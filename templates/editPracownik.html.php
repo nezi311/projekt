@@ -9,7 +9,6 @@
 {else}
   {if isset($tablicaPracownik)}
 
-
   <div class="container">
     <form class="form-horizontal" action="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/update" method="POST" id="UpdatePracownika">
       <div class="form-group">
@@ -52,8 +51,13 @@
         <label class="control-label col-sm-2" for="uprawnienia">Uprawnienia :</label>
         <div class="col-sm-10">
           <select class="form-control" id="uprawnienia" name="uprawnienia">
+            {if $tablicaPracownik[0]['uprawnienia']=="Sprzedawca"}
+              <option value="1">Kierownik sprzedaży</option>
+              <option value="2"  selected>Sprzedawca</option>
+            {else}
               <option value="1" selected>Kierownik sprzedaży</option>
               <option value="2">Sprzedawca</option>
+            {/if}
           </select>
         </div>
       </div>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-03-07 18:43:47
+/* Smarty version 3.1.31, created on 2017-03-07 18:50:21
   from "/opt/lampp/htdocs/Aplikacja_PO/templates/editPracownik.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58bef153055f71_94622422',
+  'unifunc' => 'content_58bef2dda31d28_22766781',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a4b4b625fe5f599c1260442b0c4c4b14c675ff29' => 
     array (
       0 => '/opt/lampp/htdocs/Aplikacja_PO/templates/editPracownik.html.php',
-      1 => 1488908625,
+      1 => 1488909020,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58bef153055f71_94622422 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58bef2dda31d28_22766781 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -36,7 +36,6 @@ $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id,
 </h2>
 <?php } else { ?>
   <?php if (isset($_smarty_tpl->tpl_vars['tablicaPracownik']->value)) {?>
-
 
   <div class="container">
     <form class="form-horizontal" action="http://<?php echo $_SERVER['HTTP_HOST'];
@@ -88,8 +87,13 @@ Pracownicy/update" method="POST" id="UpdatePracownika">
         <label class="control-label col-sm-2" for="uprawnienia">Uprawnienia :</label>
         <div class="col-sm-10">
           <select class="form-control" id="uprawnienia" name="uprawnienia">
+            <?php if ($_smarty_tpl->tpl_vars['tablicaPracownik']->value[0]['uprawnienia'] == "Sprzedawca") {?>
+              <option value="1">Kierownik sprzedaży</option>
+              <option value="2"  selected>Sprzedawca</option>
+            <?php } else { ?>
               <option value="1" selected>Kierownik sprzedaży</option>
               <option value="2">Sprzedawca</option>
+            <?php }?>
           </select>
         </div>
       </div>
