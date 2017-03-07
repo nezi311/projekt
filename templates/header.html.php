@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>SRPH</title>
+        <title>Sklep hurtowni SZPUNAR</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <!-- Latest compiled and minified JavaScript -->
         <script src="http://code.jquery.com/jquery-latest.js"></script>

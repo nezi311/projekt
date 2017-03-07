@@ -23,7 +23,7 @@
 <div class="page-header">
   <h2>Zaloguj się do systemu</h2>
 </div>
-<form id="logform" action="http://{$smarty.server.HTTP_HOST}{$subdir}AccessRoles/login" method="post">
+<form id="logform" action="http://{$smarty.server.HTTP_HOST}{$subdir}AccessRoles/login" method="POST">
   <div class="form-group">
     <label for="name">Login</label>
     <input type="text" class="form-control" id="login" name="login" placeholder="Wprowadź login">

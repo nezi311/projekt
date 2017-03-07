@@ -16,13 +16,28 @@
           }
           if(isset($data['error']))
               $this->set('error', $data['error']);
-          //przetworzenie szablonu do wyświetlania listy kategorii
+          //przetworzenie szablonu do wyświetlania listy pracowników
           $this->render('indexPracownicy');
       }
 
 			public function add()
 			{
 				$this->render('addPracownik');
+			}
+
+			public function edit($id)
+			{
+				$model = $this->getModel('Pracownicy');
+				if($model)
+				{
+						$data = $model->getOne($id);
+						if(isset($data['pracownik']))
+							$this->set('tablicaPracownik', $data['pracownik']);
+				}
+				if(isset($data['error']))
+						$this->set('error', $data['error']);
+				//przetworzenie szablonu do wyświetlania danych pracowników do edycji
+				$this->render('editPracownik');
 			}
   }
 ?>

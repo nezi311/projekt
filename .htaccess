@@ -19,6 +19,7 @@ RewriteRule ^Pracownicy/?$ index.php?controller=Pracownicy [L]
 RewriteRule ^Pracownicy/delete/(\d+)/?$ index.php?controller=Pracownicy&action=delete&id=$1 [L]
 RewriteRule ^Pracownicy/add/?$ index.php?controller=Pracownicy&action=add [L]
 RewriteRule ^Pracownicy/insert/?$ index.php?controller=Pracownicy&action=insert [L]
+RewriteRule ^Pracownicy/edit/(\d+)/?$ index.php?controller=Pracownicy&action=edit&id=$1 [L]
 
 RewriteRule ^AccessRoles/logform/?$ index.php?controller=AccessRoles&action=logform [L]
 RewriteRule ^AccessRoles/login/?$ index.php?controller=AccessRoles&action=login [L]

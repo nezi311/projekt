@@ -79,5 +79,16 @@ class Pracownicy extends Controller
             }
             $this->redirect('Pracownicy/');
     }
+
+    public function edit()
+    {
+      if($_SESSION['role']<=0)
+      {
+        $view=$this->getView('Pracownicy');
+        $view->edit($_GET["id"]);
+      }
+      else
+        $this->redirect('Pracownicy/');
+    }
 }
 ?>

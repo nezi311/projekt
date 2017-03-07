@@ -19,7 +19,7 @@
             <select class="form-control" id='pracownik' name='pracownik'>
               {if isset($tablicaPracownicy)}
                 {foreach $tablicaPracownicy as $elementPracownik}
-                <<option value="{$elementPracownik['id']}">{$elementPracownik['imie']} &nbsp; {$elementPracownik['nazwisko']}</option>
+                <option value="{$elementPracownik['id']}">{$elementPracownik['imie']} &nbsp; {$elementPracownik['nazwisko']}</option>
                 {/foreach}
               {/if}
             </select>

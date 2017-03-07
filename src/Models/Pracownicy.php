@@ -11,7 +11,6 @@
       else
           try
           {
-              $autorzy = array();
               $stmt = $this->pdo->query("SELECT * FROM pracownicy");
               $pracownicy = $stmt->fetchAll();
               $stmt->closeCursor();
@@ -26,6 +25,38 @@
           }
       return $data;
     }
+
+		public function getOne($id)
+		{
+			$data = array();
+			if($id === NULL || $id === "")
+				$data['error'] = 'Nieokreślone ID!';
+			else
+			if(!$this->pdo)
+					$data['error'] = 'Połączenie z bazą nie powidoło się!';
+			else
+					try
+					{
+							$stmt = $this->pdo->prepare("SELECT * FROM pracownicy WHERE id=:id");
+							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
+							$stmt -> execute();
+							$pracownik = $stmt -> fetchAll();
+							$liczba_wierszy = $stmt->rowCount();
+							$stmt->closeCursor();
+							if($pracownik && !empty($pracownik))
+									$data['pracownik'] = $pracownik;
+							else
+									$data['pracownik'] = array();
+
+							if($liczba_wierszy===0)
+								$data['error']="Brak podanego id w bazie danych";
+					}
+					catch(\PDOException $e)
+					{
+							$data['error'] = 'Błąd odczytu danych z bazy! ';
+					}
+			return $data;
+		}
 
 		public function delete($id)
 		{

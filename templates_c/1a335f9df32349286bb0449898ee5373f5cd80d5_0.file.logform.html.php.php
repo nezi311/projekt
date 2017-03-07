@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-01-27 15:41:09
+/* Smarty version 3.1.31, created on 2017-03-07 18:15:34
   from "/opt/lampp/htdocs/Aplikacja_PO/templates/logform.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_588b5c05038506_93158954',
+  'unifunc' => 'content_58beeab6acd604_22878112',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1a335f9df32349286bb0449898ee5373f5cd80d5' => 
     array (
       0 => '/opt/lampp/htdocs/Aplikacja_PO/templates/logform.html.php',
-      1 => 1485451300,
+      1 => 1488906800,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_588b5c05038506_93158954 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58beeab6acd604_22878112 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -67,7 +67,7 @@ css/bootstrap.css" rel="stylesheet">
 </div>
 <form id="logform" action="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-AccessRoles/login" method="post">
+AccessRoles/login" method="POST">
   <div class="form-group">
     <label for="name">Login</label>
     <input type="text" class="form-control" id="login" name="login" placeholder="Wprowadź login">

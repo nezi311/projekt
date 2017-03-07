@@ -5,10 +5,7 @@ require_once('vendor/autoload.php');
 
 try{
 
-$stmt = $pdo->query("DROP TABLE IF EXISTS `elementharmonogramu`");
-$stmt = $pdo->query("DROP TABLE IF EXISTS `elementharmonogramu`");
-$stmt = $pdo->query("DROP TABLE IF EXISTS `harmonogram`");
-$stmt = $pdo->query("DROP TABLE IF EXISTS `kartamc`");
+
 $stmt = $pdo->query("DROP TABLE IF EXISTS `pracownicy`");
 $stmt->execute();
 $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `pracownicy`
@@ -26,54 +23,6 @@ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `pracownicy`
   PRIMARY KEY (id)
 );");
 $stmt->execute();
-$stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `kartamc`
-(
-  `id` INT AUTO_INCREMENT,
-  `idpracownik` INT,
-  `aktywna` TINYINT,
-  PRIMARY KEY (id),
-  FOREIGN KEY (idpracownik) REFERENCES pracownicy(id) ON DELETE CASCADE
-);");
-$stmt->execute();
-/*
-$stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `harmonogram`
-(
-  `id` INT AUTO_INCREMENT,
-  `miesiac` TINYINT NOT NULL,
-  `rok` INT NOT NULL,
-  PRIMARY KEY (id)
-);");
- $stmt->execute();
- */
- $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `elementharmonogramu`
-  (
-    `id` INT AUTO_INCREMENT,
-    `idpracownik` INT NOT NULL,
-    `dzien` DATE NOT NULL ,
-    `tytul` VARCHAR(150) NOT NULL,
-    `dostepnyod` TIME NOT NULL,
-    `dostepnydo` TIME NOT NULL,
-    `rozpoczeciepracy` DATETIME NULL,
-    `zakonczeniepracy` DATETIME NULL,
-    `czaspracy` DECIMAL(2,0) DEFAULT 0,
-    `obecny` TINYINT DEFAULT 0,
-    PRIMARY KEY (id),
-    FOREIGN KEY (idpracownik) REFERENCES pracownicy(id) ON DELETE CASCADE
-  );");
- $stmt->execute();
-
-  $stmt=$pdo->query("CREATE TABLE IF NOT EXISTS `pomieszczenie`
-    (
-      `id` INT AUTO_INCREMENT,
-      `nazwa` VARCHAR(100) NOT NULL,
-      `opis` VARCHAR(500) NULL,
-      `nr` VARCHAR(10) NOT NULL,
-      `wymaganeuprawnienia` INT NULL DEFAULT 0,
-      `aktywny` TINYINT NOT NULL,
-      PRIMARY KEY (id)
-    );
-  ");
-   $stmt->execute();
 
 
 
@@ -96,41 +45,8 @@ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `harmonogram`
 
  }
 
-/*
- $harmonogram=array();
- $harmonogram[]=array('miesiac'=>1,'rok'=>'2016');
-  $harmonogram[]=array('miesiac'=>2,'rok'=>'2016');
-   $harmonogram[]=array('miesiac'=>3,'rok'=>'2016');
-    $harmonogram[]=array('miesiac'=>4,'rok'=>'2016');
-     $harmonogram[]=array('miesiac'=>5,'rok'=>'2016');
-      $harmonogram[]=array('miesiac'=>6,'rok'=>'2016');
-       $harmonogram[]=array('miesiac'=>7,'rok'=>'2016');
-        $harmonogram[]=array('miesiac'=>8,'rok'=>'2016');
-
-        foreach($harmonogram as $element)
-        {
-          $stmt = $pdo->prepare('INSERT INTO `harmonogram`(`miesiac`,`rok`) VALUES (:miesiac,:rok)');
-          $stmt -> bindValue(':miesiac',$element['miesiac'],PDO::PARAM_INT);
-          $stmt -> bindValue(':rok',$element['rok'],PDO::PARAM_INT);
-          $wynik_zapytania = $stmt -> execute();
-        }
-*/
 
 
-  $elementHarmonogramu=array();
-  $elementHarmonogramu[]=array('idpracownik'=>1,'dzien'=>'2017-01-26','tytul'=>'Praca własna','dostepnyod'=>'08:00:00','dostepnydo'=>'16:00:00');
-  $elementHarmonogramu[]=array('idpracownik'=>2,'dzien'=>'2017-01-26','tytul'=>'Praca własna','dostepnyod'=>'16:00:00','dostepnydo'=>'00:00:00');
-  foreach($elementHarmonogramu as $element)
-  {
-    $stmt = $pdo->prepare('INSERT INTO `elementharmonogramu` (`idpracownik`,`dzien`,`tytul`,`dostepnyod`,`dostepnydo`) VALUES (:idpracownik,:dzien,:tytul,:dostepnyod,:dostepnydo)');
-    $stmt->bindValue(':idpracownik', $element['idpracownik'], PDO::PARAM_INT);
-    $stmt->bindValue(':dzien', $element['dzien'], PDO::PARAM_STR);
-    $stmt->bindValue(':tytul', $element['tytul'], PDO::PARAM_STR);
-    $stmt->bindValue(':dostepnyod', $element['dostepnyod'], PDO::PARAM_STR);
-    $stmt->bindValue(':dostepnydo', $element['dostepnydo'], PDO::PARAM_STR);
-    $stmt->execute();
-    $stmt->closeCursor();
-  }
 
  return true;
 }

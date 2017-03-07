@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-01-27 15:41:50
+/* Smarty version 3.1.31, created on 2017-03-07 16:24:24
   from "/opt/lampp/htdocs/Aplikacja_PO/templates/footer.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_588b5c2eb5d5b5_02876544',
+  'unifunc' => 'content_58bed0a828bee2_57504537',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ead8d429665cfdd066b155ed24fb36f523529a41' => 
     array (
       0 => '/opt/lampp/htdocs/Aplikacja_PO/templates/footer.html.php',
-      1 => 1485178554,
+      1 => 1488900008,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_588b5c2eb5d5b5_02876544 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58bed0a828bee2_57504537 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
       </div>
     </div>
@@ -43,7 +43,7 @@ echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 js/jquery.validate.min.js"><?php echo '</script'; ?>
 >
     <p class="text-muted">
-    Zaawansowane programowanie aplikacji internetowych - MVC
+    Hurtownia SZPUNAR - Projekt zespołowy 2017
     </p>
 </div>
 </html>

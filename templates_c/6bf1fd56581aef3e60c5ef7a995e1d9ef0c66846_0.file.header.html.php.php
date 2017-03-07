@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-01-27 15:41:50
+/* Smarty version 3.1.31, created on 2017-03-07 16:24:24
   from "/opt/lampp/htdocs/Aplikacja_PO/templates/header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_588b5c2eb4fde7_38859749',
+  'unifunc' => 'content_58bed0a8278d72_28878311',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6bf1fd56581aef3e60c5ef7a995e1d9ef0c66846' => 
     array (
       0 => '/opt/lampp/htdocs/Aplikacja_PO/templates/header.html.php',
-      1 => 1485460656,
+      1 => 1488900001,
       2 => 'file',
     ),
   ),
@@ -20,11 +20,11 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_588b5c2eb4fde7_38859749 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58bed0a8278d72_28878311 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
-        <title>SRPH</title>
+        <title>Sklep hurtowni SZPUNAR</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <!-- Latest compiled and minified JavaScript -->
         <?php echo '<script'; ?>

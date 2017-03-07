@@ -7,7 +7,7 @@
       <script src="http://{$smarty.server.HTTP_HOST}{$subdir}js/jquery.cookie.js"></script>
       <script src="http://{$smarty.server.HTTP_HOST}{$subdir}js/jquery.validate.min.js"></script>
     <p class="text-muted">
-    Zaawansowane programowanie aplikacji internetowych - MVC
+    Hurtownia SZPUNAR - Projekt zespołowy 2017
     </p>
 </div>
 </html>

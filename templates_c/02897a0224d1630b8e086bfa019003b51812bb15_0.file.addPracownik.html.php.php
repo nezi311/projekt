@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-01-27 15:42:20
+/* Smarty version 3.1.31, created on 2017-03-07 16:56:38
   from "/opt/lampp/htdocs/Aplikacja_PO/templates/addPracownik.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_588b5c4c47a684_94646089',
+  'unifunc' => 'content_58bed836e1c213_16500496',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '02897a0224d1630b8e086bfa019003b51812bb15' => 
     array (
       0 => '/opt/lampp/htdocs/Aplikacja_PO/templates/addPracownik.html.php',
-      1 => 1485455666,
+      1 => 1488902127,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_588b5c4c47a684_94646089 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58bed836e1c213_16500496 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -79,7 +79,10 @@ Pracownicy/insert" method="POST" id="DodajPracownika">
     <div class="form-group">
       <label class="control-label col-sm-2" for="uprawnienia">Uprawnienia :</label>
       <div class="col-sm-10">
-        <input type="number" class="form-control" id="uprawnienia" name="uprawnienia" placeholder="0 - 5" min="0" max="5" value="0">
+        <select class="form-control" id="uprawnienia" name="uprawnienia">
+          <option value="1">Kierownik sprzedaży</option>
+          <option value="2">Sprzedawca</option>
+        </select>
       </div>
     </div>
     <div class="form-group">

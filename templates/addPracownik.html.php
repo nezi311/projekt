@@ -50,7 +50,10 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="uprawnienia">Uprawnienia :</label>
       <div class="col-sm-10">
-        <input type="number" class="form-control" id="uprawnienia" name="uprawnienia" placeholder="0 - 5" min="0" max="5" value="0">
+        <select class="form-control" id="uprawnienia" name="uprawnienia">
+          <option value="1">Kierownik sprzedaży</option>
+          <option value="2">Sprzedawca</option>
+        </select>
       </div>
     </div>
     <div class="form-group">
