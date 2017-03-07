@@ -1,0 +1,27 @@
+#włączenie mod_rewrite
+Options +FollowSymLinks
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^Grafik/?$ index.php?controller=Grafik [L]
+RewriteRule ^Grafik/insert/?$ index.php?controller=Grafik&action=insert [L]
+RewriteRule ^Grafik/delete/(\d+)/?$ index.php?controller=Grafik&action=delete&id=$1 [L]
+RewriteRule ^Categories/showone/(\d+)/?$ index.php?controller=Categories&action=showone&id=$1 [L]
+RewriteRule ^Categories/install/?$ index.php?controller=Categories&action=install [L]
+RewriteRule ^Grafik/delete/(\d+)/?$ index.php?controller=Grafik&action=delete&id=$1 [L]
+RewriteRule ^Categories/add/?$ index.php?controller=Categories&action=add [L]
+
+
+
+RewriteRule ^Pracownicy/?$ index.php?controller=Pracownicy [L]
+RewriteRule ^Pracownicy/delete/(\d+)/?$ index.php?controller=Pracownicy&action=delete&id=$1 [L]
+RewriteRule ^Pracownicy/add/?$ index.php?controller=Pracownicy&action=add [L]
+RewriteRule ^Pracownicy/insert/?$ index.php?controller=Pracownicy&action=insert [L]
+
+RewriteRule ^AccessRoles/logform/?$ index.php?controller=AccessRoles&action=logform [L]
+RewriteRule ^AccessRoles/login/?$ index.php?controller=AccessRoles&action=login [L]
+RewriteRule ^AccessRoles/logout/?$ index.php?controller=AccessRoles&action=logout [L]
+
+ErrorDocument 404 http://localhost/Aplikacja_PO/errors/404.html
