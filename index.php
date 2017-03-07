@@ -1,4 +1,5 @@
 <?php
+	// nezi311 nowa linijka
 	//automatyczne ładowanie potrzebnych klas
 
 
