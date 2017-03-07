@@ -1,6 +1,10 @@
 <?php
 	// nezi311 nowa linijka
 	//automatyczne ładowanie potrzebnych klas
+
+
+
+	//zmiana doda
 	require_once('vendor/autoload.php');
 	//use Config\Database\DBConfig as DB;
 	\Config\Database\DBConfig::setDBConfig();
