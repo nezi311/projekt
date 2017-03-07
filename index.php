@@ -1,4 +1,5 @@
 <?php
+	// nezi311 nowa linijka
 	//automatyczne ładowanie potrzebnych klas
 	require_once('vendor/autoload.php');
 	//use Config\Database\DBConfig as DB;
