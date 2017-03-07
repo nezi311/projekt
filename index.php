@@ -1,5 +1,9 @@
 <?php
 	//automatyczne ładowanie potrzebnych klas
+
+
+
+	//zmiana doda
 	require_once('vendor/autoload.php');
 	//use Config\Database\DBConfig as DB;
 	\Config\Database\DBConfig::setDBConfig();
