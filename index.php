@@ -2,7 +2,7 @@
 	//automatyczne ładowanie potrzebnych klas
 
 
-
+//cos
 	//zmiana doda
 	require_once('vendor/autoload.php');
 	//use Config\Database\DBConfig as DB;
