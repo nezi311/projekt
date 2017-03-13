@@ -1,4 +1,7 @@
 <?php
+	// Dawid Dominiak Zmiana 1
+
+
 
 	require_once('vendor/autoload.php');
 	//use Config\Database\DBConfig as DB;
