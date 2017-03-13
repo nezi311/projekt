@@ -1,6 +1,10 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 //Michał Dodot
+=======
+// pawel
+>>>>>>> 391b6fbc167ad32f3f60e880d1a3e32781b7d02d
 =======
 	// Dawid Dominiak Zmiana 1
 
