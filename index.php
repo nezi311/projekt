@@ -8,8 +8,13 @@
 	\Config\Database\DBConfig::setDBConfig();
 	//przykład uwzględnia obsługę jednego kontrolera,
 	//który wykonuje określone akcje $action
-	//i może otrzymywać parametry poprzez zmienną $id
 
+
+	// Bartosz Debicki
+
+
+
+	//i może otrzymywać parametry poprzez zmienną $id
 	// skrócie, wartości z action są przekazywane do controllera za pomocą tablicy get
 	// w controllerze są wywoływane odpowiednie widoki (Views)
 	// za to w views dane są wyciągane za pomocą modeli (models) i następnie przekazywane do szablonu (tamplates)
