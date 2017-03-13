@@ -1,5 +1,5 @@
 <?php
-
+// pawel
 	require_once('vendor/autoload.php');
 	//use Config\Database\DBConfig as DB;
 	\Config\Database\DBConfig::setDBConfig();
