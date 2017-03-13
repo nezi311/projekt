@@ -1,5 +1,12 @@
 <?php
+<<<<<<< HEAD
 // pawel
+=======
+	// Dawid Dominiak Zmiana 1
+
+
+
+>>>>>>> 37e24b87911bbd284e9832e16725bcee3abd406c
 	require_once('vendor/autoload.php');
 	//use Config\Database\DBConfig as DB;
 	\Config\Database\DBConfig::setDBConfig();
