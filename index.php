@@ -1,16 +1,8 @@
 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
 //Michał Dodot
-=======
 // pawel
->>>>>>> 391b6fbc167ad32f3f60e880d1a3e32781b7d02d
-=======
-	// Dawid Dominiak Zmiana 1
+// Dawid Dominiak Zmiana 1
 
-
-
->>>>>>> 37e24b87911bbd284e9832e16725bcee3abd406c
 	require_once('vendor/autoload.php');
 	//use Config\Database\DBConfig as DB;
 	\Config\Database\DBConfig::setDBConfig();
