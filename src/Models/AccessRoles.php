@@ -31,7 +31,7 @@
 					{
 						if(strcmp($password, $user[0]['haslo'])===0)
 						{
-							\Tools\AccessRoles::login($login,$user[0]['uprawnienia']);
+							\Tools\AccessRoles::login($login,$user[0]['uprawnienia'],$user[0]['id']);
 							//d($_SESSION);
 							return 0;
 						}

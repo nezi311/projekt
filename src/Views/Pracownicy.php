@@ -20,6 +20,8 @@
           $this->render('indexPracownicy');
       }
 
+
+
 			public function add()
 			{
 				$this->render('addPracownik');
@@ -39,5 +41,21 @@
 				//przetworzenie szablonu do wyświetlania danych pracowników do edycji
 				$this->render('editPracownik');
 			}
+
+			public function passReset($id)
+			{
+				if($id===null)
+				{
+					$this->set('idPracownik',$_SESSION['id']);
+				}
+				else
+				{
+					$this->set('idPracownik',$id);
+				}
+				$this->render('passResetPracownik');
+			}
+
+
+
   }
 ?>

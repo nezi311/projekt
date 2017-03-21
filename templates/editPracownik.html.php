@@ -11,6 +11,12 @@
 
   <div class="container">
     <form class="form-horizontal" action="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/update" method="POST" id="UpdatePracownika">
+      <div class="form-group" style="display:none;">
+        <label class="control-label col-sm-2" for="id">Id :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="id" name="id" value={$tablicaPracownik[0]['id']} >
+        </div>
+      </div>
       <div class="form-group">
         <label class="control-label col-sm-2" for="imie">Imię :</label>
         <div class="col-sm-10">
@@ -39,12 +45,6 @@
         <label class="control-label col-sm-2" for="telefon">Telefon :</label>
         <div class="col-sm-10">
           <input type="number" class="form-control" id="telefon" name="telefon" placeholder="Wprowadz nr telefonu" value={$tablicaPracownik[0]['telefon']}>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="login">Login :</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="login" name="login" placeholder="Wprowadz login" value={$tablicaPracownik[0]['login']}>
         </div>
       </div>
       <div class="form-group">

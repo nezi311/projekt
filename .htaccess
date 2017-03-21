@@ -20,9 +20,14 @@ RewriteRule ^Pracownicy/delete/(\d+)/?$ index.php?controller=Pracownicy&action=d
 RewriteRule ^Pracownicy/add/?$ index.php?controller=Pracownicy&action=add [L]
 RewriteRule ^Pracownicy/insert/?$ index.php?controller=Pracownicy&action=insert [L]
 RewriteRule ^Pracownicy/edit/(\d+)/?$ index.php?controller=Pracownicy&action=edit&id=$1 [L]
+RewriteRule ^Pracownicy/update/?$ index.php?controller=Pracownicy&action=update [L]
+RewriteRule ^Pracownicy/passReset/?$ index.php?controller=Pracownicy&action=passReset [L]
+RewriteRule ^Pracownicy/passReset/(\d+)/?$ index.php?controller=Pracownicy&action=passReset&id=$1 [L]
+RewriteRule ^Pracownicy/zmienAktywnosc/(\d+)/?$ index.php?controller=Pracownicy&action=zmienAktywnosc&id=$1 [L]
+RewriteRule ^Pracownicy/reset/?$ index.php?controller=Pracownicy&action=reset [L]
 
 RewriteRule ^AccessRoles/logform/?$ index.php?controller=AccessRoles&action=logform [L]
 RewriteRule ^AccessRoles/login/?$ index.php?controller=AccessRoles&action=login [L]
 RewriteRule ^AccessRoles/logout/?$ index.php?controller=AccessRoles&action=logout [L]
 
-ErrorDocument 404 http://localhost/Aplikacja_PO/errors/404.html
+ErrorDocument 404 http://localhost/PZ/errors/404.html

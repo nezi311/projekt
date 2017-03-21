@@ -67,7 +67,7 @@
           <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}AccessRoles/logform">Zaloguj</a></li>
         {else}
 
-          <li><a href='http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/zmienHaslo/{$smarty.session.login}'>{$smarty.session.login}</a></li>
+          <li><a href='http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/passReset'>{$smarty.session.login}</a></li>
           <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}AccessRoles/logout">Wyloguj</a></li>
         {/if}
       </ul>
