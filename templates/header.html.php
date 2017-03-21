@@ -52,6 +52,7 @@
                 </ul>
               </li>
 
+          {if $smarty.session.role<=1}
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie użytkownikami<span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -59,6 +60,7 @@
                   <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/add" class="glyphicon glyphicon-plus"> Dodaj pracownika</a></li>
                 </ul>
               </li>
+          {/if}
 
       </ul>
 

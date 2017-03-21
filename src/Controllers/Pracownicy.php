@@ -5,10 +5,15 @@ class Pracownicy extends Controller
 
   public function index()
   {
-    //tworzy obiekt widoku i zleca wyświetlenie wszystkich kategorii
-    //w widoku
-    $view = $this->getView('Pracownicy');
-    $view->index();
+    if($_SESSION['role']<=1)
+    {
+      //tworzy obiekt widoku i zleca wyświetlenie wszystkich kategorii
+      //w widoku
+      $view = $this->getView('Pracownicy');
+      $view->index();
+    }
+    else
+      $this->redirect('index/');
   }
 
   public function showone($id=null)
@@ -25,13 +30,18 @@ class Pracownicy extends Controller
 
   public function update()
   {
-    $model=$this->getModel('Pracownicy');
+    if($_SESSION['role']<=1)
+    {
+      $model=$this->getModel('Pracownicy');
           if($model)
           {
             $data = $model->update($_POST['id'],$_POST['imie'],$_POST['nazwisko'],$_POST['dzial'],$_POST['stanowisko'],$_POST['telefon'],$_POST['uprawnienia']);
             //nie przekazano komunikatów o błędzie
           }
           $this->redirect('Pracownicy/');
+    }
+    else
+      $this->redirect('index/');
   }
 
   public function delete($id)

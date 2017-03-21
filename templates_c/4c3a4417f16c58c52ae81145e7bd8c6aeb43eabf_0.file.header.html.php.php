@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-03-21 22:31:37
+/* Smarty version 3.1.31, created on 2017-03-21 23:56:26
   from "E:\xampp\htdocs\PZ\templates\header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58d19bb98cc9f8_77284413',
+  'unifunc' => 'content_58d1af9a18d198_49683720',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4c3a4417f16c58c52ae81145e7bd8c6aeb43eabf' => 
     array (
       0 => 'E:\\xampp\\htdocs\\PZ\\templates\\header.html.php',
-      1 => 1490131876,
+      1 => 1490136983,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58d19bb98cc9f8_77284413 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58d1af9a18d198_49683720 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -102,6 +102,7 @@ Ksiazka" class="glyphicon glyphicon glyphicon-book"> Kontrola dostepu</a></li>
                 </ul>
               </li>
 
+          <?php if ($_SESSION['role'] <= 1) {?>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie użytkownikami<span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -113,6 +114,7 @@ echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Pracownicy/add" class="glyphicon glyphicon-plus"> Dodaj pracownika</a></li>
                 </ul>
               </li>
+          <?php }?>
 
       </ul>
 
