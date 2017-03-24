@@ -2,6 +2,9 @@
 <div class="page-header">
   <h1>Reset hasła pracownika</h1>
 </div>
+{if isset($error)}
+  <div class="alert alert-danger" id="alert" role="alert">{$error}</div>
+{/if}
 <div class="container">
   <form class="form-horizontal" action="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/reset" method="POST" id="ResetHasla">
 

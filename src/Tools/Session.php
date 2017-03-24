@@ -2,6 +2,7 @@
 	namespace Tools;
 
 	class Session{
+		// ** Dawid Dominiak **//
 		private static $regenerateTime = 60;
 		private static $regenrateRequest = 10;
 

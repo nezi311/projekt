@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-03-21 20:24:53
+/* Smarty version 3.1.31, created on 2017-03-24 01:57:51
   from "E:\xampp\htdocs\PZ\templates\addPracownik.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58d17e0569f3d2_68591949',
+  'unifunc' => 'content_58d46f0f8e3ae6_70392511',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '71a98dcce4ae9b892d1e5bba47794b072be4d465' => 
     array (
       0 => 'E:\\xampp\\htdocs\\PZ\\templates\\addPracownik.html.php',
-      1 => 1488911382,
+      1 => 1490317069,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58d17e0569f3d2_68591949 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58d46f0f8e3ae6_70392511 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -30,6 +30,10 @@ $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id,
   <h1>Dodaj Pracownika</h1>
 </div>
 
+  <?php if (isset($_smarty_tpl->tpl_vars['error']->value)) {?>
+    <div class="alert alert-danger" id="alert" role="alert"><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
+</div>
+  <?php }?>
 <div class="container">
   <form class="form-horizontal" action="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>

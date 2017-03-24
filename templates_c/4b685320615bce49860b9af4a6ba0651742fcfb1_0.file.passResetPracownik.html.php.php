@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-03-21 19:37:08
+/* Smarty version 3.1.31, created on 2017-03-24 02:35:03
   from "E:\xampp\htdocs\PZ\templates\passResetPracownik.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58d172d491f600_22464535',
+  'unifunc' => 'content_58d477c779eec2_79357680',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4b685320615bce49860b9af4a6ba0651742fcfb1' => 
     array (
       0 => 'E:\\xampp\\htdocs\\PZ\\templates\\passResetPracownik.html.php',
-      1 => 1490121426,
+      1 => 1490318218,
       2 => 'file',
     ),
   ),
@@ -22,13 +22,17 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58d172d491f600_22464535 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58d477c779eec2_79357680 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
 <div class="page-header">
   <h1>Reset hasła pracownika</h1>
 </div>
+<?php if (isset($_smarty_tpl->tpl_vars['error']->value)) {?>
+  <div class="alert alert-danger" id="alert" role="alert"><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
+</div>
+<?php }?>
 <div class="container">
   <form class="form-horizontal" action="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>

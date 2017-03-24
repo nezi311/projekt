@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-03-21 23:14:03
+/* Smarty version 3.1.31, created on 2017-03-24 01:39:51
   from "E:\xampp\htdocs\PZ\templates\editPracownik.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58d1a5ab1fc9c3_23149326',
+  'unifunc' => 'content_58d46ad7b97d36_19292239',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'db2b885cd9ed836ce1234939ddacb34ecb2a631b' => 
     array (
       0 => 'E:\\xampp\\htdocs\\PZ\\templates\\editPracownik.html.php',
-      1 => 1490134418,
+      1 => 1490315988,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58d1a5ab1fc9c3_23149326 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58d46ad7b97d36_19292239 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -32,9 +32,9 @@ $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id,
 
 
 <?php if (isset($_smarty_tpl->tpl_vars['error']->value)) {?>
-  <h2><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
-</h2>
-<?php } else { ?>
+  <div class="alert alert-danger" id="alert" role="alert"><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
+</div>
+<?php }?>
   <?php if (isset($_smarty_tpl->tpl_vars['tablicaPracownik']->value)) {?>
 
   <div class="container">
@@ -104,8 +104,7 @@ Pracownicy/update" method="POST" id="UpdatePracownika">
       </div>
     </form>
   </div>
-  <?php }
-}?>
+<?php }?>
 
 
 <?php $_smarty_tpl->_subTemplateRender("file:footer.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);

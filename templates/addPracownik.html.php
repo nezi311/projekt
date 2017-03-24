@@ -3,6 +3,9 @@
   <h1>Dodaj Pracownika</h1>
 </div>
 
+  {if isset($error)}
+    <div class="alert alert-danger" id="alert" role="alert">{$error}</div>
+  {/if}
 <div class="container">
   <form class="form-horizontal" action="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/insert" method="POST" id="DodajPracownika">
     <div class="form-group">

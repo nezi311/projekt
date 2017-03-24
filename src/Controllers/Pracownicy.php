@@ -3,6 +3,7 @@ namespace Controllers;
 class Pracownicy extends Controller
 {
 
+
   public function index()
   {
     if($_SESSION['role']<=1)
@@ -16,11 +17,11 @@ class Pracownicy extends Controller
       $this->redirect('index/');
   }
 
+  // ** Dawid Dominiak **//
   public function showone($id=null)
   {
     if($id !== null)
     {
-      //tworzy obiekt widoku i zleca wyświetlenie wybranej kategorii
       $view = $this->getView('Pracownicy');
       $view->showone($id);
     }
@@ -28,6 +29,7 @@ class Pracownicy extends Controller
       $this->redirect('Pracownicy/');
   }
 
+  // ** Dawid Dominiak **//
   public function update()
   {
     if($_SESSION['role']<=1)
@@ -36,14 +38,68 @@ class Pracownicy extends Controller
           if($model)
           {
             $data = $model->update($_POST['id'],$_POST['imie'],$_POST['nazwisko'],$_POST['dzial'],$_POST['stanowisko'],$_POST['telefon'],$_POST['uprawnienia']);
-            //nie przekazano komunikatów o błędzie
           }
-          $this->redirect('Pracownicy/');
+          if($data['error']==="")
+          {
+            $this->redirect('Pracownicy/');
+          }
+          else
+          {
+            $this->edit($data,$_POST['id']);
+          }
     }
     else
       $this->redirect('index/');
   }
 
+  // ** Dawid Dominiak **//
+  //rozpoczynamy procedurę aktualizacji pracownika
+  //$data - tablica z danymi o userze, przy pierwszym właczeniu edita bez bledow,
+  // $data zostaje wypelniony nullem
+  //$id - przekazuje id pracownika
+  public function edit($data = null , $id=null)
+  {
+    if($_SESSION['role']<=1) // sprawdzenie czy zalogowany user ma prawa do modyfikacji konta pracownika
+    {
+        if($id===null) // sprawdzenie czy wykonana byla nieudana proba modyfikacji usera
+        {
+          $id=$_GET["id"]; //jesli tak to pobieramy jego id za pomoca tablicy $_GET
+        }
+        //jesli nie to id zostaje przeslane przez argument metody
+
+        // sprawdzamy czy poprzednia tablica z danymi (jesli istniala) jest wypelniona bledami
+        // o atualizacji usera
+        if(isset($data['error']) && $data['error']!=="")
+        {
+          //jesli tak to zapamietujemy owe bledy do zmiennej
+          $blad['error']=$data['error'];
+        }
+
+        $model = $this->getModel('Pracownicy');
+        if($model)
+        {
+            // pobieramy dane usera o zadanym id i nadpisujemy je do tablicy $result
+            $data = $model->getOne($id);
+        }
+
+      //jesli we wczesniejszej tablicy $result byly bledy, to je przepisujemy
+      if(isset($blad))
+      {
+        $data['error'] = $blad['error'];
+      }
+
+      //utworzenie widoku
+      $view=$this->getView('Pracownicy');
+      //przeslanie nowych danych wraz z informacjami o bledzie do metody edit w widoku
+      $view->edit($data);
+
+
+    }
+    else
+      $this->redirect('index/');
+  }
+
+  // ** Dawid Dominiak **//
   public function delete($id)
   {
 
@@ -51,11 +107,11 @@ class Pracownicy extends Controller
       {
         if($id !== null)
         {
-          //za operację na bazie danych odpowiedzialny jest model
-          //tworzymy obiekt modelu i zlecamy usunięcie kategorii
+
           $model=$this->getModel('Pracownicy');
-                  if($model) {
-              $data = $model->delete($id);
+                  if($model)
+                  {
+                    $data = $model->delete($id);
                       //nie przekazano komunikatów o błędzie
                   }
           //powiadamiamy odpowiedni widok, że nastąpiła aktualizacja bazy
@@ -65,64 +121,74 @@ class Pracownicy extends Controller
           $this->redirect('Pracownicy/');
       }
       else
-        $this->redirect('Pracownicy/');
+        $this->redirect('index/');
     }
 
-    public function add()
+    // ** Dawid Dominiak **//
+    //rozpoczynamy procedurę dodawania pracownika
+    //$data - tablica z danymi o userze, przy pierwszym właczeniu bez bledow,
+    //$data zostaje wypelniony nullem
+    public function add($data = null)
     {
-      if($_SESSION['role']<=0)
+      if($_SESSION['role']<=1) // sprawdzenie czy zalogowany user ma prawa do modyfikacji konta pracownika
       {
-        $view=$this->getView('Pracownicy');
-        $view->add();
+
+        $view=$this->getView('Pracownicy');   //utworzenie widoku
+        $view->add($data);   //przeslanie nowych danych wraz z informacjami o bledzie do metody edit w widoku
       }
       else
-        $this->redirect('Pracownicy/');
+        $this->redirect('index/'); //jesli user nie ma uprawnien zostaje przekierowany do indexu
     }
 
+    // ** Dawid Dominiak **//
     public function insert()
     {
-      $model=$this->getModel('Pracownicy');
+      if($_SESSION['role']<=1)
+      {
+        $model=$this->getModel('Pracownicy');
             if($model)
             {
               $data = $model->insert($_POST['imie'],$_POST['nazwisko'],$_POST['dzial'],$_POST['stanowisko'],$_POST['telefon'],$_POST['login'],$_POST['haslo'],$_POST['uprawnienia']);
+              //pobranie komunikatów o bledach
             }
-            if(isset($data['error']))
-              // dodać obsługę błędów
+            if($data['error'] === "") // jeśli bledy nie istnieją, przechodzimy do zakladnki "pracownicy"
+              {
+                $this->redirect('Pracownicy/');
+              }
+              else // jeśli błędy istnieją wyświetlamy je w formularzu
+              {
+                $this->add($data);
+              }
 
-            $this->redirect('Pracownicy/');
-    }
-
-    public function edit()
-    {
-      if($_SESSION['role']<=1)
-      {
-        $view=$this->getView('Pracownicy');
-        $view->edit($_GET["id"]);
       }
       else
-        $this->redirect('Pracownicy/');
+        $this->redirect('index/');
+
     }
 
-    public function passReset()
+    // ** Dawid Dominiak **//
+    public function passReset($dane=null)
     {
       if($_SESSION['role']<=1)
       {
-        if(isset($_GET['id']))
+        if(isset($_GET['id'])) // sprawdzenie czy podany jest index usera
+                              // zmiana hasla (dostepna tylko dla admina i kierownika sprzedazy)
         {
           $view=$this->getView('Pracownicy');
-          $view->passReset($_GET['id']);
+          $view->passReset($_GET['id'],$dane);
         }
-        else
+        else  // zmiana hasla (dostepna tylko zalogowanego usera)
         {
            $view=$this->getView('Pracownicy');
-           $view->passReset(null);
+           $view->passReset(null,$dane);
         }
 
       }
       else
-        $this->redirect('Pracownicy/');
+        $this->redirect('index/'); //jesli user nie ma uprawnien zostaje przekierowany na index
     }
 
+    // ** Dawid Dominiak **//
     public function reset()
     {
       if($_SESSION['role']<=1)
@@ -131,15 +197,22 @@ class Pracownicy extends Controller
         if($model)
         {
           $data = $model->reset($_POST['id'],$_POST['haslo1'],$_POST['haslo2']);
+          // pobranie komunikatów o błędach
         }
-        if(isset($data['error']))
+        if($data['error'] === "")// jeśli bledy nie istnieją, przechodzimy do zakladnki "pracownicy"
         {
-            // dodać obsługę błędów
+            $this->redirect('Pracownicy/');
+        }
+        else // jeśli błędy istnieją wyświetlamy je w formularzu
+        {
+          $this->passReset($data);
         }
       }
-      $this->redirect('Pracownicy/');
+      $this->redirect('index/'); //jesli user nie ma uprawnien zostaje przekierowany na index
     }
 
+
+    // ** Dawid Dominiak **//
     public function zmienAktywnosc()
     {
       if($_SESSION['role']<=1)

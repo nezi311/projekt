@@ -2,6 +2,7 @@
 namespace Tools;
 class AccessRoles extends Session
 {
+  // ** Dawid Dominiak **//
   private static $login='login';
   private static $loginTime = 'logintime';
   private static $sessionTime = 900;

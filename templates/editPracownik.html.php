@@ -5,8 +5,8 @@
 
 
 {if isset($error)}
-  <h2>{$error}</h2>
-{else}
+  <div class="alert alert-danger" id="alert" role="alert">{$error}</div>
+{/if}
   {if isset($tablicaPracownik)}
 
   <div class="container">
@@ -68,7 +68,6 @@
       </div>
     </form>
   </div>
-  {/if}
 {/if}
 
 

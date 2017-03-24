@@ -3,6 +3,8 @@
 	//kontroler do obsługi logowania
 	//każda metoda odpowiada jednej akcji możliwej
 	//do wykonania przez kontroler
+
+	// ** Dawid Dominiak **//
 	class Access extends Controller
 	{
 		//wyświetla formularz do logowania

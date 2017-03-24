@@ -3,7 +3,7 @@
 
 	class Pracownicy extends View
 	{
-
+			// ** Dawid Dominiak **//
       public function index()
       {
           $model = $this->getModel('Pracownicy');
@@ -21,38 +21,64 @@
       }
 
 
-
-			public function add()
+			// ** Dawid Dominiak **//
+			public function add($data)
 			{
+				// sprawdzenie czy tablica data, posiada informacje o bledach
+				if(isset($data['error']))
+						$this->set('error', $data['error']);// jesli tak to przypisujemy je do zmiennej
 				$this->render('addPracownik');
 			}
 
-			public function edit($id)
+
+			// public function edit($id, $data=null)
+			// {
+			// 	$model = $this->getModel('Pracownicy');
+			// 	if($model)
+			// 	{
+			// 			$data = $model->getOne($id);
+			// 			if(isset($data['pracownik']))
+			// 				$this->set('tablicaPracownik', $data['pracownik']);
+			// 	}
+			// 	if(isset($data['error']))
+			// 			$this->set('error', $data['error']);
+			// 	//przetworzenie szablonu do wyświetlania danych pracowników do edycji
+			// 	$this->render('editPracownik');
+			// }
+
+			// ** Dawid Dominiak **//
+			public function edit($data=null)
 			{
-				$model = $this->getModel('Pracownicy');
-				if($model)
-				{
-						$data = $model->getOne($id);
-						if(isset($data['pracownik']))
-							$this->set('tablicaPracownik', $data['pracownik']);
-				}
+				//sprawdzenie czy tablica data, posiada dane pracownika
+				if(isset($data['pracownik']))
+					$this->set('tablicaPracownik', $data['pracownik']); // jesli tak przypisujemy je do zmiennej
+
+				// sprawdzenie czy tablica data, posiada informacje o bledach
 				if(isset($data['error']))
-						$this->set('error', $data['error']);
+						$this->set('error', $data['error']);// jesli tak to przypisujemy je do zmiennej
+
 				//przetworzenie szablonu do wyświetlania danych pracowników do edycji
 				$this->render('editPracownik');
 			}
 
-			public function passReset($id)
+			// ** Dawid Dominiak **//
+			public function passReset($id, $dane=null)
 			{
-				if($id===null)
+
+				if($dane['error'] !== "")
 				{
-					$this->set('idPracownik',$_SESSION['id']);
+					$this->set('error',$dane['error']);
 				}
-				else
+				if($id===null) //zmiana hasla przez usera
+				{
+					$this->set('idPracownik',$_SESSION['id']); //utworzenie zmiennej pomocniczej do formularza
+				}
+				else //zmiana hasla przez admina lub kierownika
 				{
 					$this->set('idPracownik',$id);
 				}
-				$this->render('passResetPracownik');
+
+				$this->render('passResetPracownik'); //utworzenie zmiennej pomocniczej do formularza
 			}
 
 
