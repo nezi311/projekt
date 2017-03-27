@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-03-27 22:11:42
-  from "C:\xampp\htdocs\PZ\templates\header.html.php" */
+/* Smarty version 3.1.31, created on 2017-03-24 00:00:16
+  from "E:\xampp\htdocs\PZ\templates\header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58d971fe0f3c02_53020466',
+  'unifunc' => 'content_58d45380747185_13706367',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'd8104eaa282f8e757b1eb1f22b3fed373c78d3de' => 
+    '4c3a4417f16c58c52ae81145e7bd8c6aeb43eabf' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\PZ\\templates\\header.html.php',
-      1 => 1490645498,
+      0 => 'E:\\xampp\\htdocs\\PZ\\templates\\header.html.php',
+      1 => 1490137555,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58d971fe0f3c02_53020466 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58d45380747185_13706367 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -101,24 +101,6 @@ echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Ksiazka" class="glyphicon glyphicon glyphicon-book"> Kontrola dostepu</a></li>
                 </ul>
               </li>
-
-            <li class="dropdown">
-                  <a href="#" class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie Towarami<span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
-echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Towar" class="glyphicon glyphicon-list-alt"> Lista Towarów</a></li>
-                    <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
-echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Towar/freeze" class="glyphicon glyphicon-list-alt"> Zamrożone Towary</a></li>
-                    <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
-echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Towar/addZamowienia" class="glyphicon glyphicon-plus"> Zamów Towar</a></li>
-                    <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
-echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Towar/Zamowienia" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
-                  </ul>
-                </li>
 
           <?php if ($_SESSION['role'] <= 1) {?>
             <li class="dropdown">

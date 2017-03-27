@@ -2,13 +2,15 @@
 namespace Tools;
 class AccessRoles extends Session
 {
+  // ** Dawid Dominiak **//
   private static $login='login';
   private static $loginTime = 'logintime';
   private static $sessionTime = 900;
   private static $role="role";
+  private static $id="id";
 
   //zaloguj
-  public static function login($login,$role)
+  public static function login($login,$role,$id)
   {
     //sprawdzenie istniej�cej sesji
     if(parent::check() === true)
@@ -19,6 +21,7 @@ class AccessRoles extends Session
       parent::set(self::$login, $login);
       parent::set(self::$loginTime, time());
       parent::set(self::$role,$role);
+      parent::set(self::$id,$id);
 
     }
   }

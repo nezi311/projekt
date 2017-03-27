@@ -5,12 +5,18 @@
 
 
 {if isset($error)}
-  <h2>{$error}</h2>
-{else}
+  <div class="alert alert-danger" id="alert" role="alert">{$error}</div>
+{/if}
   {if isset($tablicaPracownik)}
 
   <div class="container">
     <form class="form-horizontal" action="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/update" method="POST" id="UpdatePracownika">
+      <div class="form-group" style="display:none;">
+        <label class="control-label col-sm-2" for="id">Id :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="id" name="id" value={$tablicaPracownik[0]['id']} >
+        </div>
+      </div>
       <div class="form-group">
         <label class="control-label col-sm-2" for="imie">Imię :</label>
         <div class="col-sm-10">
@@ -42,12 +48,6 @@
         </div>
       </div>
       <div class="form-group">
-        <label class="control-label col-sm-2" for="login">Login :</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="login" name="login" placeholder="Wprowadz login" value={$tablicaPracownik[0]['login']}>
-        </div>
-      </div>
-      <div class="form-group">
         <label class="control-label col-sm-2" for="uprawnienia">Uprawnienia :</label>
         <div class="col-sm-10">
           <select class="form-control" id="uprawnienia" name="uprawnienia">
@@ -68,7 +68,6 @@
       </div>
     </form>
   </div>
-  {/if}
 {/if}
 
 

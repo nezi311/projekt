@@ -1,13 +1,43 @@
-{include file="header.html.php"}
+<?php
+/* Smarty version 3.1.31, created on 2017-03-27 17:52:12
+  from "C:\xampp\htdocs\PZ\templates\addPracownik.html.php" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_58d9352ce9fc04_70319093',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '46f327d3f81cdd70756ca8a00529869a33682589' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\PZ\\templates\\addPracownik.html.php',
+      1 => 1490606604,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:header.html.php' => 1,
+    'file:footer.html.php' => 1,
+  ),
+),false)) {
+function content_58d9352ce9fc04_70319093 (Smarty_Internal_Template $_smarty_tpl) {
+$_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
+
 <div class="page-header">
   <h1>Dodaj Pracownika</h1>
 </div>
 
-  {if isset($error)}
-    <div class="alert alert-danger" id="alert" role="alert">{$error}</div>
-  {/if}
+  <?php if (isset($_smarty_tpl->tpl_vars['error']->value)) {?>
+    <div class="alert alert-danger" id="alert" role="alert"><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
+</div>
+  <?php }?>
 <div class="container">
-  <form class="form-horizontal" action="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/insert" method="POST" id="DodajPracownika">
+  <form class="form-horizontal" action="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Pracownicy/insert" method="POST" id="DodajPracownika">
     <div class="form-group">
       <label class="control-label col-sm-2" for="imie">Imię :</label>
       <div class="col-sm-10">
@@ -68,4 +98,8 @@
 </div>
 
 
-{include file="footer.html.php"}
+<?php $_smarty_tpl->_subTemplateRender("file:footer.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
+
+<?php }
+}

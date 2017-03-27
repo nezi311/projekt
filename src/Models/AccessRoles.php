@@ -7,8 +7,22 @@
 		{
 			//tutaj powinno nastąpić weryfikacja podanych danych
 			//z tymi zapisanymi w bazie
-      if(!$this->pdo)
-          $data['error'] = 'Połączenie z bazą nie powidoło się!';
+
+			$data=array();
+			$data['error']="";
+
+			if(!$this->pdo)
+      {
+				$data['error'].='Połączenie z bazą nie powidoło się! <br>';
+			}
+			if($login=="" || $login===null)
+			{
+				$data['error'].='Nie podano loginu! <br>';
+			}
+			if($password=="" || $password===null)
+			{
+				$data['error'].='Nie podano hasła! <br>';
+			}
       else
       {
         try
@@ -24,20 +38,23 @@
 
 					if(!$user)
 					{
-						$data['error'] = 'Błędny login lub hasło! ';
-						return 1;
+						$data['error'].= 'Błędny login lub hasło! ';
+						return $data;
+						//return 1
 					}
 					else
 					{
 						if(strcmp($password, $user[0]['haslo'])===0)
 						{
-							\Tools\AccessRoles::login($login,$user[0]['uprawnienia']);
+							\Tools\AccessRoles::login($login,$user[0]['uprawnienia'],$user[0]['id']);
 							//d($_SESSION);
-							return 0;
+							//return 0;
+							return $data;
 						}
 						else
 						{
-							return 1;
+							//return 1;
+							return $data;
 						}
 					}
 
@@ -45,11 +62,13 @@
         }
         catch(\PDOException $e)
         {
-          $data['error'] = 'Błąd odczytu danych z bazy! ';
-          return 1;
+          $data['error'].= 'Błąd odczytu danych z bazy! ';
+          //return 1;
+					return $data;
         }
 
-        return 1;
+        //return 1;
+				return $data;
       }
 		}
 		public function logout()

@@ -2,6 +2,7 @@
 	namespace Tools;
 
 	class Session{
+		// ** Dawid Dominiak **//
 		private static $regenerateTime = 60;
 		private static $regenrateRequest = 10;
 
@@ -9,10 +10,12 @@
 		private static $ip = 'ip';
 		private static $startTime = 'time';
 		private static $reqCount = 'request';
+		private static $name = 'SKLEP_SZPUNAR';
 
 		//rozpocz�cie lub odtworzenie sesji
 		public static function start()
 		{
+			self::name(self::$name); // przypisanie nazwy dla sesji
 			session_start();
 		}
 		//rozpocz�cie lub odtworzenie sesji
@@ -27,7 +30,7 @@
 			else
 			{
 				self::set(self::$active, true);
-				self::set(self::$ip, $_SERVER['REMOTE_ADDR']);//'192.168.1.1'
+				self::set(self::$ip, $_SERVER['REMOTE_ADDR']); //'192.168.1.1'
 				self::set(self::$startTime, time());
 				self::set(self::$reqCount, 1);
 			}

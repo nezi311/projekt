@@ -53,12 +53,24 @@
               </li>
 
             <li class="dropdown">
+                  <a href="#" class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie Towarami<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar" class="glyphicon glyphicon-list-alt"> Lista Towarów</a></li>
+                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/freeze" class="glyphicon glyphicon-list-alt"> Zamrożone Towary</a></li>
+                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/addZamowienia" class="glyphicon glyphicon-plus"> Zamów Towar</a></li>
+                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/Zamowienia" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
+                  </ul>
+                </li>
+
+          {if $smarty.session.role<=1}
+            <li class="dropdown">
                 <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie użytkownikami<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy" class="glyphicon glyphicon-user"> Pracownicy</a></li>
                   <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/add" class="glyphicon glyphicon-plus"> Dodaj pracownika</a></li>
                 </ul>
               </li>
+          {/if}
 
       </ul>
 
@@ -67,7 +79,7 @@
           <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}AccessRoles/logform">Zaloguj</a></li>
         {else}
 
-          <li><a href='http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/zmienHaslo/{$smarty.session.login}'>{$smarty.session.login}</a></li>
+          <li><a href='http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/passReset'>{$smarty.session.login}</a></li>
           <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}AccessRoles/logout">Wyloguj</a></li>
         {/if}
       </ul>

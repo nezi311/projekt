@@ -1,6 +1,8 @@
 <?php
 	namespace Models;
 	use \PDO;
+
+	// ** Dawid Dominiak **//
 	class Access extends Model
 	{
 		public function login($login, $password)
