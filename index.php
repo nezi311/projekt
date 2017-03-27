@@ -15,16 +15,15 @@
 		//Inicjalizacja sesji anonimowej
 		\Tools\Session::initialize();
 
-<<<<<<< HEAD
+
 	//i może otrzymywać parametry poprzez zmienną $id
 	// skrócie, wartości z action są przekazywane do controllera za pomocą tablicy get
 	// w controllerze są wywoływane odpowiednie widoki (Views)
 	// za to w views dane są wyciągane za pomocą modeli (models) i następnie przekazywane do szablonu (tamplates)
 		\Config\Website\Config::$subdir = 'PZ/';
-=======
->>>>>>> 7295d3b24b9d7cfe51a6e529b63bab25ba35c0a2
 
-		//Sprawdzamy czy jeste�my zalogowani
+
+		//Sprawdzamy czy jesteśmy zalogowani
 		if(\Tools\AccessRoles::islogin() !== true)
 		{
 			$mycontroller = new \Controllers\AccessRoles();

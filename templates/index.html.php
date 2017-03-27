@@ -1,6 +1,5 @@
 {include file="header.html.php"}
 <div class="page-header">
-<<<<<<< HEAD
 	<h1>Szybka nawigacja</h1>
 	</div>
 		<div class="row">
@@ -43,9 +42,8 @@
 					    </div>
 					  </div>
 			</div>
-=======
+
 	<h1>To jest index</h1>
 	<h2>{d($smarty.session)}</h2>
 </div>
->>>>>>> 7295d3b24b9d7cfe51a6e529b63bab25ba35c0a2
 {include file="footer.html.php"}
