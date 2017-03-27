@@ -1,18 +1,30 @@
 <?php
+<<<<<<< HEAD
 /* Smarty version 3.1.31, created on 2017-03-15 13:01:39
+=======
+/* Smarty version 3.1.31, created on 2017-03-13 23:29:30
+>>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
   from "C:\xampp\htdocs\PZ\templates\logform.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
+<<<<<<< HEAD
   'unifunc' => 'content_58c92d23ce0182_28198056',
+=======
+  'unifunc' => 'content_58c71d4a3b44e0_02249467',
+>>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '74290905c294b97ae1143975c349d0a3d10ce1f6' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\logform.html.php',
+<<<<<<< HEAD
       1 => 1489441770,
+=======
+      1 => 1489441778,
+>>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
       2 => 'file',
     ),
   ),
@@ -20,7 +32,11 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
+<<<<<<< HEAD
 function content_58c92d23ce0182_28198056 (Smarty_Internal_Template $_smarty_tpl) {
+=======
+function content_58c71d4a3b44e0_02249467 (Smarty_Internal_Template $_smarty_tpl) {
+>>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
 ?>
 <html>
     <head>

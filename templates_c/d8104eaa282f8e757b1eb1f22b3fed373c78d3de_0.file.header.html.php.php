@@ -1,18 +1,30 @@
 <?php
+<<<<<<< HEAD
 /* Smarty version 3.1.31, created on 2017-03-27 22:11:42
+=======
+/* Smarty version 3.1.31, created on 2017-03-22 21:44:28
+>>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
   from "C:\xampp\htdocs\PZ\templates\header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
+<<<<<<< HEAD
   'unifunc' => 'content_58d971fe0f3c02_53020466',
+=======
+  'unifunc' => 'content_58d2e22cc1af90_84199829',
+>>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd8104eaa282f8e757b1eb1f22b3fed373c78d3de' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\header.html.php',
+<<<<<<< HEAD
       1 => 1490645498,
+=======
+      1 => 1489441778,
+>>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
       2 => 'file',
     ),
   ),
@@ -20,7 +32,11 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
+<<<<<<< HEAD
 function content_58d971fe0f3c02_53020466 (Smarty_Internal_Template $_smarty_tpl) {
+=======
+function content_58d2e22cc1af90_84199829 (Smarty_Internal_Template $_smarty_tpl) {
+>>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
 ?>
 <html>
     <head>
@@ -103,6 +119,7 @@ Ksiazka" class="glyphicon glyphicon glyphicon-book"> Kontrola dostepu</a></li>
               </li>
 
             <li class="dropdown">
+<<<<<<< HEAD
                   <a href="#" class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie Towarami<span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
@@ -122,6 +139,8 @@ Towar/Zamowienia" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li
 
           <?php if ($_SESSION['role'] <= 1) {?>
             <li class="dropdown">
+=======
+>>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
                 <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie użytkownikami<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
@@ -132,7 +151,10 @@ echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Pracownicy/add" class="glyphicon glyphicon-plus"> Dodaj pracownika</a></li>
                 </ul>
               </li>
+<<<<<<< HEAD
           <?php }?>
+=======
+>>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
 
       </ul>
 
@@ -145,7 +167,12 @@ AccessRoles/logform">Zaloguj</a></li>
 
           <li><a href='http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+<<<<<<< HEAD
 Pracownicy/passReset'><?php echo $_SESSION['login'];?>
+=======
+Pracownicy/zmienHaslo/<?php echo $_SESSION['login'];?>
+'><?php echo $_SESSION['login'];?>
+>>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
 </a></li>
           <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
