@@ -19,7 +19,7 @@ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `pracownicy`
   `login` VARCHAR(100) NOT NULL UNIQUE,
   `haslo` VARCHAR(150) NOT NULL,
   `uprawnienia` INT NOT NULL,
-  `urlop` TINYINT DEFAULT 0,
+  `aktywny` INT DEFAULT 1,
   PRIMARY KEY (id)
 );");
 $stmt->execute();

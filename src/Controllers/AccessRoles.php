@@ -14,7 +14,8 @@
 		{
 			$model=$this->getModel('AccessRoles');
 			$result = $model->login($_POST['login'],md5($_POST['password']));
-			if($result === 0)
+			//if($result === 0)
+			if($result['error'] ==="")
 				$this->redirect('');
 			else
 				$this->logform($result);

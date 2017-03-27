@@ -1,8 +1,4 @@
 <?php
-//Michał Dodot
-// pawel
-// Dawid Dominiak Zmiana 1
-
 	require_once('vendor/autoload.php');
 	//use Config\Database\DBConfig as DB;
 	\Config\Database\DBConfig::setDBConfig();
@@ -10,18 +6,24 @@
 	//który wykonuje określone akcje $action
 
 
-	// Bartosz Debicki
 
+		//i może otrzymywać parametry poprzez zmienną $id
+		// skrócie, wartości z action są przekazywane do controllera za pomocą tablicy get
+		// w controllerze są wywoływane odpowiednie widoki (Views)
+		// za to w views dane są wyciągane za pomocą modeli (models) i następnie przekazywane do szablonu (tamplates)
+		\Config\Website\Config::$subdir = 'PZ/';
+		//Inicjalizacja sesji anonimowej
+		\Tools\Session::initialize();
 
-
+<<<<<<< HEAD
 	//i może otrzymywać parametry poprzez zmienną $id
 	// skrócie, wartości z action są przekazywane do controllera za pomocą tablicy get
 	// w controllerze są wywoływane odpowiednie widoki (Views)
 	// za to w views dane są wyciągane za pomocą modeli (models) i następnie przekazywane do szablonu (tamplates)
 		\Config\Website\Config::$subdir = 'PZ/';
+=======
+>>>>>>> 7295d3b24b9d7cfe51a6e529b63bab25ba35c0a2
 
-	//Inicjalizacja sesji anonimowej
-		\Tools\Session::initialize();
 		//Sprawdzamy czy jeste�my zalogowani
 		if(\Tools\AccessRoles::islogin() !== true)
 		{

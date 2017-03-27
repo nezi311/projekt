@@ -1,10 +1,4 @@
 <?php
-//dodatkowa klasa ktora dziedziczy po acces (roles)
-// dodatkowa zmienna statyczna roles
-// login dziedziczy po klasie pochodnej (access)
-// logout tak SAMConnection
-// dopisac metode getrole();
-// potem w controlerach sprawdzać role
 	namespace Tools;
 
 	class Access extends Session
