@@ -182,7 +182,7 @@ $stmt->execute();
  $stmt->execute();
  $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `Dostawca`
  (
-   `IdDostawca` int(11) NOT NULL,
+   `IdDostawca` INT AUTO_INCREMENT,
    `NazwaSkrocona` varchar(100) NOT NULL,
    `NazwaPelna` varchar(100) NOT NULL,
    `NIP` varchar(10) NOT NULL,
@@ -193,19 +193,38 @@ $stmt->execute();
    `NrKonta` varchar(30) NOT NULL,
    `Adres` varchar(50) NOT NULL,
    `KodPocztowy` varchar(6) NOT NULL,
-   `Poczta` varchar(30) NOT NULL
-   PRIMARY KEY (IdDostawca),
- )ENGINE = InnoDB;");
+   `Poczta` varchar(30) NOT NULL,
+   PRIMARY KEY (IdDostawca)
+ );");
  $stmt->execute();
 
- $towary = array();
- $towary[]=array('NazwaS'=>'klawiatura',);
+ $dostawcy = array();
+ $dostawcy[]=array('NazwaSkrocona'=>'DPD',
+ 'NazwaPelna'=>'DPD',
+ 'NIP'=>'0987654321',
+ 'Telefon1'=>'123456789',
+ 'Telefon2'=>'123656789',
+ 'Telefon3'=>'123856789',
+ 'NazwaDzialu'=>'elektronika',
+ 'NrKonta'=>'4487547836587346',
+ 'Adres'=>'Kalisz, Jasna 21',
+ 'KodPocztowy'=>'11-666',
+ 'Poczta'=>'Kalisz',);
 
- foreach($towary as $element_towar)
+ foreach($dostawcy as $dostawca)
  {
-   $stmt = $pdo->prepare('INSERT INTO `Zamowienia`(`NazwaTowaru`,`MinStanMagazynowy`,`MaxStanMagazynowy`,`StawkaVat`,`IdKategoria`,`IdJednostkaMiary`,`Status`) VALUES (:NazwaTowaru,:MinStanMagazynowy,:MaxStanMagazynowy,:StawkaVat,:IdKategoria,:IdJednostkaMiary,:Status)');
-   $stmt -> bindValue(':NazwaTowaru',$element_towar['NazwaTowaru'],PDO::PARAM_STR);
-
+   $stmt = $pdo->prepare('INSERT INTO `Dostawca`(`NazwaSkrocona`,`NazwaPelna`,`NIP`,`Telefon1`,`Telefon2`,`Telefon3`,`NazwaDzialu`,`NrKonta`,`Adres`,`KodPocztowy`,`Poczta`) VALUES (:NazwaSkrocona,:NazwaPelna,:NIP,:Telefon1,:Telefon2,:Telefon3,:NazwaDzialu,:NrKonta,:Adres,:KodPocztowy,:Poczta)');
+   $stmt -> bindValue(':NazwaSkrocona',$dostawca['NazwaSkrocona'],PDO::PARAM_STR);
+   $stmt -> bindValue(':NazwaPelna',$dostawca['NazwaPelna'],PDO::PARAM_STR);
+   $stmt -> bindValue(':NIP',$dostawca['NIP'],PDO::PARAM_INT);
+   $stmt -> bindValue(':Telefon1',$dostawca['Telefon1'],PDO::PARAM_INT);
+   $stmt -> bindValue(':Telefon2',$dostawca['Telefon2'],PDO::PARAM_INT);
+   $stmt -> bindValue(':Telefon3',$dostawca['Telefon3'],PDO::PARAM_INT);
+   $stmt -> bindValue(':NazwaDzialu',$dostawca['NazwaDzialu'],PDO::PARAM_STR);
+   $stmt -> bindValue(':NrKonta',$dostawca['NrKonta'],PDO::PARAM_INT);
+   $stmt -> bindValue(':Adres',$dostawca['Adres'],PDO::PARAM_STR);
+   $stmt -> bindValue(':KodPocztowy',$dostawca['KodPocztowy'],PDO::PARAM_STR);
+   $stmt -> bindValue(':Poczta',$dostawca['Poczta'],PDO::PARAM_STR);
    $wynik_zapytania = $stmt -> execute();
  }
  /*************************************************/
@@ -215,7 +234,7 @@ $stmt->execute();
   $stmt->execute();
   $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `Klient`
   (
-    `IdPracownik` int(11) NOT NULL,
+    `IdKlient` INT AUTO_INCREMENT,
     `Imie` varchar(50) NOT NULL,
     `Nazwisko` varchar(50) NOT NULL,
     `NIP` varchar(10) NOT NULL,
@@ -225,26 +244,37 @@ $stmt->execute();
     `Lokal` varchar(50) NULL,
     `KodPocztowy` varchar(6) NOT NULL,
     `Poczta` varchar(30) NOT NULL,
-    `EMail` varchar(30) NOT NULL
-    PRIMARY KEY (IdDostawca),
-  )ENGINE = InnoDB;");
+    `EMail` varchar(30) NOT NULL,
+    PRIMARY KEY (IdKlient)
+  );");
   $stmt->execute();
 
-  $towary = array();
-  $towary[]=array('Imie'=>'Michal',);
-  $towary[]=array('Nazwisko'=>'Kowalski',);
-  $towary[]=array('NIP'=>'0123456789',);
-  $towary[]=array('Miasto'=>'Ostrów Wlkp',);
-  $towary[]=array('Ulica'=>'Matejki',);
-  $towary[]=array('Dom'=>'21',);
-  $towary[]=array('KodPocztowy'=>'63-400',);
-  $towary[]=array('EMail'=>'michal123@wp.pl',);
+  $klienci = array();
+  $klienci[]=array('Imie'=>'Michal',
+  'Nazwisko'=>'Kowalski',
+  'NIP'=>'0123456789',
+  'Miasto'=>'Ostrów Wlkp',
+  'Ulica'=>'Matejki',
+  'Dom'=>'21',
+  'Lokal'=>'',
+  'KodPocztowy'=>'63-400',
+  'Poczta'=>'Ostrów Wlkp',
+  'EMail'=>'michal123@wp.pl');
 
-  foreach($towary as $element_towar)
+
+  foreach($klienci as $klient)
   {
     $stmt = $pdo->prepare('INSERT INTO `Klient`(`Imie`,`Nazwisko`,`NIP`,`Miasto`,`Ulica`,`Dom`,`Lokal`,`KodPocztowy`,`Poczta`,`EMail`) VALUES (:Imie,:Nazwisko,:NIP,:Miasto,:Ulica,:Dom,:Lokal,:KodPocztowy,:Poczta,:EMail)');
-    $stmt -> bindValue(':NazwaTowaru',$element_towar['NazwaTowaru'],PDO::PARAM_STR);
-
+    $stmt -> bindValue(':Imie',$klient['Imie'],PDO::PARAM_STR);
+    $stmt -> bindValue(':Nazwisko',$klient['Nazwisko'],PDO::PARAM_STR);
+    $stmt -> bindValue(':NIP',$klient['NIP'],PDO::PARAM_INT);
+    $stmt -> bindValue(':Miasto',$klient['Miasto'],PDO::PARAM_STR);
+    $stmt -> bindValue(':Ulica',$klient['Ulica'],PDO::PARAM_STR);
+    $stmt -> bindValue(':Dom',$klient['Dom'],PDO::PARAM_STR);
+    $stmt -> bindValue(':Lokal',$klient['Lokal'],PDO::PARAM_STR);
+    $stmt -> bindValue(':KodPocztowy',$klient['KodPocztowy'],PDO::PARAM_STR);
+    $stmt -> bindValue(':Poczta',$klient['Poczta'],PDO::PARAM_STR);
+    $stmt -> bindValue(':EMail',$klient['EMail'],PDO::PARAM_STR);
     $wynik_zapytania = $stmt -> execute();
   }
  return true;
