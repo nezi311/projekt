@@ -38,7 +38,7 @@
 
 					if(!$user)
 					{
-						$data['error'].= 'Błędny login lub hasło! ';
+						$data['error'].= 'Błędny login lub hasło! <br>';
 						return $data;
 						//return 1
 					}
@@ -46,13 +46,22 @@
 					{
 						if(strcmp($password, $user[0]['haslo'])===0)
 						{
-							\Tools\AccessRoles::login($login,$user[0]['uprawnienia'],$user[0]['id']);
-							//d($_SESSION);
-							//return 0;
+							if($user[0]['aktywny'] == 1)
+							{
+								\Tools\AccessRoles::login($login,$user[0]['uprawnienia'],$user[0]['id']);
+								//d($_SESSION);
+								//return 0;
+							}
+							else
+							{
+								$data['error'].='Twoje konto jest nieaktywne! Zgłoś się administratora systemu w celu jego odblokowania. <br>';
+							}
+
 							return $data;
 						}
 						else
 						{
+							$data['error'].= 'Błędny login lub hasło! <br>';
 							//return 1;
 							return $data;
 						}

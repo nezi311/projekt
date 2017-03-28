@@ -31,6 +31,7 @@
 <!-- To co ma Bartek -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+<<<<<<< HEAD
         <li><a href="#">Towary</a></li>
         <li><a href="#">Kategorie</a></li>
 
@@ -63,6 +64,8 @@
                 </ul>
               </li>
 
+=======
+>>>>>>> e1abffcd166793b33a130a29c56a454b7447bb66
             <li class="dropdown">
                   <a href="#" class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie Towarami<span class="caret"></span></a>
                   <ul class="dropdown-menu">
