@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-03-27 11:26:08
+/* Smarty version 3.1.31, created on 2017-03-28 15:58:26
   from "C:\xampp\htdocs\PZ\templates\indexPracownicy.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58d8dab05a6e07_15527201',
+  'unifunc' => 'content_58da6c02eb10a1_02505240',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2a8ccbbb29f02f1cebb3e85f7fe886d0a50050e8' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\indexPracownicy.html.php',
-      1 => 1490606604,
+      1 => 1490647715,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58d8dab05a6e07_15527201 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58da6c02eb10a1_02505240 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 

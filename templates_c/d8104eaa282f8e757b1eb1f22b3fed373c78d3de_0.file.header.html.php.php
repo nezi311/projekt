@@ -1,30 +1,18 @@
 <?php
-<<<<<<< HEAD
-/* Smarty version 3.1.31, created on 2017-03-27 22:11:42
-=======
-/* Smarty version 3.1.31, created on 2017-03-22 21:44:28
->>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
+/* Smarty version 3.1.31, created on 2017-03-28 18:04:48
   from "C:\xampp\htdocs\PZ\templates\header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-<<<<<<< HEAD
-  'unifunc' => 'content_58d971fe0f3c02_53020466',
-=======
-  'unifunc' => 'content_58d2e22cc1af90_84199829',
->>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
+  'unifunc' => 'content_58da89a0d169c5_81127732',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd8104eaa282f8e757b1eb1f22b3fed373c78d3de' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\header.html.php',
-<<<<<<< HEAD
-      1 => 1490645498,
-=======
-      1 => 1489441778,
->>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
+      1 => 1490717087,
       2 => 'file',
     ),
   ),
@@ -32,11 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-<<<<<<< HEAD
-function content_58d971fe0f3c02_53020466 (Smarty_Internal_Template $_smarty_tpl) {
-=======
-function content_58d2e22cc1af90_84199829 (Smarty_Internal_Template $_smarty_tpl) {
->>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
+function content_58da89a0d169c5_81127732 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -88,6 +72,16 @@ css/bootstrap.css" rel="stylesheet">
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <li><a href="#">Towary</a></li>
+        <li><a href="#">Kategorie</a></li>
+
+<form class="navbar-form navbar-left">
+<div class="form-group">
+<input type="text" class="form-control" placeholder="Wpisz nazwę produktu">
+</div>
+<button type="submit" class="btn btn-default">Szukaj</button>
+</form>
+
         <li class="dropdown">
             <a href="#" class="dropdown-toggle glyphicon glyphicon-folder-open" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Grafik<span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -119,7 +113,6 @@ Ksiazka" class="glyphicon glyphicon glyphicon-book"> Kontrola dostepu</a></li>
               </li>
 
             <li class="dropdown">
-<<<<<<< HEAD
                   <a href="#" class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie Towarami<span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
@@ -139,8 +132,6 @@ Towar/Zamowienia" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li
 
           <?php if ($_SESSION['role'] <= 1) {?>
             <li class="dropdown">
-=======
->>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
                 <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie użytkownikami<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
@@ -151,14 +142,13 @@ echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Pracownicy/add" class="glyphicon glyphicon-plus"> Dodaj pracownika</a></li>
                 </ul>
               </li>
-<<<<<<< HEAD
           <?php }?>
-=======
->>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
 
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+      <li><a href="#">Zamówienie</a></li>
+      <li><a href="#">Historia</a></li>
         <?php if (!isset($_SESSION['login'])) {?>
           <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
@@ -167,12 +157,7 @@ AccessRoles/logform">Zaloguj</a></li>
 
           <li><a href='http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-<<<<<<< HEAD
 Pracownicy/passReset'><?php echo $_SESSION['login'];?>
-=======
-Pracownicy/zmienHaslo/<?php echo $_SESSION['login'];?>
-'><?php echo $_SESSION['login'];?>
->>>>>>> c4d9c70e1a8e449d2ea352d70a66f5f517a6a7aa
 </a></li>
           <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>

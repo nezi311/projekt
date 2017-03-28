@@ -3,6 +3,7 @@
 // argument $http to usługa AngularJS pozwalająca uzyskiwać połączenie z zdalnym serwerem
 // $ oznacz zmienne z przestrzeni AngularJS
 app.controller('myController', function($scope, $http) {
+
     //zmienna komunikatów błędów
     $scope.msg = '';
     //wyświetlanie wszytskich kategorii
