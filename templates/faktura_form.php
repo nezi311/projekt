@@ -6,14 +6,14 @@ echo'
 function sprawdz()
 {
 	var formularz = document.getElementById("Formularz");
-    
+
     var blad = "";
 	var puste = false;
     var zlyNip = false;
     var literyWRoku = false;
 	var pustePola = "";
     var alert = "";
-	
+
     if (formularz.imieNabywca.value == "")
 	{
 		blad=true;
@@ -21,14 +21,14 @@ function sprawdz()
 		if(pustePola != "")pustePola+=", ";
 		pustePola += "imieNabywca";
 	}
-        
 
-    if((formularz.nipNabywca.value.length != 11) && formularz.nipNabywca.value != "") 
+
+    if((formularz.nipNabywca.value.length != 11) && formularz.nipNabywca.value != "")
     {
         blad=true;
         zlyNip = true;
     }
-	
+
     for(i=0;i<formularz.nipNabywca.value.length;i++)
         {
             if(isNaN(formularz.nipNabywca.value[i]))
@@ -38,7 +38,7 @@ function sprawdz()
                     break;
                 }
         }
-    
+
     if(blad==true)
     {
         if(puste == true)
@@ -46,24 +46,24 @@ function sprawdz()
                 if(alert != "")alert+="\n";
 		          alert += "Wypełnij następujące pola: "+pustePola;
             }
-        
+
         if(zlyNip == true)
             {
                 if(alert != "")alert+="\n";
                 alert += "Za krótka/długa liczba na NIP."
             }
-        
+
         if(literyWRoku == true)
             {
                 if(alert != "")alert+="\n";
                 alert += "Wpisałeś litery w dacie."
             }
-        
+
         window.alert(alert);
         return false;
     }
 	else window.alert("Dodano książkę.");
-	
+
 }
 </script>
 <form action="faktura.php" method="post" id="Formularz" onsubmit="sprawdz()">

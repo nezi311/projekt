@@ -28,8 +28,44 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
+<!-- To co ma Bartek -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+<<<<<<< HEAD
+        <li><a href="#">Towary</a></li>
+        <li><a href="#">Kategorie</a></li>
+
+<form class="navbar-form navbar-left">
+<div class="form-group">
+<input type="text" class="form-control" placeholder="Wpisz nazwę produktu">
+</div>
+<button type="submit" class="btn btn-default">Szukaj</button>
+</form>
+<!-- To co ma Bartek -->
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle glyphicon glyphicon-folder-open" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Grafik<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Grafik" class="glyphicon glyphicon-folder-open"> Grafik</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+              <a href="#" class="dropdown-toggle glyphicon glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Czas pracy<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Raport" class="glyphicon glyphicon glyphicon-book"> Normalny</a></li>
+                <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Raport/szczegolowy" class="glyphicon glyphicon-plus"> Szczegolowy</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle glyphicon glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Kontrola dostępu<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Ksiazka" class="glyphicon glyphicon glyphicon-book"> Kontrola dostepu</a></li>
+                </ul>
+              </li>
+
+=======
+>>>>>>> e1abffcd166793b33a130a29c56a454b7447bb66
             <li class="dropdown">
                   <a href="#" class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie Towarami<span class="caret"></span></a>
                   <ul class="dropdown-menu">
@@ -53,6 +89,8 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+      <li><a href="#">Zamówienie</a></li>
+      <li><a href="#">Historia</a></li>
         {if !isset($smarty.session.login)}
           <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}AccessRoles/logform">Zaloguj</a></li>
         {else}
