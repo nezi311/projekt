@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-03-27 19:32:58
-  from "C:\xampp\htdocs\PZ\templates\editPracownik.html.php" */
+/* Smarty version 3.1.31, created on 2017-03-28 14:39:05
+  from "/opt/lampp/htdocs/PZ/templates/editPracownik.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58d94cca760485_49012487',
+  'unifunc' => 'content_58da59690ab698_48611165',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'ab4d99ba28cb7b7e22f84c865753eb48e4239902' => 
+    '6651ff6ccf4baa6691c48acfa80bc2b9fe61e0eb' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\PZ\\templates\\editPracownik.html.php',
-      1 => 1490606604,
+      0 => '/opt/lampp/htdocs/PZ/templates/editPracownik.html.php',
+      1 => 1490346189,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58d94cca760485_49012487 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58da59690ab698_48611165 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 

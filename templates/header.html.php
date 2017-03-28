@@ -30,28 +30,6 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle glyphicon glyphicon-folder-open" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Grafik<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Grafik" class="glyphicon glyphicon-folder-open"> Grafik</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown">
-              <a href="#" class="dropdown-toggle glyphicon glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Czas pracy<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Raport" class="glyphicon glyphicon glyphicon-book"> Normalny</a></li>
-                <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Raport/szczegolowy" class="glyphicon glyphicon-plus"> Szczegolowy</a></li>
-              </ul>
-            </li>
-
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle glyphicon glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Kontrola dostępu<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Ksiazka" class="glyphicon glyphicon glyphicon-book"> Kontrola dostepu</a></li>
-                </ul>
-              </li>
-
             <li class="dropdown">
                   <a href="#" class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie Towarami<span class="caret"></span></a>
                   <ul class="dropdown-menu">

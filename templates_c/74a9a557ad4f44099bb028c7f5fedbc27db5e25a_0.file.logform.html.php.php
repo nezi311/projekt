@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-03-21 18:17:07
-  from "E:\xampp\htdocs\PZ\templates\logform.html.php" */
+/* Smarty version 3.1.31, created on 2017-03-28 14:51:00
+  from "/opt/lampp/htdocs/PZ/templates/logform.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58d16013874856_21127531',
+  'unifunc' => 'content_58da5c34bbfe57_79994213',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'dd6958d0b866714aebec6dc2682bdacc94cc99e3' => 
+    '74a9a557ad4f44099bb028c7f5fedbc27db5e25a' => 
     array (
-      0 => 'E:\\xampp\\htdocs\\PZ\\templates\\logform.html.php',
-      1 => 1488911382,
+      0 => '/opt/lampp/htdocs/PZ/templates/logform.html.php',
+      1 => 1490346189,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58d16013874856_21127531 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58da5c34bbfe57_79994213 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>

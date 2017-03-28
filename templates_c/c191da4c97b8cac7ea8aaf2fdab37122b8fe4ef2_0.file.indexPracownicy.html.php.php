@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-03-27 11:26:08
-  from "C:\xampp\htdocs\PZ\templates\indexPracownicy.html.php" */
+/* Smarty version 3.1.31, created on 2017-03-28 15:03:18
+  from "/opt/lampp/htdocs/PZ/templates/indexPracownicy.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58d8dab05a6e07_15527201',
+  'unifunc' => 'content_58da5f1640abf1_92181433',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '2a8ccbbb29f02f1cebb3e85f7fe886d0a50050e8' => 
+    'c191da4c97b8cac7ea8aaf2fdab37122b8fe4ef2' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\PZ\\templates\\indexPracownicy.html.php',
-      1 => 1490606604,
+      0 => '/opt/lampp/htdocs/PZ/templates/indexPracownicy.html.php',
+      1 => 1490706193,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58d8dab05a6e07_15527201 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58da5f1640abf1_92181433 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -59,6 +59,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['pracownik']->value) {
 </td>
     <td><?php echo $_smarty_tpl->tpl_vars['pracownik']->value['aktywny'];?>
 </td>
+		<?php if ($_smarty_tpl->tpl_vars['pracownik']->value['uprawnienia'] == 0 && $_SESSION['role'] == 0) {?>
     <td><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Pracownicy/edit/<?php echo $_smarty_tpl->tpl_vars['pracownik']->value['id'];?>
@@ -71,7 +72,27 @@ Pracownicy/zmienAktywnosc/<?php echo $_smarty_tpl->tpl_vars['pracownik']->value[
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Pracownicy/passReset/<?php echo $_smarty_tpl->tpl_vars['pracownik']->value['id'];?>
 " role="button">Resetuj</a></td>
-  </tr>
+
+		<?php } elseif ($_smarty_tpl->tpl_vars['pracownik']->value['uprawnienia'] > 0 && $_SESSION['role'] <= 1) {?>
+		<td><a href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Pracownicy/edit/<?php echo $_smarty_tpl->tpl_vars['pracownik']->value['id'];?>
+" role="button">Edytuj</a></td>
+		<td><a href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Pracownicy/zmienAktywnosc/<?php echo $_smarty_tpl->tpl_vars['pracownik']->value['id'];?>
+" role="button">Zmień</a></td>
+		<td><a href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Pracownicy/passReset/<?php echo $_smarty_tpl->tpl_vars['pracownik']->value['id'];?>
+" role="button">Resetuj</a></td>
+
+		<?php } else { ?>
+		<td><a href="#" role="button">Edytuj</a></td>
+    <td><a href="#" role="button">Zmień</a></td>
+    <td><a href="#">Resetuj</a></td>
+		<?php }?>
+	</tr>
   <?php
 }
 }

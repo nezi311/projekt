@@ -169,11 +169,12 @@ class Pracownicy extends Controller
     // ** Dawid Dominiak **//
     public function passReset($dane=null)
     {
-      if($_SESSION['role']<=1)
-      {
-        if(isset($_GET['id'])) // sprawdzenie czy podany jest index usera
-                              // zmiana hasla (dostepna tylko dla admina i kierownika sprzedazy)
+
+        // sprawdzenie czy podany jest index usera
+        // zmiana hasla (dostepna tylko dla admina i kierownika sprzedazy)
+        if(isset($_GET['id']))
         {
+          //d($dane);
           $view=$this->getView('Pracownicy');
           $view->passReset($_GET['id'],$dane);
         }
@@ -182,10 +183,6 @@ class Pracownicy extends Controller
            $view=$this->getView('Pracownicy');
            $view->passReset(null,$dane);
         }
-
-      }
-      else
-        $this->redirect('index/'); //jesli user nie ma uprawnien zostaje przekierowany na index
     }
 
     // ** Dawid Dominiak **//
@@ -205,6 +202,7 @@ class Pracownicy extends Controller
         }
         else // jeśli błędy istnieją wyświetlamy je w formularzu
         {
+
           $this->passReset($data);
         }
       }

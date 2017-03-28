@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-03-24 02:35:03
-  from "E:\xampp\htdocs\PZ\templates\passResetPracownik.html.php" */
+/* Smarty version 3.1.31, created on 2017-03-28 14:45:32
+  from "/opt/lampp/htdocs/PZ/templates/passResetPracownik.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58d477c779eec2_79357680',
+  'unifunc' => 'content_58da5aec3c0227_02623571',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '4b685320615bce49860b9af4a6ba0651742fcfb1' => 
+    'bfddc4e496e2da99e414b17cd55b6b4b66bf6507' => 
     array (
-      0 => 'E:\\xampp\\htdocs\\PZ\\templates\\passResetPracownik.html.php',
-      1 => 1490318218,
+      0 => '/opt/lampp/htdocs/PZ/templates/passResetPracownik.html.php',
+      1 => 1490346189,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58d477c779eec2_79357680 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58da5aec3c0227_02623571 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 

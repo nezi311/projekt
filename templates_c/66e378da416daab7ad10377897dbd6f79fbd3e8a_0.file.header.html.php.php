@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-01-26 20:57:38
-  from "E:\xampp\htdocs\Aplikacja_PO\templates\header.html.php" */
+/* Smarty version 3.1.31, created on 2017-03-28 14:45:23
+  from "/opt/lampp/htdocs/PZ/templates/header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_588a54b2e5b3b3_11372745',
+  'unifunc' => 'content_58da5ae34cbdb1_05587606',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'fe22ebb014fc5738a6b4bde99a6d74a8006d16af' => 
+    '66e378da416daab7ad10377897dbd6f79fbd3e8a' => 
     array (
-      0 => 'E:\\xampp\\htdocs\\Aplikacja_PO\\templates\\header.html.php',
-      1 => 1485460654,
+      0 => '/opt/lampp/htdocs/PZ/templates/header.html.php',
+      1 => 1490705078,
       2 => 'file',
     ),
   ),
@@ -20,11 +20,11 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_588a54b2e5b3b3_11372745 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58da5ae34cbdb1_05587606 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
-        <title>SRPH</title>
+        <title>Sklep hurtowni SZPUNAR</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <!-- Latest compiled and minified JavaScript -->
         <?php echo '<script'; ?>
@@ -72,36 +72,25 @@ css/bootstrap.css" rel="stylesheet">
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle glyphicon glyphicon-folder-open" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Grafik<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
-echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Grafik" class="glyphicon glyphicon-folder-open"> Grafik</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown">
-              <a href="#" class="dropdown-toggle glyphicon glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Czas pracy<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
-echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Raport" class="glyphicon glyphicon glyphicon-book"> Normalny</a></li>
-                <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
-echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Raport/szczegolowy" class="glyphicon glyphicon-plus"> Szczegolowy</a></li>
-              </ul>
-            </li>
-
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle glyphicon glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Kontrola dostępu<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
+                  <a href="#" class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie Towarami<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Ksiazka" class="glyphicon glyphicon glyphicon-book"> Kontrola dostepu</a></li>
-                </ul>
-              </li>
+Towar" class="glyphicon glyphicon-list-alt"> Lista Towarów</a></li>
+                    <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Towar/freeze" class="glyphicon glyphicon-list-alt"> Zamrożone Towary</a></li>
+                    <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Towar/addZamowienia" class="glyphicon glyphicon-plus"> Zamów Towar</a></li>
+                    <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Towar/Zamowienia" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
+                  </ul>
+                </li>
 
+          <?php if ($_SESSION['role'] <= 1) {?>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie użytkownikami<span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -113,6 +102,7 @@ echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Pracownicy/add" class="glyphicon glyphicon-plus"> Dodaj pracownika</a></li>
                 </ul>
               </li>
+          <?php }?>
 
       </ul>
 
@@ -125,8 +115,7 @@ AccessRoles/logform">Zaloguj</a></li>
 
           <li><a href='http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Pracownicy/zmienHaslo/<?php echo $_SESSION['login'];?>
-'><?php echo $_SESSION['login'];?>
+Pracownicy/passReset'><?php echo $_SESSION['login'];?>
 </a></li>
           <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
