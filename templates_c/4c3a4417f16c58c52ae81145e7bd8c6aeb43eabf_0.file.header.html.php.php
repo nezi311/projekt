@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-04 21:17:42
+/* Smarty version 3.1.31, created on 2017-04-04 21:25:14
   from "E:\xampp\htdocs\PZ\templates\header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58e3f156d486a9_83052907',
+  'unifunc' => 'content_58e3f31a7023d3_90575913',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4c3a4417f16c58c52ae81145e7bd8c6aeb43eabf' => 
     array (
       0 => 'E:\\xampp\\htdocs\\PZ\\templates\\header.html.php',
-      1 => 1491333456,
+      1 => 1491333911,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58e3f156d486a9_83052907 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58e3f31a7023d3_90575913 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -70,9 +70,20 @@ css/bootstrap.css" rel="stylesheet">
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
+<!-- To co ma Bartek -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <li><a href="#">Towary</a></li>
+        <li><a href="#">Kategorie</a></li>
+      </ul>
 
+<form class="navbar-form navbar-left">
+<div class="form-group">
+<input type="text" class="form-control" placeholder="Wpisz nazwę produktu">
+</div>
+<button type="submit" class="btn btn-default">Szukaj</button>
+</form>
+<!-- To co ma Bartek -->
 
             <li class="dropdown">
                   <a href="#" class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie Towarami<span class="caret"></span></a>
@@ -109,6 +120,8 @@ Pracownicy/add" class="glyphicon glyphicon-plus"> Dodaj pracownika</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+      <li><a href="#">Zamówienie</a></li>
+      <li><a href="#">Historia</a></li>
         <?php if (!isset($_SESSION['login'])) {?>
           <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>

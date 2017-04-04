@@ -28,45 +28,58 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
+<!-- To co ma Bartek -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <li><a href="#">Towary</a></li>
+        <li><a href="#">Kategorie</a></li>
 
 
-            <li class="dropdown">
-                  <a href="#" class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie Towarami<span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar" class="glyphicon glyphicon-list-alt"> Lista Towarów</a></li>
-                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/freeze" class="glyphicon glyphicon-list-alt"> Zamrożone Towary</a></li>
-                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/addZamowienia" class="glyphicon glyphicon-plus"> Zamów Towar</a></li>
-                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/Zamowienia" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
-                  </ul>
-                </li>
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Wpisz nazwę produktu">
+            </div>
+            <button type="submit" class="btn btn-default">Szukaj</button>
+          </form>
+          <!-- To co ma Bartek -->
 
-          {if $smarty.session.role<=1}
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie użytkownikami<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy" class="glyphicon glyphicon-user"> Pracownicy</a></li>
-                  <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/add" class="glyphicon glyphicon-plus"> Dodaj pracownika</a></li>
+                      <li class="dropdown">
+                            <a href="#" class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie Towarami<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar" class="glyphicon glyphicon-list-alt"> Lista Towarów</a></li>
+                              <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/freeze" class="glyphicon glyphicon-list-alt"> Zamrożone Towary</a></li>
+                              <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/addZamowienia" class="glyphicon glyphicon-plus"> Zamów Towar</a></li>
+                              <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/Zamowienia" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
+                            </ul>
+                        </li>
+
+                    {if $smarty.session.role<=1}
+                      <li class="dropdown">
+                          <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie użytkownikami<span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy" class="glyphicon glyphicon-user"> Pracownicy</a></li>
+                            <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/add" class="glyphicon glyphicon-plus"> Dodaj pracownika</a></li>
+                          </ul>
+                        </li>
+                    {/if}
+
+      </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="#">Zamówienie</a></li>
+                  <li><a href="#">Historia</a></li>
+                  {if !isset($smarty.session.login)}
+                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}AccessRoles/logform">Zaloguj</a></li>
+                  {else}
+
+                    <li><a href='http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/passReset'>{$smarty.session.login}</a></li>
+                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}AccessRoles/logout">Wyloguj</a></li>
+                  {/if}
                 </ul>
-              </li>
-          {/if}
-
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        {if !isset($smarty.session.login)}
-          <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}AccessRoles/logform">Zaloguj</a></li>
-        {else}
-
-          <li><a href='http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/passReset'>{$smarty.session.login}</a></li>
-          <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}AccessRoles/logout">Wyloguj</a></li>
-        {/if}
-      </ul>
 
 
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+              </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
 </nav>
 <body>
 <div id="wrap">
