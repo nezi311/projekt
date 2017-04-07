@@ -7,7 +7,7 @@
     <div class="alert alert-danger" id="alert" role="alert">{$error}</div>
   {/if}
 <div class="container">
-  <form class="form-horizontal" action="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/insertZamowienia" method="POST" id="DodajZamowienia">
+  <form class="form-horizontal" action="http://{$smarty.server.HTTP_HOST}{$subdir}Zamowienie/insert" method="POST" id="DodajZamowienia">
     <div class="form-group">
       <label class="control-label col-sm-2" for="NazwaTowaru">Nazwa Towaru :</label>
       <div class="col-sm-10">
