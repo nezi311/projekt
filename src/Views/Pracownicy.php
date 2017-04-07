@@ -65,10 +65,18 @@
 			public function passReset($id, $dane=null)
 			{
 
-				if($dane['error'] !== "")
-				{
-					$this->set('error',$dane['error']);
-				}
+
+					if(isset($dane['error']))
+					{
+						if($dane['error'] !== "" )
+						{
+							//d($dane);
+							$this->set('error',$dane['error']);
+						}
+					}
+
+
+
 				if($id===null) //zmiana hasla przez usera
 				{
 					$this->set('idPracownik',$_SESSION['id']); //utworzenie zmiennej pomocniczej do formularza

@@ -42,6 +42,43 @@ class Towar extends Controller
       $this->redirect('Towar/');
   }
 
+  public function add($data = null)
+  {
+    if($_SESSION['role']<=1) // sprawdzenie czy zalogowany user ma prawa do modyfikacji konta pracownika
+    {
+
+      $view=$this->getView('Pracownicy');   //utworzenie widoku
+      $view->add($data);   //przeslanie nowych danych wraz z informacjami o bledzie do metody edit w widoku
+    }
+    else
+      $this->redirect('index/'); //jesli user nie ma uprawnien zostaje przekierowany do indexu
+  }
+
+
+  public function insert()
+  {
+    if($_SESSION['role']<=1)
+    {
+      $model=$this->getModel('Pracownicy');
+          if($model)
+          {
+            $data = $model->insert($_POST['imie'],$_POST['nazwisko'],$_POST['dzial'],$_POST['stanowisko'],$_POST['telefon'],$_POST['login'],$_POST['haslo'],$_POST['uprawnienia']);
+            //pobranie komunikatów o bledach
+          }
+          if($data['error'] === "") // jeśli bledy nie istnieją, przechodzimy do zakladnki "pracownicy"
+            {
+              $this->redirect('Pracownicy/');
+            }
+            else // jeśli błędy istnieją wyświetlamy je w formularzu
+            {
+              $this->add($data);
+            }
+
+    }
+    else
+      $this->redirect('index/');
+
+  }
 
   public function delete($id)
   {

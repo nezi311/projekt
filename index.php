@@ -5,12 +5,6 @@
 	\Config\Database\DBConfig::setDBConfig();
 	//przykład uwzględnia obsługę jednego kontrolera,
 	//który wykonuje określone akcje $action
-	//i może otrzymywać parametry poprzez zmienną $id
-	// skrócie, wartości z action są przekazywane do controllera za pomocą tablicy get
-	// w controllerze są wywoływane odpowiednie widoki (Views)
-	// za to w views dane są wyciągane za pomocą modeli (models) i następnie przekazywane do szablonu (tamplates)
-		\Config\Website\Config::$subdir = 'PZ/';
-
 
 
 		//i może otrzymywać parametry poprzez zmienną $id
@@ -20,14 +14,6 @@
 		\Config\Website\Config::$subdir = 'PZ/';
 		//Inicjalizacja sesji anonimowej
 		\Tools\Session::initialize();
-
-
-	//i może otrzymywać parametry poprzez zmienną $id
-	// skrócie, wartości z action są przekazywane do controllera za pomocą tablicy get
-	// w controllerze są wywoływane odpowiednie widoki (Views)
-	// za to w views dane są wyciągane za pomocą modeli (models) i następnie przekazywane do szablonu (tamplates)
-		\Config\Website\Config::$subdir = 'PZ/';
-
 
 		//Sprawdzamy czy jesteśmy zalogowani
 		if(\Tools\AccessRoles::islogin() !== true)
