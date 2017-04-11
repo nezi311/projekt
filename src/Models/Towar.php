@@ -27,9 +27,70 @@
       return $data;
     }
 
-		public function insert()
+		public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary)
 		{
-
+			$blad=false;
+			$data = array();
+			$data['error']="";
+			if($NazwaTowaru === null || $NazwaTowaru === "")
+			{
+				$data['error'] .= 'Nieokreślone Nazwa Towaru! <br>';
+				$blad=true;
+			}
+			if($MinStanMagazynowy === null || $MinStanMagazynowy === "")
+			{
+				$data['error'] .='Nieokreślone Min Stan Magazynowy! <br>';
+				$blad=true;
+			}
+			if($MaxStanMagazynowy === null || $MaxStanMagazynowy === "")
+			{
+				$data['error'] .= 'Nieokreślony Max Stan Magazynowy! <br>';
+				$blad=true;
+			}
+			if($StawkaVat === null || $StawkaVat === "")
+			{
+				$data['error'] .= 'Nieokreślone Stawka Vat! <br>';
+				$blad=true;
+			}
+			if($KodTowaru === null || $KodTowaru === "")
+			{
+				$data['error'] .= 'Nieokreślony Kod Towaru! <br>';
+				$blad=true;
+			}
+			if($IdKategoria === null || $IdKategoria === "")
+			{
+				$data['error'] .= 'Nieokreślona Kategoria! <br>';
+				$blad=true;
+			}
+			if($IdJednostkaMiary === null || $IdJednostkaMiary === "")
+			{
+				$data['error'] .= 'Nieokreślone Jednostka Miary! <br>';
+				$blad=true;
+			}
+			if(!$blad)
+			{
+				try
+				{
+					$stmt = $this->pdo->prepare('INSERT INTO `Towar`(`NazwaTowaru`,`MinStanMagazynowy`,`MaxStanMagazynowy`,`StanMagazynowyRzeczywisty`,`StanMagazynowyDysponowany`,`StawkaVat`,`KodTowaru`,`IdKategoria`,`IdJednostkaMiary`,`Freeze`) VALUES (:NazwaTowaru,:MinStanMagazynowy,:MaxStanMagazynowy,:StanMagazynowyRzeczywisty,:StanMagazynowyDysponowany,:StawkaVat,:KodTowaru,:IdKategoria,:IdJednostkaMiary,:Freeze)');
+			    $stmt -> bindValue(':NazwaTowaru',$NazwaTowaru,PDO::PARAM_STR);
+			    $stmt -> bindValue(':MinStanMagazynowy',$MinStanMagazynowy,PDO::PARAM_INT);
+			    $stmt -> bindValue(':MaxStanMagazynowy',$MaxStanMagazynowy,PDO::PARAM_INT);
+			    $stmt -> bindValue(':StanMagazynowyRzeczywisty',0,PDO::PARAM_INT);
+			    $stmt -> bindValue(':StanMagazynowyDysponowany',0,PDO::PARAM_INT);
+			    $stmt -> bindValue(':StawkaVat',$StawkaVat,PDO::PARAM_INT);
+			    $stmt -> bindValue(':KodTowaru',$KodTowaru,PDO::PARAM_STR);
+					$stmt -> bindValue(':IdKategoria',$IdKategoria,PDO::PARAM_INT);
+			    $stmt -> bindValue(':IdJednostkaMiary',$IdJednostkaMiary,PDO::PARAM_INT);
+			    $stmt -> bindValue(':Freeze',0,PDO::PARAM_INT);
+			    $wynik_zapytania = $stmt -> execute();
+				}
+				catch(\PDOException $e)
+				{
+					$data['error'] .='Błąd zapisu danych do bazy! <br>';
+					return $data;
+				}
+		}
+			return $data;
 		}
 
 		public function add()

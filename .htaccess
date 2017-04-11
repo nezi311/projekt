@@ -16,6 +16,8 @@ RewriteRule ^Grafik/delete/(\d+)/?$ index.php?controller=Grafik&action=delete&id
 RewriteRule ^Categories/add/?$ index.php?controller=Categories&action=add [L]
 
 RewriteRule ^Towar/?$ index.php?controller=Towar [L]
+RewriteRule ^Towar/add/?$ index.php?controller=Towar&action=add [L]
+RewriteRule ^Towar/insert/?$ index.php?controller=Towar&action=insert [L]
 RewriteRule ^Towar/freeze/?$ index.php?controller=Towar&action=freezed [L]
 RewriteRule ^Towar/delete/(\d+)/?$ index.php?controller=Towar&action=delete&id=$1 [L]
 
