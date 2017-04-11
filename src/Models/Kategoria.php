@@ -85,7 +85,7 @@ GROUP BY NazwaKategorii');
                 {
                     $stmt = $this->pdo->prepare('UPDATE `Kategoria`
 SET `NazwaKategorii`=:name
-WHERE IdKategoria=:id');
+WHERE `IdKategoria`=:id');
                     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 										$stmt->bindValue(':name', $name, PDO::PARAM_STR);
                     $stmt->execute();

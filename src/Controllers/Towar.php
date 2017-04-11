@@ -47,7 +47,7 @@ class Towar extends Controller
     if($_SESSION['role']<=1) // sprawdzenie czy zalogowany user ma prawa do modyfikacji konta pracownika
     {
 
-      $view=$this->getView('Pracownicy');   //utworzenie widoku
+      $view=$this->getView('Towar');   //utworzenie widoku
       $view->add($data);   //przeslanie nowych danych wraz z informacjami o bledzie do metody edit w widoku
     }
     else
@@ -60,15 +60,15 @@ class Towar extends Controller
   {
     if($_SESSION['role']<=1)
     {
-      $model=$this->getModel('Pracownicy');
+      $model=$this->getModel('Towar');
           if($model)
           {
-            $data = $model->insert($_POST['imie'],$_POST['nazwisko'],$_POST['dzial'],$_POST['stanowisko'],$_POST['telefon'],$_POST['login'],$_POST['haslo'],$_POST['uprawnienia']);
+            $data = $model->insert($_POST['NazwaTowaru'],$_POST['MinStanMagazynowy'],$_POST['MaxStanMagazynowy'],$_POST['StawkaVat'],$_POST['KodTowaru'],$_POST['IdKategoria'],$_POST['IdJednostkaMiary']);
             //pobranie komunikatów o bledach
           }
           if($data['error'] === "") // jeśli bledy nie istnieją, przechodzimy do zakladnki "pracownicy"
             {
-              $this->redirect('Pracownicy/');
+              $this->redirect('Towar/');
             }
             else // jeśli błędy istnieją wyświetlamy je w formularzu
             {

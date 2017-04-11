@@ -36,6 +36,14 @@
           $this->render('freezeTowary');
       }
 
+
+			public function add($data)
+			{
+				// sprawdzenie czy tablica data, posiada informacje o bledach
+				if(isset($data['error']))
+						$this->set('error', $data['error']);// jesli tak to przypisujemy je do zmiennej
+				$this->render('addTowar');
+}
 			public function search($towar)
 			{
 					$model = $this->getModel('Towar');
