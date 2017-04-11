@@ -45,7 +45,7 @@
 			{
 			$model=$this->getModel('Kategoria');
             if($model) {
-			     $data = $model->edit($id, $_POST['nazwa']);
+			     $data = $model->edit($id, $_POST['name']);
                  //nie przekazano komunikatów o błędzie
             }
             $this->redirect('Kategoria/');
@@ -59,7 +59,7 @@
 			$view->add();
 		}
 		//dodaje do bazy kategorię
-		public function insert() {
+		public function insert($id) {
 			//za operację na bazie danych odpowiedzialny jest model
 			//tworzymy obiekt modelu i zlecamy dodanie kategorii
 			$model=$this->getModel('Kategoria');

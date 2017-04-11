@@ -49,7 +49,7 @@ $stmt->execute();
  $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `Kategoria`
  (
    `IdKategoria` INT AUTO_INCREMENT,
-   `NazwaKategorii` VARCHAR(100) NOT NULL,
+   `NazwaKategorii` VARCHAR(100) NOT NULL UNIQUE,
    PRIMARY KEY (IdKategoria)
  )ENGINE = InnoDB;");
  $stmt->execute();

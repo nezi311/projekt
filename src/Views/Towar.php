@@ -43,7 +43,7 @@
 				if(isset($data['error']))
 						$this->set('error', $data['error']);// jesli tak to przypisujemy je do zmiennej
 				$this->render('addTowar');
-
+}
 			public function search($towar)
 			{
 					$model = $this->getModel('Towar');
