@@ -22,10 +22,9 @@
 						<td>{$kategoria['NazwaKategorii']}</td>
 						<td class="col-md-4">
 							<div class="btn-group" role="group">
-
-						<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal{$kategoria['Id']}">zmień nazwę</button>
-						<a type="button" class="btn btn-danger" href="http://{$smarty.server.HTTP_HOST}{$subdir}KategoriaKlientow/Usun/{$kategoria['IdKategoria']}">usuń</a>
-			            </div>
+								<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal{$kategoria['Id']}">zmień nazwę</button>
+								<a type="button" class="btn btn-danger" href="http://{$smarty.server.HTTP_HOST}{$subdir}KategoriaKlientow/Usun/{$kategoria['IdKategoria']}">usuń</a>
+			        </div>
 
 	<!-- Modal -->
 	<div id="myModal{$kategoria['IdKategoria']}" class="modal fade" role="dialog">
@@ -33,23 +32,20 @@
 
 	    <!-- Modal content-->
 	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h4 class="modal-title">Edycja</h4>
+	    	<div class="modal-header">
+	      	<h4 class="modal-title">Edycja</h4>
 	      </div>
-	      <div class="modal-body">
-
-											<form action="http://{$smarty.server.HTTP_HOST}{$subdir}KategoriaKlientow/Edytuj/{$kategoria['IdKategoria']}" method="post">
-											    <div class="form-group">
-											    <label for="name">Nazwa kategorii</label>
-											    <input type="text" class="form-control" name="nazwa" value="{$kategoria['NazwaKategorii']}" />
-											    </div>
-											    <input type="submit" value="Zmień nazwę" class="btn btn-primary" />
-        <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
-											</form>
-
+		    <div class="modal-body">
+					<form action="http://{$smarty.server.HTTP_HOST}{$subdir}KategoriaKlientow/Edytuj/{$kategoria['IdKategoria']}" method="post">
+						<div class="form-group">
+							<label for="name">Nazwa kategorii</label>
+							<input type="text" class="form-control" name="nazwa" value="{$kategoria['NazwaKategorii']}" />
+						</div>
+						<input type="submit" value="Zmień nazwę" class="btn btn-primary" />
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+					</form>
 	      </div>
 	    </div>
-
 	  </div>
 	</div>
 

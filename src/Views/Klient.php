@@ -9,7 +9,7 @@
           $model = $this->getModel('Klient');
           if($model)
           {
-              $data = $model->getAll();
+              $data = $model->getAllShorter();
 
               if(isset($data['Klient']))
                    $this->set('tablicaKlient', $data['Klient']);

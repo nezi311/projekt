@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-11 16:59:50
+/* Smarty version 3.1.31, created on 2017-04-11 17:15:10
   from "/opt/lampp/htdocs/PZ/templates/header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58ecef66f22cc6_52701581',
+  'unifunc' => 'content_58ecf2fe263d94_48142134',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '66e378da416daab7ad10377897dbd6f79fbd3e8a' => 
     array (
       0 => '/opt/lampp/htdocs/PZ/templates/header.html.php',
-      1 => 1491922783,
+      1 => 1491923709,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58ecef66f22cc6_52701581 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58ecf2fe263d94_48142134 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -62,7 +62,7 @@ echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 css/bootstrap.css" rel="stylesheet">
           <link href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> 
+vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- awaryjny bootstrap-->
         <!-- Latest compiled and minified CSS -->
         <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
@@ -98,7 +98,7 @@ echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Towar/freeze" class="glyphicon glyphicon-list-alt"> Zamrożone Towary</a></li>
                     <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Zamowienie/add" class="glyphicon glyphicon-plus"> Zamów Towar</a></li>
+Towar/add" class="glyphicon glyphicon-plus"> Dodaj Towar</a></li>
                     <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>

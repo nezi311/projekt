@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-11 16:22:43
+/* Smarty version 3.1.31, created on 2017-04-11 17:58:12
   from "/opt/lampp/htdocs/PZ/templates/indexKlient.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58ece6b36b79e5_50729538',
+  'unifunc' => 'content_58ecfd14e59f36_42572417',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5df44b80900cff677197f02d9281d57710fdc836' => 
     array (
       0 => '/opt/lampp/htdocs/PZ/templates/indexKlient.html.php',
-      1 => 1491919744,
+      1 => 1491926291,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58ece6b36b79e5_50729538 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58ecfd14e59f36_42572417 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -75,9 +75,12 @@ Klient/insert" method="POST">
 					 class="form-control"
 					 placeholder="NIP"
 					 id="NIP"
-					 name="NIP"
-					 required>
-	</div>
+						 id="nazwisko"
+						 name="nazwisko"
+	           required>
+	 </div>
+
+
 
 	<div class="form-group">
 	 <label for="Miasto">Miasto:</label>
@@ -165,17 +168,13 @@ Klient/insert" method="POST">
 <table class="table table-striped">
   <thead>
   <tr>
-		<th>Id</th>
-		<th>Imie</th>
-		<th>Nazwisko</th>
+
+		<th>Dane osobowe</th>
 		<th>NIP</th>
-		<th>Miasto</th>
-		<th>Ulica</th>
-		<th>Dom</th>
-		<th>Lokal</th>
-		<th>KodPocztowy</th>
+		<th>Adres</th>
 		<th>Poczta</th>
 		<th>Email</th>
+		<th>Edytuj</th>
   </tr>
   </thead>
   <tbody>
@@ -186,28 +185,50 @@ if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['klient']->value) {
 ?>
 				<tr>
-					<td><?php echo $_smarty_tpl->tpl_vars['klient']->value['IdKlient'];?>
-</td>
-					<td><?php echo $_smarty_tpl->tpl_vars['klient']->value['Imie'];?>
-</td>
-						<td><?php echo $_smarty_tpl->tpl_vars['klient']->value['Nazwisko'];?>
+
+					<td><?php echo $_smarty_tpl->tpl_vars['klient']->value['DaneKlienta'];?>
 </td>
 						<td><?php echo $_smarty_tpl->tpl_vars['klient']->value['NIP'];?>
 </td>
-						<td><?php echo $_smarty_tpl->tpl_vars['klient']->value['Miasto'];?>
-</td>
-						<td><?php echo $_smarty_tpl->tpl_vars['klient']->value['Ulica'];?>
-</td>
-						<td><?php echo $_smarty_tpl->tpl_vars['klient']->value['Dom'];?>
-</td>
-						<td><?php echo $_smarty_tpl->tpl_vars['klient']->value['Lokal'];?>
-</td>
-						<td><?php echo $_smarty_tpl->tpl_vars['klient']->value['KodPocztowy'];?>
+						<td><?php echo $_smarty_tpl->tpl_vars['klient']->value['Adres'];?>
 </td>
 						<td><?php echo $_smarty_tpl->tpl_vars['klient']->value['Poczta'];?>
 </td>
 						<td><?php echo $_smarty_tpl->tpl_vars['klient']->value['EMail'];?>
 </td>
+						<td>
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal<?php echo $_smarty_tpl->tpl_vars['klient']->value['IdKlient'];?>
+">Edytuj</button>
+			        </div>
+
+							<div id="myModal<?php echo $_smarty_tpl->tpl_vars['klient']->value['IdKlient'];?>
+" class="modal fade" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">Edycja</h4>
+										</div>
+										<div class="modal-body">
+											<form action="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+KategoriaKlientow/Edytuj/<?php echo $_smarty_tpl->tpl_vars['kategoria']->value['IdKategoria'];?>
+" method="post">
+												<div class="form-group">
+													<label for="name">Nazwa kategorii</label>
+													<input type="text" class="form-control" name="nazwa" value="<?php echo $_smarty_tpl->tpl_vars['kategoria']->value['NazwaKategorii'];?>
+" />
+												</div>
+												<input type="submit" value="Zmień nazwę" class="btn btn-primary" />
+												<button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</td>
 				</tr>
 			<?php
 }

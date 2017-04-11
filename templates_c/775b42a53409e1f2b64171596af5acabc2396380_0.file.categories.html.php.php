@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-11 16:05:25
+/* Smarty version 3.1.31, created on 2017-04-11 17:03:44
   from "/opt/lampp/htdocs/PZ/templates/categories.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58ece2a5f0edb3_11372296',
+  'unifunc' => 'content_58ecf0509bf200_24123732',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '775b42a53409e1f2b64171596af5acabc2396380' => 
     array (
       0 => '/opt/lampp/htdocs/PZ/templates/categories.html.php',
-      1 => 1491916534,
+      1 => 1491922911,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58ece2a5f0edb3_11372296 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58ecf0509bf200_24123732 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -75,7 +75,7 @@ Kategoria/Edytuj/<?php echo $_smarty_tpl->tpl_vars['category']->value['IdKategor
 " method="post">
                         <div class="form-group">
                         <label for="name">Nazwa kategorii</label>
-                        <input type="text" class="form-control" name="towar" value="<?php echo $_smarty_tpl->tpl_vars['category']->value['NazwaKategorii'];?>
+                        <input type="text" class="form-control" name="name" value="<?php echo $_smarty_tpl->tpl_vars['category']->value['NazwaKategorii'];?>
 " />
                         </div>
                         <input type="submit" value="Zmień nazwę" class="btn btn-primary" />

@@ -46,9 +46,12 @@
 					 class="form-control"
 					 placeholder="NIP"
 					 id="NIP"
-					 name="NIP"
-					 required>
-	</div>
+						 id="nazwisko"
+						 name="nazwisko"
+	           required>
+	 </div>
+
+
 
 	<div class="form-group">
 	 <label for="Miasto">Miasto:</label>
@@ -136,34 +139,52 @@
 <table class="table table-striped">
   <thead>
   <tr>
-		<th>Id</th>
-		<th>Imie</th>
-		<th>Nazwisko</th>
+
+		<th>Dane osobowe</th>
 		<th>NIP</th>
-		<th>Miasto</th>
-		<th>Ulica</th>
-		<th>Dom</th>
-		<th>Lokal</th>
-		<th>KodPocztowy</th>
+		<th>Adres</th>
 		<th>Poczta</th>
 		<th>Email</th>
+		<th>Edytuj</th>
   </tr>
   </thead>
   <tbody>
 		{if isset($tablicaKlient)}
 		  {foreach $tablicaKlient as $klient}
 				<tr>
-					<td>{$klient['IdKlient']}</td>
-					<td>{$klient['Imie']}</td>
-						<td>{$klient['Nazwisko']}</td>
+
+					<td>{$klient['DaneKlienta']}</td>
 						<td>{$klient['NIP']}</td>
-						<td>{$klient['Miasto']}</td>
-						<td>{$klient['Ulica']}</td>
-						<td>{$klient['Dom']}</td>
-						<td>{$klient['Lokal']}</td>
-						<td>{$klient['KodPocztowy']}</td>
+						<td>{$klient['Adres']}</td>
 						<td>{$klient['Poczta']}</td>
 						<td>{$klient['EMail']}</td>
+						<td>
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal{$klient['IdKlient']}">Edytuj</button>
+			        </div>
+
+							<div id="myModal{$klient['IdKlient']}" class="modal fade" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">Edycja</h4>
+										</div>
+										<div class="modal-body">
+											<form action="http://{$smarty.server.HTTP_HOST}{$subdir}KategoriaKlientow/Edytuj/{$kategoria['IdKategoria']}" method="post">
+												<div class="form-group">
+													<label for="name">Nazwa kategorii</label>
+													<input type="text" class="form-control" name="nazwa" value="{$kategoria['NazwaKategorii']}" />
+												</div>
+												<input type="submit" value="Zmień nazwę" class="btn btn-primary" />
+												<button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</td>
 				</tr>
 			{/foreach}
 		{/if}

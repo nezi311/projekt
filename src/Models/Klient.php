@@ -13,7 +13,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT `Imie`,`Nazwisko`,`NIP`,`Miasto`,`Ulica`,`Dom`,`Lokal`,`KodPocztowy`,`Poczta`,`EMail` FROM Klient");
+              $stmt = $this->pdo->query("SELECT `IdKlient`,`Imie`,`Nazwisko`,`NIP`,`Miasto`,`Ulica`,`Dom`,`Lokal`,`KodPocztowy`,`Poczta`,`EMail` FROM Klient");
               $Klients = $stmt->fetchAll();
               $stmt->closeCursor();
               if($Klients && !empty($Klients))
@@ -29,6 +29,33 @@
 
       return $data;
     }
+
+		public function getAllShorter()
+		{
+			//SELECT `IdKlient`,CONCAT(`Imie`,' ',`Nazwisko`) AS DaneKlienta,`NIP`,CONCAT(`KodPocztowy`,' ',`Miasto`,' ',`Ulica`,' ',`Dom`,'/',`Lokal`) AS Adres,`Poczta`,`EMail` FROM Klient
+			$data = array();
+			$data['error']="";
+      if(!$this->pdo)
+          $data['error'] .= 'Połączenie z bazą nie powidoło się! <br>';
+      else
+          try
+          {
+              $stmt = $this->pdo->query("SELECT `IdKlient`,CONCAT(`Imie`,' ',`Nazwisko`) AS DaneKlienta,`NIP`,CONCAT(`KodPocztowy`,' ',`Miasto`,' ',`Ulica`,' ',`Dom`,'/',`Lokal`) AS Adres,`Poczta`,`EMail` FROM Klient");
+              $Klients = $stmt->fetchAll();
+              $stmt->closeCursor();
+              if($Klients && !empty($Klients))
+                  $data['Klient'] = $Klients;
+              else
+                  $data['Klient'] = array();
+          }
+          catch(\PDOException $e)
+          {
+              $data['error'] .= 'Błąd odczytu danych z bazy! <br>';
+          }
+					$data['error'] .= ' ';
+
+      return $data;
+		}
 
 
 		// ** Dawid Dominiak **//
