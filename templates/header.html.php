@@ -31,9 +31,22 @@
 <!-- To co ma Bartek -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+<<<<<<< HEAD
         <li><a href="#">Kategorie</a></li>
 
 
+=======
+        <li><a href="#">Towary</a></li>
+        <li><a href="#">Kategorie</a></li>
+
+
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Wpisz nazwę produktu">
+            </div>
+            <button type="submit" class="btn btn-default">Szukaj</button>
+          </form>
+>>>>>>> a96b44b83d0635502a4088c512d4ece62a05de23
           <!-- To co ma Bartek -->
 
 
@@ -47,6 +60,10 @@
                   </ul>
             </li>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a96b44b83d0635502a4088c512d4ece62a05de23
                     {if $smarty.session.role<=1}
                       <li class="dropdown">
                           <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie użytkownikami<span class="caret"></span></a>
