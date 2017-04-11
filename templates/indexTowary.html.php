@@ -6,7 +6,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Nazwa Towaru</th><th>Min Stan Magazynowy</th><th>Max Stan Magazynowy</th><th>Stan Magazynowy Rzeczywisty</th><th>Stan Magazynowy Dysponowany</th><th>Stawka Vat</th><th>Kod Towaru</th><th>Kategoria</th><th>Jednostka Miary</th><th>Stan</th><th>Edytuj</th><th>Zamroz </th><th>usun</th>
+      <th>Nazwa Towaru</th><th>Min Stan Magazynowy</th><th>Max Stan Magazynowy</th><th>Stan Magazynowy Rzeczywisty</th><th>Stan Magazynowy Dysponowany</th><th>Stawka Vat</th><th>Kod Towaru</th><th>Kategoria</th><th>Jednostka Miary</th><th>Stan</th><th>Edytuj</th><th>Zamroz</th><th>Koszyk </th><th>usun</th>
     </tr>
   </thead>
 {if isset($tablicaTowarow)}
@@ -24,6 +24,19 @@
 		<td>{$towar['Freeze']}</td>
     <td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/edit/{$towar['IdTowar']}" role="button">Edytuj</a></td>
     <td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/zamroz/{$towar['IdTowar']}" role="button">Zamroź</a></td>
+		<td>
+		<form action="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/koszyk/{$towar['IdTowar']}" method="post">
+			<input type='submit' value='Dodaj'>
+			{$ilosc=0}
+			<input type='hidden' name='IdTowar' value={$towar['IdTowar']}>
+			<select name='ilosc'>
+				{while $ilosc<=$towar['StanMagazynowyRzeczywisty']}
+					<option value='12'>{$ilosc}</option>
+					{$ilosc++}
+				{/while}
+			</select>
+		</form>
+		</td>
     <td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/delete/{$towar['IdTowar']}" role="button">Usuń</a></td>
   </tr>
   {/foreach}
