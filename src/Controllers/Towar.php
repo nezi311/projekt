@@ -112,6 +112,23 @@ class Towar extends Controller
         $this->redirect('index/');
     }
 
+    public function koszyk($id)
+    {
 
+          if($id !== null)
+          {
+
+            $model=$this->getModel('Towar');
+                    if($model)
+                    {
+                      $data = $model->koszyk($_POST['IdTowar'],$_POST['ilosc']);
+                        //nie przekazano komunikatów o błędzie
+                    }
+            //powiadamiamy odpowiedni widok, że nastąpiła aktualizacja bazy
+            $this->redirect('Towar/');
+          }
+          else
+            $this->redirect('Towar/');
+    }
 }
 ?>

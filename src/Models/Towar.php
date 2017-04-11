@@ -161,6 +161,39 @@
 
 		}
 
+		public function koszyk($IdTowar,$ilosc)
+    {
+			$blad=false;
+			$data = array();
+			$data['error']="";
+			/*if($IdTowar === null || $IdTowar === "")
+			{
+				$data['error'] .= 'Nieokreślone Id Towaru! <br>';
+				$blad=true;
+			}
+			if($ilosc === null || $ilosc === "")
+			{
+				$data['error'] .='Nieokreślona ilosc! <br>';
+				$blad=true;
+			}*/
+			if(!$blad)
+
+					try
+          {
+              $stmt = $this->pdo->prepare('insert into `koszyk`(`IdTowar`,`ilosc`,`klient`) values(:IdTowar,:ilosc,1);');
+							$stmt -> bindValue(':IdTowar',$IdTowar,PDO::PARAM_INT);
+							$stmt -> bindValue(':ilocs',$ilosc,PDO::PARAM_INT);
+							var_dump($stmt);
+							$wynik_zapytania = $stmt -> execute();
+          }
+          catch(\PDOException $e)
+          {
+              $data['error'] = 'Błąd odczytu danych z bazy! ';
+							var_dump($data);
+							return $data;
+          }
+      return $data;
+    	}
 
 		public function Zamroz()
 		{

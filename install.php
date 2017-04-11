@@ -5,6 +5,23 @@ require_once('vendor/autoload.php');
 
 try{
   /*************************************************/
+  /*******************KOSZYK********************/
+  /*************************************************/
+$stmt = $pdo->query("DROP TABLE IF EXISTS `koszyk`");
+$stmt->execute();
+$stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `koszyk`
+(
+  `id` INT AUTO_INCREMENT,
+  `IdTowar` int NOT NULL,
+  `ilosc` int NOT NULL,
+  `klient` int NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (IdTowar)
+  REFERENCES Towar(IdTowar),
+  FOREIGN KEY (klient)
+  REFERENCES Klient(IdKlient)
+);");
+  /*************************************************/
   /*******************PRACOWNICY********************/
   /*************************************************/
 $stmt = $pdo->query("DROP TABLE IF EXISTS `pracownicy`");
