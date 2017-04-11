@@ -36,7 +36,7 @@
                     <form action="http://{$smarty.server.HTTP_HOST}{$subdir}Kategoria/Edytuj/{$category['IdKategoria']}" method="post">
                         <div class="form-group">
                         <label for="name">Nazwa kategorii</label>
-                        <input type="text" class="form-control" name="towar" value="{$category['NazwaKategorii']}" />
+                        <input type="text" class="form-control" name="name" value="{$category['NazwaKategorii']}" />
                         </div>
                         <input type="submit" value="Zmień nazwę" class="btn btn-primary" />
       <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
@@ -109,4 +109,3 @@
 <br/><br/>
 </div>
 {include file="footer.html.php"}
-<a type="button" class="btn btn-warning" href="http://{$smarty.server.HTTP_HOST}{$subdir}Kategorie/Usun/{$category['id']}">usuń <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></a>

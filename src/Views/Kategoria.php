@@ -7,7 +7,8 @@
 		public function index(){
 			//pobranie z modelu listy kategorii
 			$model = $this->getModel('Kategoria');
-            if($model) {
+            if($model)
+						{
                 $data = $model->getAll();
                 if(isset($data['kategorie']))
                      $this->set('allKategorie', $data['kategorie']);

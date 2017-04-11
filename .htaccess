@@ -16,6 +16,8 @@ RewriteRule ^Grafik/delete/(\d+)/?$ index.php?controller=Grafik&action=delete&id
 RewriteRule ^Categories/add/?$ index.php?controller=Categories&action=add [L]
 
 RewriteRule ^Towar/?$ index.php?controller=Towar [L]
+RewriteRule ^Towar/add/?$ index.php?controller=Towar&action=add [L]
+RewriteRule ^Towar/insert/?$ index.php?controller=Towar&action=insert [L]
 RewriteRule ^Towar/freeze/?$ index.php?controller=Towar&action=freezed [L]
 RewriteRule ^Towar/delete/(\d+)/?$ index.php?controller=Towar&action=delete&id=$1 [L]
 RewriteRule ^Szukaj/?$ index.php?controller=Towar&action=search [L]
@@ -30,6 +32,7 @@ RewriteRule ^Kategoria/Usun/(\d+)/?$ index.php?controller=Kategoria&action=delet
 RewriteRule ^Kategoria/Edytuj/(\d+)/?$ index.php?controller=Kategoria&action=edit&id=$1 [L]
 RewriteRule ^Kategoria/Wstaw/?$ index.php?controller=Kategoria&action=insert [L]
 
+RewriteRule ^Klient/?$ index.php?controller=Klient [L]
 
 RewriteRule ^Pracownicy/?$ index.php?controller=Pracownicy [L]
 RewriteRule ^Pracownicy/delete/(\d+)/?$ index.php?controller=Pracownicy&action=delete&id=$1 [L]

@@ -6,17 +6,20 @@
         <script src="http://code.jquery.com/jquery-latest.js"></script>
           <script src="http://{$smarty.server.HTTP_HOST}{$subdir}/js/jquery.min.js"></script>
           <script src="http://{$smarty.server.HTTP_HOST}{$subdir}/js/jquery-ui.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+          <!-- Bootstrap -->
+          <script src="http://{$smarty.server.HTTP_HOST}{$subdir}vendor/twbs/bootstrap/dist/js/bootstrap.min.js" ></script>
+      <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
         <!-- css -->
           <!-- Custom css -->
           <link rel="stylesheet" href="http://{$smarty.server.HTTP_HOST}{$subdir}css/custom.css">
           <link rel="stylesheet" href="http://{$smarty.server.HTTP_HOST}{$subdir}css/jquery-ui.min.css">
-        <link href="http://{$smarty.server.HTTP_HOST}{$subdir}css/bootstrap.css" rel="stylesheet">
+          <link href="http://{$smarty.server.HTTP_HOST}{$subdir}css/bootstrap.css" rel="stylesheet">
+          <link href="http://{$smarty.server.HTTP_HOST}{$subdir}vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> 
+        <!-- awaryjny bootstrap-->
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+        <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
         <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
 
     </head>
 
@@ -32,20 +35,6 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 
-        <li><a href="#">Kategorie</a></li>
-
-
-        <li><a href="#">Towary</a></li>
-        <li><a href="#">Kategorie</a></li>
-
-
-
-          <form class="navbar-form navbar-left" action="http://{$smarty.server.HTTP_HOST}{$subdir}Szukaj/" method="post">
-            <div class="form-group">
-              <input type="text" name="towar" class="form-control" placeholder="Wpisz nazwę produktu">
-            </div>
-            <button type="submit" class="btn btn-default">Szukaj</button>
-          </form>
 
           <!-- To co ma Bartek -->
 
@@ -55,7 +44,7 @@
                   <ul class="dropdown-menu">
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar" class="glyphicon glyphicon-list-alt"> Lista Towarów</a></li>
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/freeze" class="glyphicon glyphicon-list-alt"> Zamrożone Towary</a></li>
-                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Zamowienie/add" class="glyphicon glyphicon-plus"> Zamów Towar</a></li>
+                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/add" class="glyphicon glyphicon-plus"> Dodaj Towar</a></li>
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
                   </ul>
 
@@ -73,13 +62,13 @@
                           <ul class="dropdown-menu">
                             <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy" class="glyphicon glyphicon-user"> Pracownicy</a></li>
                             <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/add" class="glyphicon glyphicon-plus"> Dodaj pracownika</a></li>
+                            <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Klient" class="glyphicon glyphicon-plus"> Klienci</a></li>
                           </ul>
                         </li>
                     {/if}
-
-                    <form class="navbar-form navbar-left">
+                    <form class="navbar-form navbar-left" action="http://{$smarty.server.HTTP_HOST}{$subdir}Szukaj/" method="post">
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Wpisz nazwę produktu">
+                        <input type="text" name="towar" class="form-control" placeholder="Wpisz nazwę produktu">
                       </div>
                       <button type="submit" class="btn btn-default">Szukaj</button>
                     </form>

@@ -11,9 +11,9 @@
                 try
                 {
                     $kategorie = array();
-                    $stmt = $this->pdo->query('SELECT kategoria.IdKategoria, NazwaKategorii, COUNT(NazwaTowaru) AS ilosc FROM kategoria
+                    $stmt = $this->pdo->query('SELECT Kategoria.IdKategoria, NazwaKategorii, COUNT(NazwaTowaru) AS ilosc FROM Kategoria
 	LEFT JOIN Towar
-    ON towar.IdKategoria= kategoria.IdKategoria
+    ON Towar.IdKategoria= Kategoria.IdKategoria
 GROUP BY NazwaKategorii');
                     $kategorie = $stmt->fetchAll();
                     $stmt->closeCursor();
@@ -85,7 +85,7 @@ GROUP BY NazwaKategorii');
                 {
                     $stmt = $this->pdo->prepare('UPDATE `Kategoria`
 SET `NazwaKategorii`=:name
-WHERE IdKategoria=:id');
+WHERE `IdKategoria`=:id');
                     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 										$stmt->bindValue(':name', $name, PDO::PARAM_STR);
                     $stmt->execute();
