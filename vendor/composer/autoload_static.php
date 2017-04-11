@@ -11,6 +11,20 @@ class ComposerStaticInit3053ef72ec2e05ee7c9fb4c00a0acf97
         'f084d01b0a599f67676cffef638aa95b' => __DIR__ . '/..' . '/smarty/smarty/libs/bootstrap.php',
     );
 
+    public static $prefixLengthsPsr4 = array (
+        'F' => 
+        array (
+            'Fxp\\Composer\\AssetPlugin\\' => 25,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Fxp\\Composer\\AssetPlugin\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fxp/composer-asset-plugin',
+        ),
+    );
+
     public static $fallbackDirsPsr4 = array (
         0 => __DIR__ . '/../..' . '/src',
     );
@@ -18,6 +32,8 @@ class ComposerStaticInit3053ef72ec2e05ee7c9fb4c00a0acf97
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInit3053ef72ec2e05ee7c9fb4c00a0acf97::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit3053ef72ec2e05ee7c9fb4c00a0acf97::$prefixDirsPsr4;
             $loader->fallbackDirsPsr4 = ComposerStaticInit3053ef72ec2e05ee7c9fb4c00a0acf97::$fallbackDirsPsr4;
 
         }, null, ClassLoader::class);
