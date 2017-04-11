@@ -31,6 +31,16 @@
 <!-- To co ma Bartek -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        <li><a href="#">Kategorie</a></li>
+
+
+=======
+        <li><a href="#">Towary</a></li>
+        <li><a href="#">Kategorie</a></li>
+>>>>>>> 29b6947a9f84f26f6e4593b9dd7cbecf9ac8b3b3
 
 
           <form class="navbar-form navbar-left" action="http://{$smarty.server.HTTP_HOST}{$subdir}Szukaj/" method="post">
@@ -39,7 +49,11 @@
             </div>
             <button type="submit" class="btn btn-default">Szukaj</button>
           </form>
+<<<<<<< HEAD
 
+=======
+>>>>>>> a96b44b83d0635502a4088c512d4ece62a05de23
+>>>>>>> 29b6947a9f84f26f6e4593b9dd7cbecf9ac8b3b3
           <!-- To co ma Bartek -->
 
 
@@ -51,11 +65,18 @@
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Zamowienie/add" class="glyphicon glyphicon-plus"> Zamów Towar</a></li>
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
                   </ul>
+<<<<<<< HEAD
                 </li>
             <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Kategoria">Kategoria</a></li>
 
+=======
+            </li>
+>>>>>>> 29b6947a9f84f26f6e4593b9dd7cbecf9ac8b3b3
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> a96b44b83d0635502a4088c512d4ece62a05de23
                     {if $smarty.session.role<=1}
                       <li class="dropdown">
                           <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie użytkownikami<span class="caret"></span></a>
@@ -66,6 +87,12 @@
                         </li>
                     {/if}
 
+                    <form class="navbar-form navbar-left">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Wpisz nazwę produktu">
+                      </div>
+                      <button type="submit" class="btn btn-default">Szukaj</button>
+                    </form>
       </ul>
 
                 <ul class="nav navbar-nav navbar-right">

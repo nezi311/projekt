@@ -10,7 +10,7 @@
 		private static $password;
 		private static $database;
 
-		public static function setDBConfig($database ='PO', 
+		public static function setDBConfig($database ='PZ', 
 			$username ='user', $password = '123456', $host = 'localhost',
 			$type = 'mysql', $port = '3306'){
 
