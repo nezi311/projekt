@@ -33,7 +33,7 @@ if($rabat==0)
 {
     $poRabacie = $netto;
 }
-else 
+else
 {
     $poRabacie = $netto*$rabat/100;
 }
@@ -45,7 +45,7 @@ echo(
 <html>
 <body>
 
-    
+
     <table>
     <tr>
     <td></td><td><b>NABYWCA</b></td><td><b>KLIENT</b></td>
@@ -77,7 +77,7 @@ echo(
     <tr>
     <td><b>Nr_konta</b></td><td>$nrKontaNabywca</td><td>--------</td>
     </tr>
-    </table>    
+    </table>
 
 </br>
 <table border=1>

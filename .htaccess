@@ -17,9 +17,12 @@ RewriteRule ^Categories/add/?$ index.php?controller=Categories&action=add [L]
 
 RewriteRule ^Towar/?$ index.php?controller=Towar [L]
 RewriteRule ^Towar/freeze/?$ index.php?controller=Towar&action=freezed [L]
-RewriteRule ^Towar/Zamowienia/?$ index.php?controller=Towar&action=Zamowienia [L]
-RewriteRule ^Towar/addZamowienia/?$ index.php?controller=Towar&action=addZamowienia [L]
-RewriteRule ^Towar/insertZamowienia/?$ index.php?controller=Towar&action=insertZamowienia [L]
+RewriteRule ^Towar/delete/(\d+)/?$ index.php?controller=Towar&action=delete&id=$1 [L]
+
+RewriteRule ^Zamowienie/?$ index.php?controller=Zamowienie [L]
+RewriteRule ^Zamowienie/add/?$ index.php?controller=Zamowienie&action=add [L]
+RewriteRule ^Zamowienie/insert/?$ index.php?controller=Zamowienie&action=insert [L]
+
 
 RewriteRule ^Pracownicy/?$ index.php?controller=Pracownicy [L]
 RewriteRule ^Pracownicy/delete/(\d+)/?$ index.php?controller=Pracownicy&action=delete&id=$1 [L]

@@ -1,6 +1,6 @@
 <?php
 namespace Controllers;
-class Towar extends Controller
+class Zamowienie extends Controller
 {
 
 
@@ -10,64 +10,39 @@ class Towar extends Controller
     {
       //tworzy obiekt widoku i zleca wyświetlenie wszystkich kategorii
       //w widoku
-      $view = $this->getView('Towar');
+      $view = $this->getView('Zamowienie');
       $view->index();
     }
     else
       $this->redirect('index/');
   }
 
-  public function freezed()
-  {
-    if($_SESSION['role']<=1)
-    {
-      //tworzy obiekt widoku i zleca wyświetlenie wszystkich kategorii
-      //w widoku
-      $view = $this->getView('Towar');
-      $view->freezed();
-    }
-    else
-      $this->redirect('index/');
-  }
-
-
-  public function showone($id=null)
-  {
-    if($id !== null)
-    {
-      $view = $this->getView('Towar');
-      $view->showone($id);
-    }
-    else
-      $this->redirect('Towar/');
-  }
 
   public function add($data = null)
   {
     if($_SESSION['role']<=1) // sprawdzenie czy zalogowany user ma prawa do modyfikacji konta pracownika
     {
 
-      $view=$this->getView('Pracownicy');   //utworzenie widoku
+      $view=$this->getView('Zamowienie');   //utworzenie widoku
       $view->add($data);   //przeslanie nowych danych wraz z informacjami o bledzie do metody edit w widoku
     }
     else
       $this->redirect('index/'); //jesli user nie ma uprawnien zostaje przekierowany do indexu
   }
 
-
   public function insert()
   {
     if($_SESSION['role']<=1)
     {
-      $model=$this->getModel('Pracownicy');
+      $model=$this->getModel('Zamowienie');
           if($model)
           {
-            $data = $model->insert($_POST['imie'],$_POST['nazwisko'],$_POST['dzial'],$_POST['stanowisko'],$_POST['telefon'],$_POST['login'],$_POST['haslo'],$_POST['uprawnienia']);
+            $data = $model->insert($_POST['NazwaTowaru'],$_POST['MinStanMagazynowy'],$_POST['MaxStanMagazynowy'],$_POST['stawkaVat'],$_POST['kategoria'],$_POST['jednostkamiary']);
             //pobranie komunikatów o bledach
           }
           if($data['error'] === "") // jeśli bledy nie istnieją, przechodzimy do zakladnki "pracownicy"
             {
-              $this->redirect('Pracownicy/');
+              $this->redirect('Zamowienie/');
             }
             else // jeśli błędy istnieją wyświetlamy je w formularzu
             {
@@ -80,6 +55,18 @@ class Towar extends Controller
 
   }
 
+  public function showone($id=null)
+  {
+    if($id !== null)
+    {
+      $view = $this->getView('Zamowienie');
+      $view->showone($id);
+    }
+    else
+      $this->redirect('Zamowienie/');
+  }
+
+
   public function delete($id)
   {
 
@@ -88,17 +75,17 @@ class Towar extends Controller
         if($id !== null)
         {
 
-          $model=$this->getModel('Towar');
+          $model=$this->getModel('Zamowienie');
                   if($model)
                   {
                     $data = $model->delete($id);
                       //nie przekazano komunikatów o błędzie
                   }
           //powiadamiamy odpowiedni widok, że nastąpiła aktualizacja bazy
-          $this->redirect('Towar/');
+          $this->redirect('Zamowienie/');
         }
         else
-          $this->redirect('Towar/');
+          $this->redirect('Zamowienie/');
       }
       else
         $this->redirect('index/');

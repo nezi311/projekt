@@ -9,8 +9,8 @@
       <th>Nazwa Towaru</th><th>Min Stan Magazynowy</th><th>Max Stan Magazynowy</th><th>Stawka Vat</th><th>Kategoria</th><th>Jednostka Miary</th><th>Status</th><th>Edytuj</th><th>Anuluj</th>
     </tr>
   </thead>
-{if isset($tablicaTowarow)}
-  {foreach $tablicaTowarow as $towar}
+{if isset($tablicaZamowien)}
+  {foreach $tablicaZamowien as $towar}
   <tr>
     <td>{$towar['NazwaTowaru']}</td>
     <td>{$towar['MinStanMagazynowy']}</td>
