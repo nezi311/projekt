@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-10 23:58:03
+/* Smarty version 3.1.31, created on 2017-04-11 14:33:00
   from "C:\xampp\htdocs\pz\templates\header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58ebffeb9645d3_39387157',
+  'unifunc' => 'content_58ecccfc39c232_07658930',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3461e633281582e1888c85ab7ee8e90a8d174c19' => 
     array (
       0 => 'C:\\xampp\\htdocs\\pz\\templates\\header.html.php',
-      1 => 1491861480,
+      1 => 1491913915,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58ebffeb9645d3_39387157 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58ecccfc39c232_07658930 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -73,6 +73,19 @@ css/bootstrap.css" rel="stylesheet">
 <!-- To co ma Bartek -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 68c59ceac3477695cd9826fcf774fdca7f0058b7
+        <li><a href="#">Kategorie</a></li>
+
+
+        <li><a href="#">Towary</a></li>
+        <li><a href="#">Kategorie</a></li>
+>>>>>>> 29b6947a9f84f26f6e4593b9dd7cbecf9ac8b3b3
 
 
           <form class="navbar-form navbar-left" action="http://<?php echo $_SERVER['HTTP_HOST'];
@@ -83,7 +96,15 @@ Szukaj/" method="post">
             </div>
             <button type="submit" class="btn btn-default">Szukaj</button>
           </form>
+<<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> a96b44b83d0635502a4088c512d4ece62a05de23
+>>>>>>> 29b6947a9f84f26f6e4593b9dd7cbecf9ac8b3b3
+=======
+
+>>>>>>> 68c59ceac3477695cd9826fcf774fdca7f0058b7
           <!-- To co ma Bartek -->
 
 
@@ -103,11 +124,15 @@ Zamowienie/add" class="glyphicon glyphicon-plus"> Zamów Towar</a></li>
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
                   </ul>
+<<<<<<< HEAD
                 </li>
             <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Kategoria">Kategoria</a></li>
 
+=======
+            </li>
+>>>>>>> 29b6947a9f84f26f6e4593b9dd7cbecf9ac8b3b3
 
 
                     <?php if ($_SESSION['role'] <= 1) {?>
@@ -124,6 +149,12 @@ Pracownicy/add" class="glyphicon glyphicon-plus"> Dodaj pracownika</a></li>
                         </li>
                     <?php }?>
 
+                    <form class="navbar-form navbar-left">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Wpisz nazwę produktu">
+                      </div>
+                      <button type="submit" class="btn btn-default">Szukaj</button>
+                    </form>
       </ul>
 
                 <ul class="nav navbar-nav navbar-right">
