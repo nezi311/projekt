@@ -11,9 +11,9 @@
                 try
                 {
                     $kategorie = array();
-                    $stmt = $this->pdo->query('SELECT kategoria.IdKategoria, NazwaKategorii, COUNT(NazwaTowaru) AS ilosc FROM kategoria
+                    $stmt = $this->pdo->query('SELECT Kategoria.IdKategoria, NazwaKategorii, COUNT(NazwaTowaru) AS ilosc FROM Kategoria
 	LEFT JOIN Towar
-    ON towar.IdKategoria= kategoria.IdKategoria
+    ON Towar.IdKategoria= Kategoria.IdKategoria
 GROUP BY NazwaKategorii');
                     $kategorie = $stmt->fetchAll();
                     $stmt->closeCursor();

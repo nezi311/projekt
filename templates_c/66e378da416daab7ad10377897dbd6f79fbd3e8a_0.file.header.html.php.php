@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-11 14:10:48
+/* Smarty version 3.1.31, created on 2017-04-11 15:04:56
   from "/opt/lampp/htdocs/PZ/templates/header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58ecc7c87c6165_16334150',
+  'unifunc' => 'content_58ecd4789322c8_60088750',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '66e378da416daab7ad10377897dbd6f79fbd3e8a' => 
     array (
       0 => '/opt/lampp/htdocs/PZ/templates/header.html.php',
-      1 => 1491912646,
+      1 => 1491915875,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58ecc7c87c6165_16334150 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58ecd4789322c8_60088750 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -73,14 +73,13 @@ css/bootstrap.css" rel="stylesheet">
 <!-- To co ma Bartek -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#">Kategorie</a></li>
 
 
           <!-- To co ma Bartek -->
 
 
             <li class="dropdown">
-                  <a href="#" class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie Towarami<span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie Towarami <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
@@ -95,7 +94,16 @@ Zamowienie/add" class="glyphicon glyphicon-plus"> Zamów Towar</a></li>
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
                   </ul>
+
+                </li>
+            <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Kategoria">Kategoria</a></li>
+
+
             </li>
+
+
 
                     <?php if ($_SESSION['role'] <= 1) {?>
                       <li class="dropdown">
@@ -110,10 +118,11 @@ Pracownicy/add" class="glyphicon glyphicon-plus"> Dodaj pracownika</a></li>
                           </ul>
                         </li>
                     <?php }?>
-
-                    <form class="navbar-form navbar-left">
+                    <form class="navbar-form navbar-left" action="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Szukaj/" method="post">
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Wpisz nazwę produktu">
+                        <input type="text" name="towar" class="form-control" placeholder="Wpisz nazwę produktu">
                       </div>
                       <button type="submit" class="btn btn-default">Szukaj</button>
                     </form>
@@ -143,6 +152,7 @@ AccessRoles/logout">Wyloguj</a></li>
             </div><!-- /.container-fluid -->
 </nav>
 <body>
+
 <div id="wrap">
   <div class="row center-block">
     <div class="col-md-12">

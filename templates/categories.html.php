@@ -109,4 +109,3 @@
 <br/><br/>
 </div>
 {include file="footer.html.php"}
-<a type="button" class="btn btn-warning" href="http://{$smarty.server.HTTP_HOST}{$subdir}Kategorie/Usun/{$category['id']}">usuń <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></a>

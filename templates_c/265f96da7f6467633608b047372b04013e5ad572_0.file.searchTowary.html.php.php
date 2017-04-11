@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-10 20:51:27
-  from "C:\xampp\htdocs\pz\templates\indexTowary.html.php" */
+/* Smarty version 3.1.31, created on 2017-04-11 15:01:08
+  from "/opt/lampp/htdocs/PZ/templates/searchTowary.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58ebd42fbd2db9_53944720',
+  'unifunc' => 'content_58ecd3942717c5_15029285',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '057cf19593e1615abb9d4e93d1fbefe9e454d52f' => 
+    '265f96da7f6467633608b047372b04013e5ad572' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\pz\\templates\\indexTowary.html.php',
-      1 => 1491849164,
+      0 => '/opt/lampp/htdocs/PZ/templates/searchTowary.html.php',
+      1 => 1491915414,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58ebd42fbd2db9_53944720 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58ecd3942717c5_15029285 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -30,13 +30,14 @@ $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id,
 <div class="page-header">
 	<h2>Lista Towarów</h2>
 </div>
+
+<?php if (isset($_smarty_tpl->tpl_vars['tablicaTowarow']->value) && !empty($_smarty_tpl->tpl_vars['tablicaTowarow']->value)) {?>
 <table class="table">
   <thead>
     <tr>
       <th>Nazwa Towaru</th><th>Min Stan Magazynowy</th><th>Max Stan Magazynowy</th><th>Stan Magazynowy Rzeczywisty</th><th>Stan Magazynowy Dysponowany</th><th>Stawka Vat</th><th>Kod Towaru</th><th>Kategoria</th><th>Jednostka Miary</th><th>Stan</th><th>Edytuj</th><th>Zamroz </th><th>usun</th>
     </tr>
   </thead>
-<?php if (isset($_smarty_tpl->tpl_vars['tablicaTowarow']->value)) {?>
   <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['tablicaTowarow']->value, 'towar');
 if ($_from !== null) {
@@ -82,9 +83,9 @@ Towar/delete/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 ?>
 
-<?php }?>
 </table>
-<?php if (isset($_smarty_tpl->tpl_vars['error']->value)) {?>
+<?php }
+if (isset($_smarty_tpl->tpl_vars['error']->value)) {?>
 <strong><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
 </strong>
 <?php }?>

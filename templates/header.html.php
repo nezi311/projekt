@@ -32,20 +32,6 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 
-        <li><a href="#">Kategorie</a></li>
-
-
-        <li><a href="#">Towary</a></li>
-        <li><a href="#">Kategorie</a></li>
-
-
-
-          <form class="navbar-form navbar-left" action="http://{$smarty.server.HTTP_HOST}{$subdir}Szukaj/" method="post">
-            <div class="form-group">
-              <input type="text" name="towar" class="form-control" placeholder="Wpisz nazwę produktu">
-            </div>
-            <button type="submit" class="btn btn-default">Szukaj</button>
-          </form>
 
           <!-- To co ma Bartek -->
 
@@ -76,10 +62,9 @@
                           </ul>
                         </li>
                     {/if}
-
-                    <form class="navbar-form navbar-left">
+                    <form class="navbar-form navbar-left" action="http://{$smarty.server.HTTP_HOST}{$subdir}Szukaj/" method="post">
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Wpisz nazwę produktu">
+                        <input type="text" name="towar" class="form-control" placeholder="Wpisz nazwę produktu">
                       </div>
                       <button type="submit" class="btn btn-default">Szukaj</button>
                     </form>

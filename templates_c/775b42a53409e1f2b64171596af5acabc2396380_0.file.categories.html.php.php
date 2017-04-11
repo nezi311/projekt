@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-11 14:22:08
-  from "C:\xampp\htdocs\pz\templates\categories.html.php" */
+/* Smarty version 3.1.31, created on 2017-04-11 15:15:35
+  from "/opt/lampp/htdocs/PZ/templates/categories.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58ecca70c3d430_52193683',
+  'unifunc' => 'content_58ecd6f7f3a6d4_27718898',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '221d40bfe7b155fde23e5723f1de6b6bb8b12b76' => 
+    '775b42a53409e1f2b64171596af5acabc2396380' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\pz\\templates\\categories.html.php',
-      1 => 1491860299,
+      0 => '/opt/lampp/htdocs/PZ/templates/categories.html.php',
+      1 => 1491916534,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58ecca70c3d430_52193683 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58ecd6f7f3a6d4_27718898 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -166,9 +166,5 @@ Kategoria/Wstaw/" method="post">
 <?php $_smarty_tpl->_subTemplateRender("file:footer.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
-<a type="button" class="btn btn-warning" href="http://<?php echo $_SERVER['HTTP_HOST'];
-echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Kategorie/Usun/<?php echo $_smarty_tpl->tpl_vars['category']->value['id'];?>
-">usuń <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></a>
 <?php }
 }

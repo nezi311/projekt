@@ -12,7 +12,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT * FROM towar");
+              $stmt = $this->pdo->query("SELECT * FROM Towar");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -35,7 +35,7 @@
 			else
 					try
 					{
-							$stmt = $this->pdo->prepare("SELECT * FROM `towar` WHERE NazwaTowaru LIKE :nazwa");
+							$stmt = $this->pdo->prepare("SELECT * FROM `Towar` WHERE NazwaTowaru LIKE :nazwa");
 							$stmt->bindValue(':nazwa', '%'.$towar.'%', PDO::PARAM_STR);
 							$stmt->execute();
 							$towary = $stmt->fetchAll();
@@ -70,7 +70,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT * FROM `towar` WHERE freeze=1;");
+              $stmt = $this->pdo->query("SELECT * FROM `Towar` WHERE freeze=1;");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -93,7 +93,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT * FROM towar WHERE freeze=0;");
+              $stmt = $this->pdo->query("SELECT * FROM Towar WHERE freeze=0;");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -119,7 +119,7 @@
 			else
 					try
 					{
-							$stmt = $this->pdo->prepare("SELECT * FROM towar WHERE IdTowar=:id");
+							$stmt = $this->pdo->prepare("SELECT * FROM Towar WHERE IdTowar=:id");
 							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
 							$stmt -> execute();
 							$towar = $stmt -> fetchAll();
@@ -149,7 +149,7 @@
 				else
 					try
 					{
-						$stmt = $this->pdo->prepare('DELETE FROM `towar` WHERE IdTowar=:id');
+						$stmt = $this->pdo->prepare('DELETE FROM `Towar` WHERE IdTowar=:id');
 				    $stmt -> bindValue(':id',$id,PDO::PARAM_INT);
 				    $wynik_zapytania = $stmt -> execute();
 					}
