@@ -12,7 +12,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT * FROM towar");
+              $stmt = $this->pdo->query("SELECT * FROM Towar");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -27,7 +27,33 @@
       return $data;
     }
 
-		public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary)
+
+		public function search($towar)
+		{
+			$data = array();
+			if(!$this->pdo)
+					$data['error'] = 'Połączenie z bazą nie powidoło się!';
+			else
+					try
+					{
+							$stmt = $this->pdo->prepare("SELECT * FROM `Towar` WHERE NazwaTowaru LIKE :nazwa");
+							$stmt->bindValue(':nazwa', '%'.$towar.'%', PDO::PARAM_STR);
+							$stmt->execute();
+							$towary = $stmt->fetchAll();
+							$stmt->closeCursor();
+							if($towary && !empty($towary))
+									$data['towary'] = $towary;
+							else
+									$data['error'] = 'Nie znaleziono towarów z daną frazą';
+					}
+					catch(\PDOException $e)
+					{
+							$data['error'] = 'Błąd odczytu danych z bazy! ';
+					}
+			return $data;
+		}
+
+			public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary)
 		{
 			$blad=false;
 			$data = array();
@@ -106,7 +132,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT * FROM `towar` WHERE freeze=1;");
+              $stmt = $this->pdo->query("SELECT * FROM `Towar` WHERE freeze=1;");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -129,7 +155,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT * FROM towar WHERE freeze=0;");
+              $stmt = $this->pdo->query("SELECT * FROM Towar WHERE freeze=0;");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -155,7 +181,7 @@
 			else
 					try
 					{
-							$stmt = $this->pdo->prepare("SELECT * FROM towar WHERE IdTowar=:id");
+							$stmt = $this->pdo->prepare("SELECT * FROM Towar WHERE IdTowar=:id");
 							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
 							$stmt -> execute();
 							$towar = $stmt -> fetchAll();
@@ -185,7 +211,7 @@
 				else
 					try
 					{
-						$stmt = $this->pdo->prepare('DELETE FROM `towar` WHERE IdTowar=:id');
+						$stmt = $this->pdo->prepare('DELETE FROM `Towar` WHERE IdTowar=:id');
 				    $stmt -> bindValue(':id',$id,PDO::PARAM_INT);
 				    $wynik_zapytania = $stmt -> execute();
 					}

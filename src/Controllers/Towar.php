@@ -55,6 +55,7 @@ class Towar extends Controller
   }
 
 
+
   public function insert()
   {
     if($_SESSION['role']<=1)
@@ -78,6 +79,13 @@ class Towar extends Controller
     else
       $this->redirect('index/');
 
+  }
+
+  public function search()
+  {
+
+			$view=$this->getView('Towar');
+			$view->search($_POST['towar']);
   }
 
   public function delete($id)
