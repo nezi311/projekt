@@ -31,21 +31,20 @@
 <!-- To co ma Bartek -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#">Towary</a></li>
-        <li><a href="#">Kategorie</a></li>
 
 
-          <form class="navbar-form navbar-left">
+          <form class="navbar-form navbar-left" action="http://{$smarty.server.HTTP_HOST}{$subdir}Szukaj/" method="post">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Wpisz nazwę produktu">
+              <input type="text" name="towar" class="form-control" placeholder="Wpisz nazwę produktu">
             </div>
             <button type="submit" class="btn btn-default">Szukaj</button>
           </form>
+
           <!-- To co ma Bartek -->
 
 
             <li class="dropdown">
-                  <a href="#" class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie Towarami<span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Zarządzanie Towarami <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar" class="glyphicon glyphicon-list-alt"> Lista Towarów</a></li>
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/freeze" class="glyphicon glyphicon-list-alt"> Zamrożone Towary</a></li>
@@ -53,6 +52,8 @@
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
                   </ul>
                 </li>
+            <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Kategoria">Kategoria</a></li>
+
 
 
                     {if $smarty.session.role<=1}
@@ -84,6 +85,7 @@
             </div><!-- /.container-fluid -->
 </nav>
 <body>
+  
 <div id="wrap">
   <div class="row center-block">
     <div class="col-md-12">

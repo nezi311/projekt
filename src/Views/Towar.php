@@ -36,6 +36,21 @@
           $this->render('freezeTowary');
       }
 
+			public function search($towar)
+			{
+					$model = $this->getModel('Towar');
+					if($model)
+					{
+							$data = $model->search($towar);
+
+							if(isset($data['towary']))
+									 $this->set('tablicaTowarow', $data['towary']);
+					}
+					if(isset($data['error']))
+							$this->set('error', $data['error']);
+					//przetworzenie szablonu do wyświetlania listy pracowników
+					$this->render('searchTowary');
+			}
 
 			// public function edit($id, $data=null)
 			// {
