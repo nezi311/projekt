@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-11 14:41:28
+/* Smarty version 3.1.31, created on 2017-04-17 13:05:44
   from "C:\xampp\htdocs\PZ\templates\header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58eccef8512cf8_74239037',
+  'unifunc' => 'content_58f4a1888afbd5_16268886',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd8104eaa282f8e757b1eb1f22b3fed373c78d3de' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\header.html.php',
-      1 => 1491914201,
+      1 => 1492355049,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58eccef8512cf8_74239037 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58f4a1888afbd5_16268886 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -40,9 +40,15 @@ echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 /js/jquery-ui.min.js"><?php echo '</script'; ?>
 >
-        <?php echo '<script'; ?>
- src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"><?php echo '</script'; ?>
+          <!-- Bootstrap -->
+          <?php echo '<script'; ?>
+ src="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+vendor/twbs/bootstrap/dist/js/bootstrap.min.js" ><?php echo '</script'; ?>
 >
+      <!-- <?php echo '<script'; ?>
+ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"><?php echo '</script'; ?>
+> -->
         <!-- css -->
           <!-- Custom css -->
           <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST'];
@@ -51,14 +57,17 @@ css/custom.css">
           <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 css/jquery-ui.min.css">
-        <link href="http://<?php echo $_SERVER['HTTP_HOST'];
+          <link href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 css/bootstrap.css" rel="stylesheet">
+          <link href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- awaryjny bootstrap-->
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+        <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
         <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
 
     </head>
 
@@ -74,22 +83,6 @@ css/bootstrap.css" rel="stylesheet">
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 
-        <li><a href="#">Kategorie</a></li>
-
-
-        <li><a href="#">Towary</a></li>
-        <li><a href="#">Kategorie</a></li>
-
-
-
-          <form class="navbar-form navbar-left" action="http://<?php echo $_SERVER['HTTP_HOST'];
-echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Szukaj/" method="post">
-            <div class="form-group">
-              <input type="text" name="towar" class="form-control" placeholder="Wpisz nazwę produktu">
-            </div>
-            <button type="submit" class="btn btn-default">Szukaj</button>
-          </form>
 
           <!-- To co ma Bartek -->
 
@@ -105,7 +98,7 @@ echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Towar/freeze" class="glyphicon glyphicon-list-alt"> Zamrożone Towary</a></li>
                     <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Zamowienie/add" class="glyphicon glyphicon-plus"> Zamów Towar</a></li>
+Towar/add" class="glyphicon glyphicon-plus"> Dodaj Towar</a></li>
                     <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
@@ -131,13 +124,17 @@ Pracownicy" class="glyphicon glyphicon-user"> Pracownicy</a></li>
                             <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Pracownicy/add" class="glyphicon glyphicon-plus"> Dodaj pracownika</a></li>
+                            <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Klient" class="glyphicon glyphicon-plus"> Klienci</a></li>
                           </ul>
                         </li>
                     <?php }?>
-
-                    <form class="navbar-form navbar-left">
+                    <form class="navbar-form navbar-left" action="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Szukaj/" method="post">
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Wpisz nazwę produktu">
+                        <input type="text" name="towar" class="form-control" placeholder="Wpisz nazwę produktu">
                       </div>
                       <button type="submit" class="btn btn-default">Szukaj</button>
                     </form>

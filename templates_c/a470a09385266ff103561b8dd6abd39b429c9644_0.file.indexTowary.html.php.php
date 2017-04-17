@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-11 17:13:23
+/* Smarty version 3.1.31, created on 2017-04-17 13:06:04
   from "C:\xampp\htdocs\PZ\templates\indexTowary.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58ecf293c77171_81707510',
+  'unifunc' => 'content_58f4a19cab4b08_82262099',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a470a09385266ff103561b8dd6abd39b429c9644' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\indexTowary.html.php',
-      1 => 1491923529,
+      1 => 1491988465,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58ecf293c77171_81707510 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58f4a19cab4b08_82262099 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -81,10 +81,11 @@ Towar/koszyk/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
 ?>
 			<input type='hidden' name='IdTowar' value=<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
 >
-			<select name='ilosc'>
+			<select name='ilosc' id='ilosc'>
 				<?php
  while ($_smarty_tpl->tpl_vars['ilosc']->value <= $_smarty_tpl->tpl_vars['towar']->value['StanMagazynowyRzeczywisty']) {?>
-					<option value='12'><?php echo $_smarty_tpl->tpl_vars['ilosc']->value;?>
+					<option value='<?php echo $_smarty_tpl->tpl_vars['ilosc']->value;?>
+'><?php echo $_smarty_tpl->tpl_vars['ilosc']->value;?>
 </option>
 					<?php echo $_smarty_tpl->tpl_vars['ilosc']->value++;?>
 

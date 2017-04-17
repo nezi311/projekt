@@ -4,29 +4,67 @@ require_once('vendor/autoload.php');
  $pdo=\Config\Database\DBConfig::getHandle();
 
 try{
+  $stmt = $pdo->query("DROP TABLE if exists `cenahistoria`, `zamowieniesprzedaz`, `statuszamowienia`, `koszyk`, `dostawcatowar`, `klient`, `zamowienietowar`, `zamowienia`, `Dostawca`, `towar`, `Jednostkamiary`, `kategoria`,`pracownicy`,`users`;");
+  $stmt->execute();
   /*************************************************/
-  /*******************KOSZYK********************/
+  /*******************BILANS********************/
   /*************************************************/
-$stmt = $pdo->query("DROP TABLE IF EXISTS `koszyk`");
+$stmt = $pdo->query("DROP TABLE IF EXISTS `bilans`");
 $stmt->execute();
-$stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `koszyk`
-(
-  `id` INT AUTO_INCREMENT,
-  `IdTowar` int NOT NULL,
-  `ilosc` int NOT NULL,
-  `klient` int NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (IdTowar)
-  REFERENCES Towar(IdTowar),
-  FOREIGN KEY (klient)
-  REFERENCES Klient(IdKlient)
+$stmt = $pdo->query("CREATE TABLE `bilans` (
+  `IdBilans` int(11) NOT NULL
 );");
+/*************************************************/
+/*******************USERS********************/
+/*************************************************/
+$stmt = $pdo->query("DROP TABLE IF EXISTS `users`");
+$stmt->execute();
+$stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `users`
+(
+  `IdUsers` INT AUTO_INCREMENT,
+  `user` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (IdUsers)
+)ENGINE = InnoDB;");
+$stmt->execute();
+
+$kategorie = array();
+$kategorie[]=array('user'=>'root','password'=>'5f4dcc3b5aa765d61d8327deb882cf99');
+foreach($kategorie as $element_kategoria)
+{
+  $stmt = $pdo->prepare('INSERT INTO `users`(`user`,`password`) VALUES (:user,:password)');
+  $stmt -> bindValue(':user',$element_kategoria['user'],PDO::PARAM_STR);
+  $stmt -> bindValue(':password',$element_kategoria['password'],PDO::PARAM_STR);
+  $wynik_zapytania = $stmt -> execute();
+}
+/*************************************************/
+/*******************SPOSOBDOSTAWY********************/
+/*************************************************/
+$stmt = $pdo->query("DROP TABLE IF EXISTS `sposobdostawy`");
+$stmt->execute();
+$stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `sposobdostawy`
+(
+  `IdSposobDostawy` INT AUTO_INCREMENT,
+  `SposobDostawy` VARCHAR(50) NOT NULL UNIQUE,
+  PRIMARY KEY (IdSposobDostawy)
+)ENGINE = InnoDB;");
+$stmt->execute();
+
+$kategorie = array();
+$kategorie[]=array('SposobDostawy'=>'Kurier');
+$kategorie[]=array('SposobDostawy'=>'Odbior Osobisty');
+foreach($kategorie as $element_kategoria)
+{
+  $stmt = $pdo->prepare('INSERT INTO `sposobdostawy`(`SposobDostawy`) VALUES (:SposobDostawy)');
+  $stmt -> bindValue(':SposobDostawy',$element_kategoria['SposobDostawy'],PDO::PARAM_STR);
+  $wynik_zapytania = $stmt -> execute();
+}
   /*************************************************/
   /*******************PRACOWNICY********************/
   /*************************************************/
-$stmt = $pdo->query("DROP TABLE IF EXISTS `pracownicy`");
+$stmt = $pdo->query("DROP TABLE IF EXISTS `Pracownicy`");
 $stmt->execute();
-$stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `pracownicy`
+$stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `Pracownicy`
 (
   `id` INT AUTO_INCREMENT,
   `imie` VARCHAR(100) NOT NULL,
@@ -61,8 +99,10 @@ $stmt->execute();
 
  }
  /*************************************************/
- /*******************KATEGORIA8********************/
+ /*******************KATEGORIA********************/
  /*************************************************/
+ $stmt = $pdo->query("DROP TABLE IF EXISTS `Kategoria`");
+ $stmt->execute();
  $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `Kategoria`
  (
    `IdKategoria` INT AUTO_INCREMENT,
@@ -88,20 +128,20 @@ $stmt->execute();
  $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `Jednostkamiary`
  (
    `IdJednostkaMiary` INT AUTO_INCREMENT,
-   `NazwaJednostki` VARCHAR(100) NOT NULL,
-   `skrotJednostki` VARCHAR(10)  NULL,
+   `Nazwa` VARCHAR(100) NOT NULL,
+   `NazwaSkrocona` VARCHAR(10)  NULL,
    PRIMARY KEY (IdJednostkaMiary)
  )ENGINE = InnoDB;");
  $stmt->execute();
 
  $jednostki = array();
- $jednostki[]=array('NazwaJednostki'=>'sztuka','skrotJednostki'=>'szt');
- $jednostki[]=array('NazwaJednostki'=>'litr','skrotJednostki'=>'l');
+ $jednostki[]=array('Nazwa'=>'sztuka','NazwaSkrocona'=>'szt');
+ $jednostki[]=array('Nazwa'=>'litr','NazwaSkrocona'=>'l');
  foreach($jednostki as $element_jednostka)
  {
-   $stmt = $pdo->prepare('INSERT INTO `Jednostkamiary`(`NazwaJednostki`,`skrotJednostki`) VALUES (:NazwaJednostki,:skrotJednostki)');
-   $stmt -> bindValue(':NazwaJednostki',$element_jednostka['NazwaJednostki'],PDO::PARAM_STR);
-   $stmt -> bindValue(':skrotJednostki',$element_jednostka['skrotJednostki'],PDO::PARAM_STR);
+   $stmt = $pdo->prepare('INSERT INTO `Jednostkamiary`(`Nazwa`,`NazwaSkrocona`) VALUES (:Nazwa,:NazwaSkrocona)');
+   $stmt -> bindValue(':Nazwa',$element_jednostka['Nazwa'],PDO::PARAM_STR);
+   $stmt -> bindValue(':NazwaSkrocona',$element_jednostka['NazwaSkrocona'],PDO::PARAM_STR);
    $wynik_zapytania = $stmt -> execute();
  }
  /*************************************************/
@@ -153,6 +193,7 @@ $stmt->execute();
  /*************************************************/
  /*******************ZAMÓWIENIA********************/
  /*************************************************/
+ /*
  $stmt = $pdo->query("DROP TABLE IF EXISTS `Zamowienia`");
  $stmt->execute();
  $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `Zamowienia`
@@ -189,57 +230,173 @@ $stmt->execute();
    $stmt -> bindValue(':IdJednostkaMiary',$element_towar['IdJednostkaMiary'],PDO::PARAM_INT);
    $stmt -> bindValue(':Status',$element_towar['Status'],PDO::PARAM_INT);
    $wynik_zapytania = $stmt -> execute();
- }
-/*************************************************/
-/*******************DOSTAWCA********************/
-/*************************************************/
- $stmt = $pdo->query("DROP TABLE IF EXISTS `Dostawca`");
+ }*/
+ /*************************************************/
+ /*******************DOSTAWCA********************/
+ /*************************************************/
+  $stmt = $pdo->query("DROP TABLE IF EXISTS `Dostawca`");
+  $stmt->execute();
+  $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `Dostawca`
+  (
+    `IdDostawca` INT AUTO_INCREMENT,
+    `NazwaSkrocona` varchar(100) NOT NULL,
+    `NazwaPelna` varchar(100) NOT NULL,
+    `NIP` varchar(10) NOT NULL,
+    `Telefon1` varchar(20) DEFAULT NULL,
+    `Telefon2` varchar(20) DEFAULT NULL,
+    `Telefon3` varchar(20) DEFAULT NULL,
+    `NazwaDzialu` varchar(50) NOT NULL,
+    `NrKonta` varchar(30) NOT NULL,
+    `Adres` varchar(50) NOT NULL,
+    `KodPocztowy` varchar(6) NOT NULL,
+    `Poczta` varchar(30) NOT NULL,
+    PRIMARY KEY (IdDostawca)
+  );");
+  $stmt->execute();
+
+  $dostawcy = array();
+  $dostawcy[]=array('NazwaSkrocona'=>'DPD',
+  'NazwaPelna'=>'DPD',
+  'NIP'=>'0987654321',
+  'Telefon1'=>'123456789',
+  'Telefon2'=>'123656789',
+  'Telefon3'=>'123856789',
+  'NazwaDzialu'=>'elektronika',
+  'NrKonta'=>'4487547836587346',
+  'Adres'=>'Kalisz, Jasna 21',
+  'KodPocztowy'=>'11-666',
+  'Poczta'=>'Kalisz',);
+
+  foreach($dostawcy as $dostawca)
+  {
+    $stmt = $pdo->prepare('INSERT INTO `Dostawca`(`NazwaSkrocona`,`NazwaPelna`,`NIP`,`Telefon1`,`Telefon2`,`Telefon3`,`NazwaDzialu`,`NrKonta`,`Adres`,`KodPocztowy`,`Poczta`) VALUES (:NazwaSkrocona,:NazwaPelna,:NIP,:Telefon1,:Telefon2,:Telefon3,:NazwaDzialu,:NrKonta,:Adres,:KodPocztowy,:Poczta)');
+    $stmt -> bindValue(':NazwaSkrocona',$dostawca['NazwaSkrocona'],PDO::PARAM_STR);
+    $stmt -> bindValue(':NazwaPelna',$dostawca['NazwaPelna'],PDO::PARAM_STR);
+    $stmt -> bindValue(':NIP',$dostawca['NIP'],PDO::PARAM_INT);
+    $stmt -> bindValue(':Telefon1',$dostawca['Telefon1'],PDO::PARAM_INT);
+    $stmt -> bindValue(':Telefon2',$dostawca['Telefon2'],PDO::PARAM_INT);
+    $stmt -> bindValue(':Telefon3',$dostawca['Telefon3'],PDO::PARAM_INT);
+    $stmt -> bindValue(':NazwaDzialu',$dostawca['NazwaDzialu'],PDO::PARAM_STR);
+    $stmt -> bindValue(':NrKonta',$dostawca['NrKonta'],PDO::PARAM_INT);
+    $stmt -> bindValue(':Adres',$dostawca['Adres'],PDO::PARAM_STR);
+    $stmt -> bindValue(':KodPocztowy',$dostawca['KodPocztowy'],PDO::PARAM_STR);
+    $stmt -> bindValue(':Poczta',$dostawca['Poczta'],PDO::PARAM_STR);
+    $wynik_zapytania = $stmt -> execute();
+  }
+ /*************************************************/
+ /*******************ZAMÓWIENIe********************/
+ /*************************************************/
+ $stmt = $pdo->query("DROP TABLE IF EXISTS `Zamowienia`");
  $stmt->execute();
- $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `Dostawca`
+ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `Zamowienia`
  (
-   `IdDostawca` INT AUTO_INCREMENT,
-   `NazwaSkrocona` varchar(100) NOT NULL,
-   `NazwaPelna` varchar(100) NOT NULL,
-   `NIP` varchar(10) NOT NULL,
-   `Telefon1` varchar(20) DEFAULT NULL,
-   `Telefon2` varchar(20) DEFAULT NULL,
-   `Telefon3` varchar(20) DEFAULT NULL,
-   `NazwaDzialu` varchar(50) NOT NULL,
-   `NrKonta` varchar(30) NOT NULL,
-   `Adres` varchar(50) NOT NULL,
-   `KodPocztowy` varchar(6) NOT NULL,
-   `Poczta` varchar(30) NOT NULL,
-   PRIMARY KEY (IdDostawca)
- );");
+   `IdZamowienie` int AUTO_INCREMENT,
+   `TerminRealizacji` date NOT NULL,
+   `DataRealizacji` date DEFAULT NULL,
+   `KosztZamowienia` float NOT NULL,
+   `IdDostawcy` int(11) NOT NULL,
+   `DataWystawienia` date NOT NULL,
+   `NumerZamowienia` varchar(50) CHARACTER SET latin1 NOT NULL,
+   `IdSposobDostawy` int(11) NOT NULL,
+   `KosztDostawy` float NOT NULL,
+   `WartoscTowarow` float NOT NULL,
+   PRIMARY KEY (IdZamowienie),
+   FOREIGN KEY (IdDostawcy)
+   REFERENCES Dostawca(IdDostawca)
+   ON DELETE CASCADE,
+   FOREIGN KEY (IdSposobDostawy)
+   REFERENCES sposobdostawy(IdSposobDostawy)
+   ON DELETE CASCADE
+ )ENGINE = InnoDB;");
  $stmt->execute();
 
- $dostawcy = array();
- $dostawcy[]=array('NazwaSkrocona'=>'DPD',
- 'NazwaPelna'=>'DPD',
- 'NIP'=>'0987654321',
- 'Telefon1'=>'123456789',
- 'Telefon2'=>'123656789',
- 'Telefon3'=>'123856789',
- 'NazwaDzialu'=>'elektronika',
- 'NrKonta'=>'4487547836587346',
- 'Adres'=>'Kalisz, Jasna 21',
- 'KodPocztowy'=>'11-666',
- 'Poczta'=>'Kalisz',);
-
- foreach($dostawcy as $dostawca)
+ $towary = array();
+ $towary[]=array(
+   'TerminRealizacji'=>'2017-03-21',
+   'DataRealizacji'=>'2017-03-20',
+   'KosztZamowienia'=>'600',
+   'IdDostawcy'=>'1',
+   'DataWystawienia'=>'2017-03-20',
+   'NumerZamowienia'=>'2017/03/20/1',
+   'IdSposobDostawy'=>'1',
+   'KosztDostawy'=>'0',
+   'WartoscTowarow'=>'800'
+ );
+ $towary[]=array(
+   'TerminRealizacji'=>'2017-03-23',
+   'DataRealizacji'=>'2017-03-22',
+   'KosztZamowienia'=>'1550',
+   'IdDostawcy'=>'1',
+   'DataWystawienia'=>'2017-03-22',
+   'NumerZamowienia'=>'2017/03/22/002',
+   'IdSposobDostawy'=>'2',
+   'KosztDostawy'=>'50',
+   'WartoscTowarow'=>'1500'
+ );
+ foreach($towary as $element_towar)
  {
-   $stmt = $pdo->prepare('INSERT INTO `Dostawca`(`NazwaSkrocona`,`NazwaPelna`,`NIP`,`Telefon1`,`Telefon2`,`Telefon3`,`NazwaDzialu`,`NrKonta`,`Adres`,`KodPocztowy`,`Poczta`) VALUES (:NazwaSkrocona,:NazwaPelna,:NIP,:Telefon1,:Telefon2,:Telefon3,:NazwaDzialu,:NrKonta,:Adres,:KodPocztowy,:Poczta)');
-   $stmt -> bindValue(':NazwaSkrocona',$dostawca['NazwaSkrocona'],PDO::PARAM_STR);
-   $stmt -> bindValue(':NazwaPelna',$dostawca['NazwaPelna'],PDO::PARAM_STR);
-   $stmt -> bindValue(':NIP',$dostawca['NIP'],PDO::PARAM_INT);
-   $stmt -> bindValue(':Telefon1',$dostawca['Telefon1'],PDO::PARAM_INT);
-   $stmt -> bindValue(':Telefon2',$dostawca['Telefon2'],PDO::PARAM_INT);
-   $stmt -> bindValue(':Telefon3',$dostawca['Telefon3'],PDO::PARAM_INT);
-   $stmt -> bindValue(':NazwaDzialu',$dostawca['NazwaDzialu'],PDO::PARAM_STR);
-   $stmt -> bindValue(':NrKonta',$dostawca['NrKonta'],PDO::PARAM_INT);
-   $stmt -> bindValue(':Adres',$dostawca['Adres'],PDO::PARAM_STR);
-   $stmt -> bindValue(':KodPocztowy',$dostawca['KodPocztowy'],PDO::PARAM_STR);
-   $stmt -> bindValue(':Poczta',$dostawca['Poczta'],PDO::PARAM_STR);
+   $stmt = $pdo->prepare('INSERT INTO `Zamowienia`(`TerminRealizacji`, `DataRealizacji`, `KosztZamowienia`, `IdDostawcy`, `DataWystawienia`, `NumerZamowienia`, `IdSposobDostawy`, `KosztDostawy`, `WartoscTowarow`) VALUES (:TerminRealizacji,:DataRealizacji,:KosztZamowienia,:IdDostawcy,:DataWystawienia,:NumerZamowienia,:IdSposobDostawy,:KosztDostawy,:WartoscTowarow)');
+   $stmt -> bindValue(':TerminRealizacji',$element_towar['TerminRealizacji'],PDO::PARAM_STR);
+   $stmt -> bindValue(':DataRealizacji',$element_towar['DataRealizacji'],PDO::PARAM_STR);
+   $stmt -> bindValue(':KosztZamowienia',$element_towar['KosztZamowienia'],PDO::PARAM_INT);
+   $stmt -> bindValue(':IdDostawcy',$element_towar['IdDostawcy'],PDO::PARAM_INT);
+   $stmt -> bindValue(':DataWystawienia',$element_towar['DataWystawienia'],PDO::PARAM_STR);
+   $stmt -> bindValue(':NumerZamowienia',$element_towar['NumerZamowienia'],PDO::PARAM_STR);
+   $stmt -> bindValue(':IdSposobDostawy',$element_towar['IdSposobDostawy'],PDO::PARAM_INT);
+   $stmt -> bindValue(':KosztDostawy',$element_towar['KosztDostawy'],PDO::PARAM_INT);
+   $stmt -> bindValue(':WartoscTowarow',$element_towar['WartoscTowarow'],PDO::PARAM_INT);
+   $wynik_zapytania = $stmt -> execute();
+ }
+ /*************************************************/
+ /*******************ZAMÓWIENIE_TOWAR********************/
+ /*************************************************/
+ $stmt = $pdo->query("DROP TABLE IF EXISTS `zamowienietowar`");
+ $stmt->execute();
+ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `zamowienietowar`
+ (
+   `IdZamowienieTowar` int AUTO_INCREMENT,
+   `Lp` int(11) NOT NULL,
+   `IdTowar` int(11) NOT NULL,
+   `Cena` float NOT NULL,
+   `Ilosc` int(11) NOT NULL,
+   `WartoscNetto` float NOT NULL,
+   `IdZamowienie` int(11) NOT NULL,
+   PRIMARY KEY (IdZamowienieTowar),
+   FOREIGN KEY (IdTowar)
+   REFERENCES Towar(IdTowar)
+   ON DELETE CASCADE,
+   FOREIGN KEY (IdZamowienie)
+   REFERENCES Zamowienia(IdZamowienie)
+   ON DELETE CASCADE
+ )ENGINE = InnoDB;");
+ $stmt->execute();
+
+ $towary = array();
+ $towary[]=array(
+'Lp'=>'1',
+'IdTowar'=>'1',
+'Cena'=>'100',
+'Ilosc'=>'6',
+'WartoscNetto'=>'600',
+'IdZamowienie'=>'1'
+ );
+ $towary[]=array(
+'Lp'=>'2',
+'IdTowar'=>'2',
+'Cena'=>'200',
+'Ilosc'=>'2',
+'WartoscNetto'=>'400',
+'IdZamowienie'=>'2'
+ );
+ foreach($towary as $element_towar)
+ {
+   $stmt = $pdo->prepare('INSERT INTO `zamowienietowar`(`Lp`, `IdTowar`, `Cena`, `Ilosc`, `WartoscNetto`, `IdZamowienie`) VALUES (:Lp,:IdTowar,:Cena,:Ilosc,:WartoscNetto,:IdZamowienie)');
+   $stmt -> bindValue(':Lp',$element_towar['Lp'],PDO::PARAM_INT);
+   $stmt -> bindValue(':IdTowar',$element_towar['IdTowar'],PDO::PARAM_INT);
+   $stmt -> bindValue(':Cena',$element_towar['Cena'],PDO::PARAM_STR);
+   $stmt -> bindValue(':Ilosc',$element_towar['Ilosc'],PDO::PARAM_STR);
+   $stmt -> bindValue(':WartoscNetto',$element_towar['WartoscNetto'],PDO::PARAM_INT);
+   $stmt -> bindValue(':IdZamowienie',$element_towar['IdZamowienie'],PDO::PARAM_INT);
    $wynik_zapytania = $stmt -> execute();
  }
  /*************************************************/
@@ -292,13 +449,173 @@ $stmt->execute();
     $stmt -> bindValue(':EMail',$klient['EMail'],PDO::PARAM_STR);
     $wynik_zapytania = $stmt -> execute();
   }
+  /*************************************************/
+  /*******************DOSTAWCA_TOWAR********************/
+  /*************************************************/
+   $stmt = $pdo->query("DROP TABLE IF EXISTS `dostawcatowar`");
+   $stmt->execute();
+   $stmt = $pdo->query("CREATE TABLE if NOT EXISTS `dostawcatowar` (
+  `IdDostawcaTowar` INT AUTO_INCREMENT,
+  `IdDostawca` int(11) NOT NULL,
+  `IdTowar` int(11) NOT NULL,
+  `Cena` float NOT NULL,
+  `DataOd` date NOT NULL,
+  `DataDo` date DEFAULT NULL,
+  `KodTowaruWgDostawcy` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `NazwaTowaruWgDostawcy` varchar(50) CHARACTER SET latin1 NOT NULL,
+  primary key(`IdDostawcaTowar`)
+);");
+   $stmt->execute();
+
+   $klienci = array();
+   $klienci[]=array(
+  'IdDostawca'=>'1',
+   'IdTowar'=>'1',
+   'Cena'=>'600',
+   'DataOd'=>'2017-03-13',
+   'DataDo'=>'2017-03-23',
+   'KodTowaruWgDostawcy'=>'648464168464',
+   'NazwaTowaruWgDostawcy'=>'DELL 24"');
+
+   $klienci[]=array(
+  'IdDostawca'=>'1',
+   'IdTowar'=>'2',
+   'Cena'=>'250',
+   'DataOd'=>'2017-03-07',
+   'DataDo'=>'2017-03-12',
+   'KodTowaruWgDostawcy'=>'1551555131353',
+   'NazwaTowaruWgDostawcy'=>'Mysz Zowie EC1-A');
+
+   foreach($klienci as $klient)
+   {
+     $stmt = $pdo->prepare('INSERT INTO `dostawcatowar` (`IdDostawca`, `IdTowar`, `Cena`, `DataOd`, `DataDo`, `KodTowaruWgDostawcy`, `NazwaTowaruWgDostawcy`) VALUES (:IdDostawca,:IdTowar,:Cena,:DataOd,:DataDo,:KodTowaruWgDostawcy,:NazwaTowaruWgDostawcy)');
+     $stmt -> bindValue(':IdDostawca',$klient['IdDostawca'],PDO::PARAM_INT);
+     $stmt -> bindValue(':IdTowar',$klient['IdTowar'],PDO::PARAM_INT);
+     $stmt -> bindValue(':Cena',$klient['Cena'],PDO::PARAM_INT);
+     $stmt -> bindValue(':DataOd',$klient['DataOd'],PDO::PARAM_STR);
+     $stmt -> bindValue(':DataDo',$klient['DataDo'],PDO::PARAM_STR);
+     $stmt -> bindValue(':KodTowaruWgDostawcy',$klient['KodTowaruWgDostawcy'],PDO::PARAM_INT);
+     $stmt -> bindValue(':NazwaTowaruWgDostawcy',$klient['NazwaTowaruWgDostawcy'],PDO::PARAM_STR);
+     $wynik_zapytania = $stmt -> execute();
+   }
+   /*************************************************/
+   /*******************KOSZYK********************/
+   /*************************************************/
+ $stmt = $pdo->query("DROP TABLE IF EXISTS `koszyk`");
+ $stmt->execute();
+ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `koszyk`
+ (
+   `id` INT AUTO_INCREMENT,
+   `IdTowar` int NOT NULL,
+   `ilosc` int NOT NULL,
+   `klient` int NOT NULL,
+   PRIMARY KEY (id),
+   FOREIGN KEY (IdTowar)
+   REFERENCES Towar(IdTowar),
+   FOREIGN KEY (klient)
+   REFERENCES Klient(IdKlient)
+ );");
+ /*************************************************/
+ /*******************STATUS_ZAMÓWIENIA********************/
+ /*************************************************/
+ $stmt = $pdo->query("DROP TABLE IF EXISTS `statuszamowienia`");
+ $stmt->execute();
+ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `statuszamowienia`
+ (
+   `IdStanZamowienia` INT AUTO_INCREMENT,
+   `Stan` VARCHAR(50) NOT NULL UNIQUE,
+   PRIMARY KEY (IdStanZamowienia)
+ )ENGINE = InnoDB;");
+ $stmt->execute();
+
+ $kategorie = array();
+ $kategorie[]=array('Stan'=>'Anulowany');
+ $kategorie[]=array('Stan'=>'Zrealizowany');
+ $kategorie[]=array('Stan'=>'W trakcie realizacji');
+ foreach($kategorie as $element_kategoria)
+ {
+   $stmt = $pdo->prepare('INSERT INTO `statuszamowienia`(`Stan`) VALUES (:Stan)');
+   $stmt -> bindValue(':Stan',$element_kategoria['Stan'],PDO::PARAM_STR);
+   $wynik_zapytania = $stmt -> execute();
+ }
+ /*************************************************/
+ /*******************ZAMÓWIENIE_SPRZEDAŻ*******************/
+ /*************************************************/
+ $stmt = $pdo->query("DROP TABLE IF EXISTS `zamowieniesprzedaz`");
+ $stmt->execute();
+ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `zamowieniesprzedaz`
+ (
+   `IdZamowienieSprzedaz` INT AUTO_INCREMENT,
+   `DataZamowienia` date NOT NULL,
+   `Wartosc` float NOT NULL,
+   `IdStanZamowienia` int NOT NULL,
+   PRIMARY KEY (IdZamowienieSprzedaz),
+   foreign key (IdStanZamowienia)
+   references statuszamowienia(IdStanZamowienia)
+ )ENGINE = InnoDB;");
+ $stmt->execute();
+
+ $kategorie = array();
+ $kategorie[]=array(
+   'DataZamowienia'=>'2017-03-04',
+ 'Wartosc'=>'700',
+'IdStanZamowienia'=>'2');
+$kategorie[]=array(
+  'DataZamowienia'=>'2017-02-14',
+'Wartosc'=>'100',
+'IdStanZamowienia'=>'3');
+ foreach($kategorie as $element_kategoria)
+ {
+   $stmt = $pdo->prepare('INSERT INTO `zamowieniesprzedaz`(`DataZamowienia`,`Wartosc`,`IdStanZamowienia`) VALUES (:DataZamowienia,:Wartosc,:IdStanZamowienia)');
+   $stmt -> bindValue(':DataZamowienia',$element_kategoria['DataZamowienia'],PDO::PARAM_STR);
+   $stmt -> bindValue(':Wartosc',$element_kategoria['Wartosc'],PDO::PARAM_INT);
+   $stmt -> bindValue(':IdStanZamowienia',$element_kategoria['IdStanZamowienia'],PDO::PARAM_INT);
+   $wynik_zapytania = $stmt -> execute();
+ }
+ /*************************************************/
+ /*******************CENA_HISTORIA*******************/
+ /*************************************************/
+ $stmt = $pdo->query("DROP TABLE IF EXISTS `cenahistoria`");
+ $stmt->execute();
+ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `cenahistoria`
+ (
+   `IdCenaHistoria` INT AUTO_INCREMENT,
+   `DataWprowadzenia` date NOT NULL,
+   `Cena` float NOT NULL,
+   `IdTowar` int NOT NULL,
+   PRIMARY KEY (IdCenaHistoria),
+   foreign key (IdTowar)
+   references towar(IdTowar)
+ )ENGINE = InnoDB;");
+ $stmt->execute();
+
+ $kategorie = array();
+ $kategorie[]=array(
+   'DataWprowadzenia'=>'2017-02-04',
+ 'Cena'=>'700',
+'IdTowar'=>'1');
+$kategorie[]=array(
+  'DataWprowadzenia'=>'2017-02-14',
+'Cena'=>'650',
+'IdTowar'=>'1');
+$kategorie[]=array(
+  'DataWprowadzenia'=>'2017-02-20',
+'Cena'=>'600',
+'IdTowar'=>'1');
+ foreach($kategorie as $element_kategoria)
+ {
+   $stmt = $pdo->prepare('INSERT INTO `cenahistoria`(`DataWprowadzenia`,`Cena`,`IdTowar`) VALUES (:DataWprowadzenia,:Cena,:IdTowar)');
+   $stmt -> bindValue(':DataWprowadzenia',$element_kategoria['DataWprowadzenia'],PDO::PARAM_STR);
+   $stmt -> bindValue(':Cena',$element_kategoria['Cena'],PDO::PARAM_INT);
+   $stmt -> bindValue(':IdTowar',$element_kategoria['IdTowar'],PDO::PARAM_INT);
+   $wynik_zapytania = $stmt -> execute();
+ }
  return true;
+ echo ("Baza została zainstalowana.");
 }
 catch (PDOException $e)
 {
  echo ('Wystąpił błąd biblioteki PDO: ' .$e->getMessage());
  return false;
 }
-
-echo ("Baza została zainstalowana.");
 ?>

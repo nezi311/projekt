@@ -29,9 +29,9 @@
 			<input type='submit' value='Dodaj'>
 			{$ilosc=0}
 			<input type='hidden' name='IdTowar' value={$towar['IdTowar']}>
-			<select name='ilosc'>
+			<select name='ilosc' id='ilosc'>
 				{while $ilosc<=$towar['StanMagazynowyRzeczywisty']}
-					<option value='12'>{$ilosc}</option>
+					<option value='{$ilosc}'>{$ilosc}</option>
 					{$ilosc++}
 				{/while}
 			</select>
