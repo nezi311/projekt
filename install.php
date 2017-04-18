@@ -4,7 +4,7 @@ require_once('vendor/autoload.php');
  $pdo=\Config\Database\DBConfig::getHandle();
 
 try{
-  $stmt = $pdo->query("DROP TABLE if exists `cenahistoria`, `zamowieniesprzedaz`, `statuszamowienia`, `koszyk`, `dostawcatowar`, `klient`, `zamowienietowar`, `zamowienia`, `Dostawca`, `towar`, `Jednostkamiary`, `kategoria`,`pracownicy`,`users`;");
+  $stmt = $pdo->query("DROP TABLE if exists `cenahistoria`, `zamowieniesprzedaz`, `statuszamowienia`, `koszyk`, `dostawcatowar`, `klient`, `zamowienietowar`, `zamowienietowarkopia`, `zamowienia`, `Dostawca`, `towar`, `Jednostkamiary`, `kategoria`,`pracownicy`,`users`;");
   $stmt->execute();
   /*************************************************/
   /*******************BILANS********************/
@@ -400,6 +400,58 @@ $stmt->execute();
    $wynik_zapytania = $stmt -> execute();
  }
  /*************************************************/
+ /*******************ZAMÓWIENIE_TOWAR********************/
+ /*************************************************/
+ $stmt = $pdo->query("DROP TABLE IF EXISTS `zamowienietowarkopia`");
+ $stmt->execute();
+ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `zamowienietowarkopia`
+ (
+   `IdZamowienieTowarKopia` int AUTO_INCREMENT,
+   `Lp` int(11) NOT NULL,
+   `IdTowar` int(11) NOT NULL,
+   `Cena` float NOT NULL,
+   `Ilosc` int(11) NOT NULL,
+   `WartoscNetto` float NOT NULL,
+   `IdZamowienie` int(11) NOT NULL,
+   PRIMARY KEY (IdZamowienieTowarKopia),
+   FOREIGN KEY (IdTowar)
+   REFERENCES Towar(IdTowar)
+   ON DELETE CASCADE,
+   FOREIGN KEY (IdZamowienie)
+   REFERENCES Zamowienia(IdZamowienie)
+   ON DELETE CASCADE
+ )ENGINE = InnoDB;");
+ $stmt->execute();
+
+ $towary = array();
+ $towary[]=array(
+'Lp'=>'1',
+'IdTowar'=>'1',
+'Cena'=>'100',
+'Ilosc'=>'6',
+'WartoscNetto'=>'600',
+'IdZamowienie'=>'1'
+ );
+ $towary[]=array(
+'Lp'=>'2',
+'IdTowar'=>'2',
+'Cena'=>'200',
+'Ilosc'=>'2',
+'WartoscNetto'=>'400',
+'IdZamowienie'=>'2'
+ );
+ foreach($towary as $element_towar)
+ {
+   $stmt = $pdo->prepare('INSERT INTO `zamowienietowarkopia`(`Lp`, `IdTowar`, `Cena`, `Ilosc`, `WartoscNetto`, `IdZamowienie`) VALUES (:Lp,:IdTowar,:Cena,:Ilosc,:WartoscNetto,:IdZamowienie)');
+   $stmt -> bindValue(':Lp',$element_towar['Lp'],PDO::PARAM_INT);
+   $stmt -> bindValue(':IdTowar',$element_towar['IdTowar'],PDO::PARAM_INT);
+   $stmt -> bindValue(':Cena',$element_towar['Cena'],PDO::PARAM_STR);
+   $stmt -> bindValue(':Ilosc',$element_towar['Ilosc'],PDO::PARAM_STR);
+   $stmt -> bindValue(':WartoscNetto',$element_towar['WartoscNetto'],PDO::PARAM_INT);
+   $stmt -> bindValue(':IdZamowienie',$element_towar['IdZamowienie'],PDO::PARAM_INT);
+   $wynik_zapytania = $stmt -> execute();
+ }
+ /*************************************************/
  /*******************KLIENT********************/
  /*************************************************/
   $stmt = $pdo->query("DROP TABLE IF EXISTS `Klient`");
@@ -549,9 +601,12 @@ $stmt->execute();
    `DataZamowienia` date NOT NULL,
    `Wartosc` float NOT NULL,
    `IdStanZamowienia` int NOT NULL,
+   `IdKlient` int NOT NULL,
    PRIMARY KEY (IdZamowienieSprzedaz),
    foreign key (IdStanZamowienia)
-   references statuszamowienia(IdStanZamowienia)
+   references statuszamowienia(IdStanZamowienia),
+   foreign key (IdKlient)
+   references klient(IdKlient)
  )ENGINE = InnoDB;");
  $stmt->execute();
 
@@ -559,17 +614,20 @@ $stmt->execute();
  $kategorie[]=array(
    'DataZamowienia'=>'2017-03-04',
  'Wartosc'=>'700',
-'IdStanZamowienia'=>'2');
+'IdStanZamowienia'=>'2',
+'IdKlient'=>'1');
 $kategorie[]=array(
   'DataZamowienia'=>'2017-02-14',
 'Wartosc'=>'100',
-'IdStanZamowienia'=>'3');
+'IdStanZamowienia'=>'3',
+'IdKlient'=>'1');
  foreach($kategorie as $element_kategoria)
  {
-   $stmt = $pdo->prepare('INSERT INTO `zamowieniesprzedaz`(`DataZamowienia`,`Wartosc`,`IdStanZamowienia`) VALUES (:DataZamowienia,:Wartosc,:IdStanZamowienia)');
+   $stmt = $pdo->prepare('INSERT INTO `zamowieniesprzedaz`(`DataZamowienia`,`Wartosc`,`IdStanZamowienia`,`IdKlient`) VALUES (:DataZamowienia,:Wartosc,:IdStanZamowienia,:IdKlient)');
    $stmt -> bindValue(':DataZamowienia',$element_kategoria['DataZamowienia'],PDO::PARAM_STR);
    $stmt -> bindValue(':Wartosc',$element_kategoria['Wartosc'],PDO::PARAM_INT);
    $stmt -> bindValue(':IdStanZamowienia',$element_kategoria['IdStanZamowienia'],PDO::PARAM_INT);
+   $stmt -> bindValue(':IdKlient',$element_kategoria['IdKlient'],PDO::PARAM_INT);
    $wynik_zapytania = $stmt -> execute();
  }
  /*************************************************/
@@ -610,8 +668,8 @@ $kategorie[]=array(
    $stmt -> bindValue(':IdTowar',$element_kategoria['IdTowar'],PDO::PARAM_INT);
    $wynik_zapytania = $stmt -> execute();
  }
- return true;
  echo ("Baza została zainstalowana.");
+ return true;
 }
 catch (PDOException $e)
 {
