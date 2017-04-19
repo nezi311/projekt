@@ -14,29 +14,7 @@ $stmt->execute();
 $stmt = $pdo->query("CREATE TABLE `bilans` (
   `IdBilans` int(11) NOT NULL
 );");
-/*************************************************/
-/*******************USERS********************/
-/*************************************************/
-$stmt = $pdo->query("DROP TABLE IF EXISTS `users`");
-$stmt->execute();
-$stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `users`
-(
-  `IdUsers` INT AUTO_INCREMENT,
-  `user` VARCHAR(50) NOT NULL,
-  `password` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (IdUsers)
-)ENGINE = InnoDB;");
-$stmt->execute();
 
-$kategorie = array();
-$kategorie[]=array('user'=>'root','password'=>'5f4dcc3b5aa765d61d8327deb882cf99');
-foreach($kategorie as $element_kategoria)
-{
-  $stmt = $pdo->prepare('INSERT INTO `users`(`user`,`password`) VALUES (:user,:password)');
-  $stmt -> bindValue(':user',$element_kategoria['user'],PDO::PARAM_STR);
-  $stmt -> bindValue(':password',$element_kategoria['password'],PDO::PARAM_STR);
-  $wynik_zapytania = $stmt -> execute();
-}
 /*************************************************/
 /*******************SPOSOBDOSTAWY********************/
 /*************************************************/

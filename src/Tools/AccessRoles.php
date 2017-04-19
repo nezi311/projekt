@@ -5,7 +5,7 @@ class AccessRoles extends Session
   // ** Dawid Dominiak **//
   private static $login='login';
   private static $loginTime = 'logintime';
-  private static $sessionTime = 900;
+  private static $sessionTime = 1200;
   private static $role="role";
   private static $id="id";
 

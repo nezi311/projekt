@@ -20,7 +20,7 @@
     <td>{$pracownik['login']}</td>
     <td>{$pracownik['uprawnienia']}</td>
     <td>{$pracownik['aktywny']}</td>
-		
+
 		{if $pracownik['uprawnienia']==0 and $smarty.session.role==0}
     <td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/edit/{$pracownik['id']}" role="button">Edytuj</a></td>
     <td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/zmienAktywnosc/{$pracownik['id']}" role="button">Zmień</a></td>
@@ -41,7 +41,7 @@
 {/if}
 </table>
 {if isset($error)}
-<strong>{$error}</strong>
+	<div class="alert alert-danger" role="alert">{$error}</div>
 {/if}
 
 {include file="footer.html.php"}

@@ -17,9 +17,9 @@
               $Klients = $stmt->fetchAll();
               $stmt->closeCursor();
               if($Klients && !empty($Klients))
-                  $data['Klient'] = $Klients;
+                  $data['Klienci'] = $Klients;
               else
-                  $data['Klient'] = array();
+                  $data['Klienci'] = array();
           }
           catch(\PDOException $e)
           {
@@ -77,9 +77,9 @@
 							$liczba_wierszy = $stmt->rowCount();
 							$stmt->closeCursor();
 							if($Klients && !empty($Klients))
-									$data['klient'] = $Klients;
+									$data['Klient'] = $Klients;
 							else
-									$data['klient'] = array();
+									$data['Klient'] = array();
 
 							if($liczba_wierszy==0)
 								$data['error']="Brak podanego id w bazie danych";
@@ -198,58 +198,86 @@
 
 
 		// ** Dawid Dominiak **//
-		public function update($id,$imie,$nazwisko,$dzial,$stanowisko,$telefon,$uprawnienia)
+		public function update($id,$imie,$nazwisko,$NIP,$Miasto,$Ulica,$Dom,$Lokal,$KodPocztowy,$Poczta,$Email)
 		{
 			$blad=false;
 			$data = array();
 			$data['error']="";
+			if(!$this->pdo)
+			{
+					$data['error'] = 'Połączenie z bazą nie powidoło się!';
+					$blad=true;
+			}
 			if($id == null || $id == "")
 			{
-				$data['error'] .= 'Nieokreślone id! <br>';
+				$data['error'] .= 'Nieokreślone ID! <br>';
 				$blad=true;
 			}
 			if($imie == null || $imie == "")
 			{
-					$data['error'] .= 'Nieokreślone imię! <br>';
-					$blad=true;
+				$data['error'] .= 'Nieokreślone imię! <br>';
+				$blad=true;
 			}
 			if($nazwisko == null || $nazwisko == "")
 			{
 				$data['error'] .='Nieokreślone nazwisko! <br>';
 				$blad=true;
 			}
-			if($dzial == null || $dzial == "")
+			if($NIP == null || $NIP == "")
 			{
-				$data['error'] .= 'Nieokreślony dział! <br>';
+				$data['error'] .= 'Nieokreślony NIP! <br>';
 				$blad=true;
 			}
-			if($stanowisko == null || $stanowisko == "")
+			if($Miasto == null || $Miasto == "")
 			{
-				$data['error'] .= 'Nieokreślone stanowisko! <br>';
+				$data['error'] .= 'Nieokreślone miasto! <br>';
 				$blad=true;
 			}
-			if($telefon == null || $telefon == "")
+			if($Ulica == null || $Ulica == "")
 			{
-				$data['error'] .= 'Nieokreślony nr telefonu! <br>';
+				$data['error'] .= 'Nieokreślona ulica! <br>';
 				$blad=true;
 			}
-			if($uprawnienia == null || $uprawnienia == "")
+			if($Dom == null || $Dom == "")
 			{
-				$data['error'] .= 'Nieokreślone uprawnienia! <br>';
+				$data['error'] .= 'Nieokreślony numer domu! <br>';
+				$blad=true;
+			}
+			if($KodPocztowy == null || $KodPocztowy == "")
+			{
+				$data['error'] .= 'Nieokreślony kod pocztowy! <br>';
+				$blad=true;
+			}
+			if($Poczta == null || $Poczta == "")
+			{
+				$data['error'] .= 'Nieokreślona poczta! <br>';
+				$blad=true;
+			}
+			if($Email == null || $Email == "")
+			{
+				$data['error'] .= 'Nieokreślony Email! <br>';
 				$blad=true;
 			}
 				if(!$blad)
 				{
 					try
 					{
-						$stmt = $this->pdo->prepare('UPDATE `pracownicy` SET `imie`=:imie,`nazwisko`=:nazwisko,`dzial`=:dzial,`stanowisko`=:stanowisko,`telefon`=:telefon,`uprawnienia`=:role WHERE `id`=:id');
+						//echo("$id,$imie,$nazwisko,$NIP,$Miasto,$Ulica,$Dom,$Lokal,$KodPocztowy,$Poczta,$Email");
+						//$stmt = $this->pdo->prepare('UPDATE Klient SET `Imie`=:Imie, `Nazwisko`=:Nazwisko, `NIP`=:NIP, `Miasto`=:Miasto, `Ulica`=:Uluca, `Dom`=:Dom, `Lokal`=:Lokal, `KodPocztowy`=:KodPocztowy, `Poczta`=:Poczta, `EMail`=:EMail WHERE `IdKlient`=:id');
+						$stmt = $this->pdo->prepare('UPDATE `Klient` SET `Imie`=:imie,`Nazwisko`=:nazwisko,`NIP`=:nIP,`Miasto`=:miasto,`Ulica`=:ulica,`Dom`=:dom,`Lokal`=:lokal,`KodPocztowy`=:kodPocztowy,`Poczta`=:poczta,`EMail`=:eMail WHERE `IdKlient`=:id');
+
+
 						$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
-						$stmt -> bindValue(':role',$uprawnienia,PDO::PARAM_INT);
 						$stmt -> bindValue(':imie',$imie,PDO::PARAM_STR);
-						$stmt -> bindValue(':nazwisko',$nazwisko,PDO::PARAM_STR);
-						$stmt -> bindValue(':dzial',$dzial,PDO::PARAM_STR);
-						$stmt -> bindValue(':stanowisko',$stanowisko,PDO::PARAM_STR);
-						$stmt -> bindValue(':telefon',$telefon,PDO::PARAM_STR);
+				    $stmt -> bindValue(':nazwisko',$nazwisko,PDO::PARAM_STR);
+				    $stmt -> bindValue(':nIP',$NIP,PDO::PARAM_INT);
+				    $stmt -> bindValue(':miasto',$Miasto,PDO::PARAM_STR);
+				    $stmt -> bindValue(':ulica',$Ulica,PDO::PARAM_STR);
+				    $stmt -> bindValue(':dom',$Dom,PDO::PARAM_STR);
+				    $stmt -> bindValue(':lokal',$Lokal,PDO::PARAM_STR);
+				    $stmt -> bindValue(':kodPocztowy',$KodPocztowy,PDO::PARAM_STR);
+				    $stmt -> bindValue(':poczta',$Poczta,PDO::PARAM_STR);
+				    $stmt -> bindValue(':eMail',$Email,PDO::PARAM_STR);
 						$wynik_zapytania = $stmt -> execute();
 					}
 					catch(\PDOException $e)
@@ -262,94 +290,6 @@
 				return $data;
 		}
 
-
-		// ** Dawid Dominiak **//
-		public function reset($id ,$pass1, $pass2)
-		{
-			$blad=false;
-			$data = array();
-			$data['error']="";
-			if($id == NULL || $id == "")
-				{
-					$data['error'] .= 'Nieokreślone id! <br>';
-					$blad=true;
-				}
-			if($pass1 == NULL || $pass1 == "")
-					{
-						$data['error'] .= 'Nieokreślone hasło nr. 1! <br>';
-						$blad=true;
-					}
-				if($pass2 == NULL || $pass2 == "")
-				{
-					$data['error'] .= 'Nieokreślone hasło nr. 2! <br>';
-					$blad=true;
-				}
-			if(strcmp($pass1,$pass2)!==0)
-				{
-					$data['error'] .= 'Hasło nr.1 i hasło nr. 2 są różne! <br>';
-					$blad=true;
-				}
-			if(!$blad)
-			{
-
-				try
-				{
-					$stmt = $this->pdo->prepare('UPDATE `pracownicy` SET `haslo`= :haslo WHERE `id`=:id');
-					$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
-					$md5password = md5($pass1);
-					$stmt -> bindValue(':haslo',$md5password,PDO::PARAM_STR);
-					$wynik_zapytania = $stmt -> execute();
-				}
-				catch(\PDOException $e)
-				{
-						$data['error'] .='Błąd zapisu danych do bazy! <br>';
-						return $data;
-				}
-
-			}
-			return $data;
-
-		}
-
-		// ** Dawid Dominiak **//
-		public function zmienAktywnosc($id)
-		{
-			$data = array();
-			if($id == NULL || $id == "")
-					$data['error'] = 'Nieokreślone id!';
-				else
-				{
-
-						try
-						{
-							$tempArray=array();
-							$tempArray=$this->getOne($id);
-
-							//d($tempArray['pracownik'][0]['aktywny']);
-
-							$stmt = $this->pdo->prepare('UPDATE `pracownicy` SET `aktywny`= :aktywny WHERE `id`=:id');
-							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
-							if($tempArray['pracownik'][0]['aktywny']==0)
-							{
-								$stmt -> bindValue(':aktywny',1,PDO::PARAM_INT);
-							}
-							else
-							{
-								$stmt -> bindValue(':aktywny',0,PDO::PARAM_INT);
-							}
-							$wynik_zapytania = $stmt -> execute();
-						}
-						catch(\PDOException $e)
-						{
-							if(isset($data['error']))
-								$data['error'] =$data['error'].'<br> Błąd zapisu danych do bazy!';
-							else
-								$data['error'] ='<br> Błąd zapisu danych do bazy!';
-						}
-
-				}
-				return $data;
-		}
 
   }
 

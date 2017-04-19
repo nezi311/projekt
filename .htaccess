@@ -7,9 +7,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteRule ^index/?$ index.php?controller=index [L]
 
-RewriteRule ^Grafik/?$ index.php?controller=Grafik [L]
-RewriteRule ^Grafik/insert/?$ index.php?controller=Grafik&action=insert [L]
-RewriteRule ^Grafik/delete/(\d+)/?$ index.php?controller=Grafik&action=delete&id=$1 [L]
+
 RewriteRule ^Categories/showone/(\d+)/?$ index.php?controller=Categories&action=showone&id=$1 [L]
 RewriteRule ^Categories/install/?$ index.php?controller=Categories&action=install [L]
 RewriteRule ^Grafik/delete/(\d+)/?$ index.php?controller=Grafik&action=delete&id=$1 [L]
@@ -33,6 +31,11 @@ RewriteRule ^Kategoria/Edytuj/(\d+)/?$ index.php?controller=Kategoria&action=edi
 RewriteRule ^Kategoria/Wstaw/?$ index.php?controller=Kategoria&action=insert [L]
 
 RewriteRule ^Klient/?$ index.php?controller=Klient [L]
+RewriteRule ^Klient/update/?$ index.php?controller=Klient&action=update [L]
+RewriteRule ^Klient/insert/?$ index.php?controller=Klient&action=insert [L]
+
+
+
 
 RewriteRule ^Pracownicy/?$ index.php?controller=Pracownicy [L]
 RewriteRule ^Pracownicy/delete/(\d+)/?$ index.php?controller=Pracownicy&action=delete&id=$1 [L]

@@ -9,10 +9,17 @@
           $model = $this->getModel('Klient');
           if($model)
           {
+						/*
               $data = $model->getAllShorter();
 
               if(isset($data['Klient']))
                    $this->set('tablicaKlient', $data['Klient']);
+						*/
+
+						$data = $model->getAll();
+		        if(isset($data['Klienci']))
+		        	$this->set('tablicaKlienci', $data['Klienci']);
+
           }
           if(isset($data['error']))
               $this->set('error', $data['error']);
@@ -52,33 +59,7 @@
 				$this->render('editPracownik');
 			}
 
-			// ** Dawid Dominiak **//
-			public function passReset($id, $dane=null)
-			{
 
-
-					if(isset($dane['error']))
-					{
-						if($dane['error'] !== "" )
-						{
-							//d($dane);
-							$this->set('error',$dane['error']);
-						}
-					}
-
-
-
-				if($id===null) //zmiana hasla przez usera
-				{
-					$this->set('idPracownik',$_SESSION['id']); //utworzenie zmiennej pomocniczej do formularza
-				}
-				else //zmiana hasla przez admina lub kierownika
-				{
-					$this->set('idPracownik',$id);
-				}
-
-				$this->render('passResetPracownik'); //utworzenie zmiennej pomocniczej do formularza
-			}
 
 
 
