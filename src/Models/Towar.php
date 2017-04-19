@@ -244,7 +244,7 @@
           {
               $stmt = $this->pdo->prepare('insert into `koszyk`(`IdTowar`,`ilosc`,`klient`) values(:IdTowar,:ilosc,1);');
 							$stmt -> bindValue(':IdTowar',$IdTowar,PDO::PARAM_INT);
-							$stmt -> bindValue(':ilocs',$ilosc,PDO::PARAM_INT);
+							$stmt -> bindValue(':ilosc',$ilosc,PDO::PARAM_INT);
 							var_dump($stmt);
 							$wynik_zapytania = $stmt -> execute();
           }

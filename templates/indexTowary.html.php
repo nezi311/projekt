@@ -26,12 +26,14 @@
     <td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/zamroz/{$towar['IdTowar']}" role="button">Zamroź</a></td>
 		<td>
 		<form action="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/koszyk/{$towar['IdTowar']}" method="post">
-			<input type='submit' value='Dodaj'>
-			{$ilosc=0}
 			<input type='hidden' name='IdTowar' value={$towar['IdTowar']}>
+
+			<input type='submit' value='Dodaj'>
+
+			{$ilosc=0}
 			<select name='ilosc' id='ilosc'>
 				{while $ilosc<=$towar['StanMagazynowyRzeczywisty']}
-					<option value='{$ilosc}'>{$ilosc}</option>
+					<option value={$ilosc}>{$ilosc}</option>
 					{$ilosc++}
 				{/while}
 			</select>
