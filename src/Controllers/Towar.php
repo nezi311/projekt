@@ -30,6 +30,18 @@ class Towar extends Controller
       $this->redirect('index/');
   }
 
+  public function wKoszyku()
+  {
+    if($_SESSION['role']<=1)
+    {
+      //tworzy obiekt widoku i zleca wyświetlenie wszystkich kategorii
+      //w widoku
+      $view = $this->getView('Towar');
+      $view->wKoszyku();
+    }
+    else
+      $this->redirect('index/');
+  }
 
   public function showone($id=null)
   {

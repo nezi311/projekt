@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-17 13:05:44
+/* Smarty version 3.1.31, created on 2017-04-19 22:23:35
   from "C:\xampp\htdocs\PZ\templates\header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58f4a1888afbd5_16268886',
+  'unifunc' => 'content_58f7c74711a368_57045851',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd8104eaa282f8e757b1eb1f22b3fed373c78d3de' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\header.html.php',
-      1 => 1492355049,
+      1 => 1492633413,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58f4a1888afbd5_16268886 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58f7c74711a368_57045851 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -141,6 +141,9 @@ Szukaj/" method="post">
       </ul>
 
                 <ul class="nav navbar-nav navbar-right">
+                  <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Koszyk" class="glyphicon glyphicon-shopping-cart"> Koszyk</a></li>
                   <li><a href="#">Zamówienie</a></li>
                   <li><a href="#">Historia</a></li>
                   <?php if (!isset($_SESSION['login'])) {?>

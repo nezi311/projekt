@@ -7,6 +7,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteRule ^index/?$ index.php?controller=index [L]
 
+RewriteRule ^Koszyk/?$ index.php?controller=Towar&action=wKoszyku [L]
+
 RewriteRule ^Grafik/?$ index.php?controller=Grafik [L]
 RewriteRule ^Grafik/insert/?$ index.php?controller=Grafik&action=insert [L]
 RewriteRule ^Grafik/delete/(\d+)/?$ index.php?controller=Grafik&action=delete&id=$1 [L]

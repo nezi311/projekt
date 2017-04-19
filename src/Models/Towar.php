@@ -202,6 +202,28 @@
 			return $data;
 		}
 
+		public function wKoszyku()
+    {
+      $data = array();
+      if(!$this->pdo)
+          $data['error'] = 'Połączenie z bazą nie powidoło się!';
+      else
+          try
+          {
+              $stmt = $this->pdo->query("SELECT NazwaTowaru, KodTowaru, StawkaVat, ilosc, NazwaSkrocona FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar inner join `jednostkamiary` on jednostkamiary.idjednostkamiary=towar.idjednostkamiary");
+              $towary = $stmt->fetchAll();
+              $stmt->closeCursor();
+              if($towary && !empty($towary))
+                  $data['towary'] = $towary;
+              else
+                  $data['towary'] = array();
+          }
+          catch(\PDOException $e)
+          {
+              $data['error'] = 'Błąd odczytu danych z bazy! ';
+          }
+      return $data;
+    }
 
 		public function delete($id)
 		{

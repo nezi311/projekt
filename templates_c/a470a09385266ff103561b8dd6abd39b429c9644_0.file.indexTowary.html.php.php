@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-19 20:24:21
+/* Smarty version 3.1.31, created on 2017-04-19 22:01:10
   from "C:\xampp\htdocs\PZ\templates\indexTowary.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58f7ab5528ade7_24807101',
+  'unifunc' => 'content_58f7c206aaa5d8_48128385',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a470a09385266ff103561b8dd6abd39b429c9644' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\indexTowary.html.php',
-      1 => 1492626259,
+      1 => 1492632069,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58f7ab5528ade7_24807101 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58f7c206aaa5d8_48128385 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -33,7 +33,7 @@ $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id,
 <table class="table">
   <thead>
     <tr>
-      <th>Nazwa Towaru</th><th>Min Stan Magazynowy</th><th>Max Stan Magazynowy</th><th>Stan Magazynowy Rzeczywisty</th><th>Stan Magazynowy Dysponowany</th><th>Stawka Vat</th><th>Kod Towaru</th><th>Kategoria</th><th>Jednostka Miary</th><th>Stan</th><th>Edytuj</th><th>Zamroz</th><th>Koszyk </th><th>usun</th>
+      <th>Nazwa Towaru</th><th>Min Stan Magazynowy</th><th>Max Stan Magazynowy</th><th>Stan Magazynowy Rzeczywisty</th><th>Stan Magazynowy Dysponowany</th><th>Stawka Vat</th><th>Kod Towaru</th><th>Kategoria</th><th>Jednostka Miary</th><th>Stan</th><th>Edytuj</th><th>Zamroz</th><th>Kup</th><th>usun</th>
     </tr>
   </thead>
 <?php if (isset($_smarty_tpl->tpl_vars['tablicaTowarow']->value)) {?>
@@ -81,11 +81,11 @@ Towar/koszyk/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
 
 			<input type='submit' value='Dodaj'>
 
-			<?php $_smarty_tpl->_assignInScope('ilosc', 0);
+			<?php $_smarty_tpl->_assignInScope('ilosc', 1);
 ?>
 			<select name='ilosc' id='ilosc'>
 				<?php
- while ($_smarty_tpl->tpl_vars['ilosc']->value <= $_smarty_tpl->tpl_vars['towar']->value['StanMagazynowyRzeczywisty']) {?>
+ while ($_smarty_tpl->tpl_vars['ilosc']->value <= $_smarty_tpl->tpl_vars['towar']->value['StanMagazynowyDysponowany']) {?>
 					<option value=<?php echo $_smarty_tpl->tpl_vars['ilosc']->value;?>
 ><?php echo $_smarty_tpl->tpl_vars['ilosc']->value;?>
 </option>
@@ -94,7 +94,6 @@ Towar/koszyk/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
 				<?php }?>
 
 			</select>
-		
 		</form>
 		</td>
     <td><a href="http://<?php echo $_SERVER['HTTP_HOST'];

@@ -6,7 +6,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Nazwa Towaru</th><th>Min Stan Magazynowy</th><th>Max Stan Magazynowy</th><th>Stan Magazynowy Rzeczywisty</th><th>Stan Magazynowy Dysponowany</th><th>Stawka Vat</th><th>Kod Towaru</th><th>Kategoria</th><th>Jednostka Miary</th><th>Stan</th><th>Edytuj</th><th>Zamroz</th><th>Koszyk </th><th>usun</th>
+      <th>Nazwa Towaru</th><th>Min Stan Magazynowy</th><th>Max Stan Magazynowy</th><th>Stan Magazynowy Rzeczywisty</th><th>Stan Magazynowy Dysponowany</th><th>Stawka Vat</th><th>Kod Towaru</th><th>Kategoria</th><th>Jednostka Miary</th><th>Stan</th><th>Edytuj</th><th>Zamroz</th><th>Kup</th><th>usun</th>
     </tr>
   </thead>
 {if isset($tablicaTowarow)}
@@ -30,9 +30,9 @@
 
 			<input type='submit' value='Dodaj'>
 
-			{$ilosc=0}
+			{$ilosc=1}
 			<select name='ilosc' id='ilosc'>
-				{while $ilosc<=$towar['StanMagazynowyRzeczywisty']}
+				{while $ilosc<=$towar['StanMagazynowyDysponowany']}
 					<option value={$ilosc}>{$ilosc}</option>
 					{$ilosc++}
 				{/while}

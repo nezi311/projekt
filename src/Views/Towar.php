@@ -36,6 +36,21 @@
           $this->render('freezeTowary');
       }
 
+			public function wKoszyku()
+      {
+          $model = $this->getModel('Towar');
+          if($model)
+          {
+              $data = $model->wKoszyku();
+
+              if(isset($data['towary']))
+                   $this->set('tablicaTowarow2', $data['towary']);
+          }
+          if(isset($data['error']))
+              $this->set('error', $data['error']);
+          //przetworzenie szablonu do wyświetlania listy pracowników
+          $this->render('koszykTowary');
+      }
 
 			public function add($data)
 			{
