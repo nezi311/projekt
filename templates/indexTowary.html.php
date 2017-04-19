@@ -37,7 +37,6 @@
 					{$ilosc++}
 				{/while}
 			</select>
-		
 		</form>
 		</td>
     <td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/delete/{$towar['IdTowar']}" role="button">Usuń</a></td>
