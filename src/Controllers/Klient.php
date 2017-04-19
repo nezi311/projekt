@@ -37,9 +37,9 @@ class Klient extends Controller
       $model=$this->getModel('Klient');
           if($model)
           {
-            $data = $model->update($_POST['id'],$_POST['imie'],$_POST['nazwisko'],$_POST['dzial'],$_POST['stanowisko'],$_POST['telefon'],$_POST['uprawnienia']);
+            $data = $model->update($_POST['id'],$_POST['imie'],$_POST['nazwisko'],$_POST['NIP'],$_POST['Miasto'],$_POST['Ulica'],$_POST['Dom'],$_POST['Lokal'],$_POST['KodPocztowy'],$_POST['Poczta'],$_POST['Email']);
           }
-          if($data['error']==="")
+          if($data['error']=="")
           {
             $this->redirect('Klient/');
           }

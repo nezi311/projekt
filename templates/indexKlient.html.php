@@ -46,9 +46,8 @@
 					 class="form-control"
 					 placeholder="NIP"
 					 id="NIP"
-						 id="nazwisko"
-						 name="nazwisko"
-	           required>
+					 name="NIP"
+	         required>
 	 </div>
 
 
@@ -149,13 +148,18 @@
   </tr>
   </thead>
   <tbody>
-		{if isset($tablicaKlient)}
-		  {foreach $tablicaKlient as $klient}
+		{if isset($tablicaKlienci)}
+		  {foreach $tablicaKlienci as $klient}
 				<tr>
 
-					<td>{$klient['DaneKlienta']}</td>
+					<td>{$klient['Imie']}&nbsp;{$klient['Nazwisko']}</td>
 						<td>{$klient['NIP']}</td>
-						<td>{$klient['Adres']}</td>
+						<td>
+							{$klient['KodPocztowy']}&nbsp;{$klient['Miasto']}&nbsp;ul.{$klient['Ulica']}&nbsp;{$klient['Dom']}
+							{if $klient['Lokal']!=null || $klient['Lokal']!=""}
+								/{$klient['Lokal']}
+							{/if}
+						</td>
 						<td>{$klient['Poczta']}</td>
 						<td>{$klient['EMail']}</td>
 						<td>
@@ -172,12 +176,146 @@
 											<h4 class="modal-title">Edycja</h4>
 										</div>
 										<div class="modal-body">
-											<form action="http://{$smarty.server.HTTP_HOST}{$subdir}KategoriaKlientow/Edytuj/{$kategoria['IdKategoria']}" method="post">
+											<form action="http://{$smarty.server.HTTP_HOST}{$subdir}Klient/update" method="POST" method="POST">
 												<div class="form-group">
-													<label for="name">Nazwa kategorii</label>
-													<input type="text" class="form-control" name="nazwa" value="{$kategoria['NazwaKategorii']}" />
+
+													<div class="form-group" style="display:none;">
+													    <label for="id">Id:</label>
+													    <input
+													           type="text"
+													           class="form-control"
+													           placeholder="Imie"
+																		 id="id"
+																		 name="id"
+													           required
+																		 readonly="readonly"
+																		 value="{$klient['IdKlient']}"
+																		 >
+													</div>
+													<div class="form-group">
+													    <label for="imie">Imie:</label>
+													    <input
+													           type="text"
+													           class="form-control"
+													           placeholder="Imie"
+																		 id="imie"
+																		 name="imie"
+																		 value="{$klient['Imie']}"
+													           required>
+													</div>
+
+														 <div class="form-group">
+														    <label for="nazwisko">Nazwisko:</label>
+																<input
+														           type="text"
+														           class="form-control"
+														           placeholder="Nazwisko"
+																			 id="nazwisko"
+																			 name="nazwisko"
+																			 value="{$klient['Nazwisko']}"
+														           required>
+														 </div>
+
+														<div class="form-group">
+														 <label for="NIP">NIP:</label>
+														 <input
+																		 type="number"
+																		 class="form-control"
+																		 placeholder="NIP"
+																		 id="NIP"
+																		 name="NIP"
+																		 value="{$klient['NIP']}"
+														          required>
+														 </div>
+
+
+
+														<div class="form-group">
+														 <label for="Miasto">Miasto:</label>
+														 <input
+																		 type="text"
+																		 class="form-control"
+																		 placeholder="Miasto"
+																		 id="Miasto"
+																		 name="Miasto"
+																		 value="{$klient['Miasto']}"
+																		 required>
+														</div>
+
+														<div class="form-group">
+														 <label for="Ulica">Ulica:</label>
+														 <input
+																		 type="text"
+																		 class="form-control"
+																		 placeholder="Ulica"
+																		 id="Ulica"
+																		 name="Ulica"
+																		 value="{$klient['Ulica']}"
+																		 required>
+														</div>
+
+														<div class="form-group">
+														 <label for="Dom">Nr domu:</label>
+														 <input
+																		 type="number"
+																		 class="form-control"
+																		 placeholder="Nr domu"
+																		 id="Dom"
+																		 name="Dom"
+																		 value={$klient['Dom']}
+																		 required>
+														</div>
+
+														<div class="form-group">
+														 <label for="Lokal">Nr lokalu:</label>
+														 <input
+																		 type="number"
+																		 class="form-control"
+																		 placeholder="Nr lokalu"
+																		 name="Lokal"
+																		 id="Lokal"
+																		 value="{$klient['Lokal']}"
+																		 >
+														</div>
+
+														 <div class="form-group">
+														 <label for="KodPocztowy">Kod Pocztowy:</label>
+														 <input
+																		 type="text"
+
+																		 class="form-control"
+																		 placeholder="62-800"
+																		 name="KodPocztowy"
+																		 id="KodPocztowy"
+																		 value="{$klient['KodPocztowy']}"
+																		 required>
+														</div>
+														 <div class="form-group">
+														 <label for="Poczta">Poczta:</label>
+														 <input
+																		 type="text"
+																		 class="form-control"
+																		 placeholder="Poczta"
+																		 name="Poczta"
+																		 id="Poczta"
+																		 value="{$klient['Poczta']}"
+																		 required>
+														</div>
+
+														 <div class="form-group">
+														 <label for="Email">Email:</label>
+														 <input
+																		 type="text"
+																		 class="form-control"
+																		 placeholder="firma@firma.com"
+																		 name="Email"
+																		 id="Email"
+																		 value="{$klient['EMail']}"
+																		 required>
+														</div>
+
 												</div>
-												<input type="submit" value="Zmień nazwę" class="btn btn-primary" />
+												<input type="submit" value="Zmień" class="btn btn-primary" />
 												<button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
 											</form>
 										</div>
