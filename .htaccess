@@ -7,15 +7,13 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteRule ^index/?$ index.php?controller=index [L]
 
-<<<<<<< HEAD
+
 RewriteRule ^Koszyk/?$ index.php?controller=Towar&action=wKoszyku [L]
 
 RewriteRule ^Grafik/?$ index.php?controller=Grafik [L]
 RewriteRule ^Grafik/insert/?$ index.php?controller=Grafik&action=insert [L]
 RewriteRule ^Grafik/delete/(\d+)/?$ index.php?controller=Grafik&action=delete&id=$1 [L]
-=======
 
->>>>>>> f2191b47409a0a543d4dd228968ef58ccf2c2727
 RewriteRule ^Categories/showone/(\d+)/?$ index.php?controller=Categories&action=showone&id=$1 [L]
 RewriteRule ^Categories/install/?$ index.php?controller=Categories&action=install [L]
 RewriteRule ^Grafik/delete/(\d+)/?$ index.php?controller=Grafik&action=delete&id=$1 [L]
