@@ -53,7 +53,7 @@
 			return $data;
 		}
 
-			public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary)
+			public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary,$Cena)
 		{
 			$blad=false;
 			$data = array();
@@ -93,11 +93,16 @@
 				$data['error'] .= 'Nieokreślone Jednostka Miary! <br>';
 				$blad=true;
 			}
+			if($Cena === null || $Cena === "")
+			{
+				$data['error'] .= 'Nieokreślone Cena! <br>';
+				$blad=true;
+			}
 			if(!$blad)
 			{
 				try
 				{
-					$stmt = $this->pdo->prepare('INSERT INTO `Towar`(`NazwaTowaru`,`MinStanMagazynowy`,`MaxStanMagazynowy`,`StanMagazynowyRzeczywisty`,`StanMagazynowyDysponowany`,`StawkaVat`,`KodTowaru`,`IdKategoria`,`IdJednostkaMiary`,`Freeze`) VALUES (:NazwaTowaru,:MinStanMagazynowy,:MaxStanMagazynowy,:StanMagazynowyRzeczywisty,:StanMagazynowyDysponowany,:StawkaVat,:KodTowaru,:IdKategoria,:IdJednostkaMiary,:Freeze)');
+					$stmt = $this->pdo->prepare('INSERT INTO `Towar`(`NazwaTowaru`,`MinStanMagazynowy`,`MaxStanMagazynowy`,`StanMagazynowyRzeczywisty`,`StanMagazynowyDysponowany`,`StawkaVat`,`KodTowaru`,`IdKategoria`,`IdJednostkaMiary`,`Freeze`,`Cena`) VALUES (:NazwaTowaru,:MinStanMagazynowy,:MaxStanMagazynowy,:StanMagazynowyRzeczywisty,:StanMagazynowyDysponowany,:StawkaVat,:KodTowaru,:IdKategoria,:IdJednostkaMiary,:Freeze,:Cena)');
 			    $stmt -> bindValue(':NazwaTowaru',$NazwaTowaru,PDO::PARAM_STR);
 			    $stmt -> bindValue(':MinStanMagazynowy',$MinStanMagazynowy,PDO::PARAM_INT);
 			    $stmt -> bindValue(':MaxStanMagazynowy',$MaxStanMagazynowy,PDO::PARAM_INT);
@@ -108,6 +113,7 @@
 					$stmt -> bindValue(':IdKategoria',$IdKategoria,PDO::PARAM_INT);
 			    $stmt -> bindValue(':IdJednostkaMiary',$IdJednostkaMiary,PDO::PARAM_INT);
 			    $stmt -> bindValue(':Freeze',0,PDO::PARAM_INT);
+					$stmt -> bindValue(':Cena',$Cena,PDO::PARAM_INT);
 			    $wynik_zapytania = $stmt -> execute();
 				}
 				catch(\PDOException $e)
@@ -253,13 +259,42 @@
 				else
 					try
 					{
-						$stmt = $this->pdo->prepare('UPDATE koszyk SET ilosc=ilosc+1 WHERE id=:id');
-				    $stmt -> bindValue(':id',$id,PDO::PARAM_INT);
-				    $wynik_zapytania = $stmt -> execute();
+						$stmt2 = $this->pdo->prepare('SELECT IdTowar FROM `koszyk` where id=:id');
+						$stmt2 -> bindValue(':id',$id,PDO::PARAM_INT);
+						$stmt2 -> execute();
+						$data = $stmt2 -> fetchAll();
+						foreach($data as $result)
+						{
+							$towar = $result['IdTowar'];
+						}
+
+						$stmt2 = $this->pdo->prepare('SELECT StanMagazynowyDysponowany FROM `towar` where IdTowar='.$towar.'');
+						$stan = $stmt2 -> execute();
+						$data = $stmt2 -> fetchAll();
+						foreach($data as $result)
+						{
+							$stan = $result['StanMagazynowyDysponowany'];
+						}
+
+						$stmt2 = $this->pdo->prepare('SELECT ilosc FROM `koszyk` where id=:id');
+						$stmt2 -> bindValue(':id',$id,PDO::PARAM_INT);
+						$ilosc = $stmt2 -> execute();
+						$data = $stmt2 -> fetchAll();
+						foreach($data as $result)
+						{
+							$ilosc = $result['ilosc'];
+						}
+
+						if($ilosc==0 || $ilosc<$stan)
+						{
+							$stmt = $this->pdo->prepare('UPDATE koszyk SET ilosc=ilosc+1 WHERE id=:id');
+							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
+							$wynik_zapytania = $stmt -> execute();
+						}
 					}
 					catch(\PDOException $e)
 					{
-						$data['error'] =$data['error'].'<br> Błąd wykonywania operacji usunięcia';
+						$data['error'] =$data['error'];
 					}
 				return $data;
 
@@ -273,9 +308,20 @@
 				else
 					try
 					{
-						$stmt = $this->pdo->prepare('UPDATE koszyk SET ilosc=ilosc-1 WHERE id=:id');
-						$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
-						$wynik_zapytania = $stmt -> execute();
+						$stmt2 = $this->pdo->prepare('SELECT ilosc FROM `koszyk` where id=:id');
+						$stmt2 -> bindValue(':id',$id,PDO::PARAM_INT);
+						$ilosc = $stmt2 -> execute();
+						$data = $stmt2 -> fetchAll();
+						foreach($data as $result)
+						{
+							$ilosc = $result['ilosc'];
+						}
+						if($ilosc>1)
+						{
+							$stmt = $this->pdo->prepare('UPDATE koszyk SET ilosc=ilosc-1 WHERE id=:id');
+							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
+							$wynik_zapytania = $stmt -> execute();
+						}
 					}
 					catch(\PDOException $e)
 					{
@@ -359,12 +405,18 @@
 
 					try
           {
-
-              $stmt = $this->pdo->prepare('insert into `koszyk`(`IdTowar`,`ilosc`,`klient`) values(:IdTowar,:ilosc,1);');
-							$stmt -> bindValue(':IdTowar',$IdTowar,PDO::PARAM_INT);
-							$stmt -> bindValue(':ilosc',$ilosc,PDO::PARAM_INT);
-							var_dump($stmt);
-							$wynik_zapytania = $stmt -> execute();
+							$stmt2 = $this->pdo->prepare('select * from `koszyk` where IdTowar=:IdTowar');
+							$stmt2 -> bindValue(':IdTowar',$IdTowar,PDO::PARAM_INT);
+							$czyJuzJest = $stmt2 -> execute();
+							//var_dump($stmt2);
+							$i = $stmt2->fetchColumn();
+							if($i == null)
+							{
+								$stmt = $this->pdo->prepare('insert into `koszyk`(`IdTowar`,`ilosc`,`klient`) values(:IdTowar,:ilosc,1);');
+								$stmt -> bindValue(':IdTowar',$IdTowar,PDO::PARAM_INT);
+								$stmt -> bindValue(':ilosc',$ilosc,PDO::PARAM_INT);
+								$wynik_zapytania = $stmt -> execute();
+							}
           }
           catch(\PDOException $e)
           {

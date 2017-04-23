@@ -140,7 +140,7 @@ $stmt->execute();
    `IdKategoria` INT NOT NULL,
    `IdJednostkaMiary` INT NOT NULL,
    `Freeze` INT NOT NULL,
-   `Cena` float NOT NULL,
+   `Cena` float  NULL,
    PRIMARY KEY (IdTowar),
    FOREIGN KEY (IdKategoria)
    REFERENCES Kategoria(IdKategoria)

@@ -13,10 +13,6 @@ RewriteRule ^Koszyk/usun/(\d+)/?$ index.php?controller=Towar&action=deleteKoszyk
 RewriteRule ^Koszyk/plus/(\d+)/?$ index.php?controller=Towar&action=iloscPlus&id=$1 [L]
 RewriteRule ^Koszyk/minus/(\d+)/?$ index.php?controller=Towar&action=iloscMinus&id=$1 [L]
 
-RewriteRule ^Grafik/?$ index.php?controller=Grafik [L]
-RewriteRule ^Grafik/insert/?$ index.php?controller=Grafik&action=insert [L]
-RewriteRule ^Grafik/delete/(\d+)/?$ index.php?controller=Grafik&action=delete&id=$1 [L]
-
 RewriteRule ^Categories/showone/(\d+)/?$ index.php?controller=Categories&action=showone&id=$1 [L]
 RewriteRule ^Categories/install/?$ index.php?controller=Categories&action=install [L]
 RewriteRule ^Grafik/delete/(\d+)/?$ index.php?controller=Grafik&action=delete&id=$1 [L]
@@ -27,6 +23,7 @@ RewriteRule ^Towar/add/?$ index.php?controller=Towar&action=add [L]
 RewriteRule ^Towar/insert/?$ index.php?controller=Towar&action=insert [L]
 RewriteRule ^Towar/freeze/?$ index.php?controller=Towar&action=freezed [L]
 RewriteRule ^Towar/delete/(\d+)/?$ index.php?controller=Towar&action=delete&id=$1 [L]
+RewriteRule ^Towar/showone/(\d+)/?$ index.php?controller=Towar&action=showone&id=$1 [L]
 RewriteRule ^Szukaj/?$ index.php?controller=Towar&action=search [L]
 RewriteRule ^Towar/koszyk/(\d+)/?$ index.php?controller=Towar&action=koszyk&id=$1 [L]
 
