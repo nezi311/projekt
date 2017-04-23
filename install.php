@@ -4,7 +4,7 @@ require_once('vendor/autoload.php');
  $pdo=\Config\Database\DBConfig::getHandle();
 
 try{
-  $stmt = $pdo->query("DROP TABLE if exists `cenahistoria`, `zamowieniesprzedaz`, `statuszamowienia`, `koszyk`, `dostawcatowar`, `klient`, `zamowienietowar`, `zamowienietowarkopia`, `zamowienia`, `Dostawca`, `towar`, `Jednostkamiary`, `kategoria`,`pracownicy`,`users`;");
+  $stmt = $pdo->query("DROP TABLE if exists `cenahistoria`,`towarySprzedaz`, `zamowieniesprzedaz`, `statuszamowienia`, `koszyk`, `dostawcatowar`, `klient`, `zamowienietowar`, `zamowienietowarkopia`, `zamowienia`, `Dostawca`, `towar`, `Jednostkamiary`, `kategoria`,`pracownicy`,`users`;");
   $stmt->execute();
   /*************************************************/
   /*******************BILANS********************/
@@ -153,6 +153,7 @@ $stmt->execute();
  $towary = array();
  $towary[]=array('NazwaTowaru'=>'klawiatura','MinStanMagazynowy'=>1,'MaxStanMagazynowy'=>1,'StanMagazynowyRzeczywisty'=>1,'StanMagazynowyDysponowany'=>1,'StawkaVat'=>8,'KodTowaru'=>'a43dv42','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>1);
  $towary[]=array('NazwaTowaru'=>'mysz','MinStanMagazynowy'=>1,'MaxStanMagazynowy'=>1,'StanMagazynowyRzeczywisty'=>1,'StanMagazynowyDysponowany'=>1,'StawkaVat'=>8,'KodTowaru'=>'b43dv43','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>0);
+  $towary[]=array('NazwaTowaru'=>'monitor','MinStanMagazynowy'=>2,'MaxStanMagazynowy'=>2,'StanMagazynowyRzeczywisty'=>2,'StanMagazynowyDysponowany'=>2,'StawkaVat'=>8,'KodTowaru'=>'h3h4j1','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>0);
  foreach($towary as $element_towar)
  {
    $stmt = $pdo->prepare('INSERT INTO `Towar`(`NazwaTowaru`,`MinStanMagazynowy`,`MaxStanMagazynowy`,`StanMagazynowyRzeczywisty`,`StanMagazynowyDysponowany`,`StawkaVat`,`KodTowaru`,`IdKategoria`,`IdJednostkaMiary`,`Freeze`) VALUES (:NazwaTowaru,:MinStanMagazynowy,:MaxStanMagazynowy,:StanMagazynowyRzeczywisty,:StanMagazynowyDysponowany,:StawkaVat,:KodTowaru,:IdKategoria,:IdJednostkaMiary,:Freeze)');
@@ -394,9 +395,6 @@ $stmt->execute();
    PRIMARY KEY (IdZamowienieTowarKopia),
    FOREIGN KEY (IdTowar)
    REFERENCES Towar(IdTowar)
-   ON DELETE CASCADE,
-   FOREIGN KEY (IdZamowienie)
-   REFERENCES Zamowienia(IdZamowienie)
    ON DELETE CASCADE
  )ENGINE = InnoDB;");
  $stmt->execute();
@@ -493,7 +491,13 @@ $stmt->execute();
   `DataDo` date DEFAULT NULL,
   `KodTowaruWgDostawcy` varchar(50) CHARACTER SET latin1 NOT NULL,
   `NazwaTowaruWgDostawcy` varchar(50) CHARACTER SET latin1 NOT NULL,
-  primary key(`IdDostawcaTowar`)
+  primary key(`IdDostawcaTowar`),
+  FOREIGN KEY (IdDostawca)
+  REFERENCES Dostawca(IdDostawca)
+  ON DELETE CASCADE,
+  FOREIGN KEY (IdTowar)
+  REFERENCES Towar(IdTowar)
+  ON DELETE CASCADE
 );");
    $stmt->execute();
 
@@ -580,12 +584,13 @@ $stmt->execute();
    `Wartosc` float NOT NULL,
    `IdStanZamowienia` int NOT NULL,
    `IdKlient` int NOT NULL,
+   `IdKoszykKopia` int NOT NULL,
    PRIMARY KEY (IdZamowienieSprzedaz),
    foreign key (IdStanZamowienia)
    references statuszamowienia(IdStanZamowienia),
    foreign key (IdKlient)
    references klient(IdKlient)
- )ENGINE = InnoDB;");
+    )ENGINE = InnoDB;");
  $stmt->execute();
 
  $kategorie = array();
@@ -608,6 +613,54 @@ $kategorie[]=array(
    $stmt -> bindValue(':IdKlient',$element_kategoria['IdKlient'],PDO::PARAM_INT);
    $wynik_zapytania = $stmt -> execute();
  }
+ /*************************************************/
+ /*******************TOWARY_SPRZEDAZ********************/
+ /*************************************************/
+$stmt = $pdo->query("DROP TABLE IF EXISTS `towarySprzedaz`");
+$stmt->execute();
+$stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `towarySprzedaz`
+(
+ `id` INT AUTO_INCREMENT,
+ `IdTowar` int NOT NULL,
+ `ilosc` int NOT NULL,
+ `klient` int NOT NULL,
+ `IdZamowienieSprzedaz` int NOT NULL,
+ PRIMARY KEY (id),
+ FOREIGN KEY (IdTowar)
+ REFERENCES Towar(IdTowar),
+ FOREIGN KEY (klient)
+ REFERENCES Klient(IdKlient),
+ FOREIGN KEY (IdZamowienieSprzedaz)
+ REFERENCES ZamowienieSprzedaz(IdZamowienieSprzedaz)
+);");
+$kategorie = array();
+$kategorie[]=array(
+'IdTowar'=>'2',
+'ilosc'=>'2',
+'klient'=>'1',
+'IdZamowienieSprzedaz'=>'1'
+);
+$kategorie[]=array(
+  'IdTowar'=>'1',
+  'ilosc'=>'1',
+  'klient'=>'1',
+  'IdZamowienieSprzedaz'=>'1'
+);
+$kategorie[]=array(
+  'IdTowar'=>'1',
+  'ilosc'=>'1',
+  'klient'=>'1',
+  'IdZamowienieSprzedaz'=>'2'
+);
+foreach($kategorie as $element_kategoria)
+{
+  $stmt = $pdo->prepare('INSERT INTO `towarySprzedaz`(`IdTowar`,`ilosc`,`klient`,`IdZamowienieSprzedaz`) VALUES (:IdTowar,:ilosc,:klient,:IdZamowienieSprzedaz)');
+  $stmt -> bindValue(':IdTowar',$element_kategoria['IdTowar'],PDO::PARAM_INT);
+  $stmt -> bindValue(':ilosc',$element_kategoria['ilosc'],PDO::PARAM_INT);
+  $stmt -> bindValue(':klient',$element_kategoria['klient'],PDO::PARAM_INT);
+  $stmt -> bindValue(':IdZamowienieSprzedaz',$element_kategoria['IdZamowienieSprzedaz'],PDO::PARAM_INT);
+  $wynik_zapytania = $stmt -> execute();
+}
  /*************************************************/
  /*******************CENA_HISTORIA*******************/
  /*************************************************/
@@ -638,6 +691,14 @@ $kategorie[]=array(
   'DataWprowadzenia'=>'2017-02-20',
 'Cena'=>'600',
 'IdTowar'=>'1');
+$kategorie[]=array(
+  'DataWprowadzenia'=>'2017-03-14',
+'Cena'=>'650',
+'IdTowar'=>'2');
+$kategorie[]=array(
+  'DataWprowadzenia'=>'2017-02-20',
+'Cena'=>'600',
+'IdTowar'=>'2');
  foreach($kategorie as $element_kategoria)
  {
    $stmt = $pdo->prepare('INSERT INTO `cenahistoria`(`DataWprowadzenia`,`Cena`,`IdTowar`) VALUES (:DataWprowadzenia,:Cena,:IdTowar)');

@@ -1,5 +1,5 @@
 {include file="header.html.php"}
-
+<!--kontroler wKoszyku w TOWAR-->
 <div class="page-header">
 	<h2>Towary w koszyku</h2>
 </div>
@@ -20,6 +20,14 @@
   {/foreach}
 {/if}
 </table>
+{if isset($_COOKIE['ids'])}
+{$cookie = $_COOKIE['ids']}
+{$cookie = stripslashes($cookie)}
+{$dana = json_decode($cookie, true)}
+{$cookie = $_COOKIE['ilosci']}
+{$cookie = stripslashes($cookie)}
+{$dana = json_decode($cookie, true)}
+{/if}
 {if isset($error)}
 <strong>{$error}</strong>
 {/if}

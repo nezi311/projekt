@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-19 23:02:13
+/* Smarty version 3.1.31, created on 2017-04-21 17:55:52
   from "C:\xampp\htdocs\PZ\templates\logform.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58f7d055b79e98_80161834',
+  'unifunc' => 'content_58fa2b88720014_97996583',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58f7d055b79e98_80161834 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58fa2b88720014_97996583 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>

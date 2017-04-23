@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-19 23:02:23
+/* Smarty version 3.1.31, created on 2017-04-21 17:17:56
   from "C:\xampp\htdocs\PZ\templates\koszykTowary.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58f7d05f401788_03683343',
+  'unifunc' => 'content_58fa22a47c51d0_33587524',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5e279aede6bdbad4b4a5004f4dc687417c133c30' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\koszykTowary.html.php',
-      1 => 1492634369,
+      1 => 1492787874,
       2 => 'file',
     ),
   ),
@@ -22,11 +22,11 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58f7d05f401788_03683343 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58fa22a47c51d0_33587524 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
-
+<!--kontroler wKoszyku w TOWAR-->
 <div class="page-header">
 	<h2>Towary w koszyku</h2>
 </div>
@@ -61,7 +61,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 
 <?php }?>
 </table>
-<?php if (isset($_smarty_tpl->tpl_vars['error']->value)) {?>
+<?php if (isset($_smarty_tpl->tpl_vars['_COOKIE']->value['ids'])) {
+$_smarty_tpl->_assignInScope('cookie', $_smarty_tpl->tpl_vars['_COOKIE']->value['ids']);
+$_smarty_tpl->_assignInScope('cookie', stripslashes($_smarty_tpl->tpl_vars['cookie']->value));
+$_smarty_tpl->_assignInScope('dana', json_decode($_smarty_tpl->tpl_vars['cookie']->value,true));
+$_smarty_tpl->_assignInScope('cookie', $_smarty_tpl->tpl_vars['_COOKIE']->value['ilosci']);
+$_smarty_tpl->_assignInScope('cookie', stripslashes($_smarty_tpl->tpl_vars['cookie']->value));
+$_smarty_tpl->_assignInScope('dana', json_decode($_smarty_tpl->tpl_vars['cookie']->value,true));
+}
+if (isset($_smarty_tpl->tpl_vars['error']->value)) {?>
 <strong><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
 </strong>
 <?php }?>

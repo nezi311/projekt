@@ -250,7 +250,7 @@
 			$blad=false;
 			$data = array();
 			$data['error']="";
-			/*if($IdTowar === null || $IdTowar === "")
+			if($IdTowar === null || $IdTowar === "")
 			{
 				$data['error'] .= 'Nieokreślone Id Towaru! <br>';
 				$blad=true;
@@ -259,11 +259,49 @@
 			{
 				$data['error'] .='Nieokreślona ilosc! <br>';
 				$blad=true;
-			}*/
+			}
 			if(!$blad)
+			{
+				if(!isset($_COOKIE['idtowary']))
+				{
+				  echo 'nie ma ciaskeczka';
+				  $ids = array();
+				  $dane = json_encode($ids);
+				  setcookie('idtowary', $dane);
+				  $_COOKIE['idtowary'] = $dane;
+				}
+				else
+				{
+				  $cookie = $_COOKIE['idtowary'];
+				  $cookie = stripslashes($cookie);
+				  $towar = json_decode($cookie, true);
+				  $towar[] = $IdTowar;
+				  $dane = json_encode($towar);
+				  setcookie('idtowary', $dane);
+				  $_COOKIE['idtowary'] = $dane;
+				}
+				if(!isset($_COOKIE['ilosci']))
+				{
+				  echo 'nie ma ciaskeczka';
+				  $ids = array();
+				  $dane = json_encode($ids);
+				  setcookie('ilosci', $dane);
+				  $_COOKIE['ilosci'] = $dane;
+				}
+				else
+				{
+				  $cookie = $_COOKIE['ilosci'];
+				  $cookie = stripslashes($cookie);
+				  $towar = json_decode($cookie, true);
+				  $towar[] = $ilosc;
+				  $dane = json_encode($towar);
+				  setcookie('ilosci', $dane);
+				  $_COOKIE['ilosci'] = $dane;
+				}
 
 					try
           {
+
               $stmt = $this->pdo->prepare('insert into `koszyk`(`IdTowar`,`ilosc`,`klient`) values(:IdTowar,:ilosc,1);');
 							$stmt -> bindValue(':IdTowar',$IdTowar,PDO::PARAM_INT);
 							$stmt -> bindValue(':ilosc',$ilosc,PDO::PARAM_INT);
@@ -273,9 +311,10 @@
           catch(\PDOException $e)
           {
               $data['error'] = 'Błąd odczytu danych z bazy! ';
-							var_dump($data);
 							return $data;
           }
+				}
+
       return $data;
     	}
 
