@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-23 22:08:47
+/* Smarty version 3.1.31, created on 2017-04-23 23:24:44
   from "C:\xampp\htdocs\PZ\templates\header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58fd09cfbb9b94_21112797',
+  'unifunc' => 'content_58fd1b9c5d6b02_37509720',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd8104eaa282f8e757b1eb1f22b3fed373c78d3de' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\header.html.php',
-      1 => 1492977942,
+      1 => 1492982614,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58fd09cfbb9b94_21112797 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58fd1b9c5d6b02_37509720 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -126,7 +126,7 @@ Statystyka"><span class="glyphicon glyphicon-signal"></span> Statystyki</a></li>
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Szukaj/" method="post">
                       <div class="form-group">
-                        <input type="text" name="towar" class="form-control" placeholder="Wpisz nazwę produktu">
+                        <input type="text" name="towar" id="towar" class="form-control" placeholder="Wpisz nazwę produktu">
                       </div>
                       <button type="submit" class="btn btn-default">Szukaj</button>
                     </form>
