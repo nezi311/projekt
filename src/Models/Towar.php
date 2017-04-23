@@ -210,7 +210,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT NazwaTowaru, KodTowaru, StawkaVat, ilosc, NazwaSkrocona FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar inner join `jednostkamiary` on jednostkamiary.idjednostkamiary=towar.idjednostkamiary");
+              $stmt = $this->pdo->query("SELECT Id ,NazwaTowaru, KodTowaru, Cena, StawkaVat, ilosc, NazwaSkrocona FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar inner join `jednostkamiary` on jednostkamiary.idjednostkamiary=towar.idjednostkamiary");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -245,6 +245,64 @@
 
 		}
 
+		public function iloscPlus($id)
+		{
+			$data = array();
+				if($id === NULL || $id === "")
+					$data['error'] = 'Nieokreślone ID!';
+				else
+					try
+					{
+						$stmt = $this->pdo->prepare('UPDATE koszyk SET ilosc=ilosc+1 WHERE id=:id');
+				    $stmt -> bindValue(':id',$id,PDO::PARAM_INT);
+				    $wynik_zapytania = $stmt -> execute();
+					}
+					catch(\PDOException $e)
+					{
+						$data['error'] =$data['error'].'<br> Błąd wykonywania operacji usunięcia';
+					}
+				return $data;
+
+		}
+
+		public function iloscMinus($id)
+		{
+			$data = array();
+				if($id === NULL || $id === "")
+					$data['error'] = 'Nieokreślone ID!';
+				else
+					try
+					{
+						$stmt = $this->pdo->prepare('UPDATE koszyk SET ilosc=ilosc-1 WHERE id=:id');
+						$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
+						$wynik_zapytania = $stmt -> execute();
+					}
+					catch(\PDOException $e)
+					{
+						$data['error'] =$data['error'].'<br> Błąd wykonywania operacji usunięcia';
+					}
+				return $data;
+
+		}
+		public function deleteKoszyk($id)
+		{
+			$data = array();
+				if($id === NULL || $id === "")
+					$data['error'] = 'Nieokreślone ID!';
+				else
+					try
+					{
+						$stmt = $this->pdo->prepare('DELETE FROM `koszyk` WHERE id=:id');
+				    $stmt -> bindValue(':id',$id,PDO::PARAM_INT);
+				    $wynik_zapytania = $stmt -> execute();
+					}
+					catch(\PDOException $e)
+					{
+						$data['error'] =$data['error'].'<br> Błąd wykonywania operacji usunięcia';
+					}
+				return $data;
+
+		}
 		public function koszyk($IdTowar,$ilosc)
     {
 			$blad=false;

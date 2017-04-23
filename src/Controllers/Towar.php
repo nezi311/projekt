@@ -124,6 +124,77 @@ class Towar extends Controller
         $this->redirect('index/');
     }
 
+    public function iloscPlus($id)
+    {
+
+        if($_SESSION['role']<=1)
+        {
+          if($id !== null)
+          {
+
+            $model=$this->getModel('Towar');
+                    if($model)
+                    {
+                      $data = $model->iloscPlus($id);
+                        //nie przekazano komunikatów o błędzie
+                    }
+            //powiadamiamy odpowiedni widok, że nastąpiła aktualizacja bazy
+            $this->redirect('Koszyk/');
+          }
+          else
+            $this->redirect('Koszyk/');
+        }
+        else
+          $this->redirect('index/');
+      }
+
+      public function iloscMinus($id)
+      {
+
+          if($_SESSION['role']<=1)
+          {
+            if($id !== null)
+            {
+
+              $model=$this->getModel('Towar');
+                      if($model)
+                      {
+                        $data = $model->iloscMinus($id);
+                          //nie przekazano komunikatów o błędzie
+                      }
+              //powiadamiamy odpowiedni widok, że nastąpiła aktualizacja bazy
+              $this->redirect('Koszyk/');
+            }
+            else
+              $this->redirect('Koszyk/');
+          }
+          else
+            $this->redirect('index/');
+        }
+
+    public function deleteKoszyk($id)
+    {
+
+        if($_SESSION['role']<=1)
+        {
+          if($id !== null)
+          {
+
+            $model=$this->getModel('Towar');
+                    if($model)
+                    {
+                      $data = $model->deleteKoszyk($id);
+                        //nie przekazano komunikatów o błędzie
+                    }
+            //powiadamiamy odpowiedni widok, że nastąpiła aktualizacja bazy
+            $this->redirect('Koszyk/');
+          }
+          else
+            $this->redirect('Koszyk/');
+        }
+        else
+          $this->redirect('index/');
+      }
     public function koszyk($id)
     {
 

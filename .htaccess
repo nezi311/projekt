@@ -9,6 +9,9 @@ RewriteRule ^index/?$ index.php?controller=index [L]
 
 
 RewriteRule ^Koszyk/?$ index.php?controller=Towar&action=wKoszyku [L]
+RewriteRule ^Koszyk/usun/(\d+)/?$ index.php?controller=Towar&action=deleteKoszyk&id=$1 [L]
+RewriteRule ^Koszyk/plus/(\d+)/?$ index.php?controller=Towar&action=iloscPlus&id=$1 [L]
+RewriteRule ^Koszyk/minus/(\d+)/?$ index.php?controller=Towar&action=iloscMinus&id=$1 [L]
 
 RewriteRule ^Grafik/?$ index.php?controller=Grafik [L]
 RewriteRule ^Grafik/insert/?$ index.php?controller=Grafik&action=insert [L]
@@ -26,6 +29,7 @@ RewriteRule ^Towar/freeze/?$ index.php?controller=Towar&action=freezed [L]
 RewriteRule ^Towar/delete/(\d+)/?$ index.php?controller=Towar&action=delete&id=$1 [L]
 RewriteRule ^Szukaj/?$ index.php?controller=Towar&action=search [L]
 RewriteRule ^Towar/koszyk/(\d+)/?$ index.php?controller=Towar&action=koszyk&id=$1 [L]
+
 
 RewriteRule ^Zamowienie/?$ index.php?controller=Zamowienie [L]
 RewriteRule ^Zamowienie/add/?$ index.php?controller=Zamowienie&action=add [L]

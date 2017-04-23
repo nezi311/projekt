@@ -140,6 +140,7 @@ $stmt->execute();
    `IdKategoria` INT NOT NULL,
    `IdJednostkaMiary` INT NOT NULL,
    `Freeze` INT NOT NULL,
+   `Cena` float NOT NULL,
    PRIMARY KEY (IdTowar),
    FOREIGN KEY (IdKategoria)
    REFERENCES Kategoria(IdKategoria)
@@ -151,12 +152,12 @@ $stmt->execute();
  $stmt->execute();
 
  $towary = array();
- $towary[]=array('NazwaTowaru'=>'klawiatura','MinStanMagazynowy'=>1,'MaxStanMagazynowy'=>1,'StanMagazynowyRzeczywisty'=>1,'StanMagazynowyDysponowany'=>1,'StawkaVat'=>8,'KodTowaru'=>'a43dv42','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>1);
- $towary[]=array('NazwaTowaru'=>'mysz','MinStanMagazynowy'=>1,'MaxStanMagazynowy'=>1,'StanMagazynowyRzeczywisty'=>1,'StanMagazynowyDysponowany'=>1,'StawkaVat'=>8,'KodTowaru'=>'b43dv43','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>0);
-  $towary[]=array('NazwaTowaru'=>'monitor','MinStanMagazynowy'=>2,'MaxStanMagazynowy'=>2,'StanMagazynowyRzeczywisty'=>2,'StanMagazynowyDysponowany'=>2,'StawkaVat'=>8,'KodTowaru'=>'h3h4j1','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>0);
+ $towary[]=array('NazwaTowaru'=>'klawiatura','MinStanMagazynowy'=>1,'MaxStanMagazynowy'=>1,'StanMagazynowyRzeczywisty'=>1,'StanMagazynowyDysponowany'=>1,'StawkaVat'=>8,'KodTowaru'=>'a43dv42','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>1,'Cena'=>600);
+ $towary[]=array('NazwaTowaru'=>'mysz','MinStanMagazynowy'=>1,'MaxStanMagazynowy'=>1,'StanMagazynowyRzeczywisty'=>1,'StanMagazynowyDysponowany'=>1,'StawkaVat'=>8,'KodTowaru'=>'b43dv43','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>0,'Cena'=>650);
+  $towary[]=array('NazwaTowaru'=>'monitor','MinStanMagazynowy'=>2,'MaxStanMagazynowy'=>2,'StanMagazynowyRzeczywisty'=>2,'StanMagazynowyDysponowany'=>2,'StawkaVat'=>8,'KodTowaru'=>'h3h4j1','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>0,'Cena'=>400);
  foreach($towary as $element_towar)
  {
-   $stmt = $pdo->prepare('INSERT INTO `Towar`(`NazwaTowaru`,`MinStanMagazynowy`,`MaxStanMagazynowy`,`StanMagazynowyRzeczywisty`,`StanMagazynowyDysponowany`,`StawkaVat`,`KodTowaru`,`IdKategoria`,`IdJednostkaMiary`,`Freeze`) VALUES (:NazwaTowaru,:MinStanMagazynowy,:MaxStanMagazynowy,:StanMagazynowyRzeczywisty,:StanMagazynowyDysponowany,:StawkaVat,:KodTowaru,:IdKategoria,:IdJednostkaMiary,:Freeze)');
+   $stmt = $pdo->prepare('INSERT INTO `Towar`(`NazwaTowaru`,`MinStanMagazynowy`,`MaxStanMagazynowy`,`StanMagazynowyRzeczywisty`,`StanMagazynowyDysponowany`,`StawkaVat`,`KodTowaru`,`IdKategoria`,`IdJednostkaMiary`,`Freeze`,`Cena`) VALUES (:NazwaTowaru,:MinStanMagazynowy,:MaxStanMagazynowy,:StanMagazynowyRzeczywisty,:StanMagazynowyDysponowany,:StawkaVat,:KodTowaru,:IdKategoria,:IdJednostkaMiary,:Freeze,:Cena)');
    $stmt -> bindValue(':NazwaTowaru',$element_towar['NazwaTowaru'],PDO::PARAM_STR);
    $stmt -> bindValue(':MinStanMagazynowy',$element_towar['MinStanMagazynowy'],PDO::PARAM_INT);
    $stmt -> bindValue(':MaxStanMagazynowy',$element_towar['MaxStanMagazynowy'],PDO::PARAM_INT);
@@ -167,6 +168,7 @@ $stmt->execute();
    $stmt -> bindValue(':IdKategoria',$element_towar['IdKategoria'],PDO::PARAM_INT);
    $stmt -> bindValue(':IdJednostkaMiary',$element_towar['IdJednostkaMiary'],PDO::PARAM_INT);
    $stmt -> bindValue(':Freeze',$element_towar['Freeze'],PDO::PARAM_INT);
+   $stmt -> bindValue(':Cena',$element_towar['Cena'],PDO::PARAM_INT);
    $wynik_zapytania = $stmt -> execute();
  }
  /*************************************************/
@@ -540,7 +542,7 @@ $stmt->execute();
  $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `koszyk`
  (
    `id` INT AUTO_INCREMENT,
-   `IdTowar` int NOT NULL,
+   `IdTowar` int NOT NULL unique,
    `ilosc` int NOT NULL,
    `klient` int NOT NULL,
    PRIMARY KEY (id),
@@ -699,6 +701,10 @@ $kategorie[]=array(
   'DataWprowadzenia'=>'2017-02-20',
 'Cena'=>'600',
 'IdTowar'=>'2');
+$kategorie[]=array(
+  'DataWprowadzenia'=>'2017-04-20',
+'Cena'=>'400',
+'IdTowar'=>'3');
  foreach($kategorie as $element_kategoria)
  {
    $stmt = $pdo->prepare('INSERT INTO `cenahistoria`(`DataWprowadzenia`,`Cena`,`IdTowar`) VALUES (:DataWprowadzenia,:Cena,:IdTowar)');

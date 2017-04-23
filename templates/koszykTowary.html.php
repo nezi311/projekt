@@ -3,10 +3,11 @@
 <div class="page-header">
 	<h2>Towary w koszyku</h2>
 </div>
+{$suma=0}
 <table class="table" style='width:50%;'>
   <thead>
     <tr>
-      <th>Nazwa Towaru</th><th>Kod Towaru</th><th>Stawka Vat</th><th>Ilość</th>
+      <th>Nazwa Towaru</th><th>Kod Towaru</th><th>Cena</th><th>Stawka Vat</th><th>Ilość</th><th>Cena częściowa</th><th>Usuń</th>
     </tr>
   </thead>
 {if isset($tablicaTowarow2)}
@@ -14,12 +15,21 @@
   <tr>
     <td>{$towar['NazwaTowaru']}</td>
 		<td>{$towar['KodTowaru']}</td>
+		<td>{$towar['Cena']}</td>
     <td>{$towar['StawkaVat']}%</td>
-    <td>{$towar['ilosc']} {$towar['NazwaSkrocona']}</td>
+    <td>
+			<a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/plus/{$towar['Id']}" role="button"><span class="glyphicon glyphicon-plus"></span></a>
+			{$towar['ilosc']} {$towar['NazwaSkrocona']}
+			<a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/minus/{$towar['Id']}" role="button"><span class="glyphicon glyphicon-minus"></span></a>
+		</td>
+		<td>{($towar['Cena']*$towar['StawkaVat'])/100*$towar['ilosc']}</td>
+		{$suma=$suma+(($towar['Cena']*$towar['StawkaVat'])/100*$towar['ilosc'])}
+		<td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/usun/{$towar['Id']}" role="button"><span class="glyphicon glyphicon-remove"></span></a></td>
   </tr>
   {/foreach}
 {/if}
 </table>
+Suma: {$suma}
 {if isset($_COOKIE['ids'])}
 {$cookie = $_COOKIE['ids']}
 {$cookie = stripslashes($cookie)}
