@@ -105,6 +105,25 @@
 				$this->render('editTowar');
 			}
 
+			public function showone($id=null)
+			{
+
+				$model = $this->getModel('Towar');
+				if($model)
+				{
+					$data = $model->getOne($id);
+
+					if(isset($data['towar']))
+							 $this->set('tablicaTowarow', $data['towar']);
+				}
+				if(isset($data['error']))
+						$this->set('error', $data['error']);// jesli tak to przypisujemy je do zmiennej
+
+				//przetworzenie szablonu do wyświetlania danych pracowników do edycji
+				$this->render('oneTowar');
+			}
+
+
 
 
   }
