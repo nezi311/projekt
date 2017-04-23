@@ -9,7 +9,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading">Parametry</div>
   <div class="panel-body">
-		<form class= method="post">
+		<form method="post">
 				<div class="form-group">
 					<label for="kryterium">Kryterium</label>
 					<select class="form-control" name="kryterium"> <!--Supplement an id here instead of using 'name'-->
@@ -37,13 +37,13 @@
 				<label for="dataDo">Data do</label>
 				<input class="form-control" type="date" id="dataDo" value="2017-04-18" name="dataDo"/>
 			</div>
-			<input type="submit" value="Dodaj" class="btn btn-default" />
+			<input type="submit" value="Aktualizuj" class="btn btn-default" />
 		</form>
 	</div>
 </div>
 </div>
 <div class="col-md-9">
-{if !isset($allStatystyki) || $allStatystyki|@count === 0}
+{if !isset($allStatystyki)}
 	<div class="alert alert-danger" role="alert">Brak wyników</div>
 
 
@@ -58,8 +58,8 @@
 	{foreach $allStatystyki as $statystyka}
 		<tr>
 			<td></td>
-			<td>{$towar['kryterium']}</td>
-			<td>{$towar['wartosc']}</td>
+			<td>{$statystyka['nazwa']}</td>
+			<td>{$statystyka['wartosc']}</td>
 		</tr>
 		{/foreach}
 	</tbody>
