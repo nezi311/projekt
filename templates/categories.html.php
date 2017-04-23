@@ -6,17 +6,19 @@
 {if $allKategorie|@count === 0}
 	<div class="alert alert-danger" role="alert">Brak kategorii w bazie!</div>
 {else}
-<table class="table">
+<table class="table sortable">
 	<thead>
 		<tr>
 			<th>Nazwa kategorii</th>
-			<th>Działanie</th>
+			<th>Liczba towarów</th>
+			<th class="sorttable_nosort">Działanie</th>
 		</tr>
 	</thead>
 	<tbody>
 				{foreach $allKategorie as $category}
 		<tr>
-			<td><span class="badge">{$category['ilosc']}</span>  {$category['NazwaKategorii']}</td>
+			<th>{$category['NazwaKategorii']}</th>
+			<td>{$category['ilosc']}</td>
 
 			<td>
           <div class="btn-group" role="group">
@@ -89,10 +91,7 @@
 </table>
 
 {/if}
-{if isset($error)}
-<strong>{$error}</strong>
-
-{/if}<a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+<a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
   Dodaj kategorię
 </a>
 <div class="collapse" id="collapseExample">
@@ -107,5 +106,14 @@
   </div>
 </div>
 <br/><br/>
+
+
+
 </div>
+
+
+{if isset($error)}
+<strong>{$error}</strong>
+
+{/if}
 {include file="footer.html.php"}

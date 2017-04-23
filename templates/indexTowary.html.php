@@ -3,7 +3,7 @@
 <div class="page-header">
 	<h2>Lista Towarów</h2>
 </div>
-<table class="table">
+<table class="table sorttable">
   <thead>
     <tr>
       <th>Nazwa Towaru</th><th>Min Stan Magazynowy</th><th>Max Stan Magazynowy</th><th>Stan Magazynowy Rzeczywisty</th><th>Stan Magazynowy Dysponowany</th><th>Stawka Vat</th><th>Kod Towaru</th><th>Kategoria</th><th>Jednostka Miary</th><th>Stan</th><th>Edytuj</th><th>Zamroz</th><th>Kup</th><th>usun</th>

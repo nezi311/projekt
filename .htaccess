@@ -44,7 +44,7 @@ RewriteRule ^Klient/?$ index.php?controller=Klient [L]
 RewriteRule ^Klient/update/?$ index.php?controller=Klient&action=update [L]
 RewriteRule ^Klient/insert/?$ index.php?controller=Klient&action=insert [L]
 
-
+RewriteRule ^Statystyka/?$ index.php?controller=Statystyka [L]
 
 
 RewriteRule ^Pracownicy/?$ index.php?controller=Pracownicy [L]
