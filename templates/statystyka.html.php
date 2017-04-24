@@ -18,7 +18,7 @@
 						  <option value="towarKasa" {if $kryterium=="towarKasa"}selected{/if}>Sprzedane towary (dochód)</option>
 						</optgroup>
 						<optgroup label="Klienci">
-				  		<option value="klientIlosc" {if $kryterium=="klientIlosc"}selected{/if}>Najwięcej kupujący klienci</option>
+				  		<option value="klientKasa" {if $kryterium=="klientKasa"}selected{/if}>Najwięcej kupujący klienci</option>
 						</optgroup>
 					</select>
 				</div>
@@ -51,16 +51,18 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th>#</th><th>Nazwa</th><th>Wartość</th>
+			<th>#</th><th>{if $kryterium=="klientKasa"}Klient{else}Nazwa Towaru{/if}</th><th>Liczba</th>
 		</tr>
 	</thead>
 	<tbody>
+		{assign var=val value=1}
 	{foreach $allStatystyki as $statystyka}
 		<tr>
-			<td></td>
+			<td>{$val}</td>
 			<td>{$statystyka['nazwa']}</td>
 			<td>{$statystyka['wartosc']}</td>
 		</tr>
+{assign var=val value=$val+1}
 		{/foreach}
 	</tbody>
 </table>
