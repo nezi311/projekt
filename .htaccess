@@ -9,6 +9,7 @@ RewriteRule ^index/?$ index.php?controller=index [L]
 
 
 RewriteRule ^Koszyk/?$ index.php?controller=Towar&action=wKoszyku [L]
+RewriteRule ^Koszyk/zrealizuj/?$ index.php?controller=Towar&action=zrealizuj [L]
 RewriteRule ^Koszyk/usun/(\d+)/?$ index.php?controller=Towar&action=deleteKoszyk&id=$1 [L]
 RewriteRule ^Koszyk/plus/(\d+)/?$ index.php?controller=Towar&action=iloscPlus&id=$1 [L]
 RewriteRule ^Koszyk/minus/(\d+)/?$ index.php?controller=Towar&action=iloscMinus&id=$1 [L]

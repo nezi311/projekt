@@ -22,13 +22,17 @@
 			{$towar['ilosc']} {$towar['NazwaSkrocona']}
 			<a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/minus/{$towar['Id']}" role="button"><span class="glyphicon glyphicon-minus"></span></a>
 		</td>
-		<td>{($towar['Cena']*$towar['StawkaVat'])/100*$towar['ilosc']}</td>
-		{$suma=$suma+(($towar['Cena']*$towar['StawkaVat'])/100*$towar['ilosc'])}
+		<td>{(((($towar['Cena']*$towar['StawkaVat'])/100)+$towar['Cena'])*$towar['ilosc'])}</td>
+		{$suma=$suma+((($towar['Cena']*$towar['StawkaVat'])/100*$towar['ilosc'])+$towar['Cena']*$towar['ilosc'])}
 		<td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/usun/{$towar['Id']}" role="button"><span class="glyphicon glyphicon-remove"></span></a></td>
   </tr>
   {/foreach}
 {/if}
 </table>
+<form action="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/zrealizuj" method="post">
+	<input type='hidden' name='suma' value={$suma}>
+	<input type='submit' name='submit' value=Zamów>
+</form>
 Suma: {$suma}
 {if isset($_COOKIE['ids'])}
 {$cookie = $_COOKIE['ids']}

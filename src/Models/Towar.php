@@ -248,9 +248,37 @@
 						$data['error'] =$data['error'].'<br> Błąd wykonywania operacji usunięcia';
 					}
 				return $data;
+			}
 
-		}
+			public function zrealizuj($suma)
+			{
+				$data = array();
+					if($suma === NULL || $suma === "")
+						$data['error'] = 'Nieokreślona suma!';
+					else
+						try
+						{
+							$stmt = $this->pdo->prepare('INSERT INTO `zamowieniesprzedaz`(`DataZamowienia`,`Wartosc`,`IdStanZamowienia`,`IdKlient`) VALUES (CURDATE(),:suma,3,1)');
+					    $stmt -> bindValue(':suma',$suma,PDO::PARAM_INT);
+							$stmt -> execute();
 
+							$stmt = $this->pdo->prepare('INSERT INTO towarysprzedaz (IdTowar, ilosc, klient, cena, IdZamowienieSprzedaz) select koszyk.IdTowar, ilosc, klient, (Cena+(Cena*StawkaVat/100)), (SELECT MAX(IdZamowienieSprzedaz) FROM zamowieniesprzedaz) FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar');
+							$stmt -> execute();
+
+							$stmt2 = $this->pdo->prepare('SELECT IdTowar FROM koszyk');
+							$stmt2 -> execute();
+							$data = $stmt2 -> fetchAll();
+							foreach($data as $result)
+							{
+								//echo $result['IdTowar'];
+							}
+						}
+						catch(\PDOException $e)
+						{
+							$data['error'] =$data['error'].'<br> Błąd wykonywania operacji usunięcia';
+						}
+					return $data;
+				}
 		public function iloscPlus($id)
 		{
 			$data = array();

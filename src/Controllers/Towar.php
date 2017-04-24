@@ -124,6 +124,25 @@ class Towar extends Controller
         $this->redirect('index/');
     }
 
+    public function zrealizuj()
+    {
+
+        if($_SESSION['role']<=1)
+        {
+
+
+            $model=$this->getModel('Towar');
+                    if($model)
+                    {
+                      $data = $model->zrealizuj($_POST['suma']);
+                        //nie przekazano komunikatów o błędzie
+                    }
+                  $this->redirect('Towar/');
+        }
+        else
+          $this->redirect('index/');
+      }
+
     public function iloscPlus($id)
     {
 

@@ -586,7 +586,6 @@ $stmt->execute();
    `Wartosc` float NOT NULL,
    `IdStanZamowienia` int NOT NULL,
    `IdKlient` int NOT NULL,
-   `IdKoszykKopia` int NOT NULL,
    PRIMARY KEY (IdZamowienieSprzedaz),
    foreign key (IdStanZamowienia)
    references statuszamowienia(IdStanZamowienia),
@@ -626,6 +625,7 @@ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `towarySprzedaz`
  `IdTowar` int NOT NULL,
  `ilosc` int NOT NULL,
  `klient` int NOT NULL,
+ `cena` float NOT NULL,
  `IdZamowienieSprzedaz` int NOT NULL,
  PRIMARY KEY (id),
  FOREIGN KEY (IdTowar)
@@ -640,27 +640,31 @@ $kategorie[]=array(
 'IdTowar'=>'2',
 'ilosc'=>'2',
 'klient'=>'1',
+'cena'=>'400',
 'IdZamowienieSprzedaz'=>'1'
 );
 $kategorie[]=array(
   'IdTowar'=>'1',
   'ilosc'=>'1',
   'klient'=>'1',
+  'cena'=>'500',
   'IdZamowienieSprzedaz'=>'1'
 );
 $kategorie[]=array(
   'IdTowar'=>'1',
   'ilosc'=>'1',
   'klient'=>'1',
+  'cena'=>'500',
   'IdZamowienieSprzedaz'=>'2'
 );
 foreach($kategorie as $element_kategoria)
 {
-  $stmt = $pdo->prepare('INSERT INTO `towarySprzedaz`(`IdTowar`,`ilosc`,`klient`,`IdZamowienieSprzedaz`) VALUES (:IdTowar,:ilosc,:klient,:IdZamowienieSprzedaz)');
+  $stmt = $pdo->prepare('INSERT INTO `towarySprzedaz`(`IdTowar`,`ilosc`,`klient`,`IdZamowienieSprzedaz`,`cena`) VALUES (:IdTowar,:ilosc,:klient,:IdZamowienieSprzedaz,:cena)');
   $stmt -> bindValue(':IdTowar',$element_kategoria['IdTowar'],PDO::PARAM_INT);
   $stmt -> bindValue(':ilosc',$element_kategoria['ilosc'],PDO::PARAM_INT);
   $stmt -> bindValue(':klient',$element_kategoria['klient'],PDO::PARAM_INT);
   $stmt -> bindValue(':IdZamowienieSprzedaz',$element_kategoria['IdZamowienieSprzedaz'],PDO::PARAM_INT);
+  $stmt -> bindValue(':cena',$element_kategoria['cena'],PDO::PARAM_INT);
   $wynik_zapytania = $stmt -> execute();
 }
  /*************************************************/
