@@ -14,28 +14,28 @@
 					<label for="kryterium">Kryterium</label>
 					<select class="form-control" name="kryterium"> <!--Supplement an id here instead of using 'name'-->
 						<optgroup label="Towary">
-						  <option value="towarIlosc">Sprzedane towary (ilość)</option>
-						  <option value="towarKasa">Sprzedane towary (dochód)</option>
+						  <option value="towarIlosc" {if $kryterium=="towarIlosc"}selected{/if}>Sprzedane towary (ilość)</option>
+						  <option value="towarKasa" {if $kryterium=="towarKasa"}selected{/if}>Sprzedane towary (dochód)</option>
 						</optgroup>
 						<optgroup label="Klienci">
-				  		<option value="klientIlosc">Najwięcej kupujący klienci</option>
+				  		<option value="klientIlosc" {if $kryterium=="klientIlosc"}selected{/if}>Najwięcej kupujący klienci</option>
 						</optgroup>
 					</select>
 				</div>
 					<div class="form-group">
 				    <label for="sortowanie">Sortuj</label>
 						<select class="form-control" name="sortowanie"> <!--Supplement an id here instead of using 'name'-->
-					  <option value="ASC">Rosnąco</option>
-					  <option value="DESC">Malejąco</option>
+					  <option value="ASC" {if $sortowanie=="ASC"}selected{/if}>Rosnąco</option>
+					  <option value="DESC" {if $sortowanie=="DESC"}selected{/if}>Malejąco</option>
 						</select>
 					</div>
 				<div class="form-group">
 			    <label for="dataOd">Data od</label>
-					<input class="form-control" type="date" id="dataOd" value="2017-01-01" name="dataOd"/>
+					<input class="form-control" type="date" id="dataOd" value={$dataOd} name="dataOd"/>
 				</div>
 			<div class="form-group">
 				<label for="dataDo">Data do</label>
-				<input class="form-control" type="date" id="dataDo" value="2017-04-18" name="dataDo"/>
+				<input class="form-control" type="date" id="dataDo" value={$dataDo} name="dataDo"/>
 			</div>
 			<input type="submit" value="Aktualizuj" class="btn btn-default" />
 		</form>
@@ -48,10 +48,10 @@
 
 
 {else}
-<table>
+<table class="table">
 	<thead>
 		<tr>
-			<th>#</th><th>Kryterium</th><th>Wartość</th>
+			<th>#</th><th>Nazwa</th><th>Wartość</th>
 		</tr>
 	</thead>
 	<tbody>

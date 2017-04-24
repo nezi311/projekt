@@ -4,8 +4,7 @@
 	class Statystyka extends Model {
 		//model zwraca tablicę wszystkich kategorii
 		public function getAll($kryterium, $sortowanie, $dataOd, $dataDo){
-			if($kryterium==="towarIlosc")
-			{
+
             $data = array();
             if(!$this->pdo)
                 $data['error'] = 'Połączenie z bazą nie powidoło się!';
@@ -13,27 +12,46 @@
                 try
                 {
                     $statystyki = array();
-                    $stmt = $this->pdo->query('SELECT NazwaTowaru, COUNT(*)*ilosc AS wartosc
+if($kryterium==="towarIlosc" && $sortowanie==="ASC")
+{
+                    $stmt = $this->pdo->prepare('SELECT NazwaTowaru AS nazwa, COUNT(*)*ilosc AS wartosc
 FROM towar
 INNER JOIN towarysprzedaz
 ON towarysprzedaz.idTowar=towar.IdTowar
 	INNER JOIN zamowieniesprzedaz
     ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
- WHERE DataZamowienia BETWEEN '2016-01-01' AND '2017-04-23'
+ WHERE DataZamowienia BETWEEN :dataOd AND :dataDo
  GROUP BY NazwaTowaru
-ORDER BY `wartosc` ASC');
+ORDER BY `wartosc` asc');
+}
+
+if($kryterium==="towarIlosc" && $sortowanie==="DESC")
+{
+$stmt = $this->pdo->prepare('SELECT NazwaTowaru AS nazwa, COUNT(*)*ilosc AS wartosc
+FROM towar
+INNER JOIN towarysprzedaz
+ON towarysprzedaz.idTowar=towar.IdTowar
+INNER JOIN zamowieniesprzedaz
+ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
+WHERE DataZamowienia BETWEEN :dataOd AND :dataDo
+GROUP BY NazwaTowaru
+ORDER BY `wartosc` desc');
+}
+$stmt->bindValue(':dataOd', $dataOd, PDO::PARAM_STR);
+$stmt->bindValue(':dataDo', $dataDo, PDO::PARAM_STR);
+$result = $stmt->execute();
                     $statystyki = $stmt->fetchAll();
                     $stmt->closeCursor();
                     if($statystyki && !empty($statystyki))
                         $data['statystyki'] = $statystyki;
                     else
-                        $data['statystyki'] = array();
+                        $data['error'] = "brak wyników";
                 }
                 catch(\PDOException $e)
                 {
                     $data['error'] = 'Błąd odczytu danych z bazy!'. $e->getMessage();
                 }
-							}
+
             return $data;
 		}
 	}
