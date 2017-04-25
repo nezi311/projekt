@@ -34,16 +34,5 @@
 	<input type='submit' name='submit' value=Zamów>
 </form>
 Suma: {$suma}
-{if isset($_COOKIE['ids'])}
-{$cookie = $_COOKIE['ids']}
-{$cookie = stripslashes($cookie)}
-{$dana = json_decode($cookie, true)}
-{$cookie = $_COOKIE['ilosci']}
-{$cookie = stripslashes($cookie)}
-{$dana = json_decode($cookie, true)}
-{/if}
-{if isset($error)}
-<strong>{$error}</strong>
-{/if}
 
 {include file="footer.html.php"}
