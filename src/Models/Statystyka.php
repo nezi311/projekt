@@ -3,7 +3,7 @@
 	use \PDO;
 	class Statystyka extends Model {
 		//model zwraca tablicę wszystkich kategorii
-		public function getAll($kryterium, $sortowanie, $dataOd, $dataDo){
+		public function getAll($kryterium, $fraza, $dataOd, $dataDo){
 
             $data = array();
             if(!$this->pdo)
@@ -13,9 +13,9 @@
                 {
                     $statystyki = array();
 //ilość towaru
-if($kryterium==="towarIlosc" && $sortowanie==="ASC")
+if($kryterium==="towarIlosc")
 {
-                    $stmt = $this->pdo->prepare('SELECT towar.NazwaTowaru AS nazwa, CONCAT(COUNT(*)*ilosc," ",NazwaSkrocona,".") AS wartosc
+                    $stmt = $this->pdo->prepare('SELECT towar.NazwaTowaru AS nazwa, kategoria.NazwaKategorii AS kategoria,  CONCAT(COUNT(*)*ilosc," ",NazwaSkrocona,".") AS wartosc
 FROM towar
 INNER JOIN towarysprzedaz
 ON towarysprzedaz.idTowar=towar.IdTowar
@@ -23,65 +23,37 @@ ON towarysprzedaz.idTowar=towar.IdTowar
     ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
     INNER JOIN jednostkamiary
     ON jednostkamiary.IdJednostkaMiary=towar.IdJednostkaMiary
- WHERE DataZamowienia BETWEEN :dataOd AND :dataDo
+    INNER JOIN kategoria
+    ON towar.IdKategoria=kategoria.IdKategoria
+ WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza)
  GROUP BY NazwaTowaru
 ORDER BY `wartosc` asc');
-}
-if($kryterium==="towarIlosc" && $sortowanie==="DESC")
-{
-$stmt = $this->pdo->prepare('SELECT towar.NazwaTowaru AS nazwa, CONCAT(COUNT(*)*ilosc," ",NazwaSkrocona,".") AS wartosc
-FROM towar
-INNER JOIN towarysprzedaz
-ON towarysprzedaz.idTowar=towar.IdTowar
-	INNER JOIN zamowieniesprzedaz
-    ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
-    INNER JOIN jednostkamiary
-    ON jednostkamiary.IdJednostkaMiary=towar.IdJednostkaMiary
-WHERE DataZamowienia BETWEEN :dataOd AND :dataDo
-GROUP BY NazwaTowaru
-ORDER BY `wartosc` desc');
+$stmt->bindValue(':fraza', '%'.$fraza.'%', PDO::PARAM_STR);
 }
 //pieniądze z towaru
-if($kryterium==="towarKasa" && $sortowanie==="ASC")
+if($kryterium==="towarKasa")
 {
-                    $stmt = $this->pdo->prepare('SELECT towar.NazwaTowaru AS nazwa, CONCAT(SUM(towarysprzedaz.cena)*ilosc," zł.") AS wartosc
+                    $stmt = $this->pdo->prepare('SELECT towar.NazwaTowaru AS nazwa, kategoria.NazwaKategorii AS kategoria, CONCAT(SUM(towarysprzedaz.cena)*ilosc," zł.") AS wartosc
 FROM towar
 INNER JOIN towarysprzedaz
 ON towarysprzedaz.idTowar=towar.IdTowar
 	INNER JOIN zamowieniesprzedaz
     ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
+    INNER JOIN kategoria
+    ON towar.IdKategoria=kategoria.IdKategoria
  WHERE DataZamowienia BETWEEN :dataOd AND :dataDo
- GROUP BY NazwaTowaru
+ GROUP BY towarysprzedaz.cena
 ORDER BY `wartosc` asc');
-}
-if($kryterium==="towarKasa" && $sortowanie==="DESC")
-{
-$stmt = $this->pdo->prepare('SELECT towar.NazwaTowaru AS nazwa, CONCAT(SUM(towarysprzedaz.cena)*ilosc," zł.") AS wartosc
-FROM towar
-INNER JOIN towarysprzedaz
-ON towarysprzedaz.idTowar=towar.IdTowar
-	INNER JOIN zamowieniesprzedaz
-    ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
-WHERE DataZamowienia BETWEEN :dataOd AND :dataDo
-GROUP BY NazwaTowaru
-ORDER BY `wartosc` desc');
 }
 //pieniądze od klientów
-if($kryterium==="klientKasa" && $sortowanie==="ASC")
+if($kryterium==="klientKasa")
 {
-$stmt = $this->pdo->prepare('SELECT CONCAT(Imie," ",Nazwisko," (",NIP,")") AS nazwa, CONCAT(SUM(wartosc)*ilosc," zł.") AS wartosc
+$stmt = $this->pdo->prepare('SELECT CONCAT(Imie," ",Nazwisko," (",NIP,")") AS nazwa, CONCAT(SUM(wartosc)," zł.") AS wartosc
 FROM zamowieniesprzedaz
 INNER JOIN Klient
 ON zamowieniesprzedaz.IdKlient=Klient.IdKlient
+WHERE DataZamowienia BETWEEN :dataOd AND :dataDo
 ORDER BY `wartosc` asc');
-}
-if($kryterium==="klientKasa" && $sortowanie==="DESC")
-{
-$stmt = $this->pdo->prepare('SELECT CONCAT(Imie," ",Nazwisko," (",NIP,")") AS nazwa, CONCAT(SUM(wartosc)*ilosc," zł.") AS wartosc
-FROM zamowieniesprzedaz
-INNER JOIN Klient
-ON zamowieniesprzedaz.IdKlient=Klient.IdKlient
-ORDER BY `wartosc` desc');
 }
 
 $stmt->bindValue(':dataOd', $dataOd, PDO::PARAM_STR);
