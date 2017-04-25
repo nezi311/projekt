@@ -63,7 +63,7 @@ $stmt->execute();
  $users[]=array('imie'=>'Marcin','nazwisko'=>'Kornalski','dzial'=>'Obsługa klienta','stanowisko'=>'Pracownik','telefon'=>'777666555','login'=>'pracownik','haslo'=>'password','uprawnienia'=>1);
  foreach($users as $element_user)
  {
-   $stmt = $pdo->prepare('INSERT INTO `pracownicy`(`imie`,`nazwisko`,`dzial`,`stanowisko`,`telefon`,`login`,`haslo`,`uprawnienia`) VALUES (:imie,:nazwisko,:dzial,:stanowisko,:telefon,:login,:password,:role)');
+   $stmt = $pdo->prepare('INSERT INTO `Pracownicy`(`imie`,`nazwisko`,`dzial`,`stanowisko`,`telefon`,`login`,`haslo`,`uprawnienia`) VALUES (:imie,:nazwisko,:dzial,:stanowisko,:telefon,:login,:password,:role)');
    $stmt -> bindValue(':login',$element_user['login'],PDO::PARAM_STR);
    $md5password = md5($element_user['haslo']);
    $stmt -> bindValue(':password',$md5password,PDO::PARAM_STR);
@@ -582,15 +582,15 @@ $stmt->execute();
  $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `zamowieniesprzedaz`
  (
    `IdZamowienieSprzedaz` INT AUTO_INCREMENT,
-   `DataZamowienia` date NOT NULL,
+   `DataZamowienia` DATE NOT NULL,
    `Wartosc` float NOT NULL,
-   `IdStanZamowienia` int NOT NULL,
-   `IdKlient` int NOT NULL,
+   `IdStanZamowienia` INT NOT NULL,
+   `IdKlient` INT NOT NULL,
    PRIMARY KEY (IdZamowienieSprzedaz),
-   foreign key (IdStanZamowienia)
-   references statuszamowienia(IdStanZamowienia),
-   foreign key (IdKlient)
-   references klient(IdKlient)
+   FOREIGN KEY (IdStanZamowienia)
+   REFERENCES statuszamowienia(IdStanZamowienia),
+   FOREIGN KEY (IdKlient)
+   REFERENCES Klient(IdKlient)
     )ENGINE = InnoDB;");
  $stmt->execute();
 
@@ -622,19 +622,19 @@ $stmt->execute();
 $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `towarySprzedaz`
 (
  `id` INT AUTO_INCREMENT,
- `IdTowar` int NOT NULL,
- `ilosc` int NOT NULL,
- `klient` int NOT NULL,
+ `IdTowar` INT NOT NULL,
+ `ilosc` INT NOT NULL,
+ `klient` INT NOT NULL,
  `cena` float NOT NULL,
- `IdZamowienieSprzedaz` int NOT NULL,
+ `IdZamowienieSprzedaz` INT NOT NULL,
  PRIMARY KEY (id),
  FOREIGN KEY (IdTowar)
  REFERENCES Towar(IdTowar),
  FOREIGN KEY (klient)
  REFERENCES Klient(IdKlient),
  FOREIGN KEY (IdZamowienieSprzedaz)
- REFERENCES ZamowienieSprzedaz(IdZamowienieSprzedaz)
-);");
+ REFERENCES zamowieniesprzedaz(IdZamowienieSprzedaz)
+)ENGINE = InnoDB;");
 $kategorie = array();
 $kategorie[]=array(
 'IdTowar'=>'2',
@@ -664,7 +664,7 @@ foreach($kategorie as $element_kategoria)
   $stmt -> bindValue(':ilosc',$element_kategoria['ilosc'],PDO::PARAM_INT);
   $stmt -> bindValue(':klient',$element_kategoria['klient'],PDO::PARAM_INT);
   $stmt -> bindValue(':IdZamowienieSprzedaz',$element_kategoria['IdZamowienieSprzedaz'],PDO::PARAM_INT);
-  $stmt -> bindValue(':cena',$element_kategoria['cena'],PDO::PARAM_INT);
+  $stmt -> bindValue(':cena',$element_kategoria['cena'],PDO::PARAM_STR);
   $wynik_zapytania = $stmt -> execute();
 }
  /*************************************************/
@@ -679,8 +679,8 @@ foreach($kategorie as $element_kategoria)
    `Cena` float NOT NULL,
    `IdTowar` int NOT NULL,
    PRIMARY KEY (IdCenaHistoria),
-   foreign key (IdTowar)
-   references towar(IdTowar)
+   FOREIGN KEY (IdTowar)
+   REFERENCES Towar(IdTowar)
  )ENGINE = InnoDB;");
  $stmt->execute();
 
