@@ -33,16 +33,16 @@ $stmt->bindValue(':fraza', '%'.$fraza.'%', PDO::PARAM_STR);
 //pieniądze z towaru
 if($kryterium==="towarKasa")
 {
-                    $stmt = $this->pdo->prepare('SELECT Towar.NazwaTowaru AS nazwa, kategoria.NazwaKategorii AS kategoria, CONCAT(SUM(towarysprzedaz.cena)*ilosc," zł.") AS wartosc
+                    $stmt = $this->pdo->prepare('SELECT Towar.NazwaTowaru AS nazwa, Kategoria.NazwaKategorii AS Kategoria, CONCAT(SUM(towarySprzedaz.cena)*ilosc," zł.") AS wartosc
 FROM Towar
 INNER JOIN towarySprzedaz
 ON towarySprzedaz.idTowar=Towar.IdTowar
 	INNER JOIN zamowieniesprzedaz
-    ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
+    ON towarySprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
     INNER JOIN Kategoria
-    ON towar.IdKategoria=Kategoria.IdKategoria
+    ON Towar.IdKategoria=Kategoria.IdKategoria
  WHERE DataZamowienia BETWEEN :dataOd AND :dataDo
- GROUP BY towarysprzedaz.cena
+ GROUP BY towarySprzedaz.cena
 ORDER BY `wartosc` asc');
 }
 //pieniądze od klientów
