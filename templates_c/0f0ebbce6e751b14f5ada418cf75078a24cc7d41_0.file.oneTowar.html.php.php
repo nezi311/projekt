@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-25 16:32:47
+/* Smarty version 3.1.31, created on 2017-04-25 16:47:20
   from "/opt/lampp/htdocs/PZ/templates/oneTowar.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58ff5e0f713293_27570391',
+  'unifunc' => 'content_58ff61782152f5_20773005',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0f0ebbce6e751b14f5ada418cf75078a24cc7d41' => 
     array (
       0 => '/opt/lampp/htdocs/PZ/templates/oneTowar.html.php',
-      1 => 1493130766,
+      1 => 1493131596,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58ff5e0f713293_27570391 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58ff61782152f5_20773005 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -89,7 +89,10 @@ echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Towar/zamroz/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
 " role="button">Wycofaj ze sprzedaży</a>
 	</div>
+  <img src="http://chart.apis.google.com/chart?cht=lc&amp;chs=600x400&chd=t:14,7,13,19,30,36,40,49&chxt=x,y&chxl=0:|I|II|III|IV|V|" alt="" />
+
 </div>
+
 </h4>
   </div>
 </div>
