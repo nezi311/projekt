@@ -28,7 +28,7 @@
         try
         {
           $user=array();
-          $stmt = $this->pdo->prepare('SELECT * FROM `pracownicy` WHERE `login`=:login');
+          $stmt = $this->pdo->prepare('SELECT * FROM `Pracownicy` WHERE `login`=:login');
           $stmt->bindValue(':login', $login, PDO::PARAM_STR);
           $result = $stmt->execute();
           $user = $stmt->fetchAll();
