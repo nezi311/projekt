@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-25 18:11:02
+/* Smarty version 3.1.31, created on 2017-04-25 18:25:39
   from "C:\xampp\htdocs\pz\templates\statystyka.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58ff7516a49182_52465741',
+  'unifunc' => 'content_58ff78834f00a2_67034879',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '8ba4c9b8c9c1a0c308e1ca7f240a1c487f2f8e38' => 
     array (
       0 => 'C:\\xampp\\htdocs\\pz\\templates\\statystyka.html.php',
-      1 => 1493136658,
+      1 => 1493137468,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58ff7516a49182_52465741 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58ff78834f00a2_67034879 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -36,7 +36,7 @@ $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id,
 <div class="panel panel-primary">
   <div class="panel-heading">Parametry</div>
   <div class="panel-body">
-		<form method="get">
+		<form method="post">
 				<div class="form-group">
 					<label for="kryterium">Kryterium</label>
 					<select class="form-control" class="target" name="kryterium" id="kryterium"> <!--Supplement an id here instead of using 'name'-->

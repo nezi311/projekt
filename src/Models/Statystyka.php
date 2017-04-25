@@ -15,16 +15,16 @@
 //ilość towaru
 if($kryterium==="towarIlosc")
 {
-                    $stmt = $this->pdo->prepare('SELECT towar.NazwaTowaru AS nazwa, kategoria.NazwaKategorii AS kategoria,  CONCAT(COUNT(*)*ilosc," ",NazwaSkrocona,".") AS wartosc
-FROM towar
-INNER JOIN towarysprzedaz
-ON towarysprzedaz.idTowar=towar.IdTowar
+                    $stmt = $this->pdo->prepare('SELECT Towar.NazwaTowaru AS nazwa, Kategoria.NazwaKategorii AS Kategoria,  CONCAT(COUNT(*)*ilosc," ",NazwaSkrocona,".") AS wartosc
+FROM Towar
+INNER JOIN towarySprzedaz
+ON towarySprzedaz.idTowar=Towar.IdTowar
 	INNER JOIN zamowieniesprzedaz
-    ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
-    INNER JOIN jednostkamiary
-    ON jednostkamiary.IdJednostkaMiary=towar.IdJednostkaMiary
-    INNER JOIN kategoria
-    ON towar.IdKategoria=kategoria.IdKategoria
+    ON towarySprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
+    INNER JOIN Jednostkamiary
+    ON Jednostkamiary.IdJednostkaMiary=Towar.IdJednostkaMiary
+    INNER JOIN Kategoria
+    ON Towar.IdKategoria=Kategoria.IdKategoria
  WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza)
  GROUP BY NazwaTowaru
 ORDER BY `wartosc` asc');
@@ -32,15 +32,18 @@ ORDER BY `wartosc` asc');
 //pieniądze z towaru
 if($kryterium==="towarKasa")
 {
-                    $stmt = $this->pdo->prepare('SELECT towar.NazwaTowaru AS nazwa, kategoria.NazwaKategorii AS kategoria, CONCAT(SUM(towarysprzedaz.cena)*ilosc," zł.") AS wartosc
-FROM towar
-INNER JOIN towarysprzedaz
-ON towarysprzedaz.idTowar=towar.IdTowar
+                    $stmt = $this->pdo->prepare('SELECT Towar.NazwaTowaru AS nazwa, kategoria.NazwaKategorii AS kategoria, CONCAT(SUM(towarysprzedaz.cena)*ilosc," zł.") AS wartosc
+FROM Towar
+INNER JOIN towarySprzedaz
+ON towarySprzedaz.idTowar=Towar.IdTowar
 	INNER JOIN zamowieniesprzedaz
     ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
     INNER JOIN kategoria
     ON towar.IdKategoria=kategoria.IdKategoria
  WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza)
+    INNER JOIN Kategoria
+    ON towar.IdKategoria=Kategoria.IdKategoria
+ WHERE DataZamowienia BETWEEN :dataOd AND :dataDo
  GROUP BY towarysprzedaz.cena
 ORDER BY `wartosc` asc');
 }

@@ -12,7 +12,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT * FROM pracownicy");
+              $stmt = $this->pdo->query("SELECT * FROM Pracownicy");
               $pracownicy = $stmt->fetchAll();
               $stmt->closeCursor();
               if($pracownicy && !empty($pracownicy))
@@ -40,7 +40,7 @@
 			else
 					try
 					{
-							$stmt = $this->pdo->prepare("SELECT * FROM pracownicy WHERE id=:id");
+							$stmt = $this->pdo->prepare("SELECT * FROM Pracownicy WHERE id=:id");
 							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
 							$stmt -> execute();
 							$pracownik = $stmt -> fetchAll();
@@ -71,7 +71,7 @@
 				else
 					try
 					{
-						$stmt = $this->pdo->prepare('DELETE FROM `pracownicy` WHERE id=:id');
+						$stmt = $this->pdo->prepare('DELETE FROM `Pracownicy` WHERE id=:id');
 				    $stmt -> bindValue(':id',$id,PDO::PARAM_INT);
 				    $wynik_zapytania = $stmt -> execute();
 					}
@@ -134,7 +134,7 @@
 			{
 				try
 				{
-					$stmt = $this->pdo->prepare('INSERT INTO `pracownicy`(`imie`,`nazwisko`,`dzial`,`stanowisko`,`telefon`,`login`,`haslo`,`uprawnienia`) VALUES (:imie,:nazwisko,:dzial,:stanowisko,:telefon,:login,:password,:role)');
+					$stmt = $this->pdo->prepare('INSERT INTO `Pracownicy`(`imie`,`nazwisko`,`dzial`,`stanowisko`,`telefon`,`login`,`haslo`,`uprawnienia`) VALUES (:imie,:nazwisko,:dzial,:stanowisko,:telefon,:login,:password,:role)');
 			    $stmt -> bindValue(':login',$login,PDO::PARAM_STR);
 			    $md5password = md5($haslo);
 			    $stmt -> bindValue(':password',$md5password,PDO::PARAM_STR);
@@ -201,7 +201,7 @@
 				{
 					try
 					{
-						$stmt = $this->pdo->prepare('UPDATE `pracownicy` SET `imie`=:imie,`nazwisko`=:nazwisko,`dzial`=:dzial,`stanowisko`=:stanowisko,`telefon`=:telefon,`uprawnienia`=:role WHERE `id`=:id');
+						$stmt = $this->pdo->prepare('UPDATE `Pracownicy` SET `imie`=:imie,`nazwisko`=:nazwisko,`dzial`=:dzial,`stanowisko`=:stanowisko,`telefon`=:telefon,`uprawnienia`=:role WHERE `id`=:id');
 						$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
 						$stmt -> bindValue(':role',$uprawnienia,PDO::PARAM_INT);
 						$stmt -> bindValue(':imie',$imie,PDO::PARAM_STR);
@@ -253,7 +253,7 @@
 
 				try
 				{
-					$stmt = $this->pdo->prepare('UPDATE `pracownicy` SET `haslo`= :haslo WHERE `id`=:id');
+					$stmt = $this->pdo->prepare('UPDATE `Pracownicy` SET `haslo`= :haslo WHERE `id`=:id');
 					$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
 					$md5password = md5($pass1);
 					$stmt -> bindValue(':haslo',$md5password,PDO::PARAM_STR);
@@ -286,7 +286,7 @@
 
 							//d($tempArray['pracownik'][0]['aktywny']);
 
-							$stmt = $this->pdo->prepare('UPDATE `pracownicy` SET `aktywny`= :aktywny WHERE `id`=:id');
+							$stmt = $this->pdo->prepare('UPDATE `Pracownicy` SET `aktywny`= :aktywny WHERE `id`=:id');
 							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
 							if($tempArray['pracownik'][0]['aktywny']==0)
 							{
