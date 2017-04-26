@@ -11,7 +11,7 @@
 			$view = $this->getView('Statystyka');
 			if (isset($_POST['kryterium']))
 			{
-			$view->index($_POST['kryterium'], $_POST['fraza'], $_POST['dataOd'], $_POST['dataDo']);
+			$view->index($_POST['kryterium'], $_POST['fraza'], $_POST['dataOd'], $_POST['dataDo'], $_POST['kategoria']);
 		}
 			else {
 				$view->index();
