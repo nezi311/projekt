@@ -138,7 +138,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT * FROM `Towar` WHERE freeze=1;");
+              $stmt = $this->pdo->query("SELECT IdTowar,CONCAT(Cena,' ','zł') AS Cena,KodTowaru,StanMagazynowyDysponowany,StawkaVat,NazwaTowaru,kategoria.NazwaKategorii AS Kategoria, JednostkaMiary.Nazwa AS JednostkaMiary FROM `Towar`INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria INNER JOIN JednostkaMiary on Towar.IdJednostkaMiary=JednostkaMiary.IdJednostkaMiary  WHERE freeze=1;");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -161,7 +161,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT * FROM Towar WHERE freeze=0;");
+              $stmt = $this->pdo->query("SELECT IdTowar,CONCAT(Cena,' ','zł') AS Cena,KodTowaru,StanMagazynowyDysponowany,StawkaVat,NazwaTowaru,kategoria.NazwaKategorii AS Kategoria, JednostkaMiary.Nazwa AS JednostkaMiary FROM `Towar`INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria INNER JOIN JednostkaMiary on Towar.IdJednostkaMiary=JednostkaMiary.IdJednostkaMiary  WHERE freeze=0;");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -675,16 +675,51 @@
       return $data;
     	}
 
-		public function Zamroz()
-		{
+			public function freeze($id)
+			{
+					$data = array();
+						try
+						{
+							$stmt = $this->pdo->prepare('UPDATE `Towar` SET `Freeze`=:Freeze WHERE `IdTowar`=:id');
+							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
+							$stmt -> bindValue(':Freeze',1,PDO::PARAM_INT);
+							$wynik_zapytania = $stmt -> execute();
+						}
+						catch(\PDOException $e)
+						{
+							$data['error'].='Błąd zapisu danych do bazy! <br>';
+							return $data;
+						}
 
 		}
 
-		public function odmroz($id)
-		{
+			public function unfreeze($id)
+			{
+				$blad=false;
+				$data = array();
+				$data['error']="";
+				if($id === null || $id === "")
+				{
+					$data['error'] .= 'Nieokreślone id! <br>';
+					$blad=true;
+				}
+					if(!$blad)
+					{
+						try
+						{
+							$stmt = $this->pdo->prepare('UPDATE `towar` SET `Freeze`=:Freeze WHERE `IdTowar`=:id');
+							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
+							$stmt -> bindValue(':Freeze',0,PDO::PARAM_INT);
+							$wynik_zapytania = $stmt -> execute();
+						}
+						catch(\PDOException $e)
+						{
+							$data['error'].='Błąd zapisu danych do bazy! <br>';
+							return $data;
+						}
+			}
 
-		}
 
   }
-
+}
 ?>

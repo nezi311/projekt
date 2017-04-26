@@ -34,10 +34,17 @@
 				<label for="dataDo">Data do</label>
 				<input class="form-control" type="date" id="dataDo" value={$dataDo} name="dataDo"/>
 			</div>
+			{if isset($allKategorie)}
 			<div class="form-group" div id="kat">
 						<label for="kategoria">Kategoria</label>
-						<input class="form-control" type="text" name="kategoria" maxlength="20"/>
+						<select class="form-control" name="kategoria" id="kryterium"> <!--Supplement an id here instead of using 'name'-->
+							<option value="0" {if $kat==0}selected{/if}>Wszystkie kategorie</option>
+					{foreach $allKategorie as $kategoria}
+							  <option value={$kategoria['IdKategoria']} {if $kat==$kategoria['IdKategoria']}selected{/if}>{$kategoria['NazwaKategorii']}</option>
+								{/foreach}
+						</select>
 			</div>
+			{/if}
 			<input type="submit" value="Aktualizuj" class="btn btn-default" />
 		</form>
 	</div>
@@ -51,7 +58,7 @@
 <table class="table sortable">
 	<thead>
 		<tr>
-			<th class=sorttable_nosort>#</th><th>{if $kryterium=="klientKasa"}Klient{else}Nazwa Towaru{/if}</th>{if $kryterium=="towarIlosc" || $kryterium=="towarKasa"}<th>Kategoria</th>{/if}<th>{if $kryterium=="klientKasa" || $kryterium=="towarKasa"}Wartość{else}Ilość{/if}</th>
+			<th class=sorttable_nosort>#</th><th>{if $kryterium=="klientKasa"}Klient{else}Nazwa Towaru{/if}</th><th>{if $kryterium=="towarIlosc" || $kryterium=="towarKasa"}Kategoria{elseif $kryterium=="klientKasa"}Poczta{/if}</th><th>{if $kryterium=="klientKasa" || $kryterium=="towarKasa"}Wartość{else}Ilość{/if}</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -60,7 +67,7 @@
 		<tr>
 			<td>{$val}</td>
 			<td>{$statystyka['nazwa']}</td>
-			{if $kryterium=="towarIlosc" || $kryterium=="towarKasa"}<td>{$statystyka['kategoria']}</td>{/if}
+			<td>{if $kryterium=="towarIlosc" || $kryterium=="towarKasa"}{$statystyka['kategoria']}{elseif $kryterium=="klientKasa"}{$statystyka['adres']}{/if}</td>
 			<td>{$statystyka['wartosc']}</td>
 		</tr>
 {assign var=val value=$val+1}
