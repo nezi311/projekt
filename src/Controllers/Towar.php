@@ -232,5 +232,52 @@ class Towar extends Controller
           else
             $this->redirect('Towar/');
     }
+
+    public function freeze($id)
+ {
+
+   if($_SESSION['role']<=1)
+   {
+     if($id !== null)
+     {
+
+       $model=$this->getModel('Towar');
+               if($model)
+               {
+                 $data = $model->freeze($id);
+                   //nie przekazano komunikatów o błędzie
+               }
+       //powiadamiamy odpowiedni widok, że nastąpiła aktualizacja bazy
+       $this->redirect('Towar/');
+     }
+     else
+       $this->redirect('Towar/');
+   }
+   else
+     $this->redirect('index/');
+ }
+ public function unfreeze($id)
+ {
+
+   if($_SESSION['role']<=1)
+   {
+     if($id !== null)
+     {
+
+       $model=$this->getModel('Towar');
+               if($model)
+               {
+                 $data = $model->unfreeze($id);
+                   //nie przekazano komunikatów o błędzie
+               }
+       //powiadamiamy odpowiedni widok, że nastąpiła aktualizacja bazy
+       $this->redirect('Towar/');
+     }
+     else
+       $this->redirect('Towar/');
+   }
+   else
+     $this->redirect('index/');
+ }
 }
 ?>
