@@ -12,10 +12,10 @@
 		<form method="post">
 				<div class="form-group">
 					<label for="kryterium">Kryterium</label>
-					<select class="form-control" name="kryterium"> <!--Supplement an id here instead of using 'name'-->
+					<select class="form-control" class="target" name="kryterium" id="kryterium"> <!--Supplement an id here instead of using 'name'-->
 						<optgroup label="Towary">
 						  <option value="towarIlosc" {if $kryterium=="towarIlosc"}selected{/if}>Sprzedane towary (ilość)</option>
-						  <option value="towarKasa" {if $kryterium=="towarKasa"}selected{/if}>Sprzedane towary (dochód)</option>
+						  <option value="towarKasa" {if $kryterium=="towarKasa"}selected{/if}>Sprzedane towary (wartość)</option>
 						</optgroup>
 						<optgroup label="Klienci">
 				  		<option value="klientKasa" {if $kryterium=="klientKasa"}selected{/if}>Najwięcej kupujący klienci</option>
@@ -34,6 +34,10 @@
 				<label for="dataDo">Data do</label>
 				<input class="form-control" type="date" id="dataDo" value={$dataDo} name="dataDo"/>
 			</div>
+			<div class="form-group" div id="kat">
+						<label for="kategoria">Kategoria</label>
+						<input class="form-control" type="text" name="kategoria" maxlength="20"/>
+			</div>
 			<input type="submit" value="Aktualizuj" class="btn btn-default" />
 		</form>
 	</div>
@@ -43,12 +47,11 @@
 {if !isset($allStatystyki)}
 	<div class="alert alert-danger" role="alert">Brak wyników</div>
 
-
 {else}
 <table class="table sortable">
 	<thead>
 		<tr>
-			<th class=sorttable_nosort>#</th><th>{if $kryterium=="klientKasa"}Klient{else}Nazwa Towaru{/if}</th>{if $kryterium=="towarIlosc" || $kryterium=="towarKasa"}<th>Kategoria</th>{/if}<th>{if $kryterium=="klientKasa" || $kryterium=="towarKasa"}Wartość{else}Liczba{/if}</th>
+			<th class=sorttable_nosort>#</th><th>{if $kryterium=="klientKasa"}Klient{else}Nazwa Towaru{/if}</th>{if $kryterium=="towarIlosc" || $kryterium=="towarKasa"}<th>Kategoria</th>{/if}<th>{if $kryterium=="klientKasa" || $kryterium=="towarKasa"}Wartość{else}Ilość{/if}</th>
 		</tr>
 	</thead>
 	<tbody>

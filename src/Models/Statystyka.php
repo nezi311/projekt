@@ -28,7 +28,6 @@ ON towarySprzedaz.idTowar=Towar.IdTowar
  WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza)
  GROUP BY NazwaTowaru
 ORDER BY `wartosc` asc');
-$stmt->bindValue(':fraza', '%'.$fraza.'%', PDO::PARAM_STR);
 }
 //pieniądze z towaru
 if($kryterium==="towarKasa")
@@ -38,7 +37,14 @@ FROM Towar
 INNER JOIN towarySprzedaz
 ON towarySprzedaz.idTowar=Towar.IdTowar
 	INNER JOIN zamowieniesprzedaz
+<<<<<<< HEAD
     ON towarySprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
+=======
+    ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
+    INNER JOIN kategoria
+    ON towar.IdKategoria=kategoria.IdKategoria
+ WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza)
+>>>>>>> 3d2ea1ec7f4a3703d5632fc0ff5d63f4fc710be7
     INNER JOIN Kategoria
     ON Towar.IdKategoria=Kategoria.IdKategoria
  WHERE DataZamowienia BETWEEN :dataOd AND :dataDo
@@ -52,10 +58,10 @@ $stmt = $this->pdo->prepare('SELECT CONCAT(Imie," ",Nazwisko," (",NIP,")") AS na
 FROM zamowieniesprzedaz
 INNER JOIN Klient
 ON zamowieniesprzedaz.IdKlient=Klient.IdKlient
-WHERE DataZamowienia BETWEEN :dataOd AND :dataDo
+WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (CONCAT(Imie," ",Nazwisko," (",NIP,")") LIKE :fraza)
 ORDER BY `wartosc` asc');
 }
-
+$stmt->bindValue(':fraza', '%'.$fraza.'%', PDO::PARAM_STR);
 $stmt->bindValue(':dataOd', $dataOd, PDO::PARAM_STR);
 $stmt->bindValue(':dataDo', $dataDo, PDO::PARAM_STR);
 $result = $stmt->execute();
