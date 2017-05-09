@@ -478,6 +478,32 @@ $stmt->execute();
   'NazwaFirmy'=>'Marmoladex');
 
 
+  $klienci[]=array('Imie'=>'Maciej',
+  'Nazwisko'=>'Marciniak',
+  'NIP'=>'0122456789',
+  'Miasto'=>'Ostrów Wlkp',
+  'Ulica'=>'Strzelecka',
+  'Dom'=>'5B',
+  'Lokal'=>'7',
+  'KodPocztowy'=>'63-400',
+  'Poczta'=>'Ostrów Wlkp',
+  'EMail'=>'maciux@wp.pl',
+  'NazwaFirmy'=>'Maciux i spółka');
+
+  $klienci[]=array('Imie'=>'Kamil',
+  'Nazwisko'=>'Kowalski',
+  'NIP'=>'0123875789',
+  'Miasto'=>'Kalisz',
+  'Ulica'=>'Radosna',
+  'Dom'=>'69',
+  'Lokal'=>'',
+  'KodPocztowy'=>'63-401',
+  'Poczta'=>'Kalisz',
+  'EMail'=>'dojlido123@wp.pl',
+  'NazwaFirmy'=>'Kamilonex');
+
+
+
   foreach($klienci as $klient)
   {
     $stmt = $pdo->prepare('INSERT INTO `Klient`(`Imie`,`Nazwisko`,`NIP`,`Miasto`,`Ulica`,`Dom`,`Lokal`,`KodPocztowy`,`Poczta`,`EMail`,`NazwaFirmy`) VALUES (:Imie,:Nazwisko,:NIP,:Miasto,:Ulica,:Dom,:Lokal,:KodPocztowy,:Poczta,:EMail,:Firma)');
@@ -559,12 +585,9 @@ $stmt->execute();
    `id` INT AUTO_INCREMENT,
    `IdTowar` int NOT NULL unique,
    `ilosc` int NOT NULL,
-   `klient` int NOT NULL,
    PRIMARY KEY (id),
    FOREIGN KEY (IdTowar)
-   REFERENCES Towar(IdTowar),
-   FOREIGN KEY (klient)
-   REFERENCES Klient(IdKlient)
+   REFERENCES Towar(IdTowar)
  );");
  /*************************************************/
  /*******************STATUS_ZAMÓWIENIA********************/

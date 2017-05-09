@@ -46,6 +46,13 @@
               if(isset($data['towary']))
                    $this->set('tablicaTowarow2', $data['towary']);
           }
+					$model = $this->getModel('Klient');
+					if($model)
+					{
+						$data = $model->getAll();
+						if(isset($data['Klienci']))
+							$this->set('Klienci', $data['Klienci']);
+					}
           if(isset($data['error']))
               $this->set('error', $data['error']);
           //przetworzenie szablonu do wyświetlania listy pracowników
