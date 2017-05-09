@@ -138,7 +138,18 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT IdTowar,CONCAT(Cena,' ','zł') AS Cena,KodTowaru,StanMagazynowyDysponowany,StawkaVat,NazwaTowaru,kategoria.NazwaKategorii AS Kategoria, JednostkaMiary.Nazwa AS JednostkaMiary FROM `Towar`INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria INNER JOIN JednostkaMiary on Towar.IdJednostkaMiary=JednostkaMiary.IdJednostkaMiary  WHERE freeze=1;");
+              $stmt = $this->pdo->query("SELECT IdTowar,
+																					CONCAT(Cena,' ','zł') AS Cena,
+																					KodTowaru,
+																					StanMagazynowyDysponowany,
+																					StawkaVat,
+																					NazwaTowaru,
+																					Kategoria.NazwaKategorii AS Kategoria,
+																					Jednostkamiary.Nazwa AS JednostkaMiary
+																					FROM `Towar`
+																					INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria
+																					INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary
+																					WHERE freeze=1");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -161,7 +172,18 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT IdTowar,CONCAT(Cena,' ','zł') AS Cena,KodTowaru,StanMagazynowyDysponowany,StawkaVat,NazwaTowaru,kategoria.NazwaKategorii AS Kategoria, JednostkaMiary.Nazwa AS JednostkaMiary FROM `Towar`INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria INNER JOIN JednostkaMiary on Towar.IdJednostkaMiary=JednostkaMiary.IdJednostkaMiary  WHERE freeze=0;");
+              $stmt = $this->pdo->query("SELECT IdTowar,
+																					CONCAT(Cena,' ','zł') AS Cena,
+																					KodTowaru,
+																					StanMagazynowyDysponowany,
+																					StawkaVat,
+																					NazwaTowaru,
+																					Kategoria.NazwaKategorii AS Kategoria,
+																					Jednostkamiary.Nazwa AS JednostkaMiary
+																					FROM `Towar`
+																					INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria
+																					INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary
+																					WHERE freeze=0");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
