@@ -8,6 +8,7 @@
           <script src="http://{$smarty.server.HTTP_HOST}{$subdir}js/jquery-ui.min.js"></script>
           <script src="http://{$smarty.server.HTTP_HOST}{$subdir}js/sorttable.js"></script>
           <script src="http://{$smarty.server.HTTP_HOST}{$subdir}js/stat.js"></script>
+          <script src="http://{$smarty.server.HTTP_HOST}{$subdir}js/collapsiderHide.js"></script>
           <!-- Bootstrap -->
           <script src="http://{$smarty.server.HTTP_HOST}{$subdir}vendor/twbs/bootstrap/dist/js/bootstrap.min.js" ></script>
       <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->

@@ -447,6 +447,7 @@ $stmt->execute();
     `KodPocztowy` varchar(6) NOT NULL,
     `Poczta` varchar(30) NOT NULL,
     `EMail` varchar(30) NOT NULL,
+    `NazwaFirmy` varchar(100) DEFAULT NULL,
     PRIMARY KEY (IdKlient)
   );");
   $stmt->execute();
@@ -461,12 +462,25 @@ $stmt->execute();
   'Lokal'=>'',
   'KodPocztowy'=>'63-400',
   'Poczta'=>'Ostrów Wlkp',
-  'EMail'=>'michal123@wp.pl');
+  'EMail'=>'michal123@wp.pl',
+  'NazwaFirmy'=>'Drutex');
+
+  $klienci[]=array('Imie'=>'Dawid',
+  'Nazwisko'=>'Kowalski',
+  'NIP'=>'654789713',
+  'Miasto'=>'Ostrów Wlkp',
+  'Ulica'=>'Parczewskiego',
+  'Dom'=>'31',
+  'Lokal'=>'22',
+  'KodPocztowy'=>'63-400',
+  'Poczta'=>'Ostrów Wlkp',
+  'EMail'=>'DKowal123@wp.pl',
+  'NazwaFirmy'=>'Marmoladex');
 
 
   foreach($klienci as $klient)
   {
-    $stmt = $pdo->prepare('INSERT INTO `Klient`(`Imie`,`Nazwisko`,`NIP`,`Miasto`,`Ulica`,`Dom`,`Lokal`,`KodPocztowy`,`Poczta`,`EMail`) VALUES (:Imie,:Nazwisko,:NIP,:Miasto,:Ulica,:Dom,:Lokal,:KodPocztowy,:Poczta,:EMail)');
+    $stmt = $pdo->prepare('INSERT INTO `Klient`(`Imie`,`Nazwisko`,`NIP`,`Miasto`,`Ulica`,`Dom`,`Lokal`,`KodPocztowy`,`Poczta`,`EMail`,`NazwaFirmy`) VALUES (:Imie,:Nazwisko,:NIP,:Miasto,:Ulica,:Dom,:Lokal,:KodPocztowy,:Poczta,:EMail,:Firma)');
     $stmt -> bindValue(':Imie',$klient['Imie'],PDO::PARAM_STR);
     $stmt -> bindValue(':Nazwisko',$klient['Nazwisko'],PDO::PARAM_STR);
     $stmt -> bindValue(':NIP',$klient['NIP'],PDO::PARAM_INT);
@@ -477,6 +491,7 @@ $stmt->execute();
     $stmt -> bindValue(':KodPocztowy',$klient['KodPocztowy'],PDO::PARAM_STR);
     $stmt -> bindValue(':Poczta',$klient['Poczta'],PDO::PARAM_STR);
     $stmt -> bindValue(':EMail',$klient['EMail'],PDO::PARAM_STR);
+    $stmt -> bindValue(':Firma',$klient['NazwaFirmy'],PDO::PARAM_STR);
     $wynik_zapytania = $stmt -> execute();
   }
   /*************************************************/

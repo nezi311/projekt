@@ -13,7 +13,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT `IdKlient`,`Imie`,`Nazwisko`,`NIP`,`Miasto`,`Ulica`,`Dom`,`Lokal`,`KodPocztowy`,`Poczta`,`EMail` FROM Klient");
+              $stmt = $this->pdo->query("SELECT `IdKlient`,`Imie`,`Nazwisko`,`NIP`,`Miasto`,`Ulica`,`Dom`,`Lokal`,`KodPocztowy`,`Poczta`,`EMail`,`NazwaFirmy` FROM Klient");
               $Klients = $stmt->fetchAll();
               $stmt->closeCursor();
               if($Klients && !empty($Klients))
@@ -25,7 +25,6 @@
           {
               $data['error'] .= 'Błąd odczytu danych z bazy! <br>';
           }
-					$data['error'] .= ' ';
 
       return $data;
     }
@@ -55,6 +54,49 @@
 					$data['error'] .= ' ';
 
       return $data;
+		}
+
+		public function search($phrase1,$phrase2,$phrase3,$phrase4,$phrase5)
+		{
+			$data = array();
+			$data['error']="";
+			if(!$this->pdo)
+					$data['error'] .= 'Połączenie z bazą nie powidoło się! <br>';
+			else
+					try
+					{
+							$stmt = $this->pdo->prepare("SELECT *
+																						FROM Klient
+																						WHERE Imie LIKE :phrase1
+																						AND Nazwisko LIKE :phrase2
+																						AND NIP LIKE :phrase3
+																						AND Miasto LIKE :phrase4
+																						AND NazwaFirmy LIKE :phrase5");
+							$phrase1='%'.$phrase1.'%';
+							$phrase2='%'.$phrase2.'%';
+							$phrase3='%'.$phrase3.'%';
+							$phrase4='%'.$phrase4.'%';
+							$phrase5='%'.$phrase5.'%';
+							$stmt -> bindValue(':phrase1',$phrase1,PDO::PARAM_STR);
+							$stmt -> bindValue(':phrase2',$phrase2,PDO::PARAM_STR);
+							$stmt -> bindValue(':phrase3',$phrase3,PDO::PARAM_STR);
+							$stmt -> bindValue(':phrase4',$phrase4,PDO::PARAM_STR);
+							$stmt -> bindValue(':phrase5',$phrase5,PDO::PARAM_STR);
+							$stmt -> execute();
+							$klient = $stmt -> fetchAll();
+							$liczba_wierszy = $stmt->rowCount();
+							$stmt->closeCursor();
+							if($klient && !empty($klient))
+									$data['Klienci'] = $klient;
+							else
+									$data['Klienci'] = array();
+
+					}
+					catch(\PDOException $e)
+					{
+							$data['error'] = 'Błąd odczytu danych z bazy! ';
+					}
+			return $data;
 		}
 
 
@@ -115,7 +157,7 @@
 
 
 		// ** Dawid Dominiak **//
-		public function insert($imie,$nazwisko,$NIP,$Miasto,$Ulica,$Dom,$Lokal,$KodPocztowy,$Poczta,$Email)
+		public function insert($imie,$nazwisko,$NIP,$Miasto,$Ulica,$Dom,$Lokal,$KodPocztowy,$Poczta,$Email,$Firma)
 		{
 			$blad=false;
 			$data = array();
@@ -174,7 +216,7 @@
 			{
 				try
 				{
-					$stmt = $this->pdo->prepare('INSERT INTO `Klient`(`Imie`,`Nazwisko`,`NIP`,`Miasto`,`Ulica`,`Dom`,`Lokal`,`KodPocztowy`,`Poczta`,`EMail`) VALUES (:Imie,:Nazwisko,:NIP,:Miasto,:Ulica,:Dom,:Lokal,:KodPocztowy,:Poczta,:EMail)');
+					$stmt = $this->pdo->prepare('INSERT INTO `Klient`(`Imie`,`Nazwisko`,`NIP`,`Miasto`,`Ulica`,`Dom`,`Lokal`,`KodPocztowy`,`Poczta`,`EMail`,`NazwaFirmy`) VALUES (:Imie,:Nazwisko,:NIP,:Miasto,:Ulica,:Dom,:Lokal,:KodPocztowy,:Poczta,:EMail,:Firma)');
 			    $stmt -> bindValue(':Imie',$imie,PDO::PARAM_STR);
 			    $stmt -> bindValue(':Nazwisko',$nazwisko,PDO::PARAM_STR);
 			    $stmt -> bindValue(':NIP',$NIP,PDO::PARAM_INT);
@@ -185,6 +227,7 @@
 			    $stmt -> bindValue(':KodPocztowy',$KodPocztowy,PDO::PARAM_STR);
 			    $stmt -> bindValue(':Poczta',$Poczta,PDO::PARAM_STR);
 			    $stmt -> bindValue(':EMail',$Email,PDO::PARAM_STR);
+					$stmt -> bindValue(':Firma',$Firma,PDO::PARAM_STR);
 			    $wynik_zapytania = $stmt -> execute();
 				}
 				catch(\PDOException $e)
@@ -198,7 +241,7 @@
 
 
 		// ** Dawid Dominiak **//
-		public function update($id,$imie,$nazwisko,$NIP,$Miasto,$Ulica,$Dom,$Lokal,$KodPocztowy,$Poczta,$Email)
+		public function update($id,$imie,$nazwisko,$NIP,$Miasto,$Ulica,$Dom,$Lokal,$KodPocztowy,$Poczta,$Email,$firma)
 		{
 			$blad=false;
 			$data = array();
@@ -225,17 +268,7 @@
 			}
 			if($NIP == null || $NIP == "")
 			{
-				$data['error'] .= 'Nieokreślony NIP! <br>';
-				$blad=true;
-			}
-			if($Miasto == null || $Miasto == "")
-			{
-				$data['error'] .= 'Nieokreślone miasto! <br>';
-				$blad=true;
-			}
-			if($Ulica == null || $Ulica == "")
-			{
-				$data['error'] .= 'Nieokreślona ulica! <br>';
+				$data['error'] .='Nieokreślony NIP! <br>';
 				$blad=true;
 			}
 			if($Dom == null || $Dom == "")
@@ -258,13 +291,13 @@
 				$data['error'] .= 'Nieokreślony Email! <br>';
 				$blad=true;
 			}
-				if(!$blad)
-				{
+			if(!$blad)
+			{
 					try
 					{
 						//echo("$id,$imie,$nazwisko,$NIP,$Miasto,$Ulica,$Dom,$Lokal,$KodPocztowy,$Poczta,$Email");
 						//$stmt = $this->pdo->prepare('UPDATE Klient SET `Imie`=:Imie, `Nazwisko`=:Nazwisko, `NIP`=:NIP, `Miasto`=:Miasto, `Ulica`=:Uluca, `Dom`=:Dom, `Lokal`=:Lokal, `KodPocztowy`=:KodPocztowy, `Poczta`=:Poczta, `EMail`=:EMail WHERE `IdKlient`=:id');
-						$stmt = $this->pdo->prepare('UPDATE `Klient` SET `Imie`=:imie,`Nazwisko`=:nazwisko,`NIP`=:nIP,`Miasto`=:miasto,`Ulica`=:ulica,`Dom`=:dom,`Lokal`=:lokal,`KodPocztowy`=:kodPocztowy,`Poczta`=:poczta,`EMail`=:eMail WHERE `IdKlient`=:id');
+						$stmt = $this->pdo->prepare('UPDATE `Klient` SET `Imie`=:imie,`Nazwisko`=:nazwisko,`NIP`=:nIP,`Miasto`=:miasto,`Ulica`=:ulica,`Dom`=:dom,`Lokal`=:lokal,`KodPocztowy`=:kodPocztowy,`Poczta`=:poczta,`EMail`=:eMail,`NazwaFirmy`=:firma WHERE `IdKlient`=:id');
 
 
 						$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
@@ -278,6 +311,7 @@
 				    $stmt -> bindValue(':kodPocztowy',$KodPocztowy,PDO::PARAM_STR);
 				    $stmt -> bindValue(':poczta',$Poczta,PDO::PARAM_STR);
 				    $stmt -> bindValue(':eMail',$Email,PDO::PARAM_STR);
+						$stmt -> bindValue(':firma',$firma,PDO::PARAM_STR);
 						$wynik_zapytania = $stmt -> execute();
 					}
 					catch(\PDOException $e)

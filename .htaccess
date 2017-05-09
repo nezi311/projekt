@@ -25,6 +25,8 @@ RewriteRule ^Towar/insert/?$ index.php?controller=Towar&action=insert [L]
 RewriteRule ^Towar/freeze/?$ index.php?controller=Towar&action=freezed [L]
 RewriteRule ^Towar/delete/(\d+)/?$ index.php?controller=Towar&action=delete&id=$1 [L]
 RewriteRule ^Towar/showone/(\d+)/?$ index.php?controller=Towar&action=showone&id=$1 [L]
+RewriteRule ^Towar/freeze/(\d+)/?$ index.php?controller=Towar&action=freeze&id=$1 [L]
+RewriteRule ^Towar/unfreeze/(\d+)/?$ index.php?controller=Towar&action=unfreeze&id=$1 [L]
 RewriteRule ^Szukaj/?$ index.php?controller=Towar&action=search [L]
 RewriteRule ^Towar/koszyk/(\d+)/?$ index.php?controller=Towar&action=koszyk&id=$1 [L]
 
@@ -41,6 +43,8 @@ RewriteRule ^Kategoria/Wstaw/?$ index.php?controller=Kategoria&action=insert [L]
 RewriteRule ^Klient/?$ index.php?controller=Klient [L]
 RewriteRule ^Klient/update/?$ index.php?controller=Klient&action=update [L]
 RewriteRule ^Klient/insert/?$ index.php?controller=Klient&action=insert [L]
+RewriteRule ^Klient/szukaj/?$ index.php?controller=Klient&action=szukaj [L]
+
 
 RewriteRule ^Statystyka/?$ index.php?controller=Statystyka [L]
 

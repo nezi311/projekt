@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-25 18:25:39
-  from "C:\xampp\htdocs\pz\templates\header.html.php" */
+/* Smarty version 3.1.31, created on 2017-05-08 23:43:17
+  from "/opt/lampp/htdocs/PZ/templates/header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58ff7883753d29_50326023',
+  'unifunc' => 'content_5910e675b7e234_42338616',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '3461e633281582e1888c85ab7ee8e90a8d174c19' => 
+    '66e378da416daab7ad10377897dbd6f79fbd3e8a' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\pz\\templates\\header.html.php',
-      1 => 1493134540,
+      0 => '/opt/lampp/htdocs/PZ/templates/header.html.php',
+      1 => 1494279793,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58ff7883753d29_50326023 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5910e675b7e234_42338616 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -49,6 +49,11 @@ js/sorttable.js"><?php echo '</script'; ?>
  src="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 js/stat.js"><?php echo '</script'; ?>
+>
+          <?php echo '<script'; ?>
+ src="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+js/collapsiderHide.js"><?php echo '</script'; ?>
 >
           <!-- Bootstrap -->
           <?php echo '<script'; ?>

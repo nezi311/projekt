@@ -138,7 +138,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT * FROM `Towar` WHERE freeze=1;");
+              $stmt = $this->pdo->query("SELECT IdTowar,CONCAT(Cena,' ','zł') AS Cena,KodTowaru,StanMagazynowyDysponowany,StawkaVat,NazwaTowaru,kategoria.NazwaKategorii AS Kategoria, JednostkaMiary.Nazwa AS JednostkaMiary FROM `Towar`INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria INNER JOIN JednostkaMiary on Towar.IdJednostkaMiary=JednostkaMiary.IdJednostkaMiary  WHERE freeze=1;");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -161,7 +161,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT * FROM Towar WHERE freeze=0;");
+              $stmt = $this->pdo->query("SELECT IdTowar,CONCAT(Cena,' ','zł') AS Cena,KodTowaru,StanMagazynowyDysponowany,StawkaVat,NazwaTowaru,kategoria.NazwaKategorii AS Kategoria, JednostkaMiary.Nazwa AS JednostkaMiary FROM `Towar`INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria INNER JOIN JednostkaMiary on Towar.IdJednostkaMiary=JednostkaMiary.IdJednostkaMiary  WHERE freeze=0;");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -239,6 +239,14 @@
 				else
 					try
 					{
+						$stmt2 = $this->pdo->prepare('SELECT IdTowar FROM `koszyk` where id=:id');
+						$stmt2 -> bindValue(':id',$id,PDO::PARAM_INT);
+						$stmt2 -> execute();
+						$data = $stmt2 -> fetchAll();
+						foreach($data as $result)
+						{
+							$idt = $result['IdTowar'];
+						}
 						$stmt = $this->pdo->prepare('DELETE FROM `Towar` WHERE IdTowar=:id');
 				    $stmt -> bindValue(':id',$id,PDO::PARAM_INT);
 				    $wynik_zapytania = $stmt -> execute();
@@ -247,6 +255,7 @@
 					{
 						$data['error'] =$data['error'].'<br> Błąd wykonywania operacji usunięcia';
 					}
+
 				return $data;
 			}
 
@@ -265,13 +274,25 @@
 							$stmt = $this->pdo->prepare('INSERT INTO towarysprzedaz (IdTowar, ilosc, klient, cena, IdZamowienieSprzedaz) select koszyk.IdTowar, ilosc, klient, (Cena+(Cena*StawkaVat/100)), (SELECT MAX(IdZamowienieSprzedaz) FROM zamowieniesprzedaz) FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar');
 							$stmt -> execute();
 
-							$stmt2 = $this->pdo->prepare('SELECT IdTowar FROM koszyk');
+							$stmt2 = $this->pdo->prepare("truncate table koszyk");
+							$stmt2 -> execute();
+
+							setcookie("ilosci", "", time()-3600,'/');
+							setcookie("idtowary", "", time()-3600,'/');
+/*
+							$stmt2 = $this->pdo->prepare('SELECT IdTowar, ilosc FROM koszyk');
 							$stmt2 -> execute();
 							$data = $stmt2 -> fetchAll();
 							foreach($data as $result)
 							{
-								//echo $result['IdTowar'];
-							}
+								echo 'id'.$result['IdTowar'].' ilosc'.$result['ilosc'];
+								echo '<br>';
+								$stmt2 = $this->pdo->prepare("SELECT ilosc from koszyk where IdTowar = '".$result['IdTowar']."'");
+								$quantity = $stmt2 -> execute();
+
+								$stmt2 = $this->pdo->prepare("update towar set towar.StanMagazynowyDysponowany = towar.StanMagazynowyDysponowany-'".$result['ilosc']."' where IdTowar = '".$result['IdTowar']."'");
+								$stmt2 -> execute();
+							}*/
 						}
 						catch(\PDOException $e)
 						{
@@ -304,20 +325,58 @@
 							$stan = $result['StanMagazynowyDysponowany'];
 						}
 
-						$stmt2 = $this->pdo->prepare('SELECT ilosc FROM `koszyk` where id=:id');
+						$stmt2 = $this->pdo->prepare('SELECT IdTowar, ilosc FROM `koszyk` where id=:id');
 						$stmt2 -> bindValue(':id',$id,PDO::PARAM_INT);
 						$ilosc = $stmt2 -> execute();
 						$data = $stmt2 -> fetchAll();
 						foreach($data as $result)
 						{
 							$ilosc = $result['ilosc'];
+							$idt = $result['IdTowar'];
 						}
 
-						if($ilosc==0 || $ilosc<$stan)
+						if($stan>0)
 						{
+							echo $id.'<br>towary: ';
+							var_dump($_COOKIE['idtowary']);
 							$stmt = $this->pdo->prepare('UPDATE koszyk SET ilosc=ilosc+1 WHERE id=:id');
 							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
 							$wynik_zapytania = $stmt -> execute();
+
+							$stmt2 = $this->pdo->prepare("update towar set towar.StanMagazynowyDysponowany = towar.StanMagazynowyDysponowany-1 where IdTowar = $idt");
+							$stmt2 -> execute();
+
+							$cookie2 = $_COOKIE['idtowary'];
+							$cookie2 = stripslashes($cookie2);
+							$ids = json_decode($cookie2, true);
+
+							if(($k = array_search($idt, $ids)) === false)
+							{
+							//  echo 'nie ma';
+							}
+							else
+							{
+							  //echo 'jest';
+							  $indeks = array_search($idt, $ids);
+							}
+
+							$cookie = $_COOKIE['ilosci'];
+							$cookie = stripslashes($cookie);
+							$quantity = json_decode($cookie, true);
+							echo '<br>';
+							if(($k = array_search($idt, $ids)) === false){}
+							else
+							{
+								echo '<br>ilosci ';
+								var_dump($_COOKIE['ilosci']);
+								$ilosc=$ilosc+1;
+							  $quantity[$indeks]=$ilosc;
+							}
+							$dane = json_encode($quantity);
+							setcookie('ilosci', $dane,time()+60*60*24*30,'/');
+							$_COOKIE['ilosci'] = $dane;
+							echo '<br>';
+							var_dump($_COOKIE['ilosci']);
 						}
 					}
 					catch(\PDOException $e)
@@ -329,32 +388,78 @@
 		}
 
 		public function iloscMinus($id)
-		{
+		{/*
+			var_dump($_COOKIE['idtowary']);
+			echo '<br>';
+			var_dump($_COOKIE['ilosci']);
+			echo '<br>';*/
 			$data = array();
 				if($id === NULL || $id === "")
 					$data['error'] = 'Nieokreślone ID!';
 				else
 					try
 					{
-						$stmt2 = $this->pdo->prepare('SELECT ilosc FROM `koszyk` where id=:id');
+						$stmt2 = $this->pdo->prepare('SELECT IdTowar, ilosc FROM `koszyk` where id=:id');
 						$stmt2 -> bindValue(':id',$id,PDO::PARAM_INT);
 						$ilosc = $stmt2 -> execute();
 						$data = $stmt2 -> fetchAll();
 						foreach($data as $result)
 						{
 							$ilosc = $result['ilosc'];
+							$idt = $result['IdTowar'];
 						}
 						if($ilosc>1)
 						{
+							echo $id.'<br>towary: ';
+							var_dump($_COOKIE['idtowary']);
 							$stmt = $this->pdo->prepare('UPDATE koszyk SET ilosc=ilosc-1 WHERE id=:id');
 							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
 							$wynik_zapytania = $stmt -> execute();
+
+							$stmt2 = $this->pdo->prepare("update towar set towar.StanMagazynowyDysponowany = towar.StanMagazynowyDysponowany+1 where IdTowar = $idt");
+							$stmt2 -> execute();
+
+							$cookie2 = $_COOKIE['idtowary'];
+							$cookie2 = stripslashes($cookie2);
+							$ids = json_decode($cookie2, true);
+
+							if(($k = array_search($idt, $ids)) === false)
+							{
+							//  echo 'nie ma';
+							}
+							else
+							{
+							  //echo 'jest';
+							  $indeks = array_search($idt, $ids);
+							}
+
+							$cookie = $_COOKIE['ilosci'];
+							$cookie = stripslashes($cookie);
+							$quantity = json_decode($cookie, true);
+							echo '<br>';
+							if(($k = array_search($idt, $ids)) === false){}
+							else
+							{
+								echo '<br>ilosci ';
+								var_dump($_COOKIE['ilosci']);
+								$ilosc=$ilosc-1;
+							  $quantity[$indeks]=$ilosc;
+							}
+							$dane = json_encode($quantity);
+							setcookie('ilosci', $dane,time()+60*60*24*30,'/');
+							$_COOKIE['ilosci'] = $dane;
+							echo '<br>';
+							var_dump($_COOKIE['ilosci']);
 						}
 					}
 					catch(\PDOException $e)
 					{
 						$data['error'] =$data['error'].'<br> Błąd wykonywania operacji usunięcia';
 					}
+					/*var_dump($_COOKIE['idtowary']);
+					echo '<br>';
+					var_dump($_COOKIE['ilosci']);
+					echo '<br>';*/
 				return $data;
 
 		}
@@ -366,9 +471,59 @@
 				else
 					try
 					{
+						$stmt2 = $this->pdo->prepare('SELECT IdTowar, ilosc FROM `koszyk` where id=:id');
+						$stmt2 -> bindValue(':id',$id,PDO::PARAM_INT);
+						$stmt2 -> execute();
+						$data = $stmt2 -> fetchAll();
+						foreach($data as $result)
+						{
+							$idt = $result['IdTowar'];
+							$ilosc = $result['ilosc'];
+						}
+						$stmt2 = $this->pdo->prepare("update towar set towar.StanMagazynowyDysponowany = towar.StanMagazynowyDysponowany+$ilosc where IdTowar = $idt");
+						$stmt2 -> execute();
+
 						$stmt = $this->pdo->prepare('DELETE FROM `koszyk` WHERE id=:id');
 				    $stmt -> bindValue(':id',$id,PDO::PARAM_INT);
 				    $wynik_zapytania = $stmt -> execute();
+
+						var_dump($_COOKIE['idtowary']);
+						echo '<br>';
+						var_dump($_COOKIE['ilosci']);
+						echo '<br>';
+						$cookie2 = $_COOKIE['idtowary'];
+						$cookie2 = stripslashes($cookie2);
+						$ids = json_decode($cookie2, true);
+
+						if(($k = array_search($idt, $ids)) === false)
+						{
+						//  echo 'nie ma';
+						}
+						else
+						{
+							//echo 'jest';
+							$indeks = array_search($idt, $ids);
+							//echo $indeks;
+							//echo '<br>';
+							unset($ids[$indeks]);
+						}
+						$dane = json_encode($ids);
+						setcookie('idtowary', $dane,time()+60*60*24*30,'/');
+						$_COOKIE['idtowary'] = $dane;
+
+						$cookie = $_COOKIE['ilosci'];
+						$cookie = stripslashes($cookie);
+						$quantity = json_decode($cookie, true);
+
+							unset($quantity[$indeks]);
+
+						$dane = json_encode($quantity);
+						setcookie('ilosci', $dane,time()+60*60*24*30,'/');
+						$_COOKIE['ilosci'] = $dane;
+						var_dump($_COOKIE['idtowary']);
+						echo '<br>';
+						var_dump($_COOKIE['ilosci']);
+						echo '<br>';
 					}
 					catch(\PDOException $e)
 					{
@@ -396,43 +551,104 @@
 			{
 				if(!isset($_COOKIE['idtowary']))
 				{
-				  echo 'nie ma ciaskeczka';
 				  $ids = array();
+					$ids[] = $IdTowar;
+					//echo '<br>id: ';
+					//var_dump($ids);
 				  $dane = json_encode($ids);
-				  setcookie('idtowary', $dane);
+				  setcookie('idtowary', $dane,time()+60*60*24*30,'/');
 				  $_COOKIE['idtowary'] = $dane;
+					//var_dump($_COOKIE['idtowary']);
+					if(!isset($_COOKIE['ilosci']))
+					{
+						$quantity = array();
+						$quantity[] = $ilosc;
+						//echo '<br>ilosc: ';
+						//var_dump($quantity);
+						$dane = json_encode($quantity);
+						setcookie('ilosci', $dane,time()+60*60*24*30,'/');
+						$_COOKIE['ilosci'] = $dane;
+						//var_dump($_COOKIE['ilosci']);
+					}
+					else
+					{
+						$cookie = $_COOKIE['ilosci'];
+						$cookie = stripslashes($cookie);
+						$quantity = json_decode($cookie, true);
+						$quantity[] = $ilosc;
+						//echo '<br>ilosc: ';
+						//var_dump($quantity);
+						$dane = json_encode($quantity);
+						setcookie('ilosci', $dane,time()+60*60*24*30,'/');
+						$_COOKIE['ilosci'] = $dane;
+						//var_dump($_COOKIE['ilosci']);
+					}
 				}
 				else
 				{
 				  $cookie = $_COOKIE['idtowary'];
 				  $cookie = stripslashes($cookie);
-				  $towar = json_decode($cookie, true);
-				  $towar[] = $IdTowar;
-				  $dane = json_encode($towar);
-				  setcookie('idtowary', $dane);
-				  $_COOKIE['idtowary'] = $dane;
-				}
-				if(!isset($_COOKIE['ilosci']))
-				{
-				  echo 'nie ma ciaskeczka';
-				  $ids = array();
-				  $dane = json_encode($ids);
-				  setcookie('ilosci', $dane);
-				  $_COOKIE['ilosci'] = $dane;
-				}
-				else
-				{
-				  $cookie = $_COOKIE['ilosci'];
-				  $cookie = stripslashes($cookie);
-				  $towar = json_decode($cookie, true);
-				  $towar[] = $ilosc;
-				  $dane = json_encode($towar);
-				  setcookie('ilosci', $dane);
-				  $_COOKIE['ilosci'] = $dane;
-				}
+				  $ids = json_decode($cookie, true);
+					if (!in_array($IdTowar, $ids))
+					{
+						$ids[] = $IdTowar;
+						//echo '<br>id: ';
+						//var_dump($ids);
+						$dane = json_encode($ids);
+						setcookie('idtowary', $dane,time()+60*60*24*30,'/');
+						$_COOKIE['idtowary'] = $dane;
+						//var_dump($_COOKIE['idtowary']);
+						if(!isset($_COOKIE['ilosci']))
+						{
+							$quantity = array();
+							$quantity[] = $ilosc;
+							//echo '<br>ilosc: ';
+							//var_dump($quantity);
+							$dane = json_encode($quantity);
+							setcookie('ilosci', $dane,time()+60*60*24*30,'/');
+							$_COOKIE['ilosci'] = $dane;
+							//var_dump($_COOKIE['ilosci']);
+						}
+						else
+						{
+							$cookie = $_COOKIE['ilosci'];
+							$cookie = stripslashes($cookie);
+							$quantity = json_decode($cookie, true);
+							$quantity[] = $ilosc;
+							//echo '<br>ilosc: ';
+							//var_dump($quantity);
+							$dane = json_encode($quantity);
+							setcookie('ilosci', $dane,time()+60*60*24*30,'/');
+							$_COOKIE['ilosci'] = $dane;
+							//var_dump($_COOKIE['ilosci']);
+						}
+					}
+				}/*
+				echo '<br>id: ';
+				var_dump($_COOKIE['idtowary']);
+				echo '<br>ilosci: ';
+				var_dump($_COOKIE['ilosci']);*/
+				//echo $IdTowar;
+				//echo $ilosc;
+				$cookie = $_COOKIE['idtowary'];
+				$cookie = stripslashes($cookie);
+				$ids = json_decode($cookie, true);
 
+				$cookie = $_COOKIE['ilosci'];
+				$cookie = stripslashes($cookie);
+				$quantity = json_decode($cookie, true);
+
+				foreach (array_combine($ids, $quantity) as $towar => $ile)
+				{
+						echo 'towar ';
+						echo 'id: '.$towar;
+				    echo ',';
+				    echo 'ilosc: '.$ile;
+				    echo '<br>';
+				}
 					try
           {
+
 							$stmt2 = $this->pdo->prepare('select * from `koszyk` where IdTowar=:IdTowar');
 							$stmt2 -> bindValue(':IdTowar',$IdTowar,PDO::PARAM_INT);
 							$czyJuzJest = $stmt2 -> execute();
@@ -444,6 +660,9 @@
 								$stmt -> bindValue(':IdTowar',$IdTowar,PDO::PARAM_INT);
 								$stmt -> bindValue(':ilosc',$ilosc,PDO::PARAM_INT);
 								$wynik_zapytania = $stmt -> execute();
+
+								$stmt2 = $this->pdo->prepare("update towar set towar.StanMagazynowyDysponowany = towar.StanMagazynowyDysponowany-$ilosc where IdTowar = $IdTowar");
+								$stmt2 -> execute();
 							}
           }
           catch(\PDOException $e)
@@ -456,16 +675,51 @@
       return $data;
     	}
 
-		public function Zamroz()
-		{
+			public function freeze($id)
+			{
+					$data = array();
+						try
+						{
+							$stmt = $this->pdo->prepare('UPDATE `Towar` SET `Freeze`=:Freeze WHERE `IdTowar`=:id');
+							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
+							$stmt -> bindValue(':Freeze',1,PDO::PARAM_INT);
+							$wynik_zapytania = $stmt -> execute();
+						}
+						catch(\PDOException $e)
+						{
+							$data['error'].='Błąd zapisu danych do bazy! <br>';
+							return $data;
+						}
 
 		}
 
-		public function odmroz($id)
-		{
+			public function unfreeze($id)
+			{
+				$blad=false;
+				$data = array();
+				$data['error']="";
+				if($id === null || $id === "")
+				{
+					$data['error'] .= 'Nieokreślone id! <br>';
+					$blad=true;
+				}
+					if(!$blad)
+					{
+						try
+						{
+							$stmt = $this->pdo->prepare('UPDATE `towar` SET `Freeze`=:Freeze WHERE `IdTowar`=:id');
+							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
+							$stmt -> bindValue(':Freeze',0,PDO::PARAM_INT);
+							$wynik_zapytania = $stmt -> execute();
+						}
+						catch(\PDOException $e)
+						{
+							$data['error'].='Błąd zapisu danych do bazy! <br>';
+							return $data;
+						}
+			}
 
-		}
 
   }
-
+}
 ?>

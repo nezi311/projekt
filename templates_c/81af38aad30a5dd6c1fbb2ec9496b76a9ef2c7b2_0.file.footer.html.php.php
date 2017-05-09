@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-25 18:25:39
-  from "C:\xampp\htdocs\pz\templates\footer.html.php" */
+/* Smarty version 3.1.31, created on 2017-04-25 18:32:33
+  from "/opt/lampp/htdocs/PZ/templates/footer.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58ff7883b00935_61050534',
+  'unifunc' => 'content_58ff7a2147b2e1_25446053',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '04da7b6de8f4d5ab7bf1647da67fd35c2a2e108a' => 
+    '81af38aad30a5dd6c1fbb2ec9496b76a9ef2c7b2' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\pz\\templates\\footer.html.php',
-      1 => 1492974296,
+      0 => '/opt/lampp/htdocs/PZ/templates/footer.html.php',
+      1 => 1491915414,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58ff7883b00935_61050534 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58ff7a2147b2e1_25446053 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
       </div>
     </div>
