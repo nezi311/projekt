@@ -31,10 +31,12 @@
 </table>
 <b>Klient</b>
 <form action="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/zrealizuj" method="post" style='width:20%;'>
-	<select name="klient" class="form-control">
+	<input list="customers" name="klient">
+  <datalist id="customers">
 	{foreach $Klienci as $klient}
 	<option value="{$klient['IdKlient']}">{$klient['Imie']} {$klient['Nazwisko']}</option>
 	{/foreach}
+	</datalist>
 </select>
 <br>
 	<input type='hidden' name='suma' value={$suma}>
