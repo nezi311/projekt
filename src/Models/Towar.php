@@ -259,7 +259,7 @@
 				return $data;
 			}
 
-			public function zrealizuj($suma)
+			public function zrealizuj($suma, $klient)
 			{
 				$data = array();
 					if($suma === NULL || $suma === "")
@@ -267,13 +267,15 @@
 					else
 						try
 						{
-							$stmt = $this->pdo->prepare('INSERT INTO `zamowieniesprzedaz`(`DataZamowienia`,`Wartosc`,`IdStanZamowienia`,`IdKlient`) VALUES (CURDATE(),:suma,3,1)');
+							$stmt = $this->pdo->prepare('INSERT INTO `zamowieniesprzedaz`(`DataZamowienia`,`Wartosc`,`IdStanZamowienia`,`IdKlient`) VALUES (CURDATE(),:suma,3,:klient)');
 					    $stmt -> bindValue(':suma',$suma,PDO::PARAM_INT);
+							$stmt -> bindValue(':klient',$klient,PDO::PARAM_INT);
 							$stmt -> execute();
 
-							$stmt = $this->pdo->prepare('INSERT INTO towarysprzedaz (IdTowar, ilosc, klient, cena, IdZamowienieSprzedaz) select koszyk.IdTowar, ilosc, klient, (Cena+(Cena*StawkaVat/100)), (SELECT MAX(IdZamowienieSprzedaz) FROM zamowieniesprzedaz) FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar');
+							$stmt = $this->pdo->prepare('INSERT INTO towarysprzedaz (IdTowar, ilosc, klient, cena, IdZamowienieSprzedaz) select koszyk.IdTowar, ilosc, :klient, (Cena+(Cena*StawkaVat/100)), (SELECT MAX(IdZamowienieSprzedaz) FROM zamowieniesprzedaz) FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar');
+							$stmt -> bindValue(':klient',$klient,PDO::PARAM_INT);
 							$stmt -> execute();
-
+							echo 'cos';
 							$stmt2 = $this->pdo->prepare("truncate table koszyk");
 							$stmt2 -> execute();
 
@@ -645,6 +647,8 @@
 				    echo ',';
 				    echo 'ilosc: '.$ile;
 				    echo '<br>';
+						echo 'login: '.$_SESSION['login'];
+						echo '<br>';
 				}
 					try
           {
@@ -654,9 +658,11 @@
 							$czyJuzJest = $stmt2 -> execute();
 							//var_dump($stmt2);
 							$i = $stmt2->fetchColumn();
+							$klient = $_SESSION['login'];
+
 							if($i == null)
 							{
-								$stmt = $this->pdo->prepare('insert into `koszyk`(`IdTowar`,`ilosc`,`klient`) values(:IdTowar,:ilosc,1);');
+								$stmt = $this->pdo->prepare('insert into `koszyk`(`IdTowar`,`ilosc`) values(:IdTowar,:ilosc);');
 								$stmt -> bindValue(':IdTowar',$IdTowar,PDO::PARAM_INT);
 								$stmt -> bindValue(':ilosc',$ilosc,PDO::PARAM_INT);
 								$wynik_zapytania = $stmt -> execute();
@@ -667,7 +673,8 @@
           }
           catch(\PDOException $e)
           {
-              $data['error'] = 'Błąd odczytu danych z bazy! ';
+              $data['error'] = 'Błąd odczytu danych z bazy! '.$e;
+							d($data['error']);
 							return $data;
           }
 				}

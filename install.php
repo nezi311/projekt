@@ -462,6 +462,26 @@ $stmt->execute();
   'KodPocztowy'=>'63-400',
   'Poczta'=>'Ostrów Wlkp',
   'EMail'=>'michal123@wp.pl');
+  $klienci[]=array('Imie'=>'Maciej',
+  'Nazwisko'=>'Marciniak',
+  'NIP'=>'0122456789',
+  'Miasto'=>'Ostrów Wlkp',
+  'Ulica'=>'Strzelecka',
+  'Dom'=>'5B',
+  'Lokal'=>'7',
+  'KodPocztowy'=>'63-400',
+  'Poczta'=>'Ostrów Wlkp',
+  'EMail'=>'maciux@wp.pl');
+  $klienci[]=array('Imie'=>'Kamil',
+  'Nazwisko'=>'Kowalski',
+  'NIP'=>'0123875789',
+  'Miasto'=>'Kalisz',
+  'Ulica'=>'Radosna',
+  'Dom'=>'69',
+  'Lokal'=>'',
+  'KodPocztowy'=>'63-401',
+  'Poczta'=>'Kalisz',
+  'EMail'=>'dojlido123@wp.pl');
 
 
   foreach($klienci as $klient)
@@ -544,12 +564,9 @@ $stmt->execute();
    `id` INT AUTO_INCREMENT,
    `IdTowar` int NOT NULL unique,
    `ilosc` int NOT NULL,
-   `klient` int NOT NULL,
    PRIMARY KEY (id),
    FOREIGN KEY (IdTowar)
-   REFERENCES Towar(IdTowar),
-   FOREIGN KEY (klient)
-   REFERENCES Klient(IdKlient)
+   REFERENCES Towar(IdTowar)
  );");
  /*************************************************/
  /*******************STATUS_ZAMÓWIENIA********************/

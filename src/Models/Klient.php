@@ -13,7 +13,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT `IdKlient`,`Imie`,`Nazwisko`,`NIP`,`Miasto`,`Ulica`,`Dom`,`Lokal`,`KodPocztowy`,`Poczta`,`EMail` FROM Klient");
+              $stmt = $this->pdo->query("SELECT `IdKlient`,`Imie`,`Nazwisko` FROM Klient");
               $Klients = $stmt->fetchAll();
               $stmt->closeCursor();
               if($Klients && !empty($Klients))

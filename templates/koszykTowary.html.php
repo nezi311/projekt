@@ -4,13 +4,14 @@
 	<h2>Towary w koszyku</h2>
 </div>
 {$suma=0}
+{if isset($tablicaTowarow2) and $tablicaTowarow2 != null}
 <table class="table" style='width:50%;'>
   <thead>
     <tr>
       <th>Nazwa Towaru</th><th>Kod Towaru</th><th>Cena</th><th>Stawka Vat</th><th>Ilość</th><th>Cena częściowa</th><th>Usuń</th>
     </tr>
   </thead>
-{if isset($tablicaTowarow2)}
+
   {foreach $tablicaTowarow2 as $towar}
   <tr>
     <td>{$towar['NazwaTowaru']}</td>
@@ -27,12 +28,21 @@
 		<td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/usun/{$towar['Id']}" role="button"><span class="glyphicon glyphicon-remove"></span></a></td>
   </tr>
   {/foreach}
-{/if}
 </table>
-<form action="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/zrealizuj" method="post">
+<b>Klient</b>
+<form action="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/zrealizuj" method="post" style='width:20%;'>
+	<select name="klient" class="form-control">
+	{foreach $Klienci as $klient}
+	<option value="{$klient['IdKlient']}">{$klient['Imie']} {$klient['Nazwisko']}</option>
+	{/foreach}
+</select>
+<br>
 	<input type='hidden' name='suma' value={$suma}>
 	<input type='submit' name='submit' value=Zamów>
 </form>
 Suma: {$suma}
+{else}
+<h2>Brak towarów do zamówienia.</h2>
+{/if}
 
 {include file="footer.html.php"}
