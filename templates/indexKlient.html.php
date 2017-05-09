@@ -221,13 +221,12 @@
 <!-- tabela z kategoriami -->
 <!-- dyrektywa ng-init inicjalizuje tabele -->
 <br>
+
 <div class="container">
   <div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-
-			{if isset($tablicaKlienci)}
-				{foreach $tablicaKlienci as $klient}
-
+		{if isset($tablicaKlienci)}
+			{foreach $tablicaKlienci as $klient}
+    		<div class="panel panel-default">
 			      <div class="panel-heading">
 			        <h4 class="panel-title">
 			          <a data-toggle="collapse" data-parent="#accordion" href="#collapse{$klient['IdKlient']}">
@@ -425,9 +424,9 @@
 								</ul>
 							</div>
 			      </div>
-				{/foreach}
-			{/if}
-    </div>
+    		</div>
+			{/foreach}
+		{/if}
   </div>
 </div>
 
