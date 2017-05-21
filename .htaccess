@@ -30,6 +30,7 @@ RewriteRule ^Towar/unfreeze/(\d+)/?$ index.php?controller=Towar&action=unfreeze&
 RewriteRule ^Szukaj/?$ index.php?controller=Towar&action=search [L]
 RewriteRule ^Towar/koszyk/(\d+)/?$ index.php?controller=Towar&action=koszyk&id=$1 [L]
 
+RewriteRule ^Zamowienia/?$ index.php?controller=Zamowienia [L]
 
 RewriteRule ^Zamowienie/?$ index.php?controller=Zamowienie [L]
 RewriteRule ^Zamowienie/add/?$ index.php?controller=Zamowienie&action=add [L]

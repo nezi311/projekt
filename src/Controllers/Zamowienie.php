@@ -90,7 +90,12 @@ class Zamowienie extends Controller
       else
         $this->redirect('index/');
     }
-
+    public function listaZamowien(){
+			//tworzy obiekt widoku i zleca wyświetlenie wszystkich kategorii
+			//w widoku
+			$view = $this->getView('Zamowienie');
+			$view->listaZamowien();
+		}
 
 }
 ?>

@@ -265,7 +265,7 @@ $stmt->execute();
     $wynik_zapytania = $stmt -> execute();
   }
  /*************************************************/
- /*******************ZAMÓWIENIe********************/
+ /*******************ZAMÓWIENIA********************/
  /*************************************************/
  $stmt = $pdo->query("DROP TABLE IF EXISTS `Zamowienia`");
  $stmt->execute();
@@ -295,7 +295,6 @@ $stmt->execute();
  $towary[]=array(
    'TerminRealizacji'=>'2017-03-21',
    'DataRealizacji'=>'2017-03-20',
-   'KosztZamowienia'=>'600',
    'IdDostawcy'=>'1',
    'DataWystawienia'=>'2017-03-20',
    'NumerZamowienia'=>'2017/03/20/1',
@@ -306,7 +305,6 @@ $stmt->execute();
  $towary[]=array(
    'TerminRealizacji'=>'2017-03-23',
    'DataRealizacji'=>'2017-03-22',
-   'KosztZamowienia'=>'1550',
    'IdDostawcy'=>'1',
    'DataWystawienia'=>'2017-03-22',
    'NumerZamowienia'=>'2017/03/22/002',
@@ -316,10 +314,9 @@ $stmt->execute();
  );
  foreach($towary as $element_towar)
  {
-   $stmt = $pdo->prepare('INSERT INTO `Zamowienia`(`TerminRealizacji`, `DataRealizacji`, `KosztZamowienia`, `IdDostawcy`, `DataWystawienia`, `NumerZamowienia`, `IdSposobDostawy`, `KosztDostawy`, `WartoscTowarow`) VALUES (:TerminRealizacji,:DataRealizacji,:KosztZamowienia,:IdDostawcy,:DataWystawienia,:NumerZamowienia,:IdSposobDostawy,:KosztDostawy,:WartoscTowarow)');
+   $stmt = $pdo->prepare('INSERT INTO `Zamowienia`(`TerminRealizacji`, `DataRealizacji`, `KosztZamowienia`, `IdDostawcy`, `DataWystawienia`, `NumerZamowienia`, `IdSposobDostawy`, `KosztDostawy`, `WartoscTowarow`) VALUES (:TerminRealizacji,:DataRealizacji,(:KosztDostawy+:WartoscTowarow),:IdDostawcy,:DataWystawienia,:NumerZamowienia,:IdSposobDostawy,:KosztDostawy,:WartoscTowarow)');
    $stmt -> bindValue(':TerminRealizacji',$element_towar['TerminRealizacji'],PDO::PARAM_STR);
    $stmt -> bindValue(':DataRealizacji',$element_towar['DataRealizacji'],PDO::PARAM_STR);
-   $stmt -> bindValue(':KosztZamowienia',$element_towar['KosztZamowienia'],PDO::PARAM_INT);
    $stmt -> bindValue(':IdDostawcy',$element_towar['IdDostawcy'],PDO::PARAM_INT);
    $stmt -> bindValue(':DataWystawienia',$element_towar['DataWystawienia'],PDO::PARAM_STR);
    $stmt -> bindValue(':NumerZamowienia',$element_towar['NumerZamowienia'],PDO::PARAM_STR);
