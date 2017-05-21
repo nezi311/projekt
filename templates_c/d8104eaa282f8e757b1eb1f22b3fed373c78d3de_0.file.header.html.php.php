@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-05-09 14:24:37
+/* Smarty version 3.1.31, created on 2017-05-10 11:01:59
   from "C:\xampp\htdocs\PZ\templates\header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_5911b505e41c35_96895781',
+  'unifunc' => 'content_5912d707611f60_38471648',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd8104eaa282f8e757b1eb1f22b3fed373c78d3de' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\header.html.php',
-      1 => 1493138149,
+      1 => 1494403168,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5911b505e41c35_96895781 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5912d707611f60_38471648 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -49,6 +49,11 @@ js/sorttable.js"><?php echo '</script'; ?>
  src="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 js/stat.js"><?php echo '</script'; ?>
+>
+          <?php echo '<script'; ?>
+ src="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+js/collapsiderHide.js"><?php echo '</script'; ?>
 >
           <!-- Bootstrap -->
           <?php echo '<script'; ?>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-05-10 11:06:36
-  from "C:\xampp\htdocs\PZ\templates\indexTowary.html.php" */
+/* Smarty version 3.1.31, created on 2017-05-10 11:05:14
+  from "C:\xampp\htdocs\PZ\templates\OneKategoria.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_5912d81c575174_45536366',
+  'unifunc' => 'content_5912d7cab370a0_12158643',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'a470a09385266ff103561b8dd6abd39b429c9644' => 
+    '1c518f92a32eeb49e1273b69b0fb5079d625cdcc' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\PZ\\templates\\indexTowary.html.php',
-      1 => 1494404667,
+      0 => 'C:\\xampp\\htdocs\\PZ\\templates\\OneKategoria.html.php',
+      1 => 1494407111,
       2 => 'file',
     ),
   ),
@@ -22,13 +22,13 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_5912d81c575174_45536366 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5912d7cab370a0_12158643 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
 
 <div class="page-header">
-	<h2>Lista Towarów</h2>
+	<h2>Lista Towarów z kategori </h2>
 </div>
 <table class="table sorttable">
   <thead>
@@ -36,44 +36,44 @@ $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id,
       <th>Nazwa Towaru</th><th>Stan Magazynowy Dysponowany</th><th>Stawka Vat</th><th>Kod Towaru</th><th>Kategoria</th><th>Jednostka Miary</th><th>Cena</th><th>Edytuj</th><th>Zamroz</th><th>Kup</th><th>usun</th>
     </tr>
   </thead>
-<?php if (isset($_smarty_tpl->tpl_vars['tablicaTowarow']->value)) {?>
+<?php if (isset($_smarty_tpl->tpl_vars['allKategorie']->value)) {?>
   <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['tablicaTowarow']->value, 'towar');
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['allKategorie']->value, 'category');
 if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['towar']->value) {
+foreach ($_from as $_smarty_tpl->tpl_vars['category']->value) {
 ?>
   <tr>
     <td><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Towar/showone/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
-" role="button"><?php echo $_smarty_tpl->tpl_vars['towar']->value['NazwaTowaru'];?>
+Towar/showone/<?php echo $_smarty_tpl->tpl_vars['category']->value['IdTowar'];?>
+" role="button"><?php echo $_smarty_tpl->tpl_vars['category']->value['NazwaTowaru'];?>
 </a></td>
-    <td><?php echo $_smarty_tpl->tpl_vars['towar']->value['StanMagazynowyDysponowany'];?>
+    <td><?php echo $_smarty_tpl->tpl_vars['category']->value['StanMagazynowyDysponowany'];?>
 </td>
-    <td><?php echo $_smarty_tpl->tpl_vars['towar']->value['StawkaVat'];?>
+    <td><?php echo $_smarty_tpl->tpl_vars['category']->value['StawkaVat'];?>
 </td>
-    <td><?php echo $_smarty_tpl->tpl_vars['towar']->value['KodTowaru'];?>
+    <td><?php echo $_smarty_tpl->tpl_vars['category']->value['KodTowaru'];?>
 </td>
-    <td><?php echo $_smarty_tpl->tpl_vars['towar']->value['Kategoria'];?>
+    <td><?php echo $_smarty_tpl->tpl_vars['category']->value['NazwaKategorii'];?>
 </td>
-    <td><?php echo $_smarty_tpl->tpl_vars['towar']->value['JednostkaMiary'];?>
+    <td><?php echo $_smarty_tpl->tpl_vars['category']->value['Nazwa'];?>
 </td>
-		<td><?php echo $_smarty_tpl->tpl_vars['towar']->value['Cena'];?>
+		<td><?php echo $_smarty_tpl->tpl_vars['category']->value['Cena'];?>
 </td>
     <td><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Towar/edit/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
+Towar/edit/<?php echo $_smarty_tpl->tpl_vars['category']->value['IdTowar'];?>
 " role="button">Edytuj</a></td>
     <td><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Towar/freeze/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
+Towar/freeze/<?php echo $_smarty_tpl->tpl_vars['category']->value['IdTowar'];?>
 " role="button">Zamroź</a></td>
 		<td>
 		<form action="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Towar/koszyk/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
+Towar/koszyk/<?php echo $_smarty_tpl->tpl_vars['category']->value['IdTowar'];?>
 " method="post">
-			<input type='hidden' name='IdTowar' value=<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
+			<input type='hidden' name='IdTowar' value=<?php echo $_smarty_tpl->tpl_vars['category']->value['IdTowar'];?>
 >
 
 			<input type='submit' value='Dodaj'>
@@ -82,7 +82,7 @@ Towar/koszyk/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
 ?>
 			<select name='ilosc' id='ilosc'>
 				<?php
- while ($_smarty_tpl->tpl_vars['ilosc']->value <= $_smarty_tpl->tpl_vars['towar']->value['StanMagazynowyDysponowany']) {?>
+ while ($_smarty_tpl->tpl_vars['ilosc']->value <= $_smarty_tpl->tpl_vars['category']->value['StanMagazynowyDysponowany']) {?>
 					<option value=<?php echo $_smarty_tpl->tpl_vars['ilosc']->value;?>
 ><?php echo $_smarty_tpl->tpl_vars['ilosc']->value;?>
 </option>
@@ -95,7 +95,7 @@ Towar/koszyk/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
 		</td>
     <td><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Towar/delete/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
+Towar/delete/<?php echo $_smarty_tpl->tpl_vars['category']->value['IdTowar'];?>
 " role="button">Usuń</a></td>
   </tr>
   <?php

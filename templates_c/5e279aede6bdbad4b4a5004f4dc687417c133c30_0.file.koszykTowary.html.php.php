@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-05-09 16:09:35
+/* Smarty version 3.1.31, created on 2017-05-10 11:15:51
   from "C:\xampp\htdocs\PZ\templates\koszykTowary.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_5911cd9fa87b03_23892307',
+  'unifunc' => 'content_5912da47bc1776_98140444',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5e279aede6bdbad4b4a5004f4dc687417c133c30' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\koszykTowary.html.php',
-      1 => 1494338971,
+      1 => 1494403168,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_5911cd9fa87b03_23892307 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5912da47bc1776_98140444 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 

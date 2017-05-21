@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-25 18:32:56
-  from "/opt/lampp/htdocs/PZ/templates/oneTowar.html.php" */
+/* Smarty version 3.1.31, created on 2017-05-10 11:11:39
+  from "C:\xampp\htdocs\PZ\templates\oneTowar.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58ff7a388115f1_26434241',
+  'unifunc' => 'content_5912d94bb46bf9_16319417',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '0f0ebbce6e751b14f5ada418cf75078a24cc7d41' => 
+    'ca2ec33287bbb590fc4e0c84c710093839f19ac8' => 
     array (
-      0 => '/opt/lampp/htdocs/PZ/templates/oneTowar.html.php',
-      1 => 1493131596,
+      0 => 'C:\\xampp\\htdocs\\PZ\\templates\\oneTowar.html.php',
+      1 => 1494403168,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58ff7a388115f1_26434241 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5912d94bb46bf9_16319417 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 

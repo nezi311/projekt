@@ -39,6 +39,7 @@ RewriteRule ^Kategoria/?$ index.php?controller=Kategoria [L]
 RewriteRule ^Kategoria/Usun/(\d+)/?$ index.php?controller=Kategoria&action=delete&id=$1 [L]
 RewriteRule ^Kategoria/Edytuj/(\d+)/?$ index.php?controller=Kategoria&action=edit&id=$1 [L]
 RewriteRule ^Kategoria/Wstaw/?$ index.php?controller=Kategoria&action=insert [L]
+RewriteRule ^Kategoria/showone/(\d+)/?$ index.php?controller=Kategoria&action=showone&id=$1 [L]
 
 RewriteRule ^Klient/?$ index.php?controller=Klient [L]
 RewriteRule ^Klient/update/?$ index.php?controller=Klient&action=update [L]

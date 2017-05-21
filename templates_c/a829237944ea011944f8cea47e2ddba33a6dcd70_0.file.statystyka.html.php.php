@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-25 18:32:35
-  from "/opt/lampp/htdocs/PZ/templates/statystyka.html.php" */
+/* Smarty version 3.1.31, created on 2017-05-10 11:09:29
+  from "C:\xampp\htdocs\PZ\templates\statystyka.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58ff7a23087394_30464941',
+  'unifunc' => 'content_5912d8c9778551_92117302',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'feefb8f2c3a72d12028e6efe727621e2f8669cb6' => 
+    'a829237944ea011944f8cea47e2ddba33a6dcd70' => 
     array (
-      0 => '/opt/lampp/htdocs/PZ/templates/statystyka.html.php',
-      1 => 1493137938,
+      0 => 'C:\\xampp\\htdocs\\PZ\\templates\\statystyka.html.php',
+      1 => 1494403168,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58ff7a23087394_30464941 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5912d8c9778551_92117302 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -64,10 +64,28 @@ $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id,
 				<input class="form-control" type="date" id="dataDo" value=<?php echo $_smarty_tpl->tpl_vars['dataDo']->value;?>
  name="dataDo"/>
 			</div>
+			<?php if (isset($_smarty_tpl->tpl_vars['allKategorie']->value)) {?>
 			<div class="form-group" div id="kat">
 						<label for="kategoria">Kategoria</label>
-						<input class="form-control" type="text" name="kategoria" maxlength="20"/>
+						<select class="form-control" name="kategoria" id="kryterium"> <!--Supplement an id here instead of using 'name'-->
+							<option value="0" <?php if ($_smarty_tpl->tpl_vars['kat']->value == 0) {?>selected<?php }?>>Wszystkie kategorie</option>
+					<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['allKategorie']->value, 'kategoria');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['kategoria']->value) {
+?>
+							  <option value=<?php echo $_smarty_tpl->tpl_vars['kategoria']->value['IdKategoria'];?>
+ <?php if ($_smarty_tpl->tpl_vars['kat']->value == $_smarty_tpl->tpl_vars['kategoria']->value['IdKategoria']) {?>selected<?php }?>><?php echo $_smarty_tpl->tpl_vars['kategoria']->value['NazwaKategorii'];?>
+</option>
+								<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+						</select>
 			</div>
+			<?php }?>
 			<input type="submit" value="Aktualizuj" class="btn btn-default" />
 		</form>
 	</div>
@@ -81,7 +99,7 @@ $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id,
 <table class="table sortable">
 	<thead>
 		<tr>
-			<th class=sorttable_nosort>#</th><th><?php if ($_smarty_tpl->tpl_vars['kryterium']->value == "klientKasa") {?>Klient<?php } else { ?>Nazwa Towaru<?php }?></th><?php if ($_smarty_tpl->tpl_vars['kryterium']->value == "towarIlosc" || $_smarty_tpl->tpl_vars['kryterium']->value == "towarKasa") {?><th>Kategoria</th><?php }?><th><?php if ($_smarty_tpl->tpl_vars['kryterium']->value == "klientKasa" || $_smarty_tpl->tpl_vars['kryterium']->value == "towarKasa") {?>Wartość<?php } else { ?>Ilość<?php }?></th>
+			<th class=sorttable_nosort>#</th><th><?php if ($_smarty_tpl->tpl_vars['kryterium']->value == "klientKasa") {?>Klient<?php } else { ?>Nazwa Towaru<?php }?></th><th><?php if ($_smarty_tpl->tpl_vars['kryterium']->value == "towarIlosc" || $_smarty_tpl->tpl_vars['kryterium']->value == "towarKasa") {?>Kategoria<?php } elseif ($_smarty_tpl->tpl_vars['kryterium']->value == "klientKasa") {?>Poczta<?php }?></th><th><?php if ($_smarty_tpl->tpl_vars['kryterium']->value == "klientKasa" || $_smarty_tpl->tpl_vars['kryterium']->value == "towarKasa") {?>Wartość<?php } else { ?>Ilość<?php }?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -97,8 +115,11 @@ foreach ($_from as $_smarty_tpl->tpl_vars['statystyka']->value) {
 </td>
 			<td><?php echo $_smarty_tpl->tpl_vars['statystyka']->value['nazwa'];?>
 </td>
-			<?php if ($_smarty_tpl->tpl_vars['kryterium']->value == "towarIlosc" || $_smarty_tpl->tpl_vars['kryterium']->value == "towarKasa") {?><td><?php echo $_smarty_tpl->tpl_vars['statystyka']->value['kategoria'];?>
-</td><?php }?>
+			<td><?php if ($_smarty_tpl->tpl_vars['kryterium']->value == "towarIlosc" || $_smarty_tpl->tpl_vars['kryterium']->value == "towarKasa") {
+echo $_smarty_tpl->tpl_vars['statystyka']->value['kategoria'];
+} elseif ($_smarty_tpl->tpl_vars['kryterium']->value == "klientKasa") {
+echo $_smarty_tpl->tpl_vars['statystyka']->value['adres'];
+}?></td>
 			<td><?php echo $_smarty_tpl->tpl_vars['statystyka']->value['wartosc'];?>
 </td>
 		</tr>
