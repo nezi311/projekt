@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-05-09 16:19:26
+/* Smarty version 3.1.31, created on 2017-05-21 18:50:48
   from "C:\xampp\htdocs\PZ\templates\statystyka.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_5911cfeea39204_80501034',
+  'unifunc' => 'content_5921c5685fd1c1_49825722',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_5911cfeea39204_80501034 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5921c5685fd1c1_49825722 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-05-09 16:09:35
+/* Smarty version 3.1.31, created on 2017-05-21 21:18:01
   from "C:\xampp\htdocs\PZ\templates\koszykTowary.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_5911cd9fa87b03_23892307',
+  'unifunc' => 'content_5921e7e91b7271_60088008',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5e279aede6bdbad4b4a5004f4dc687417c133c30' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\koszykTowary.html.php',
-      1 => 1494338971,
+      1 => 1495394280,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_5911cd9fa87b03_23892307 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5921e7e91b7271_60088008 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -82,10 +82,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 ?>
 
 </table>
-<b>Klient</b>
+
 <form action="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Koszyk/zrealizuj" method="post" style='width:20%;'>
+<b>Klient</b>
 	<input list="customers" name="klient">
   <datalist id="customers">
 	<?php
@@ -104,7 +105,25 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 ?>
 
 	</datalist>
-</select>
+	<br>
+<b>Sposób dostawy</b>
+	<input list="delivery" name="dostawa">
+  <datalist id="delivery">
+	<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['Dostawa']->value, 'sposob');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['sposob']->value) {
+?>
+	<option value="<?php echo $_smarty_tpl->tpl_vars['sposob']->value['IdSposobDostawy'];?>
+"><?php echo $_smarty_tpl->tpl_vars['sposob']->value['SposobDostawy'];?>
+</option>
+	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+	</datalist>
 <br>
 	<input type='hidden' name='suma' value=<?php echo $_smarty_tpl->tpl_vars['suma']->value;?>
 >

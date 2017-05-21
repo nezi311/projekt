@@ -17,7 +17,7 @@
 	<tbody>
 				{foreach $allKategorie as $category}
 		<tr>
-			<th>{$category['NazwaKategorii']}</th>
+			<th><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Kategoria/showone/{$category['IdKategoria']}" role="button">{$category['NazwaKategorii']}</a></th>
 			<td>{$category['ilosc']}</td>
 
 			<td>
