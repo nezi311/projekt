@@ -1,20 +1,6 @@
-<?php
-require_once('vendor/autoload.php');
-\Config\Database\DBConfig::setDBConfig();
- $pdo=\Config\Database\DBConfig::getHandle();
 
-try{
-  $stmt = $pdo->query("DROP TABLE if exists `cenahistoria`,`towarySprzedaz`, `zamowieniesprzedaz`, `statuszamowienia`, `koszyk`, `dostawcatowar`, `klient`, `zamowienietowar`, `zamowienietowarkopia`, `zamowienia`, `Dostawca`, `towar`, `Jednostkamiary`, `kategoria`,`pracownicy`,`users`;");
-  $stmt->execute();
-  /*************************************************/
-  /*******************BILANS********************/
-  /*************************************************/
-$stmt = $pdo->query("DROP TABLE IF EXISTS `bilans`");
-$stmt->execute();
-$stmt = $pdo->query("CREATE TABLE `bilans` (
-  `IdBilans` int(11) NOT NULL
-);");
 
+<<<<<<< HEAD
 /*************************************************/
 /*******************SPOSOBDOSTAWY********************/
 /*************************************************/
@@ -791,86 +777,164 @@ $kategorie[]=array(
   'IdZamowienieSprzedaz'=>'2'
 );
 foreach($kategorie as $element_kategoria)
+=======
+
+<?php
+	namespace Models;
+	use \PDO;
+	class Statystyka extends Model {
+		//model zwraca tablicę wszystkich kategorii
+		public function getAll($kryterium, $fraza, $dataOd, $dataDo, $kategoria){
+
+            $data = array();
+            if(!$this->pdo)
+                $data['error'] = 'Połączenie z bazą nie powidoło się!';
+            else
+                try
+                {
+                    $statystyki = array();
+//ilość towaru
+if($kryterium==="kategoriaKasa")
 {
-  $stmt = $pdo->prepare('INSERT INTO `towarySprzedaz`(`IdTowar`,`ilosc`,`klient`,`IdZamowienieSprzedaz`,`cena`) VALUES (:IdTowar,:ilosc,:klient,:IdZamowienieSprzedaz,:cena)');
-  $stmt -> bindValue(':IdTowar',$element_kategoria['IdTowar'],PDO::PARAM_INT);
-  $stmt -> bindValue(':ilosc',$element_kategoria['ilosc'],PDO::PARAM_INT);
-  $stmt -> bindValue(':klient',$element_kategoria['klient'],PDO::PARAM_INT);
-  $stmt -> bindValue(':IdZamowienieSprzedaz',$element_kategoria['IdZamowienieSprzedaz'],PDO::PARAM_INT);
-  $stmt -> bindValue(':cena',$element_kategoria['cena'],PDO::PARAM_STR);
-  $wynik_zapytania = $stmt -> execute();
+                    $stmt = $this->pdo->prepare('SELECT kategoria, CONCAT(SUM(wartosc)," zł.") AS wartosc
+FROM (
+SELECT Towar.NazwaTowaru, Kategoria.NazwaKategorii AS kategoria, SUM(towarysprzedaz.cena)*ilosc AS wartosc
+FROM Towar
+INNER JOIN TowarySprzedaz
+ON TowarySprzedaz.idTowar=Towar.IdTowar
+	INNER JOIN zamowieniesprzedaz
+    ON Towarysprzedaz.IdZamowienieSprzedaz=Zamowieniesprzedaz.IdZamowienieSprzedaz
+    INNER JOIN Kategoria
+    ON Towar.IdKategoria=Kategoria.IdKategoria
+		WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza)
+ GROUP BY Towarysprzedaz.cena
+ORDER BY `wartosc`  ASC
+) AS sprzedane');
 }
 
-
-
-*/
-
- /*************************************************/
- /*******************CENA_HISTORIA*******************/
- /*************************************************/
- /*
- $stmt = $pdo->query("DROP TABLE IF EXISTS `cenahistoria`");
- $stmt->execute();
- $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `cenahistoria`
- (
-   `IdCenaHistoria` INT AUTO_INCREMENT,
-   `DataWprowadzenia` date NOT NULL,
-   `Cena` float NOT NULL,
-   `IdTowar` int NOT NULL,
-   PRIMARY KEY (IdCenaHistoria),
-   FOREIGN KEY (IdTowar)
-   REFERENCES Towar(IdTowar)
- )ENGINE = InnoDB;");
- $stmt->execute();
-
- $kategorie = array();
- $kategorie[]=array(
-   'DataWprowadzenia'=>'2017-02-04',
- 'Cena'=>'700',
-'IdTowar'=>'1');
-$kategorie[]=array(
-  'DataWprowadzenia'=>'2017-02-14',
-'Cena'=>'650',
-'IdTowar'=>'1');
-$kategorie[]=array(
-  'DataWprowadzenia'=>'2017-02-20',
-'Cena'=>'600',
-'IdTowar'=>'1');
-$kategorie[]=array(
-  'DataWprowadzenia'=>'2017-03-14',
-'Cena'=>'650',
-'IdTowar'=>'2');
-$kategorie[]=array(
-  'DataWprowadzenia'=>'2017-02-20',
-'Cena'=>'600',
-'IdTowar'=>'2');
-$kategorie[]=array(
-  'DataWprowadzenia'=>'2017-04-20',
-'Cena'=>'400',
-'IdTowar'=>'3');
- foreach($kategorie as $element_kategoria)
- {
-   $stmt = $pdo->prepare('INSERT INTO `cenahistoria`(`DataWprowadzenia`,`Cena`,`IdTowar`) VALUES (:DataWprowadzenia,:Cena,:IdTowar)');
-   $stmt -> bindValue(':DataWprowadzenia',$element_kategoria['DataWprowadzenia'],PDO::PARAM_STR);
-   $stmt -> bindValue(':Cena',$element_kategoria['Cena'],PDO::PARAM_INT);
-   $stmt -> bindValue(':IdTowar',$element_kategoria['IdTowar'],PDO::PARAM_INT);
-   $wynik_zapytania = $stmt -> execute();
- }
-
-*/
-
-
-
-
-
-
-
- echo ("Baza została zainstalowana.");
- return true;
-}
-catch (PDOException $e)
+if($kryterium==="towarNiesprzedany")
+>>>>>>> 4de0217c8f1da4d726ccd18871f5e64d7451fdcc
 {
- echo ('Wystąpił błąd biblioteki PDO: ' .$e->getMessage());
- return false;
+                    $stmt = $this->pdo->prepare('SELECT NazwaTowaru as nazwa, StanMagazynowyDysponowany as wartosc, NazwaKategorii as kategoria
+FROM Towar
+INNER JOIN Kategoria
+ON Kategoria.IdKategoria=Towar.IdKategoria
+WHERE NazwaTowaru NOT IN(SELECT Towar.NazwaTowaru AS NazwaTowaru
+FROM Towar
+INNER JOIN towarySprzedaz
+ON towarySprzedaz.idTowar=Towar.IdTowar
+	INNER JOIN zamowieniesprzedaz
+    ON towarySprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
+ WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza)
+ GROUP BY NazwaTowaru)');
 }
+if($kryterium==="towarIlosc")
+{
+                    $stmt = $this->pdo->prepare('SELECT Towar.NazwaTowaru AS nazwa, Kategoria.NazwaKategorii AS kategoria,  CONCAT(COUNT(*)*ilosc," ",NazwaSkrocona,".") AS wartosc
+FROM Towar
+INNER JOIN towarySprzedaz
+ON towarySprzedaz.idTowar=Towar.IdTowar
+	INNER JOIN zamowieniesprzedaz
+    ON towarySprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
+    INNER JOIN Jednostkamiary
+    ON Jednostkamiary.IdJednostkaMiary=Towar.IdJednostkaMiary
+    INNER JOIN Kategoria
+    ON Towar.IdKategoria=Kategoria.IdKategoria
+ WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza)
+ GROUP BY NazwaTowaru
+ORDER BY `wartosc` asc');
+}
+//pieniądze z towaru
+if($kryterium==="towarKasa")
+{
+                    $stmt = $this->pdo->prepare('SELECT Towar.NazwaTowaru AS nazwa, Kategoria.NazwaKategorii AS kategoria, CONCAT(SUM(towarysprzedaz.cena)*ilosc," zł.") AS wartosc
+FROM Towar
+INNER JOIN towarySprzedaz
+ON towarySprzedaz.idTowar=Towar.IdTowar
+	INNER JOIN zamowieniesprzedaz
+    ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
+    INNER JOIN Kategoria
+    ON towar.IdKategoria=Kategoria.IdKategoria
+ WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza)
+ GROUP BY Towarysprzedaz.cena
+ORDER BY `wartosc` asc');
+}
+
+if($kryterium==="towarNiesprzedany" && $kategoria!=0)
+{
+                    $stmt = $this->pdo->prepare('SELECT NazwaTowaru as nazwa, StanMagazynowyDysponowany as wartosc, NazwaKategorii as kategoria
+FROM Towar
+INNER JOIN Kategoria
+ON Kategoria.IdKategoria=Towar.IdKategoria
+WHERE NazwaTowaru NOT IN(SELECT Towar.NazwaTowaru AS NazwaTowaru
+FROM Towar
+INNER JOIN towarySprzedaz
+ON towarySprzedaz.idTowar=Towar.IdTowar
+	INNER JOIN zamowieniesprzedaz
+    ON towarySprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
+ WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza)
+ GROUP BY NazwaTowaru) AND (Towar.IdKategoria=:kategoria)');
+ $stmt->bindValue(':kategoria', $kategoria, PDO::PARAM_INT);
+}
+
+if($kryterium==="towarIlosc" && $kategoria!=0)
+{
+                    $stmt = $this->pdo->prepare('SELECT Towar.NazwaTowaru AS nazwa, Kategoria.NazwaKategorii AS kategoria,  CONCAT(COUNT(*)*ilosc," ",NazwaSkrocona,".") AS wartosc
+FROM Towar
+INNER JOIN towarySprzedaz
+ON towarySprzedaz.idTowar=Towar.IdTowar
+	INNER JOIN zamowieniesprzedaz
+    ON towarySprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
+    INNER JOIN Jednostkamiary
+    ON Jednostkamiary.IdJednostkaMiary=Towar.IdJednostkaMiary
+    INNER JOIN Kategoria
+    ON Towar.IdKategoria=Kategoria.IdKategoria
+ WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza) AND (Towar.IdKategoria=:kategoria)
+ GROUP BY NazwaTowaru
+ORDER BY `wartosc` asc');
+$stmt->bindValue(':kategoria', $kategoria, PDO::PARAM_INT);
+}
+//pieniądze z towaru
+if($kryterium==="towarKasa" && $kategoria!=0)
+{
+                    $stmt = $this->pdo->prepare('SELECT Towar.NazwaTowaru AS nazwa, Kategoria.NazwaKategorii AS Kategoria, CONCAT(SUM(towarysprzedaz.cena)*ilosc," zł.") AS wartosc
+FROM Towar
+INNER JOIN towarySprzedaz
+ON towarySprzedaz.idTowar=Towar.IdTowar
+	INNER JOIN zamowieniesprzedaz
+    ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
+    INNER JOIN Kategoria
+    ON towar.IdKategoria=Kategoria.IdKategoria
+ WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza) AND (Towar.IdKategoria=:kategoria)
+ GROUP BY Towarysprzedaz.cena
+ORDER BY `wartosc` asc');
+$stmt->bindValue(':kategoria', $kategoria, PDO::PARAM_INT);
+}
+//pieniądze od klientów
+if($kryterium==="klientKasa")
+{
+$stmt = $this->pdo->prepare('SELECT CONCAT(Imie," ",Nazwisko," (",NIP,")") AS nazwa, CONCAT(SUM(wartosc)," zł.") AS wartosc, CONCAT(KodPocztowy," ",Poczta) AS adres
+FROM zamowieniesprzedaz
+INNER JOIN Klient
+ON zamowieniesprzedaz.IdKlient=Klient.IdKlient
+WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (CONCAT(Imie," ",Nazwisko," (",NIP,")") LIKE :fraza)
+ORDER BY `wartosc` asc');
+}
+$stmt->bindValue(':fraza', '%'.$fraza.'%', PDO::PARAM_STR);
+$stmt->bindValue(':dataOd', $dataOd, PDO::PARAM_STR);
+$stmt->bindValue(':dataDo', $dataDo, PDO::PARAM_STR);
+$result = $stmt->execute();
+                    $statystyki = $stmt->fetchAll();
+                    $stmt->closeCursor();
+                    if($statystyki && !empty($statystyki))
+                        $data['statystyki'] = $statystyki;
+                }
+                catch(\PDOException $e)
+                {
+                    $data['error'] = 'Błąd odczytu danych z bazy!'. $e->getMessage();
+                }
+
+            return $data;
+		}
+	}
 ?>

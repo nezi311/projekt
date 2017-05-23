@@ -48,12 +48,12 @@
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar" class="glyphicon glyphicon-list-alt"> Lista Towarów</a></li>
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/freeze" class="glyphicon glyphicon-list-alt"> Zamrożone Towary</a></li>
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/add" class="glyphicon glyphicon-plus"> Dodaj Towar</a></li>
-                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
+                    <!--<li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>-->
                   </ul>
 
                 </li>
             <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Kategoria"><span class="glyphicon glyphicon-list-alt"></span> Kategorie</a></li>
-        <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Statystyka"><span class="glyphicon glyphicon-signal"></span> Statystyki</a></li>
+        <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Statystyka"><span class="glyphicon glyphicon-signal"></span> Zestawienia</a></li>
 
 
             </li>

@@ -35,7 +35,6 @@
     </table>
 	<div class="btn-group" role="group">
     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2{$towar['IdTowar']}">Edytuj</button>
-		<a type="button" class="btn btn-primary" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/edit/{$towar['IdTowar']}" role="button">Edytuj</a>
 		<a type="button" class="btn btn-warning" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/zamroz/{$towar['IdTowar']}" role="button">Wycofaj ze sprzedaży</a>
 	</div>
   <!-- Modal -->
@@ -51,61 +50,58 @@
           <form action="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/edit/{$towar['IdTowar']}" method="post">
             <div class="form-group">
               <label for="NazwaTowaru">Nazwa Towaru :</label>
-              <div class="col-sm-10">
+
                 <input type="text" class="form-control" id="NazwaTowaru" name="NazwaTowaru" placeholder="Wprowadz Nazwe Towaru" value="{$towar['NazwaTowaru']}">
-              </div>
+
             </div>
             <div class="form-group">
               <label  for="MinStanMagazynowy">Min Stan Magazynowy :</label>
-              <div class="col-sm-10">
+
                 <input type="text" class="form-control" id="MinStanMagazynowy" name="MinStanMagazynowy" placeholder="Wprowadz Min Stan Magazynowy" value="{$towar['MinStanMagazynowy']}">
-              </div>
+
             </div>
             <div class="form-group">
               <label  for="MaxStanMagazynowy">Max Stan Magazynowy :</label>
-              <div class="col-sm-10">
+
                 <input type="text" class="form-control" id="MaxStanMagazynowy" name="MaxStanMagazynowy" placeholder="Wprowadz Max Stan Magazynowy" value="{$towar['MaxStanMagazynowy']}">
-              </div>
+
             </div>
             <div class="form-group">
               <label  for="StawkaVat">stawka Vat :</label>
-              <div class="col-sm-10">
+
                 <input type="text" class="form-control" id="StawkaVat" name="StawkaVat" placeholder="Wprowadz stawke Vat" value="{$towar['StawkaVat']}">
-              </div>
+
             </div>
             <div class="form-group">
               <label  for="KodTowaru">KodTowaru :</label>
-              <div class="col-sm-10">
+
                 <input type="text" class="form-control" id="KodTowaru" name="KodTowaru" placeholder="Wprowadz KodTowaru" value="{$towar['KodTowaru']}">
-              </div>
+
             </div>
             <div class="form-group">
               <label  for="IdKategoria">Id Kategoria :</label>
-              <div class="col-sm-10">
-                <select class="form-control" id="IdKategoria" name="IdKategoria">
-                  //dodac if
-                  <option value="1">elektronika</option>
-                  <option value="2">inne</option>
-                </select>
-              </div>
+
+
+                  <select class="form-control" id="IdKategoria" name="IdKategoria">
+                    {foreach $tablicaKategorie as $kat}
+                    <option value="{$kat['IdKategoria']}">{$kat['NazwaKategorii']}</option>
+                    {/foreach}
+                  </select>
+
+
             </div>
             <div class="form-group">
               <label  for="IdJednostkaMiary">jednostka miary :</label>
-              <div class="col-sm-10">
+
                 <select class="form-control" id="IdJednostkaMiary" name="IdJednostkaMiary">
-                  //dodac if
-                  <option value="1">sztuka</option>
-                  <option value="2">litr</option>
+                  {foreach $tablicaJednostki as $jed}
+                  <option value="{$jed['IdJednostkaMiary']}">{$jed['Nazwa2']}</option>
+                  {/foreach}
                 </select>
-              </div>
+
             </div>
-            <div class="form-group">
-              <label  for="Cena">Cena :</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="Cena" name="Cena" placeholder="Wprowadz Cene" value="{$towar['Cena']}">
-              </div>
-            </div>
-            <input type="submit" value="Zmień nazwę" class="btn btn-primary" />
+            
+            <input type="submit" value="Edytuj" class="btn btn-primary" />
             <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
           </form>
         </div>

@@ -134,7 +134,7 @@ class Towar extends Controller
             $model=$this->getModel('Towar');
                     if($model)
                     {
-                      $data = $model->zrealizuj($_POST['suma'],$_POST['klient'],$_POST['dostawa'],$_POST['zaplata']);
+                      $data = $model->zrealizuj($_POST['suma'],$_POST['klient'],$_POST['dostawa']);
                         //nie przekazano komunikatów o błędzie
                     }
                   $this->redirect('Towar/');
@@ -275,29 +275,6 @@ class Towar extends Controller
      }
      else
        $this->redirect('Towar/');
-   }
-   else
-     $this->redirect('index/');
- }
- public function edit($id)
- {
-
-   if($_SESSION['role']<=1)
-   {
-     if($id !== null)
-     {
-
-       $model=$this->getModel('Towar');
-               if($model)
-               {
-                 $data = $model->edit($id,$_POST['NazwaTowaru'],$_POST['MinStanMagazynowy'],$_POST['MaxStanMagazynowy'],$_POST['StawkaVat'],$_POST['KodTowaru'],$_POST['IdKategoria'],$_POST['IdJednostkaMiary']);
-                   //nie przekazano komunikatów o błędzie
-               }
-       //powiadamiamy odpowiedni widok, że nastąpiła aktualizacja bazy
-       $this->redirect('Towar/');
-     }
-     else
-       $this->redirect('index/');
    }
    else
      $this->redirect('index/');
