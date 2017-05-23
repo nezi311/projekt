@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-23 22:08:47
+/* Smarty version 3.1.31, created on 2017-05-21 21:18:01
   from "C:\xampp\htdocs\PZ\templates\koszykTowary.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58fd09cfb11181_73764016',
+  'unifunc' => 'content_5921e7e91b7271_60088008',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5e279aede6bdbad4b4a5004f4dc687417c133c30' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\koszykTowary.html.php',
-      1 => 1492968849,
+      1 => 1495394280,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_58fd09cfb11181_73764016 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5921e7e91b7271_60088008 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -31,14 +31,14 @@ $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id,
 	<h2>Towary w koszyku</h2>
 </div>
 <?php $_smarty_tpl->_assignInScope('suma', 0);
-?>
+if (isset($_smarty_tpl->tpl_vars['tablicaTowarow2']->value) && $_smarty_tpl->tpl_vars['tablicaTowarow2']->value != null) {?>
 <table class="table" style='width:50%;'>
   <thead>
     <tr>
       <th>Nazwa Towaru</th><th>Kod Towaru</th><th>Cena</th><th>Stawka Vat</th><th>Ilość</th><th>Cena częściowa</th><th>Usuń</th>
     </tr>
   </thead>
-<?php if (isset($_smarty_tpl->tpl_vars['tablicaTowarow2']->value)) {?>
+
   <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['tablicaTowarow2']->value, 'towar');
 if ($_from !== null) {
@@ -66,9 +66,9 @@ echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Koszyk/minus/<?php echo $_smarty_tpl->tpl_vars['towar']->value['Id'];?>
 " role="button"><span class="glyphicon glyphicon-minus"></span></a>
 		</td>
-		<td><?php echo ($_smarty_tpl->tpl_vars['towar']->value['Cena']*$_smarty_tpl->tpl_vars['towar']->value['StawkaVat'])/100*$_smarty_tpl->tpl_vars['towar']->value['ilosc'];?>
+		<td><?php echo (((($_smarty_tpl->tpl_vars['towar']->value['Cena']*$_smarty_tpl->tpl_vars['towar']->value['StawkaVat'])/100)+$_smarty_tpl->tpl_vars['towar']->value['Cena'])*$_smarty_tpl->tpl_vars['towar']->value['ilosc']);?>
 </td>
-		<?php $_smarty_tpl->_assignInScope('suma', $_smarty_tpl->tpl_vars['suma']->value+(($_smarty_tpl->tpl_vars['towar']->value['Cena']*$_smarty_tpl->tpl_vars['towar']->value['StawkaVat'])/100*$_smarty_tpl->tpl_vars['towar']->value['ilosc']));
+		<?php $_smarty_tpl->_assignInScope('suma', $_smarty_tpl->tpl_vars['suma']->value+((($_smarty_tpl->tpl_vars['towar']->value['Cena']*$_smarty_tpl->tpl_vars['towar']->value['StawkaVat'])/100*$_smarty_tpl->tpl_vars['towar']->value['ilosc'])+$_smarty_tpl->tpl_vars['towar']->value['Cena']*$_smarty_tpl->tpl_vars['towar']->value['ilosc']));
 ?>
 		<td><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
@@ -81,21 +81,58 @@ Koszyk/usun/<?php echo $_smarty_tpl->tpl_vars['towar']->value['Id'];?>
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 ?>
 
-<?php }?>
 </table>
+
+<form action="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Koszyk/zrealizuj" method="post" style='width:20%;'>
+<b>Klient</b>
+	<input list="customers" name="klient">
+  <datalist id="customers">
+	<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['Klienci']->value, 'klient');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['klient']->value) {
+?>
+	<option value="<?php echo $_smarty_tpl->tpl_vars['klient']->value['IdKlient'];?>
+"><?php echo $_smarty_tpl->tpl_vars['klient']->value['Imie'];?>
+ <?php echo $_smarty_tpl->tpl_vars['klient']->value['Nazwisko'];?>
+</option>
+	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+	</datalist>
+	<br>
+<b>Sposób dostawy</b>
+	<input list="delivery" name="dostawa">
+  <datalist id="delivery">
+	<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['Dostawa']->value, 'sposob');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['sposob']->value) {
+?>
+	<option value="<?php echo $_smarty_tpl->tpl_vars['sposob']->value['IdSposobDostawy'];?>
+"><?php echo $_smarty_tpl->tpl_vars['sposob']->value['SposobDostawy'];?>
+</option>
+	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+	</datalist>
+<br>
+	<input type='hidden' name='suma' value=<?php echo $_smarty_tpl->tpl_vars['suma']->value;?>
+>
+	<input type='submit' name='submit' value=Zamów>
+</form>
 Suma: <?php echo $_smarty_tpl->tpl_vars['suma']->value;?>
 
-<?php if (isset($_smarty_tpl->tpl_vars['_COOKIE']->value['ids'])) {
-$_smarty_tpl->_assignInScope('cookie', $_smarty_tpl->tpl_vars['_COOKIE']->value['ids']);
-$_smarty_tpl->_assignInScope('cookie', stripslashes($_smarty_tpl->tpl_vars['cookie']->value));
-$_smarty_tpl->_assignInScope('dana', json_decode($_smarty_tpl->tpl_vars['cookie']->value,true));
-$_smarty_tpl->_assignInScope('cookie', $_smarty_tpl->tpl_vars['_COOKIE']->value['ilosci']);
-$_smarty_tpl->_assignInScope('cookie', stripslashes($_smarty_tpl->tpl_vars['cookie']->value));
-$_smarty_tpl->_assignInScope('dana', json_decode($_smarty_tpl->tpl_vars['cookie']->value,true));
-}
-if (isset($_smarty_tpl->tpl_vars['error']->value)) {?>
-<strong><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
-</strong>
+<?php } else { ?>
+<h2>Brak towarów do zamówienia.</h2>
 <?php }?>
 
 <?php $_smarty_tpl->_subTemplateRender("file:footer.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);

@@ -9,6 +9,7 @@ RewriteRule ^index/?$ index.php?controller=index [L]
 
 
 RewriteRule ^Koszyk/?$ index.php?controller=Towar&action=wKoszyku [L]
+RewriteRule ^Koszyk/zrealizuj/?$ index.php?controller=Towar&action=zrealizuj [L]
 RewriteRule ^Koszyk/usun/(\d+)/?$ index.php?controller=Towar&action=deleteKoszyk&id=$1 [L]
 RewriteRule ^Koszyk/plus/(\d+)/?$ index.php?controller=Towar&action=iloscPlus&id=$1 [L]
 RewriteRule ^Koszyk/minus/(\d+)/?$ index.php?controller=Towar&action=iloscMinus&id=$1 [L]
@@ -24,9 +25,13 @@ RewriteRule ^Towar/insert/?$ index.php?controller=Towar&action=insert [L]
 RewriteRule ^Towar/freeze/?$ index.php?controller=Towar&action=freezed [L]
 RewriteRule ^Towar/delete/(\d+)/?$ index.php?controller=Towar&action=delete&id=$1 [L]
 RewriteRule ^Towar/showone/(\d+)/?$ index.php?controller=Towar&action=showone&id=$1 [L]
+RewriteRule ^Towar/freeze/(\d+)/?$ index.php?controller=Towar&action=freeze&id=$1 [L]
+RewriteRule ^Towar/unfreeze/(\d+)/?$ index.php?controller=Towar&action=unfreeze&id=$1 [L]
 RewriteRule ^Szukaj/?$ index.php?controller=Towar&action=search [L]
 RewriteRule ^Towar/koszyk/(\d+)/?$ index.php?controller=Towar&action=koszyk&id=$1 [L]
 
+RewriteRule ^Zamowienia/?$ index.php?controller=Zamowienie&action=listaZamowien [L]
+RewriteRule ^Zamowienia/faktura/(\d+)/?$ index.php?controller=Zamowienie&action=faktura&id=$1 [L]
 
 RewriteRule ^Zamowienie/?$ index.php?controller=Zamowienie [L]
 RewriteRule ^Zamowienie/add/?$ index.php?controller=Zamowienie&action=add [L]
@@ -36,10 +41,13 @@ RewriteRule ^Kategoria/?$ index.php?controller=Kategoria [L]
 RewriteRule ^Kategoria/Usun/(\d+)/?$ index.php?controller=Kategoria&action=delete&id=$1 [L]
 RewriteRule ^Kategoria/Edytuj/(\d+)/?$ index.php?controller=Kategoria&action=edit&id=$1 [L]
 RewriteRule ^Kategoria/Wstaw/?$ index.php?controller=Kategoria&action=insert [L]
+RewriteRule ^Kategoria/showone/(\d+)/?$ index.php?controller=Kategoria&action=showone&id=$1 [L]
 
 RewriteRule ^Klient/?$ index.php?controller=Klient [L]
 RewriteRule ^Klient/update/?$ index.php?controller=Klient&action=update [L]
 RewriteRule ^Klient/insert/?$ index.php?controller=Klient&action=insert [L]
+RewriteRule ^Klient/szukaj/?$ index.php?controller=Klient&action=szukaj [L]
+
 
 RewriteRule ^Statystyka/?$ index.php?controller=Statystyka [L]
 

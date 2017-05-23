@@ -4,9 +4,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <!-- Latest compiled and minified JavaScript -->
         <script src="http://code.jquery.com/jquery-latest.js"></script>
-          <script src="http://{$smarty.server.HTTP_HOST}{$subdir}/js/jquery.min.js"></script>
-          <script src="http://{$smarty.server.HTTP_HOST}{$subdir}/js/jquery-ui.min.js"></script>
+          <script src="http://{$smarty.server.HTTP_HOST}{$subdir}js/jquery.min.js"></script>
+          <script src="http://{$smarty.server.HTTP_HOST}{$subdir}js/jquery-ui.min.js"></script>
           <script src="http://{$smarty.server.HTTP_HOST}{$subdir}js/sorttable.js"></script>
+          <script src="http://{$smarty.server.HTTP_HOST}{$subdir}js/stat.js"></script>
+          <script src="http://{$smarty.server.HTTP_HOST}{$subdir}js/collapsiderHide.js"></script>
           <!-- Bootstrap -->
           <script src="http://{$smarty.server.HTTP_HOST}{$subdir}vendor/twbs/bootstrap/dist/js/bootstrap.min.js" ></script>
       <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
@@ -67,8 +69,9 @@
       </ul>
 
                 <ul class="nav navbar-nav navbar-right">
+                  <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Zamowienia"><span class="glyphicon glyphicon-barcode"></span> Zamówienia klientów</a></li>
                   <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk</a></li>
-                  <li><a href="#"><span class="glyphicon glyphicon-time"></span> Historia</a></li>
+                  <!--<li><a href="#"><span class="glyphicon glyphicon-time"></span> Historia</a></li>-->
 
 
                                       {if $smarty.session.role<=1}

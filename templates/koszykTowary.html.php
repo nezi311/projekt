@@ -4,13 +4,14 @@
 	<h2>Towary w koszyku</h2>
 </div>
 {$suma=0}
+{if isset($tablicaTowarow2) and $tablicaTowarow2 != null}
 <table class="table" style='width:50%;'>
   <thead>
     <tr>
       <th>Nazwa Towaru</th><th>Kod Towaru</th><th>Cena</th><th>Stawka Vat</th><th>Ilość</th><th>Cena częściowa</th><th>Usuń</th>
     </tr>
   </thead>
-{if isset($tablicaTowarow2)}
+
   {foreach $tablicaTowarow2 as $towar}
   <tr>
     <td>{$towar['NazwaTowaru']}</td>
@@ -22,24 +23,36 @@
 			{$towar['ilosc']} {$towar['NazwaSkrocona']}
 			<a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/minus/{$towar['Id']}" role="button"><span class="glyphicon glyphicon-minus"></span></a>
 		</td>
-		<td>{($towar['Cena']*$towar['StawkaVat'])/100*$towar['ilosc']}</td>
-		{$suma=$suma+(($towar['Cena']*$towar['StawkaVat'])/100*$towar['ilosc'])}
+		<td>{(((($towar['Cena']*$towar['StawkaVat'])/100)+$towar['Cena'])*$towar['ilosc'])}</td>
+		{$suma=$suma+((($towar['Cena']*$towar['StawkaVat'])/100*$towar['ilosc'])+$towar['Cena']*$towar['ilosc'])}
 		<td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/usun/{$towar['Id']}" role="button"><span class="glyphicon glyphicon-remove"></span></a></td>
   </tr>
   {/foreach}
-{/if}
 </table>
+
+<form action="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/zrealizuj" method="post" style='width:20%;'>
+<b>Klient</b>
+	<input list="customers" name="klient">
+  <datalist id="customers">
+	{foreach $Klienci as $klient}
+	<option value="{$klient['IdKlient']}">{$klient['Imie']} {$klient['Nazwisko']}</option>
+	{/foreach}
+	</datalist>
+	<br>
+<b>Sposób dostawy</b>
+	<input list="delivery" name="dostawa">
+  <datalist id="delivery">
+	{foreach $Dostawa as $sposob}
+	<option value="{$sposob['IdSposobDostawy']}">{$sposob['SposobDostawy']}</option>
+	{/foreach}
+	</datalist>
+<br>
+	<input type='hidden' name='suma' value={$suma}>
+	<input type='submit' name='submit' value=Zamów>
+</form>
 Suma: {$suma}
-{if isset($_COOKIE['ids'])}
-{$cookie = $_COOKIE['ids']}
-{$cookie = stripslashes($cookie)}
-{$dana = json_decode($cookie, true)}
-{$cookie = $_COOKIE['ilosci']}
-{$cookie = stripslashes($cookie)}
-{$dana = json_decode($cookie, true)}
-{/if}
-{if isset($error)}
-<strong>{$error}</strong>
+{else}
+<h2>Brak towarów do zamówienia.</h2>
 {/if}
 
 {include file="footer.html.php"}

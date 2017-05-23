@@ -60,7 +60,36 @@
 				//przetworzenie szablonu do wyświetlania danych pracowników do edycji
 				$this->render('editZamowienie');
 			}
+			public function listaZamowien()
+      {
+          $model = $this->getModel('Zamowienie');
+          if($model)
+          {
+              $data = $model->listaZamowien();
 
+              if(isset($data['zamowienia']))
+                   $this->set('tablicaZamowien', $data['zamowienia']);
+          }
+          if(isset($data['error']))
+              $this->set('error', $data['error']);
+          //przetworzenie szablonu do wyświetlania listy pracowników
+          $this->render('listaZamowien');
+      }
+			public function faktura($id)
+			{
+					$model = $this->getModel('Zamowienie');
+					if($model)
+					{
+							$data = $model->faktura($id);
+
+							if(isset($data['zamowienia']))
+									 $this->set('tablicaZamowien', $data['zamowienia']);
+					}
+					if(isset($data['error']))
+							$this->set('error', $data['error']);
+					//przetworzenie szablonu do wyświetlania listy pracowników
+					$this->render('faktura');
+			}
 
 
   }

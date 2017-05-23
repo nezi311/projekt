@@ -63,7 +63,7 @@ $stmt->execute();
  $users[]=array('imie'=>'Marcin','nazwisko'=>'Kornalski','dzial'=>'Obsługa klienta','stanowisko'=>'Pracownik','telefon'=>'777666555','login'=>'pracownik','haslo'=>'password','uprawnienia'=>1);
  foreach($users as $element_user)
  {
-   $stmt = $pdo->prepare('INSERT INTO `pracownicy`(`imie`,`nazwisko`,`dzial`,`stanowisko`,`telefon`,`login`,`haslo`,`uprawnienia`) VALUES (:imie,:nazwisko,:dzial,:stanowisko,:telefon,:login,:password,:role)');
+   $stmt = $pdo->prepare('INSERT INTO `Pracownicy`(`imie`,`nazwisko`,`dzial`,`stanowisko`,`telefon`,`login`,`haslo`,`uprawnienia`) VALUES (:imie,:nazwisko,:dzial,:stanowisko,:telefon,:login,:password,:role)');
    $stmt -> bindValue(':login',$element_user['login'],PDO::PARAM_STR);
    $md5password = md5($element_user['haslo']);
    $stmt -> bindValue(':password',$md5password,PDO::PARAM_STR);
@@ -313,7 +313,7 @@ $stmt->execute();
     $wynik_zapytania = $stmt -> execute();
   }
  /*************************************************/
- /*******************ZAMÓWIENIe********************/
+ /*******************ZAMÓWIENIA********************/
  /*************************************************/
  $stmt = $pdo->query("DROP TABLE IF EXISTS `Zamowienia`");
  $stmt->execute();
@@ -343,7 +343,6 @@ $stmt->execute();
  $towary[]=array(
    'TerminRealizacji'=>'2017-03-21',
    'DataRealizacji'=>'2017-03-20',
-   'KosztZamowienia'=>'600',
    'IdDostawcy'=>'1',
    'DataWystawienia'=>'2017-03-20',
    'NumerZamowienia'=>'2017/03/20/1',
@@ -354,7 +353,6 @@ $stmt->execute();
  $towary[]=array(
    'TerminRealizacji'=>'2017-03-23',
    'DataRealizacji'=>'2017-03-22',
-   'KosztZamowienia'=>'1550',
    'IdDostawcy'=>'1',
    'DataWystawienia'=>'2017-03-22',
    'NumerZamowienia'=>'2017/03/22/002',
@@ -364,10 +362,9 @@ $stmt->execute();
  );
  foreach($towary as $element_towar)
  {
-   $stmt = $pdo->prepare('INSERT INTO `Zamowienia`(`TerminRealizacji`, `DataRealizacji`, `KosztZamowienia`, `IdDostawcy`, `DataWystawienia`, `NumerZamowienia`, `IdSposobDostawy`, `KosztDostawy`, `WartoscTowarow`) VALUES (:TerminRealizacji,:DataRealizacji,:KosztZamowienia,:IdDostawcy,:DataWystawienia,:NumerZamowienia,:IdSposobDostawy,:KosztDostawy,:WartoscTowarow)');
+   $stmt = $pdo->prepare('INSERT INTO `Zamowienia`(`TerminRealizacji`, `DataRealizacji`, `KosztZamowienia`, `IdDostawcy`, `DataWystawienia`, `NumerZamowienia`, `IdSposobDostawy`, `KosztDostawy`, `WartoscTowarow`) VALUES (:TerminRealizacji,:DataRealizacji,(:KosztDostawy+:WartoscTowarow),:IdDostawcy,:DataWystawienia,:NumerZamowienia,:IdSposobDostawy,:KosztDostawy,:WartoscTowarow)');
    $stmt -> bindValue(':TerminRealizacji',$element_towar['TerminRealizacji'],PDO::PARAM_STR);
    $stmt -> bindValue(':DataRealizacji',$element_towar['DataRealizacji'],PDO::PARAM_STR);
-   $stmt -> bindValue(':KosztZamowienia',$element_towar['KosztZamowienia'],PDO::PARAM_INT);
    $stmt -> bindValue(':IdDostawcy',$element_towar['IdDostawcy'],PDO::PARAM_INT);
    $stmt -> bindValue(':DataWystawienia',$element_towar['DataWystawienia'],PDO::PARAM_STR);
    $stmt -> bindValue(':NumerZamowienia',$element_towar['NumerZamowienia'],PDO::PARAM_STR);
@@ -494,7 +491,11 @@ $stmt->execute();
     `Lokal` varchar(50) NULL,
     `KodPocztowy` varchar(6) NOT NULL,
     `Poczta` varchar(30) NOT NULL,
+    `Telefon` int NOT NULL,
+    `NrKonta` int NOT NULL,
+    `Bank` varchar(30) NOT NULL,
     `EMail` varchar(30) NOT NULL,
+    `NazwaFirmy` varchar(100) DEFAULT NULL,
     PRIMARY KEY (IdKlient)
   );");
   $stmt->execute();
@@ -509,12 +510,63 @@ $stmt->execute();
   'Lokal'=>'',
   'KodPocztowy'=>'63-400',
   'Poczta'=>'Ostrów Wlkp',
-  'EMail'=>'michal123@wp.pl');
+  'Telefon'=>'132456789',
+  'NrKonta'=>'12321455646',
+  'Bank'=>'PKO',
+  'EMail'=>'michal123@wp.pl',
+  'NazwaFirmy'=>'Drutex');
+
+  $klienci[]=array('Imie'=>'Dawid',
+  'Nazwisko'=>'Kowalski',
+  'NIP'=>'654789713',
+  'Miasto'=>'Ostrów Wlkp',
+  'Ulica'=>'Parczewskiego',
+  'Dom'=>'31',
+  'Lokal'=>'22',
+  'KodPocztowy'=>'63-400',
+  'Poczta'=>'Ostrów Wlkp',
+  'Telefon'=>'636547732',
+  'NrKonta'=>'5425346236',
+  'Bank'=>'Skok Stefczyka',
+  'EMail'=>'DKowal123@wp.pl',
+  'NazwaFirmy'=>'Marmoladex');
+
+
+  $klienci[]=array('Imie'=>'Maciej',
+  'Nazwisko'=>'Marciniak',
+  'NIP'=>'0122456789',
+  'Miasto'=>'Ostrów Wlkp',
+  'Ulica'=>'Strzelecka',
+  'Dom'=>'5B',
+  'Lokal'=>'7',
+  'KodPocztowy'=>'63-400',
+  'Poczta'=>'Ostrów Wlkp',
+  'Telefon'=>'763577335',
+  'NrKonta'=>'635636765546',
+  'Bank'=>'Milenium',
+  'EMail'=>'maciux@wp.pl',
+  'NazwaFirmy'=>'Maciux i spółka');
+
+  $klienci[]=array('Imie'=>'Kamil',
+  'Nazwisko'=>'Kowalski',
+  'NIP'=>'0123875789',
+  'Miasto'=>'Kalisz',
+  'Ulica'=>'Radosna',
+  'Dom'=>'69',
+  'Lokal'=>'',
+  'KodPocztowy'=>'63-401',
+  'Poczta'=>'Kalisz',
+  'Telefon'=>'675463347',
+  'NrKonta'=>'773775756346',
+  'Bank'=>'Amber Gold',
+  'EMail'=>'dojlido123@wp.pl',
+  'NazwaFirmy'=>'Kamilonex');
+
 
 
   foreach($klienci as $klient)
   {
-    $stmt = $pdo->prepare('INSERT INTO `Klient`(`Imie`,`Nazwisko`,`NIP`,`Miasto`,`Ulica`,`Dom`,`Lokal`,`KodPocztowy`,`Poczta`,`EMail`) VALUES (:Imie,:Nazwisko,:NIP,:Miasto,:Ulica,:Dom,:Lokal,:KodPocztowy,:Poczta,:EMail)');
+    $stmt = $pdo->prepare('INSERT INTO `Klient`(`Imie`,`Nazwisko`,`NIP`,`Miasto`,`Ulica`,`Dom`,`Lokal`,`KodPocztowy`,`Poczta`,`EMail`,`NazwaFirmy`,`Telefon`,`NrKonta`,`Bank`) VALUES (:Imie,:Nazwisko,:NIP,:Miasto,:Ulica,:Dom,:Lokal,:KodPocztowy,:Poczta,:EMail,:Firma,:Telefon,:NrKonta,:Bank)');
     $stmt -> bindValue(':Imie',$klient['Imie'],PDO::PARAM_STR);
     $stmt -> bindValue(':Nazwisko',$klient['Nazwisko'],PDO::PARAM_STR);
     $stmt -> bindValue(':NIP',$klient['NIP'],PDO::PARAM_INT);
@@ -525,6 +577,10 @@ $stmt->execute();
     $stmt -> bindValue(':KodPocztowy',$klient['KodPocztowy'],PDO::PARAM_STR);
     $stmt -> bindValue(':Poczta',$klient['Poczta'],PDO::PARAM_STR);
     $stmt -> bindValue(':EMail',$klient['EMail'],PDO::PARAM_STR);
+    $stmt -> bindValue(':Firma',$klient['NazwaFirmy'],PDO::PARAM_STR);
+    $stmt -> bindValue(':Telefon',$klient['Telefon'],PDO::PARAM_INT);
+    $stmt -> bindValue(':NrKonta',$klient['NrKonta'],PDO::PARAM_INT);
+    $stmt -> bindValue(':Bank',$klient['Bank'],PDO::PARAM_STR);
     $wynik_zapytania = $stmt -> execute();
   }
   /*************************************************/
@@ -592,12 +648,9 @@ $stmt->execute();
    `id` INT AUTO_INCREMENT,
    `IdTowar` int NOT NULL unique,
    `ilosc` int NOT NULL,
-   `klient` int NOT NULL,
    PRIMARY KEY (id),
    FOREIGN KEY (IdTowar)
-   REFERENCES Towar(IdTowar),
-   FOREIGN KEY (klient)
-   REFERENCES Klient(IdKlient)
+   REFERENCES Towar(IdTowar)
  );");
  /*************************************************/
  /*******************STATUS_ZAMÓWIENIA********************/
@@ -630,19 +683,21 @@ $stmt->execute();
  $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `zamowieniesprzedaz`
  (
    `IdZamowienieSprzedaz` INT AUTO_INCREMENT,
-   `DataZamowienia` date NOT NULL,
+   `DataZamowienia` DATE NOT NULL,
    `Wartosc` float NOT NULL,
-   `IdStanZamowienia` int NOT NULL,
-   `IdKlient` int NOT NULL,
-   `IdKoszykKopia` int NOT NULL,
+   `IdStanZamowienia` INT NOT NULL,
+   `IdKlient` INT NOT NULL,
+   `IdSposobDostawy` INT NOT NULL,
    PRIMARY KEY (IdZamowienieSprzedaz),
-   foreign key (IdStanZamowienia)
-   references statuszamowienia(IdStanZamowienia),
-   foreign key (IdKlient)
-   references klient(IdKlient)
+   FOREIGN KEY (IdStanZamowienia)
+   REFERENCES statuszamowienia(IdStanZamowienia),
+   FOREIGN KEY (IdSposobDostawy)
+   REFERENCES sposobdostawy(IdSposobDostawy),
+   FOREIGN KEY (IdKlient)
+   REFERENCES Klient(IdKlient)
     )ENGINE = InnoDB;");
  $stmt->execute();
-
+/*
  $kategorie = array();
  $kategorie[]=array(
    'DataZamowienia'=>'2017-03-04',
@@ -663,6 +718,7 @@ $kategorie[]=array(
    $stmt -> bindValue(':IdKlient',$element_kategoria['IdKlient'],PDO::PARAM_INT);
    $wynik_zapytania = $stmt -> execute();
  }
+ */
  /*************************************************/
  /*******************TOWARY_SPRZEDAZ********************/
  /*************************************************/
@@ -671,46 +727,57 @@ $stmt->execute();
 $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `towarySprzedaz`
 (
  `id` INT AUTO_INCREMENT,
- `IdTowar` int NOT NULL,
- `ilosc` int NOT NULL,
- `klient` int NOT NULL,
- `IdZamowienieSprzedaz` int NOT NULL,
+ `IdTowar` INT NOT NULL,
+ `ilosc` INT NOT NULL,
+ `klient` INT NOT NULL,
+ `cena` float NOT NULL,
+ `vat` float NOT NULL,
+ `IdZamowienieSprzedaz` INT NOT NULL,
  PRIMARY KEY (id),
  FOREIGN KEY (IdTowar)
  REFERENCES Towar(IdTowar),
  FOREIGN KEY (klient)
  REFERENCES Klient(IdKlient),
  FOREIGN KEY (IdZamowienieSprzedaz)
- REFERENCES ZamowienieSprzedaz(IdZamowienieSprzedaz)
-);");
+ REFERENCES zamowieniesprzedaz(IdZamowienieSprzedaz)
+)ENGINE = InnoDB;");
+/*
 $kategorie = array();
 $kategorie[]=array(
 'IdTowar'=>'2',
 'ilosc'=>'2',
 'klient'=>'1',
+'cena'=>'400',
 'IdZamowienieSprzedaz'=>'1'
 );
 $kategorie[]=array(
   'IdTowar'=>'1',
   'ilosc'=>'1',
   'klient'=>'1',
+  'cena'=>'500',
   'IdZamowienieSprzedaz'=>'1'
 );
 $kategorie[]=array(
   'IdTowar'=>'1',
   'ilosc'=>'1',
   'klient'=>'1',
+  'cena'=>'500',
   'IdZamowienieSprzedaz'=>'2'
 );
 foreach($kategorie as $element_kategoria)
 {
-  $stmt = $pdo->prepare('INSERT INTO `towarySprzedaz`(`IdTowar`,`ilosc`,`klient`,`IdZamowienieSprzedaz`) VALUES (:IdTowar,:ilosc,:klient,:IdZamowienieSprzedaz)');
+  $stmt = $pdo->prepare('INSERT INTO `towarySprzedaz`(`IdTowar`,`ilosc`,`klient`,`IdZamowienieSprzedaz`,`cena`) VALUES (:IdTowar,:ilosc,:klient,:IdZamowienieSprzedaz,:cena)');
   $stmt -> bindValue(':IdTowar',$element_kategoria['IdTowar'],PDO::PARAM_INT);
   $stmt -> bindValue(':ilosc',$element_kategoria['ilosc'],PDO::PARAM_INT);
   $stmt -> bindValue(':klient',$element_kategoria['klient'],PDO::PARAM_INT);
   $stmt -> bindValue(':IdZamowienieSprzedaz',$element_kategoria['IdZamowienieSprzedaz'],PDO::PARAM_INT);
+  $stmt -> bindValue(':cena',$element_kategoria['cena'],PDO::PARAM_STR);
   $wynik_zapytania = $stmt -> execute();
 }
+
+
+
+*/
 
  /*************************************************/
  /*******************CENA_HISTORIA*******************/
@@ -725,8 +792,8 @@ foreach($kategorie as $element_kategoria)
    `Cena` float NOT NULL,
    `IdTowar` int NOT NULL,
    PRIMARY KEY (IdCenaHistoria),
-   foreign key (IdTowar)
-   references towar(IdTowar)
+   FOREIGN KEY (IdTowar)
+   REFERENCES Towar(IdTowar)
  )ENGINE = InnoDB;");
  $stmt->execute();
 

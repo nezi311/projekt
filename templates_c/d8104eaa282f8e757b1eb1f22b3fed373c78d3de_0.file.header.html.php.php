@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-23 23:24:44
+/* Smarty version 3.1.31, created on 2017-05-21 18:31:28
   from "C:\xampp\htdocs\PZ\templates\header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58fd1b9c5d6b02_37509720',
+  'unifunc' => 'content_5921c0e04fddd1_25469475',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd8104eaa282f8e757b1eb1f22b3fed373c78d3de' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\header.html.php',
-      1 => 1492982614,
+      1 => 1495376549,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58fd1b9c5d6b02_37509720 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5921c0e04fddd1_25469475 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -33,17 +33,27 @@ function content_58fd1b9c5d6b02_37509720 (Smarty_Internal_Template $_smarty_tpl)
           <?php echo '<script'; ?>
  src="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-/js/jquery.min.js"><?php echo '</script'; ?>
+js/jquery.min.js"><?php echo '</script'; ?>
 >
           <?php echo '<script'; ?>
  src="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-/js/jquery-ui.min.js"><?php echo '</script'; ?>
+js/jquery-ui.min.js"><?php echo '</script'; ?>
 >
           <?php echo '<script'; ?>
  src="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 js/sorttable.js"><?php echo '</script'; ?>
+>
+          <?php echo '<script'; ?>
+ src="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+js/stat.js"><?php echo '</script'; ?>
+>
+          <?php echo '<script'; ?>
+ src="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+js/collapsiderHide.js"><?php echo '</script'; ?>
 >
           <!-- Bootstrap -->
           <?php echo '<script'; ?>
@@ -135,8 +145,11 @@ Szukaj/" method="post">
                 <ul class="nav navbar-nav navbar-right">
                   <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Zamowienia"><span class="glyphicon glyphicon-barcode"></span> Zamówienia klientów</a></li>
+                  <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Koszyk"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk</a></li>
-                  <li><a href="#"><span class="glyphicon glyphicon-time"></span> Historia</a></li>
+                  <!--<li><a href="#"><span class="glyphicon glyphicon-time"></span> Historia</a></li>-->
 
 
                                       <?php if ($_SESSION['role'] <= 1) {?>

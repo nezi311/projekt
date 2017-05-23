@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-04-23 22:13:44
-  from "E:\xampp\htdocs\PZ\templates\logform.html.php" */
+/* Smarty version 3.1.31, created on 2017-05-21 19:23:30
+  from "C:\xampp\htdocs\PZ\templates\logform.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_58fd0af892a5e8_34214139',
+  'unifunc' => 'content_5921cd1284bad6_43271790',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'dd6958d0b866714aebec6dc2682bdacc94cc99e3' => 
+    '74290905c294b97ae1143975c349d0a3d10ce1f6' => 
     array (
-      0 => 'E:\\xampp\\htdocs\\PZ\\templates\\logform.html.php',
-      1 => 1488911382,
+      0 => 'C:\\xampp\\htdocs\\PZ\\templates\\logform.html.php',
+      1 => 1490647715,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58fd0af892a5e8_34214139 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5921cd1284bad6_43271790 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>

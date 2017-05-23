@@ -28,7 +28,7 @@
         try
         {
           $user=array();
-          $stmt = $this->pdo->prepare('SELECT * FROM `pracownicy` WHERE `login`=:login');
+          $stmt = $this->pdo->prepare('SELECT * FROM `Pracownicy` WHERE `login`=:login');
           $stmt->bindValue(':login', $login, PDO::PARAM_STR);
           $result = $stmt->execute();
           $user = $stmt->fetchAll();
@@ -51,6 +51,27 @@
 								\Tools\AccessRoles::login($login,$user[0]['uprawnienia'],$user[0]['id']);
 								//d($_SESSION);
 								//return 0;
+								if(isset($_COOKIE['ilosci']) and isset($_COOKIE['idtowary']))
+								{
+									$cookie = $_COOKIE['idtowary'];
+									$cookie = stripslashes($cookie);
+									$ids = json_decode($cookie, true);
+
+									$cookie = $_COOKIE['ilosci'];
+									$cookie = stripslashes($cookie);
+									$quantity = json_decode($cookie, true);
+
+									$stmt2 = $this->pdo->prepare('truncate table koszyk');
+									$stmt2 -> execute();
+
+										foreach (array_combine($ids, $quantity) as $towar => $ile)
+										{
+											$stmt = $this->pdo->prepare('insert into `koszyk`(`IdTowar`,`ilosc`,`klient`) values(:IdTowar,:ilosc,1);');
+											$stmt -> bindValue(':IdTowar',$towar,PDO::PARAM_INT);
+											$stmt -> bindValue(':ilosc',$ile,PDO::PARAM_INT);
+											$wynik_zapytania = $stmt -> execute();
+										}
+								}
 							}
 							else
 							{

@@ -90,7 +90,14 @@ class Zamowienie extends Controller
       else
         $this->redirect('index/');
     }
-
+    public function listaZamowien(){
+			$view = $this->getView('Zamowienie');
+			$view->listaZamowien();
+		}
+    public function faktura($id){
+      $view = $this->getView('Zamowienie');
+      $view->faktura($id);
+    }
 
 }
 ?>
