@@ -12,17 +12,6 @@
                 try
                 {
                     $statystyki = array();
-<<<<<<< HEAD
-                    $stmt = $this->pdo->query("SELECT NazwaTowaru, COUNT(*)*ilosc AS wartosc
-										FROM towar
-										INNER JOIN towarysprzedaz
-										ON towarysprzedaz.idTowar=towar.IdTowar
-											INNER JOIN zamowieniesprzedaz
-										    ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
-										 WHERE DataZamowienia BETWEEN '2016-01-01' AND '2017-04-23'
-										 GROUP BY NazwaTowaru
-										ORDER BY `wartosc` ASC");
-=======
 //ilość towaru
 if($kryterium==="kategoriaKasa")
 {
@@ -76,25 +65,15 @@ ORDER BY `wartosc` asc');
 //pieniądze z towaru
 if($kryterium==="towarKasa")
 {
-                    $stmt = $this->pdo->prepare('SELECT Towar.NazwaTowaru AS nazwa, Kategoria.NazwaKategorii AS Kategoria, CONCAT(SUM(towarySprzedaz.cena)*ilosc," zł.") AS wartosc
+                    $stmt = $this->pdo->prepare('SELECT Towar.NazwaTowaru AS nazwa, Kategoria.NazwaKategorii AS kategoria, CONCAT(SUM(towarysprzedaz.cena)*ilosc," zł.") AS wartosc
 FROM Towar
 INNER JOIN towarySprzedaz
 ON towarySprzedaz.idTowar=Towar.IdTowar
 	INNER JOIN zamowieniesprzedaz
-<<<<<<< HEAD
-    ON towarySprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
-=======
     ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
-    INNER JOIN kategoria
-    ON towar.IdKategoria=kategoria.IdKategoria
- WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza)
-<<<<<<< HEAD
->>>>>>> 3d2ea1ec7f4a3703d5632fc0ff5d63f4fc710be7
     INNER JOIN Kategoria
-    ON Towar.IdKategoria=Kategoria.IdKategoria
- WHERE DataZamowienia BETWEEN :dataOd AND :dataDo
- GROUP BY towarySprzedaz.cena
-=======
+    ON towar.IdKategoria=Kategoria.IdKategoria
+ WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza)
  GROUP BY Towarysprzedaz.cena
 ORDER BY `wartosc` asc');
 }
@@ -136,17 +115,16 @@ $stmt->bindValue(':kategoria', $kategoria, PDO::PARAM_INT);
 //pieniądze z towaru
 if($kryterium==="towarKasa" && $kategoria!=0)
 {
-                    $stmt = $this->pdo->prepare('SELECT Towar.NazwaTowaru AS nazwa, kategoria.NazwaKategorii AS kategoria, CONCAT(SUM(towarysprzedaz.cena)*ilosc," zł.") AS wartosc
+                    $stmt = $this->pdo->prepare('SELECT Towar.NazwaTowaru AS nazwa, Kategoria.NazwaKategorii AS Kategoria, CONCAT(SUM(towarysprzedaz.cena)*ilosc," zł.") AS wartosc
 FROM Towar
 INNER JOIN towarySprzedaz
 ON towarySprzedaz.idTowar=Towar.IdTowar
 	INNER JOIN zamowieniesprzedaz
     ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
-    INNER JOIN kategoria
-    ON towar.IdKategoria=kategoria.IdKategoria
+    INNER JOIN Kategoria
+    ON towar.IdKategoria=Kategoria.IdKategoria
  WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza) AND (Towar.IdKategoria=:kategoria)
  GROUP BY Towarysprzedaz.cena
->>>>>>> cdf45e430fb959ad5bfdf99ba34518a7d0e7dfd8
 ORDER BY `wartosc` asc');
 $stmt->bindValue(':kategoria', $kategoria, PDO::PARAM_INT);
 }
@@ -164,7 +142,6 @@ $stmt->bindValue(':fraza', '%'.$fraza.'%', PDO::PARAM_STR);
 $stmt->bindValue(':dataOd', $dataOd, PDO::PARAM_STR);
 $stmt->bindValue(':dataDo', $dataDo, PDO::PARAM_STR);
 $result = $stmt->execute();
->>>>>>> 46e61074cdf067578c0d5bdc5026aaab80bea70b
                     $statystyki = $stmt->fetchAll();
                     $stmt->closeCursor();
                     if($statystyki && !empty($statystyki))
