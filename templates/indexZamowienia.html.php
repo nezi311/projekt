@@ -10,15 +10,15 @@
     </tr>
   </thead>
 {if isset($tablicaZamowien)}
-  {foreach $tablicaZamowien as $towar}
+  {foreach $tablicaZamowien as $zamowienie}
   <tr>
-    <td>{$towar['NazwaTowaru']}</td>
-    <td>{$towar['MinStanMagazynowy']}</td>
-    <td>{$towar['MaxStanMagazynowy']}</td>
-    <td>{$towar['StawkaVat']}</td>
-    <td>{$towar['IdKategoria']}</td>
-    <td>{$towar['IdJednostkaMiary']}</td>
-    <td>{$towar['Status']}</td>
+    <td>{$zamowienie['NazwaTowaru']}</td>
+    <td>{$zamowienie['MinStanMagazynowy']}</td>
+    <td>{$zamowienie['MaxStanMagazynowy']}</td>
+    <td>{$zamowienie['StawkaVat']}</td>
+    <td>{$zamowienie['IdKategoria']}</td>
+    <td>{$zamowienie['IdJednostkaMiary']}</td>
+    <td>{$zamowienie['Status']}</td>
     <td><a href="" role="button">Edytuj</a></td>
     <td><a href="" role="button">Anuluj</a></td>
   </tr>

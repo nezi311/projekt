@@ -17,6 +17,16 @@ class Klient extends Controller
       $this->redirect('index/');
   }
 
+  public function szukaj()
+  {
+    $model = $this->getModel('Klient');
+    if($model)
+    {
+      $data = $model->search($_POST['fraza1'],$_POST['fraza2'],$_POST['fraza3'],$_POST['fraza4'],$_POST['fraza5']);
+      $this->index($data);
+    }
+  }
+
   // ** Dawid Dominiak **//
   public function showone($id=null)
   {
@@ -37,7 +47,7 @@ class Klient extends Controller
       $model=$this->getModel('Klient');
           if($model)
           {
-            $data = $model->update($_POST['id'],$_POST['imie'],$_POST['nazwisko'],$_POST['NIP'],$_POST['Miasto'],$_POST['Ulica'],$_POST['Dom'],$_POST['Lokal'],$_POST['KodPocztowy'],$_POST['Poczta'],$_POST['Email']);
+            $data = $model->update($_POST['id'],$_POST['imie'],$_POST['nazwisko'],$_POST['NIP'],$_POST['Miasto'],$_POST['Ulica'],$_POST['Dom'],$_POST['Lokal'],$_POST['KodPocztowy'],$_POST['Poczta'],$_POST['Email'],$_POST['NazwaFirmy']);
           }
           if($data['error']=="")
           {
@@ -171,7 +181,7 @@ class Klient extends Controller
             if($model)
             {
 
-              $data = $model->insert($_POST['imie'],$_POST['nazwisko'],$_POST['NIP'],$_POST['Miasto'],$_POST['Ulica'],$_POST['Dom'],$_POST['Lokal'],$_POST['KodPocztowy'],$_POST['Poczta'],$_POST['Email']);
+              $data = $model->insert($_POST['imie'],$_POST['nazwisko'],$_POST['NIP'],$_POST['Miasto'],$_POST['Ulica'],$_POST['Dom'],$_POST['Lokal'],$_POST['KodPocztowy'],$_POST['Poczta'],$_POST['Email'],$_POST['NazwaFirmy']);
               //pobranie komunikatów o bledach
             }
             if($data['error'] === "") // jeśli bledy nie istnieją, przechodzimy do zakladnki "Klient"

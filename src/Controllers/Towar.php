@@ -134,7 +134,7 @@ class Towar extends Controller
             $model=$this->getModel('Towar');
                     if($model)
                     {
-                      $data = $model->zrealizuj($_POST['suma']);
+                      $data = $model->zrealizuj($_POST['suma'],$_POST['klient'],$_POST['dostawa']);
                         //nie przekazano komunikatów o błędzie
                     }
                   $this->redirect('Towar/');

@@ -28,6 +28,31 @@ GROUP BY NazwaKategorii');
                 }
             return $data;
 		}
+
+		public function getOne($id){
+            $data = array();
+            if(!$this->pdo)
+                $data['error'] = 'Połączenie z bazą nie powidoło się!';
+            else
+                try
+                {
+                    $kategorie = array();
+                    $stmt = $this->pdo->prepare('SELECT Kategoria.IdKategoria, NazwaKategorii, IdTowar, NazwaTowaru, StanMagazynowyDysponowany, StawkaVat,KodTowaru,Nazwa, Freeze,Cena FROM Kategoria Inner JOIN Towar ON Towar.IdKategoria= Kategoria.IdKategoria inner join JednostkaMiary ON Towar.IdJednostkaMiary=JednostkaMiary.IdJednostkaMiary WHERE Kategoria.IdKategoria=:id');
+$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+$result = $stmt->execute();
+                    $kategorie = $stmt->fetchAll();
+                    $stmt->closeCursor();
+                    if($kategorie && !empty($kategorie))
+                        $data['kategorie'] = $kategorie;
+                    else
+                        $data['kategorie'] = array();
+                }
+                catch(\PDOException $e)
+                {
+                    $data['error'] = 'Błąd odczytu danych z bazy!'. $e->getMessage();
+                }
+            return $data;
+		}
 		//model usuwa wybraną kategorię
 		public function delete($id){
             $data = array();

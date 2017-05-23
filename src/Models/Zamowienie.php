@@ -148,6 +148,64 @@
 		}
 			return $data;
 		}
+		public function listaZamowien()
+		{
+			$data = array();
+			if(!$this->pdo)
+					$data['error'] = 'Połączenie z bazą nie powidoło się!';
+			else
+					try
+					{
+							$stmt = $this->pdo->query("SELECT zamowieniesprzedaz.DataZamowienia, towar.NazwaTowaru, towarysprzedaz.ilosc, towarysprzedaz.vat, towarysprzedaz.cena, zamowieniesprzedaz.Wartosc, klient.Nazwisko, klient.Imie, klient.IdKlient, towarysprzedaz.IdZamowienieSprzedaz, sposobdostawy.* from zamowieniesprzedaz inner join klient on zamowieniesprzedaz.IdKlient = klient.IdKlient inner join towarysprzedaz on towarysprzedaz.IdZamowienieSprzedaz = zamowieniesprzedaz.IdZamowienieSprzedaz inner JOIN towar on towar.IdTowar = towarysprzedaz.IdTowar inner join sposobdostawy on sposobdostawy.IdSposobDostawy = zamowieniesprzedaz.IdSposobDostawy");
+							$zamowienia = $stmt->fetchAll();
+							$stmt->closeCursor();
+							if($zamowienia && !empty($zamowienia))
+									$data['zamowienia'] = $zamowienia;
+							else
+									$data['$zamowienia'] = array();
+					}
+					catch(\PDOException $e)
+					{
+							$data['error'] = 'Błąd odczytu danych z bazy! ';
+					}
+			return $data;
+		}
+		public function faktura($id)
+		{
+			$blad=false;
+			$data = array();
+			if(!$this->pdo)
+					$data['error'] = 'Połączenie z bazą nie powidoło się!';
+			else
+			if($id === null || $id === "")
+			{
+				$data['error'] .= 'Nieokreślone zamówienie. <br>';
+				$blad=true;
+			}
+			if($blad != true)
+			{
+					try
+					{
+							$stmt = $this->pdo->query("SELECT zamowieniesprzedaz.DataZamowienia, towar.NazwaTowaru, towarysprzedaz.ilosc, towarysprzedaz.vat, towarysprzedaz.cena, zamowieniesprzedaz.Wartosc, towarysprzedaz.IdZamowienieSprzedaz, klient.*, sposobdostawy.* from zamowieniesprzedaz
+								inner join klient on zamowieniesprzedaz.IdKlient = klient.IdKlient
+								inner join towarysprzedaz on towarysprzedaz.IdZamowienieSprzedaz = zamowieniesprzedaz.IdZamowienieSprzedaz
+								inner JOIN towar on towar.IdTowar = towarysprzedaz.IdTowar
+								inner join sposobdostawy on sposobdostawy.IdSposobDostawy = zamowieniesprzedaz.IdSposobDostawy
+								where zamowieniesprzedaz.IdZamowienieSprzedaz = $id");
+							$zamowienia = $stmt->fetchAll();
+							$stmt->closeCursor();
+							if($zamowienia && !empty($zamowienia))
+									$data['zamowienia'] = $zamowienia;
+							else
+									$data['$zamowienia'] = array();
+					}
+					catch(\PDOException $e)
+					{
+							$data['error'] = 'Błąd odczytu danych z bazy! ';
+					}
+				}
+			return $data;
+		}
 
   }
 

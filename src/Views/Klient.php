@@ -9,17 +9,18 @@
           $model = $this->getModel('Klient');
           if($model)
           {
-						/*
-              $data = $model->getAllShorter();
-
-              if(isset($data['Klient']))
-                   $this->set('tablicaKlient', $data['Klient']);
-						*/
-
-						$data = $model->getAll();
-		        if(isset($data['Klienci']))
-		        	$this->set('tablicaKlienci', $data['Klienci']);
-
+						if(!isset($data))
+						{
+							$data = $model->getAll();
+							if(isset($data['Klienci']))
+								$this->set('tablicaKlienci', $data['Klienci']);
+								$this->set('Dostawa', $data['Dostawa']);
+						}
+						else
+						{
+							if(isset($data['Klienci']))
+								$this->set('tablicaKlienci', $data['Klienci']);
+						}
           }
           if(isset($data['error']))
               $this->set('error', $data['error']);

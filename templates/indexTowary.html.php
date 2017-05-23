@@ -6,21 +6,25 @@
 <table class="table sorttable">
   <thead>
     <tr>
-      <th>Nazwa Towaru</th><th>Stan Magazynowy Dysponowany</th><th>Stawka Vat</th><th>Kod Towaru</th><th>Kategoria</th><th>Jednostka Miary</th><th>Cena</th><th>Edytuj</th><th>Zamroz</th><th>Kup</th><th>usun</th>
+      <th>Nazwa Towaru</th><th>Stan Magazynowy Dysponowany</th><th>Stawka Vat</th><th>Kod Towaru</th><th>Kategoria</th><th>Jednostka Miary</th><th>Cena</th><th></th><th>Kup</th>
     </tr>
   </thead>
 {if isset($tablicaTowarow)}
   {foreach $tablicaTowarow as $towar}
   <tr>
-    <td>{$towar['NazwaTowaru']}</td>
+    <td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/showone/{$towar['IdTowar']}" role="button">{$towar['NazwaTowaru']}</a></td>
     <td>{$towar['StanMagazynowyDysponowany']}</td>
     <td>{$towar['StawkaVat']}</td>
     <td>{$towar['KodTowaru']}</td>
     <td>{$towar['Kategoria']}</td>
     <td>{$towar['JednostkaMiary']}</td>
 		<td>{$towar['Cena']}</td>
-    <td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/edit/{$towar['IdTowar']}" role="button">Edytuj</a></td>
-    <td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/freeze/{$towar['IdTowar']}" role="button">Zamroź</a></td>
+		<td>
+		<div class="btn-group" role="group">
+    <a type="button" class="btn btn-primary" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/edit/{$towar['IdTowar']}" >Edytuj</a>
+    <a type="button" class="btn btn-primary"href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/freeze/{$towar['IdTowar']}" role="button">Zamroź</a>
+	</div>
+	</td>
 		<td>
 		<form action="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/koszyk/{$towar['IdTowar']}" method="post">
 			<input type='hidden' name='IdTowar' value={$towar['IdTowar']}>
@@ -35,9 +39,7 @@
 				{/while}
 			</select>
 		</form>
-		</td>
-    <td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/delete/{$towar['IdTowar']}" role="button">Usuń</a></td>
-  </tr>
+
   {/foreach}
 {/if}
 </table>
