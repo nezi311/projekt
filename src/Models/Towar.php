@@ -173,8 +173,7 @@
 			return $data;
 		}
 
-<<<<<<< HEAD
-=======
+
 		public function edit($id, $NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary) {
 
 			$blad=false;
@@ -269,7 +268,7 @@
 	          }
 	      return $data;
 		}
->>>>>>> 22ad7dd4ee4ccaecd66d92535f3bad8187496cbc
+
 
     public function getFreeze()
     {

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-05-23 16:43:58
+/* Smarty version 3.1.31, created on 2017-05-23 18:31:45
   from "/opt/lampp/htdocs/PZ/templates/header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_59244aae4315a5_22564823',
+  'unifunc' => 'content_592463f17e8178_06950776',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '66e378da416daab7ad10377897dbd6f79fbd3e8a' => 
     array (
       0 => '/opt/lampp/htdocs/PZ/templates/header.html.php',
-      1 => 1495550575,
+      1 => 1495556533,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_59244aae4315a5_22564823 (Smarty_Internal_Template $_smarty_tpl) {
+function content_592463f17e8178_06950776 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -114,12 +114,18 @@ Towar/freeze" class="glyphicon glyphicon-list-alt"> Zamrożone Towary</a></li>
                     <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Towar/add" class="glyphicon glyphicon-plus"> Dodaj Towar</a></li>
+<<<<<<< HEAD
                     <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
                     <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Cennik" class="glyphicon glyphicon-list-alt"> Cennik towarów</a></li>
+=======
+                    <!--<li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>-->
+>>>>>>> 22ad7dd4ee4ccaecd66d92535f3bad8187496cbc
                   </ul>
 
                 </li>
@@ -128,7 +134,7 @@ echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Kategoria"><span class="glyphicon glyphicon-list-alt"></span> Kategorie</a></li>
         <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Statystyka"><span class="glyphicon glyphicon-signal"></span> Statystyki</a></li>
+Statystyka"><span class="glyphicon glyphicon-signal"></span> Zestawienia</a></li>
 
 
             </li>
