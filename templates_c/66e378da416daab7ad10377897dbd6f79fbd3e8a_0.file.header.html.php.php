@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-05-23 14:52:35
+/* Smarty version 3.1.31, created on 2017-05-23 16:43:58
   from "/opt/lampp/htdocs/PZ/templates/header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_592430935a1786_60048875',
+  'unifunc' => 'content_59244aae4315a5_22564823',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '66e378da416daab7ad10377897dbd6f79fbd3e8a' => 
     array (
       0 => '/opt/lampp/htdocs/PZ/templates/header.html.php',
-      1 => 1495542735,
+      1 => 1495550575,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_592430935a1786_60048875 (Smarty_Internal_Template $_smarty_tpl) {
+function content_59244aae4315a5_22564823 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -117,6 +117,9 @@ Towar/add" class="glyphicon glyphicon-plus"> Dodaj Towar</a></li>
                     <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
+                    <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Cennik" class="glyphicon glyphicon-list-alt"> Cennik towarów</a></li>
                   </ul>
 
                 </li>

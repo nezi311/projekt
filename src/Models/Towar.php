@@ -27,6 +27,54 @@
       return $data;
     }
 
+		public function getNotPriced()
+		{
+			$data = array();
+			if(!$this->pdo)
+					$data['error'] = 'Połączenie z bazą nie powidoło się!';
+			else
+					try
+					{
+							$stmt = $this->pdo->query("SELECT * FROM Towar WHERE Cena IS NULL");
+							$towary = $stmt->fetchAll();
+							$stmt->closeCursor();
+							if($towary && !empty($towary))
+							{
+								$data['towary'] = $towary;
+							}
+							else
+							{
+								$data['towary'] = array();
+							}
+					}
+					catch(\PDOException $e)
+					{
+							$data['error'] = 'Błąd odczytu danych z bazy! ';
+					}
+			return $data;
+		}
+
+		public function getNotPricedCount()
+		{
+			$data = array();
+			if(!$this->pdo)
+					$data['error'] = 'Połączenie z bazą nie powidoło się!';
+			else
+					try
+					{
+							$stmt = $this->pdo->query("SELECT * FROM Towar WHERE Cena IS NULL");
+							$towary = $stmt->fetchAll();
+							$iloscWierszy = $stmt->rowCount();
+							$stmt->closeCursor();
+
+					}
+					catch(\PDOException $e)
+					{
+							$data['error'] = 'Błąd odczytu danych z bazy! ';
+					}
+			return $iloscWierszy;
+		}
+
 
 		public function search($towar)
 		{
@@ -53,7 +101,7 @@
 			return $data;
 		}
 
-			public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary,$Cena)
+		public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary,$Cena)
 		{
 			$blad=false;
 			$data = array();
@@ -125,10 +173,6 @@
 			return $data;
 		}
 
-		public function add()
-		{
-
-		}
 
     public function getFreeze()
     {

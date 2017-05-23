@@ -49,6 +49,7 @@
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/freeze" class="glyphicon glyphicon-list-alt"> Zamrożone Towary</a></li>
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/add" class="glyphicon glyphicon-plus"> Dodaj Towar</a></li>
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
+                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Cennik" class="glyphicon glyphicon-list-alt"> Cennik towarów</a></li>
                   </ul>
 
                 </li>

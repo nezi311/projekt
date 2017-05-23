@@ -187,13 +187,14 @@ $stmt->execute();
    `cena` float NOT NULL,
    `dataOd` DATE NOT NULL,
    `dataDo` DATE NULL,
-   `aktualny` VARCHAR(1) DEFAULT 'T',
-   `poprzedniaCenaId` INT NULL,
+   `aktualny` VARCHAR(1) DEFAULT 'N',
+   `opis` varchar(150) DEFAULT NULL,
    PRIMARY KEY (idCennik)
  )ENGINE = InnoDB;");
 
- $datee=date("d-m-Y");
+ $datee=date("Y-m-d");
  $stmt->execute();
+ /*
  $cennik = array();
  $cennik[]=array('idTowar'=>1,'cena'=>100,'dataOd'=>$datee);
  foreach($cennik as $element_towar)
@@ -204,16 +205,16 @@ $stmt->execute();
    $stmt -> bindValue(':dataOd',$element_towar['dataOd'],PDO::PARAM_STR);
    $wynik_zapytania = $stmt -> execute();
  }
-
+*/
 
  $stmt = $pdo->query("ALTER TABLE cennik ADD FOREIGN KEY (idTowar)
  REFERENCES Towar(IdTowar)");
  $stmt->execute();
-
+/*
  $stmt = $pdo->query("ALTER TABLE cennik ADD FOREIGN KEY (poprzedniaCenaId)
  REFERENCES cennik(idCennik)");
  $stmt->execute();
-
+*/
  $stmt = $pdo->query("ALTER TABLE Towar ADD  FOREIGN KEY (Cena)
  REFERENCES cennik(idCennik)");
  $stmt->execute();
