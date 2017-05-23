@@ -16,17 +16,15 @@
         try
         {
           $user=null;
-          $stmt = $this->pdo->prepare('SELECT * FROM `users` WHERE `login`=:login');
+          $stmt = $this->pdo->prepare('SELECT * FROM `uzytkownik` WHERE (`login`=:login) AND (`haslo`=:haslo));
           $stmt->bindValue(':login', $login, PDO::PARAM_STR);
+					$stmt->bindValue(':login', $haslo, PDO::PARAM_STR);
           $result = $stmt->execute();
           $user = $stmt->fetchAll();
+          $rows = $stmt->rowCount();
           $stmt->closeCursor();
 
-          //d($user[0]['login']);
-
-
-
-          if(strcmp($password, $user[0]['password'])===0)
+          if($rows==1)
           {
             \Tools\Access::login($login);
             return 0;

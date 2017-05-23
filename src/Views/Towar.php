@@ -54,6 +54,8 @@
 							$this->set('Klienci', $data['Klienci']);
 							if(isset($data['Dostawa']))
 								$this->set('Dostawa', $data['Dostawa']);
+								if(isset($data['Zaplata']))
+									$this->set('Zaplata', $data['Zaplata']);
 					}
           if(isset($data['error']))
               $this->set('error', $data['error']);
@@ -63,6 +65,23 @@
 
 			public function add($data)
 			{
+
+				$model = $this->getModel('Kategoria');
+				if($model)
+				{
+						$data = $model->getAll();
+
+						if(isset($data['kategorie']))
+								 $this->set('tablicaKategorie', $data['kategorie']);
+				}
+				$model = $this->getModel('Towar');
+				if($model)
+				{
+						$data = $model->getJed();
+
+						if(isset($data['jednostki']))
+								 $this->set('tablicaJednostki', $data['jednostki']);
+				}
 				// sprawdzenie czy tablica data, posiada informacje o bledach
 				if(isset($data['error']))
 						$this->set('error', $data['error']);// jesli tak to przypisujemy je do zmiennej
@@ -102,6 +121,8 @@
 			// ** Dawid Dominiak **//
 			public function edit($data=null)
 			{
+
+
 				//sprawdzenie czy tablica data, posiada dane pracownika
 				if(isset($data['towar']))
 					$this->set('tablicaTowar', $data['towar']); // jesli tak przypisujemy je do zmiennej
@@ -116,6 +137,23 @@
 
 			public function showone($id=null)
 			{
+
+				$model = $this->getModel('Kategoria');
+				if($model)
+				{
+						$data = $model->getAll();
+
+						if(isset($data['kategorie']))
+								 $this->set('tablicaKategorie', $data['kategorie']);
+				}
+				$model = $this->getModel('Towar');
+				if($model)
+				{
+						$data = $model->getJed();
+
+						if(isset($data['jednostki']))
+								 $this->set('tablicaJednostki', $data['jednostki']);
+				}
 
 				$model = $this->getModel('Towar');
 				if($model)

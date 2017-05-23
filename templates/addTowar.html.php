@@ -42,8 +42,9 @@
       <label class="control-label col-sm-2" for="IdKategoria">Id Kategoria :</label>
       <div class="col-sm-10">
         <select class="form-control" id="IdKategoria" name="IdKategoria">
-          <option value="1">elektronika</option>
-          <option value="2">inne</option>
+          {foreach $tablicaKategorie as $kat}
+          <option value="{$kat['IdKategoria']}">{$kat['NazwaKategorii']}</option>
+          {/foreach}
         </select>
       </div>
     </div>
@@ -51,8 +52,9 @@
       <label class="control-label col-sm-2" for="IdJednostkaMiary">jednostka miary :</label>
       <div class="col-sm-10">
         <select class="form-control" id="IdJednostkaMiary" name="IdJednostkaMiary">
-          <option value="1">sztuka</option>
-          <option value="2">litr</option>
+          {foreach $tablicaJednostki as $jed}
+          <option value="{$jed['IdJednostkaMiary']}">{$jed['Nazwa2']}</option>
+          {/foreach}
         </select>
       </div>
     </div>

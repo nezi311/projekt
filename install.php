@@ -2,7 +2,6 @@
 require_once('vendor/autoload.php');
 \Config\Database\DBConfig::setDBConfig();
  $pdo=\Config\Database\DBConfig::getHandle();
-
 try{
   $stmt = $pdo->query("DROP TABLE if exists `cenahistoria`,`towarySprzedaz`, `zamowieniesprzedaz`, `statuszamowienia`, `koszyk`, `dostawcatowar`, `klient`, `zamowienietowar`, `zamowienietowarkopia`, `zamowienia`, `Dostawca`, `towar`, `Jednostkamiary`, `kategoria`,`pracownicy`,`users`;");
   $stmt->execute();
@@ -14,7 +13,6 @@ $stmt->execute();
 $stmt = $pdo->query("CREATE TABLE `bilans` (
   `IdBilans` int(11) NOT NULL
 );");
-
 /*************************************************/
 /*******************SPOSOBDOSTAWY********************/
 /*************************************************/
@@ -27,7 +25,6 @@ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `sposobdostawy`
   PRIMARY KEY (IdSposobDostawy)
 )ENGINE = InnoDB;");
 $stmt->execute();
-
 $kategorie = array();
 $kategorie[]=array('SposobDostawy'=>'Kurier');
 $kategorie[]=array('SposobDostawy'=>'Odbior Osobisty');
@@ -57,7 +54,6 @@ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `Pracownicy`
   PRIMARY KEY (id)
 );");
 $stmt->execute();
-
  $users = array();
  $users[]=array('imie'=>'Dawid','nazwisko'=>'Dominiak','dzial'=>'IT','stanowisko'=>'Administrator','telefon'=>'666666666','login'=>'root','haslo'=>'password','uprawnienia'=>0);
  $users[]=array('imie'=>'Marcin','nazwisko'=>'Kornalski','dzial'=>'Obsługa klienta','stanowisko'=>'Pracownik','telefon'=>'777666555','login'=>'pracownik','haslo'=>'password','uprawnienia'=>1);
@@ -74,7 +70,6 @@ $stmt->execute();
    $stmt -> bindValue(':stanowisko',$element_user['stanowisko'],PDO::PARAM_STR);
    $stmt -> bindValue(':telefon',$element_user['telefon'],PDO::PARAM_STR);
    $wynik_zapytania = $stmt -> execute();
-
  }
  /*************************************************/
  /*******************KATEGORIA********************/
@@ -88,7 +83,6 @@ $stmt->execute();
    PRIMARY KEY (IdKategoria)
  )ENGINE = InnoDB;");
  $stmt->execute();
-
  $kategorie = array();
  $kategorie[]=array('NazwaKategorii'=>'elektronika');
  $kategorie[]=array('NazwaKategorii'=>'Inne');
@@ -111,7 +105,6 @@ $stmt->execute();
    PRIMARY KEY (IdJednostkaMiary)
  )ENGINE = InnoDB;");
  $stmt->execute();
-
  $jednostki = array();
  $jednostki[]=array('Nazwa'=>'sztuka','NazwaSkrocona'=>'szt');
  $jednostki[]=array('Nazwa'=>'litr','NazwaSkrocona'=>'l');
@@ -122,12 +115,6 @@ $stmt->execute();
    $stmt -> bindValue(':NazwaSkrocona',$element_jednostka['NazwaSkrocona'],PDO::PARAM_STR);
    $wynik_zapytania = $stmt -> execute();
  }
-
-
-
-
-
-
  /*************************************************/
  /*******************TOWAR*************************/
  /*************************************************/
@@ -154,7 +141,6 @@ $stmt->execute();
    REFERENCES Jednostkamiary(IdJednostkaMiary)
  )ENGINE = InnoDB;");
  $stmt->execute();
-
  $towary = array();
  $towary[]=array('NazwaTowaru'=>'klawiatura','MinStanMagazynowy'=>1,'MaxStanMagazynowy'=>1,'StanMagazynowyRzeczywisty'=>1,'StanMagazynowyDysponowany'=>1,'StawkaVat'=>8,'KodTowaru'=>'a43dv42','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>1);
  $towary[]=array('NazwaTowaru'=>'mysz','MinStanMagazynowy'=>1,'MaxStanMagazynowy'=>1,'StanMagazynowyRzeczywisty'=>1,'StanMagazynowyDysponowany'=>1,'StawkaVat'=>8,'KodTowaru'=>'b43dv43','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>0);
@@ -174,7 +160,6 @@ $stmt->execute();
    $stmt -> bindValue(':Freeze',$element_towar['Freeze'],PDO::PARAM_INT);
    $wynik_zapytania = $stmt -> execute();
  }
-
  /*************************************************/
  /**********************CENNIK*********************/
  /*************************************************/
@@ -187,14 +172,12 @@ $stmt->execute();
    `cena` float NOT NULL,
    `dataOd` DATE NOT NULL,
    `dataDo` DATE NULL,
-   `aktualny` VARCHAR(1) DEFAULT 'N',
-   `opis` varchar(150) DEFAULT NULL,
+   `aktualny` VARCHAR(1) DEFAULT 'T',
+   `opis` VARCHAR(150) DEFAULT NULL,
    PRIMARY KEY (idCennik)
  )ENGINE = InnoDB;");
-
- $datee=date("Y-m-d");
+ $datee=date("d-m-Y");
  $stmt->execute();
- /*
  $cennik = array();
  $cennik[]=array('idTowar'=>1,'cena'=>100,'dataOd'=>$datee);
  foreach($cennik as $element_towar)
@@ -205,21 +188,13 @@ $stmt->execute();
    $stmt -> bindValue(':dataOd',$element_towar['dataOd'],PDO::PARAM_STR);
    $wynik_zapytania = $stmt -> execute();
  }
-*/
-
  $stmt = $pdo->query("ALTER TABLE cennik ADD FOREIGN KEY (idTowar)
  REFERENCES Towar(IdTowar)");
  $stmt->execute();
-/*
- $stmt = $pdo->query("ALTER TABLE cennik ADD FOREIGN KEY (poprzedniaCenaId)
- REFERENCES cennik(idCennik)");
- $stmt->execute();
-*/
+
  $stmt = $pdo->query("ALTER TABLE Towar ADD  FOREIGN KEY (Cena)
  REFERENCES cennik(idCennik)");
  $stmt->execute();
-
-
  /*************************************************/
  /*******************ZAMÓWIENIA********************/
  /*************************************************/
@@ -245,7 +220,6 @@ $stmt->execute();
    ON DELETE CASCADE
  )ENGINE = InnoDB;");
  $stmt->execute();
-
  $towary = array();
  $towary[]=array('NazwaTowaru'=>'klawiatura','MinStanMagazynowy'=>1,'MaxStanMagazynowy'=>1,'StawkaVat'=>8,'IdKategoria'=>1,'IdJednostkaMiary'=>1,'Status'=>1);
  $towary[]=array('NazwaTowaru'=>'mysz','MinStanMagazynowy'=>1,'MaxStanMagazynowy'=>1,'StawkaVat'=>8,'IdKategoria'=>1,'IdJednostkaMiary'=>1,'Status'=>1);
@@ -283,7 +257,6 @@ $stmt->execute();
     PRIMARY KEY (IdDostawca)
   );");
   $stmt->execute();
-
   $dostawcy = array();
   $dostawcy[]=array('NazwaSkrocona'=>'DPD',
   'NazwaPelna'=>'DPD',
@@ -296,7 +269,6 @@ $stmt->execute();
   'Adres'=>'Kalisz, Jasna 21',
   'KodPocztowy'=>'11-666',
   'Poczta'=>'Kalisz',);
-
   foreach($dostawcy as $dostawca)
   {
     $stmt = $pdo->prepare('INSERT INTO `Dostawca`(`NazwaSkrocona`,`NazwaPelna`,`NIP`,`Telefon1`,`Telefon2`,`Telefon3`,`NazwaDzialu`,`NrKonta`,`Adres`,`KodPocztowy`,`Poczta`) VALUES (:NazwaSkrocona,:NazwaPelna,:NIP,:Telefon1,:Telefon2,:Telefon3,:NazwaDzialu,:NrKonta,:Adres,:KodPocztowy,:Poczta)');
@@ -339,7 +311,6 @@ $stmt->execute();
    ON DELETE CASCADE
  )ENGINE = InnoDB;");
  $stmt->execute();
-
  $towary = array();
  $towary[]=array(
    'TerminRealizacji'=>'2017-03-21',
@@ -397,7 +368,6 @@ $stmt->execute();
    ON DELETE CASCADE
  )ENGINE = InnoDB;");
  $stmt->execute();
-
  $towary = array();
  $towary[]=array(
 'Lp'=>'1',
@@ -446,7 +416,6 @@ $stmt->execute();
    ON DELETE CASCADE
  )ENGINE = InnoDB;");
  $stmt->execute();
-
  $towary = array();
  $towary[]=array(
 'Lp'=>'1',
@@ -500,7 +469,6 @@ $stmt->execute();
     PRIMARY KEY (IdKlient)
   );");
   $stmt->execute();
-
   $klienci = array();
   $klienci[]=array('Imie'=>'Michal',
   'Nazwisko'=>'Kowalski',
@@ -516,7 +484,6 @@ $stmt->execute();
   'Bank'=>'PKO',
   'EMail'=>'michal123@wp.pl',
   'NazwaFirmy'=>'Drutex');
-
   $klienci[]=array('Imie'=>'Dawid',
   'Nazwisko'=>'Kowalski',
   'NIP'=>'654789713',
@@ -531,8 +498,6 @@ $stmt->execute();
   'Bank'=>'Skok Stefczyka',
   'EMail'=>'DKowal123@wp.pl',
   'NazwaFirmy'=>'Marmoladex');
-
-
   $klienci[]=array('Imie'=>'Maciej',
   'Nazwisko'=>'Marciniak',
   'NIP'=>'0122456789',
@@ -547,7 +512,6 @@ $stmt->execute();
   'Bank'=>'Milenium',
   'EMail'=>'maciux@wp.pl',
   'NazwaFirmy'=>'Maciux i spółka');
-
   $klienci[]=array('Imie'=>'Kamil',
   'Nazwisko'=>'Kowalski',
   'NIP'=>'0123875789',
@@ -562,9 +526,6 @@ $stmt->execute();
   'Bank'=>'Amber Gold',
   'EMail'=>'dojlido123@wp.pl',
   'NazwaFirmy'=>'Kamilonex');
-
-
-
   foreach($klienci as $klient)
   {
     $stmt = $pdo->prepare('INSERT INTO `Klient`(`Imie`,`Nazwisko`,`NIP`,`Miasto`,`Ulica`,`Dom`,`Lokal`,`KodPocztowy`,`Poczta`,`EMail`,`NazwaFirmy`,`Telefon`,`NrKonta`,`Bank`) VALUES (:Imie,:Nazwisko,:NIP,:Miasto,:Ulica,:Dom,:Lokal,:KodPocztowy,:Poczta,:EMail,:Firma,:Telefon,:NrKonta,:Bank)');
@@ -607,7 +568,6 @@ $stmt->execute();
   ON DELETE CASCADE
 );");
    $stmt->execute();
-
    $klienci = array();
    $klienci[]=array(
   'IdDostawca'=>'1',
@@ -617,7 +577,6 @@ $stmt->execute();
    'DataDo'=>'2017-03-23',
    'KodTowaruWgDostawcy'=>'648464168464',
    'NazwaTowaruWgDostawcy'=>'DELL 24"');
-
    $klienci[]=array(
   'IdDostawca'=>'1',
    'IdTowar'=>'2',
@@ -626,7 +585,6 @@ $stmt->execute();
    'DataDo'=>'2017-03-12',
    'KodTowaruWgDostawcy'=>'1551555131353',
    'NazwaTowaruWgDostawcy'=>'Mysz Zowie EC1-A');
-
    foreach($klienci as $klient)
    {
      $stmt = $pdo->prepare('INSERT INTO `dostawcatowar` (`IdDostawca`, `IdTowar`, `Cena`, `DataOd`, `DataDo`, `KodTowaruWgDostawcy`, `NazwaTowaruWgDostawcy`) VALUES (:IdDostawca,:IdTowar,:Cena,:DataOd,:DataDo,:KodTowaruWgDostawcy,:NazwaTowaruWgDostawcy)');
@@ -665,7 +623,6 @@ $stmt->execute();
    PRIMARY KEY (IdStanZamowienia)
  )ENGINE = InnoDB;");
  $stmt->execute();
-
  $kategorie = array();
  $kategorie[]=array('Stan'=>'Anulowany');
  $kategorie[]=array('Stan'=>'Zrealizowany');
@@ -775,11 +732,7 @@ foreach($kategorie as $element_kategoria)
   $stmt -> bindValue(':cena',$element_kategoria['cena'],PDO::PARAM_STR);
   $wynik_zapytania = $stmt -> execute();
 }
-
-
-
 */
-
  /*************************************************/
  /*******************CENA_HISTORIA*******************/
  /*************************************************/
@@ -797,7 +750,6 @@ foreach($kategorie as $element_kategoria)
    REFERENCES Towar(IdTowar)
  )ENGINE = InnoDB;");
  $stmt->execute();
-
  $kategorie = array();
  $kategorie[]=array(
    'DataWprowadzenia'=>'2017-02-04',
@@ -831,15 +783,7 @@ $kategorie[]=array(
    $stmt -> bindValue(':IdTowar',$element_kategoria['IdTowar'],PDO::PARAM_INT);
    $wynik_zapytania = $stmt -> execute();
  }
-
 */
-
-
-
-
-
-
-
  echo ("Baza została zainstalowana.");
  return true;
 }

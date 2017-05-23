@@ -156,7 +156,7 @@
 			else
 					try
 					{
-							$stmt = $this->pdo->query("SELECT zamowieniesprzedaz.DataZamowienia, towar.NazwaTowaru, towarysprzedaz.ilosc, towarysprzedaz.vat, towarysprzedaz.cena, zamowieniesprzedaz.Wartosc, klient.Nazwisko, klient.Imie, klient.IdKlient, towarysprzedaz.IdZamowienieSprzedaz, sposobdostawy.* from zamowieniesprzedaz inner join klient on zamowieniesprzedaz.IdKlient = klient.IdKlient inner join towarysprzedaz on towarysprzedaz.IdZamowienieSprzedaz = zamowieniesprzedaz.IdZamowienieSprzedaz inner JOIN towar on towar.IdTowar = towarysprzedaz.IdTowar inner join sposobdostawy on sposobdostawy.IdSposobDostawy = zamowieniesprzedaz.IdSposobDostawy");
+							$stmt = $this->pdo->query("SELECT zamowieniesprzedaz.DataZamowienia, towar.NazwaTowaru, towarysprzedaz.ilosc, towarysprzedaz.vat, towarysprzedaz.cena, zamowieniesprzedaz.Wartosc, zamowieniesprzedaz.IdSposobZaplaty,klient.Nazwisko, klient.Imie, klient.IdKlient, towarysprzedaz.IdZamowienieSprzedaz, sposobdostawy.* from zamowieniesprzedaz inner join klient on zamowieniesprzedaz.IdKlient = klient.IdKlient inner join towarysprzedaz on towarysprzedaz.IdZamowienieSprzedaz = zamowieniesprzedaz.IdZamowienieSprzedaz inner JOIN towar on towar.IdTowar = towarysprzedaz.IdTowar inner join sposobdostawy on sposobdostawy.IdSposobDostawy = zamowieniesprzedaz.IdSposobDostawy");
 							$zamowienia = $stmt->fetchAll();
 							$stmt->closeCursor();
 							if($zamowienia && !empty($zamowienia))
@@ -186,11 +186,13 @@
 			{
 					try
 					{
-							$stmt = $this->pdo->query("SELECT zamowieniesprzedaz.DataZamowienia, towar.NazwaTowaru, towarysprzedaz.ilosc, towarysprzedaz.vat, towarysprzedaz.cena, zamowieniesprzedaz.Wartosc, towarysprzedaz.IdZamowienieSprzedaz, klient.*, sposobdostawy.* from zamowieniesprzedaz
+							$stmt = $this->pdo->query("SELECT zamowieniesprzedaz.DataZamowienia, towar.KodTowaru, towar.NazwaTowaru, towar.IdJednostkaMiary, jednostkamiary.*, towarysprzedaz.ilosc, towarysprzedaz.vat, towarysprzedaz.cena, zamowieniesprzedaz.Wartosc, towarysprzedaz.IdZamowienieSprzedaz, klient.*, sposobdostawy.*, sposobzaplaty.* from zamowieniesprzedaz
 								inner join klient on zamowieniesprzedaz.IdKlient = klient.IdKlient
 								inner join towarysprzedaz on towarysprzedaz.IdZamowienieSprzedaz = zamowieniesprzedaz.IdZamowienieSprzedaz
 								inner JOIN towar on towar.IdTowar = towarysprzedaz.IdTowar
+								inner JOIN jednostkamiary on towar.IdJednostkaMiary = jednostkamiary.IdJednostkaMiary
 								inner join sposobdostawy on sposobdostawy.IdSposobDostawy = zamowieniesprzedaz.IdSposobDostawy
+								inner join sposobzaplaty on sposobzaplaty.IdSposobZaplaty = zamowieniesprzedaz.IdSposobZaplaty
 								where zamowieniesprzedaz.IdZamowienieSprzedaz = $id");
 							$zamowienia = $stmt->fetchAll();
 							$stmt->closeCursor();
