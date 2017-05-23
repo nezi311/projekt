@@ -125,9 +125,29 @@
 			return $data;
 		}
 
-		public function add()
+		public function getJed()
 		{
 
+
+				$data = array();
+	      if(!$this->pdo)
+	          $data['error'] = 'Połączenie z bazą nie powidoło się!';
+	      else
+	          try
+	          {
+	              $stmt = $this->pdo->query("SELECT IdJednostkaMiary,CONCAT(Nazwa,', ',NazwaSkrocona) AS Nazwa2 From Jednostkamiary");
+	              $jednostki = $stmt->fetchAll();
+	              $stmt->closeCursor();
+	              if($jednostki && !empty($jednostki))
+	                  $data['jednostki'] = $jednostki;
+	              else
+	                  $data['jednostki'] = array();
+	          }
+	          catch(\PDOException $e)
+	          {
+	              $data['error'] = 'Błąd odczytu danych z bazy! ';
+	          }
+	      return $data;
 		}
 
     public function getFreeze()
