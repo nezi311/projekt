@@ -100,12 +100,7 @@
                 </select>
 
             </div>
-            <div class="form-group">
-              <label  for="Cena">Cena :</label>
-
-                <input type="text" class="form-control" id="Cena" name="Cena" placeholder="Wprowadz Cene" value="{$towar['Cena']}">
-
-            </div>
+            
             <input type="submit" value="Edytuj" class="btn btn-primary" />
             <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
           </form>
