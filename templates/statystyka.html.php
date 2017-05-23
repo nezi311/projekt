@@ -16,13 +16,17 @@
 						<optgroup label="Towary">
 						  <option value="towarIlosc" {if $kryterium=="towarIlosc"}selected{/if}>Sprzedane towary (ilość)</option>
 						  <option value="towarKasa" {if $kryterium=="towarKasa"}selected{/if}>Sprzedane towary (wartość)</option>
+						  <option value="towarNiesprzedany" {if $kryterium=="towarNiesprzedany"}selected{/if}>Towary bez popytu</option>
+						</optgroup>
+						<optgroup label="Kategoria">
+				  		<option value="kategoriaKasa" {if $kryterium=="kategoriaKasa"}selected{/if}>Dochód z kategorii</option>
 						</optgroup>
 						<optgroup label="Klienci">
 				  		<option value="klientKasa" {if $kryterium=="klientKasa"}selected{/if}>Najwięcej kupujący klienci</option>
 						</optgroup>
 					</select>
 				</div>
-				<div class="form-group">
+				<div class="form-group" id="fragment">
 			    <label for="fraza">Fraza</label>
 					<input class="form-control" type="text" id="fraza" value="{$fraza}" name="fraza"/>
 				</div>
@@ -58,21 +62,32 @@
 <table class="table sortable">
 	<thead>
 		<tr>
-			<th class=sorttable_nosort>#</th><th>{if $kryterium=="klientKasa"}Klient{else}Nazwa Towaru{/if}</th><th>{if $kryterium=="towarIlosc" || $kryterium=="towarKasa"}Kategoria{elseif $kryterium=="klientKasa"}Poczta{/if}</th><th>{if $kryterium=="klientKasa" || $kryterium=="towarKasa"}Wartość{else}Ilość{/if}</th>
+			<th class=sorttable_nosort>#</th><th>{if $kryterium=="klientKasa"}Klient{elseif $kryterium=="kategoriaKasa"}Kategoria{else}Nazwa Towaru{/if}</th><th>{if $kryterium=="towarIlosc" || $kryterium=="towarKasa"|| $kryterium=="towarNiesprzedany"}Kategoria{elseif $kryterium=="klientKasa"}Poczta{/if}</th><th>{if $kryterium=="klientKasa" || $kryterium=="towarKasa"} Wartość {elseif $kryterium=="towarNiesprzedany"} Stan magazynowy {else} Ilość{/if}</th>
 		</tr>
 	</thead>
 	<tbody>
 		{assign var=val value=1}
+		{assign var=suma value=0}
 	{foreach $allStatystyki as $statystyka}
 		<tr>
 			<td>{$val}</td>
-			<td>{$statystyka['nazwa']}</td>
-			<td>{if $kryterium=="towarIlosc" || $kryterium=="towarKasa"}{$statystyka['kategoria']}{elseif $kryterium=="klientKasa"}{$statystyka['adres']}{/if}</td>
-			<td>{$statystyka['wartosc']}</td>
+			<td>{if $kryterium=="kategoriaKasa"}{$statystyka['kategoria']}{else}{$statystyka['nazwa']}{/if}</td>
+			<td>{if $kryterium=="towarIlosc" || $kryterium=="towarKasa" || $kryterium=="towarNiesprzedany"}{$statystyka['kategoria']}{elseif $kryterium=="klientKasa"}{$statystyka['adres']}{/if}</td>
+			<td>{$statystyka['wartosc']}{if $kryterium=="towarKasa"}{$suma=$suma+$statystyka['wartosc']}{/if}</td>
 		</tr>
 {assign var=val value=$val+1}
 		{/foreach}
 	</tbody>
+{if $kryterium=="towarKasa"}
+	<tfoot>
+	<tr>
+	<th></th>
+	<th>SUMA</th>
+	<th></th>
+	<th>{$suma} zł.</th>
+	</tr>
+	</tfoot>
+{/if}
 </table>
 {/if}
 	</div>
@@ -83,4 +98,5 @@
 
 {/if}
 </div>
+
 {include file="footer.html.php"}
