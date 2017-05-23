@@ -24,6 +24,7 @@ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `sposobdostawy`
 (
   `IdSposobDostawy` INT AUTO_INCREMENT,
   `SposobDostawy` VARCHAR(50) NOT NULL UNIQUE,
+  `Cena` float NOT NULL,
   PRIMARY KEY (IdSposobDostawy)
 )ENGINE = InnoDB;");
 $stmt->execute();
@@ -31,6 +32,7 @@ $stmt->execute();
 $kategorie = array();
 $kategorie[]=array('SposobDostawy'=>'Kurier');
 $kategorie[]=array('SposobDostawy'=>'Odbior Osobisty');
+$kategorie[]=array('SposobDostawy'=>'Kurier');
 foreach($kategorie as $element_kategoria)
 {
   $stmt = $pdo->prepare('INSERT INTO `sposobdostawy`(`SposobDostawy`) VALUES (:SposobDostawy)');
