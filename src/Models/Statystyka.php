@@ -13,15 +13,15 @@
                 try
                 {
                     $statystyki = array();
-                    $stmt = $this->pdo->query('SELECT NazwaTowaru, COUNT(*)*ilosc AS wartosc
-FROM towar
-INNER JOIN towarysprzedaz
-ON towarysprzedaz.idTowar=towar.IdTowar
-	INNER JOIN zamowieniesprzedaz
-    ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
- WHERE DataZamowienia BETWEEN '2016-01-01' AND '2017-04-23'
- GROUP BY NazwaTowaru
-ORDER BY `wartosc` ASC');
+                    $stmt = $this->pdo->query("SELECT NazwaTowaru, COUNT(*)*ilosc AS wartosc
+										FROM towar
+										INNER JOIN towarysprzedaz
+										ON towarysprzedaz.idTowar=towar.IdTowar
+											INNER JOIN zamowieniesprzedaz
+										    ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
+										 WHERE DataZamowienia BETWEEN '2016-01-01' AND '2017-04-23'
+										 GROUP BY NazwaTowaru
+										ORDER BY `wartosc` ASC");
                     $statystyki = $stmt->fetchAll();
                     $stmt->closeCursor();
                     if($statystyki && !empty($statystyki))
