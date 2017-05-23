@@ -14,6 +14,7 @@
 							$data = $model->getAll();
 							if(isset($data['Klienci']))
 								$this->set('tablicaKlienci', $data['Klienci']);
+								$this->set('Dostawa', $data['Dostawa']);
 						}
 						else
 						{

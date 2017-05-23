@@ -30,6 +30,8 @@ RewriteRule ^Towar/unfreeze/(\d+)/?$ index.php?controller=Towar&action=unfreeze&
 RewriteRule ^Szukaj/?$ index.php?controller=Towar&action=search [L]
 RewriteRule ^Towar/koszyk/(\d+)/?$ index.php?controller=Towar&action=koszyk&id=$1 [L]
 
+RewriteRule ^Zamowienia/?$ index.php?controller=Zamowienie&action=listaZamowien [L]
+RewriteRule ^Zamowienia/faktura/(\d+)/?$ index.php?controller=Zamowienie&action=faktura&id=$1 [L]
 
 RewriteRule ^Zamowienie/?$ index.php?controller=Zamowienie [L]
 RewriteRule ^Zamowienie/add/?$ index.php?controller=Zamowienie&action=add [L]
@@ -39,6 +41,7 @@ RewriteRule ^Kategoria/?$ index.php?controller=Kategoria [L]
 RewriteRule ^Kategoria/Usun/(\d+)/?$ index.php?controller=Kategoria&action=delete&id=$1 [L]
 RewriteRule ^Kategoria/Edytuj/(\d+)/?$ index.php?controller=Kategoria&action=edit&id=$1 [L]
 RewriteRule ^Kategoria/Wstaw/?$ index.php?controller=Kategoria&action=insert [L]
+RewriteRule ^Kategoria/showone/(\d+)/?$ index.php?controller=Kategoria&action=showone&id=$1 [L]
 
 RewriteRule ^Klient/?$ index.php?controller=Klient [L]
 RewriteRule ^Klient/update/?$ index.php?controller=Klient&action=update [L]

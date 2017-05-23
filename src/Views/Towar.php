@@ -52,6 +52,8 @@
 						$data = $model->getAll();
 						if(isset($data['Klienci']))
 							$this->set('Klienci', $data['Klienci']);
+							if(isset($data['Dostawa']))
+								$this->set('Dostawa', $data['Dostawa']);
 					}
           if(isset($data['error']))
               $this->set('error', $data['error']);

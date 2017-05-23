@@ -69,8 +69,9 @@
       </ul>
 
                 <ul class="nav navbar-nav navbar-right">
+                  <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Zamowienia"><span class="glyphicon glyphicon-barcode"></span> Zamówienia klientów</a></li>
                   <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk</a></li>
-                  <li><a href="#"><span class="glyphicon glyphicon-time"></span> Historia</a></li>
+                  <!--<li><a href="#"><span class="glyphicon glyphicon-time"></span> Historia</a></li>-->
 
 
                                       {if $smarty.session.role<=1}

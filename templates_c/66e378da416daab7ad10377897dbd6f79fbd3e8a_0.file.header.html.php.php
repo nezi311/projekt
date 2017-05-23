@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-05-08 23:43:17
+/* Smarty version 3.1.31, created on 2017-05-23 14:52:35
   from "/opt/lampp/htdocs/PZ/templates/header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_5910e675b7e234_42338616',
+  'unifunc' => 'content_592430935a1786_60048875',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '66e378da416daab7ad10377897dbd6f79fbd3e8a' => 
     array (
       0 => '/opt/lampp/htdocs/PZ/templates/header.html.php',
-      1 => 1494279793,
+      1 => 1495542735,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5910e675b7e234_42338616 (Smarty_Internal_Template $_smarty_tpl) {
+function content_592430935a1786_60048875 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -145,8 +145,11 @@ Szukaj/" method="post">
                 <ul class="nav navbar-nav navbar-right">
                   <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Zamowienia"><span class="glyphicon glyphicon-barcode"></span> Zamówienia klientów</a></li>
+                  <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Koszyk"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk</a></li>
-                  <li><a href="#"><span class="glyphicon glyphicon-time"></span> Historia</a></li>
+                  <!--<li><a href="#"><span class="glyphicon glyphicon-time"></span> Historia</a></li>-->
 
 
                                       <?php if ($_SESSION['role'] <= 1) {?>

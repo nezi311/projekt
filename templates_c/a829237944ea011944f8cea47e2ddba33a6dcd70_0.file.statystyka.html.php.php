@@ -1,18 +1,32 @@
 <?php
+<<<<<<< HEAD:templates_c/feefb8f2c3a72d12028e6efe727621e2f8669cb6_0.file.statystyka.html.php.php
 /* Smarty version 3.1.31, created on 2017-05-09 17:33:58
   from "/opt/lampp/htdocs/PZ/templates/statystyka.html.php" */
+=======
+/* Smarty version 3.1.31, created on 2017-05-21 18:50:48
+  from "C:\xampp\htdocs\PZ\templates\statystyka.html.php" */
+>>>>>>> 691579922049732153447c5491c7c4057bdb9a48:templates_c/a829237944ea011944f8cea47e2ddba33a6dcd70_0.file.statystyka.html.php.php
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
+<<<<<<< HEAD:templates_c/feefb8f2c3a72d12028e6efe727621e2f8669cb6_0.file.statystyka.html.php.php
   'unifunc' => 'content_5911e1665ef734_35216340',
+=======
+  'unifunc' => 'content_5921c5685fd1c1_49825722',
+>>>>>>> 691579922049732153447c5491c7c4057bdb9a48:templates_c/a829237944ea011944f8cea47e2ddba33a6dcd70_0.file.statystyka.html.php.php
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'feefb8f2c3a72d12028e6efe727621e2f8669cb6' => 
+    'a829237944ea011944f8cea47e2ddba33a6dcd70' => 
     array (
+<<<<<<< HEAD:templates_c/feefb8f2c3a72d12028e6efe727621e2f8669cb6_0.file.statystyka.html.php.php
       0 => '/opt/lampp/htdocs/PZ/templates/statystyka.html.php',
       1 => 1494276334,
+=======
+      0 => 'C:\\xampp\\htdocs\\PZ\\templates\\statystyka.html.php',
+      1 => 1493240468,
+>>>>>>> 691579922049732153447c5491c7c4057bdb9a48:templates_c/a829237944ea011944f8cea47e2ddba33a6dcd70_0.file.statystyka.html.php.php
       2 => 'file',
     ),
   ),
@@ -22,7 +36,11 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
+<<<<<<< HEAD:templates_c/feefb8f2c3a72d12028e6efe727621e2f8669cb6_0.file.statystyka.html.php.php
 function content_5911e1665ef734_35216340 (Smarty_Internal_Template $_smarty_tpl) {
+=======
+function content_5921c5685fd1c1_49825722 (Smarty_Internal_Template $_smarty_tpl) {
+>>>>>>> 691579922049732153447c5491c7c4057bdb9a48:templates_c/a829237944ea011944f8cea47e2ddba33a6dcd70_0.file.statystyka.html.php.php
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 

@@ -29,15 +29,23 @@
   </tr>
   {/foreach}
 </table>
-<b>Klient</b>
+
 <form action="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/zrealizuj" method="post" style='width:20%;'>
+<b>Klient</b>
 	<input list="customers" name="klient">
   <datalist id="customers">
 	{foreach $Klienci as $klient}
 	<option value="{$klient['IdKlient']}">{$klient['Imie']} {$klient['Nazwisko']}</option>
 	{/foreach}
 	</datalist>
-</select>
+	<br>
+<b>Sposób dostawy</b>
+	<input list="delivery" name="dostawa">
+  <datalist id="delivery">
+	{foreach $Dostawa as $sposob}
+	<option value="{$sposob['IdSposobDostawy']}">{$sposob['SposobDostawy']}</option>
+	{/foreach}
+	</datalist>
 <br>
 	<input type='hidden' name='suma' value={$suma}>
 	<input type='submit' name='submit' value=Zamów>

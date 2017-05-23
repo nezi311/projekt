@@ -15,11 +15,18 @@
           {
               $stmt = $this->pdo->query("SELECT `IdKlient`,`Imie`,`Nazwisko`,`NIP`,`Miasto`,`Ulica`,`Dom`,`Lokal`,`KodPocztowy`,`Poczta`,`EMail`,`NazwaFirmy` FROM Klient");
               $Klients = $stmt->fetchAll();
+							$stmt = $this->pdo->query("SELECT `IdSposobDostawy`,`SposobDostawy` FROM sposobdostawy");
+							$Dostawa = $stmt->fetchAll();
               $stmt->closeCursor();
               if($Klients && !empty($Klients))
                   $data['Klienci'] = $Klients;
               else
                   $data['Klienci'] = array();
+
+							if($Dostawa && !empty($Dostawa))
+									$data['Dostawa'] = $Dostawa;
+							else
+									$data['Dostawa'] = array();
           }
           catch(\PDOException $e)
           {
