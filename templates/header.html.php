@@ -52,7 +52,7 @@
 
                 </li>
             <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Kategoria"><span class="glyphicon glyphicon-list-alt"></span> Kategorie</a></li>
-        <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Statystyka"><span class="glyphicon glyphicon-signal"></span> Statystyki</a></li>
+        <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Statystyka"><span class="glyphicon glyphicon-signal"></span> Zestawienia</a></li>
 
 
             </li>
