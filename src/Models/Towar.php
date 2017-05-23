@@ -281,18 +281,24 @@
 				return $data;
 			}
 
-			public function zrealizuj($suma, $klient, $dostawa)
+			public function zrealizuj($suma, $klient, $dostawa, $zaplata)
 			{
+				echo "suma ".$suma."<br>";
+				echo "kl ".$klient."<br>";
+				echo "dos ".$dostawa."<br>";
+				echo "zap ".$zaplata."<br>";
 				$data = array();
-					if($suma === NULL || $suma === "")
-						$data['error'] = 'Nieokreślona suma!';
+				$data['error']="";
+					if($zaplata === NULL || $zaplata === "")
+						$data['error'] = 'Nieokreślona zaplata!';
 					else
 						try
 						{
-							$stmt = $this->pdo->prepare('INSERT INTO `zamowieniesprzedaz`(`DataZamowienia`,`Wartosc`,`IdStanZamowienia`,`IdKlient`, `IdSposobDostawy`) VALUES (CURDATE(),:suma,3,:klient, :dostawa)');
-					    $stmt -> bindValue(':suma',$suma,PDO::PARAM_INT);
+							$stmt = $this->pdo->prepare('INSERT INTO `zamowieniesprzedaz`(`DataZamowienia`,`Wartosc`,`IdStanZamowienia`,`IdKlient`, `IdSposobDostawy`,`IdSposobZaplaty`) VALUES (CURDATE(),:suma,3,:klient, :dostawa,:zaplata)');
+							$stmt -> bindValue(':suma',$suma,PDO::PARAM_INT);
 							$stmt -> bindValue(':klient',$klient,PDO::PARAM_INT);
 							$stmt -> bindValue(':dostawa',$dostawa,PDO::PARAM_INT);
+							$stmt -> bindValue(':zaplata',$zaplata,PDO::PARAM_INT);
 							$stmt -> execute();
 
 							$stmt = $this->pdo->prepare('INSERT INTO towarysprzedaz (IdTowar, ilosc, klient, cena, vat, IdZamowienieSprzedaz) select koszyk.IdTowar, ilosc, :klient, Cena, StawkaVat, (SELECT MAX(IdZamowienieSprzedaz) FROM zamowieniesprzedaz) FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar');

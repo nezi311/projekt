@@ -12,7 +12,7 @@
                 try
                 {
                     $statystyki = array();
-<<<<<<< HEAD
+
                     $stmt = $this->pdo->query("SELECT NazwaTowaru, COUNT(*)*ilosc AS wartosc
 										FROM towar
 										INNER JOIN towarysprzedaz
@@ -22,7 +22,7 @@
 										 WHERE DataZamowienia BETWEEN '2016-01-01' AND '2017-04-23'
 										 GROUP BY NazwaTowaru
 										ORDER BY `wartosc` ASC");
-=======
+
 //ilość towaru
 if($kryterium==="towarIlosc")
 {
@@ -48,20 +48,19 @@ FROM Towar
 INNER JOIN towarySprzedaz
 ON towarySprzedaz.idTowar=Towar.IdTowar
 	INNER JOIN zamowieniesprzedaz
-<<<<<<< HEAD
+
     ON towarySprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
-=======
+
     ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
     INNER JOIN kategoria
     ON towar.IdKategoria=kategoria.IdKategoria
  WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza)
-<<<<<<< HEAD
->>>>>>> 3d2ea1ec7f4a3703d5632fc0ff5d63f4fc710be7
+
     INNER JOIN Kategoria
     ON Towar.IdKategoria=Kategoria.IdKategoria
  WHERE DataZamowienia BETWEEN :dataOd AND :dataDo
  GROUP BY towarySprzedaz.cena
-=======
+
  GROUP BY Towarysprzedaz.cena
 ORDER BY `wartosc` asc');
 }
@@ -113,7 +112,7 @@ $stmt->bindValue(':fraza', '%'.$fraza.'%', PDO::PARAM_STR);
 $stmt->bindValue(':dataOd', $dataOd, PDO::PARAM_STR);
 $stmt->bindValue(':dataDo', $dataDo, PDO::PARAM_STR);
 $result = $stmt->execute();
->>>>>>> 46e61074cdf067578c0d5bdc5026aaab80bea70b
+
                     $statystyki = $stmt->fetchAll();
                     $stmt->closeCursor();
                     if($statystyki && !empty($statystyki))

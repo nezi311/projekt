@@ -15,6 +15,7 @@
 							if(isset($data['Klienci']))
 								$this->set('tablicaKlienci', $data['Klienci']);
 								$this->set('Dostawa', $data['Dostawa']);
+								$this->set('Zaplata', $data['Zaplata']);
 						}
 						else
 						{

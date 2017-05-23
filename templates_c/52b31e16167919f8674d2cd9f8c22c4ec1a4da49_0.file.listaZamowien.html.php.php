@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-05-21 21:44:34
+/* Smarty version 3.1.31, created on 2017-05-23 17:20:45
   from "C:\xampp\htdocs\PZ\templates\listaZamowien.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_5921ee22391795_86876110',
+  'unifunc' => 'content_5924534d5a7349_66152912',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '52b31e16167919f8674d2cd9f8c22c4ec1a4da49' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\listaZamowien.html.php',
-      1 => 1495395872,
+      1 => 1495552841,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_5921ee22391795_86876110 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5924534d5a7349_66152912 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -54,10 +54,22 @@ foreach ($_from as $_smarty_tpl->tpl_vars['towar']->value) {
 </h4>
 	<h4>Wartość Zamówienia: <?php echo $_smarty_tpl->tpl_vars['towar']->value['Wartosc'];?>
 </h4>
-	<a type="button" class="btn btn-primary" href="http://<?php echo $_SERVER['HTTP_HOST'];
-echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Zamowienia/faktura/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdZamowienieSprzedaz'];?>
-" >Generuj Fakturę</a>
+	<form action='Zamowienia/faktura/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdZamowienieSprzedaz'];?>
+' method='post' style=width:10%;>
+		<div class="form-group">
+			<label for="dataOd">Data sprzedaży</label>
+			<input class="form-control" type="date" id="dataSprzedazy" name="dataSprzedazy"/>
+		</div>
+
+
+		<div class="form-group">
+			<label for="dataOd">Termin zapłaty</label>
+			<input class="form-control" type="date" id="dataZaplaty" name="dataZaplaty"/>
+		</div>
+
+		<input type="submit" class="btn btn-primary" value="Generuj fakturę">
+	</form>
+
 		<table class="table sorttable" style=width:50%;>
 		  <thead>
 		    <tr>

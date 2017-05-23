@@ -4,6 +4,7 @@
 	<h2>Towary w koszyku</h2>
 </div>
 {$suma=0}
+{$dostawa=0}
 {if isset($tablicaTowarow2) and $tablicaTowarow2 != null}
 <table class="table" style='width:50%;'>
   <thead>
@@ -39,14 +40,29 @@
 	{/foreach}
 	</datalist>
 	<br>
+
 <b>Sposób dostawy</b>
 	<input list="delivery" name="dostawa">
   <datalist id="delivery">
 	{foreach $Dostawa as $sposob}
-	<option value="{$sposob['IdSposobDostawy']}">{$sposob['SposobDostawy']}</option>
+	{$dostawa = $suma*$sposob['Cena']/100}
+	<option value="{$sposob['IdSposobDostawy']}">{$sposob['SposobDostawy']}/{$dostawa} zł</option>
 	{/foreach}
 	</datalist>
+	<br>
+
+<b>Sposób zapłaty</b>
+		<input list="payment" name="zaplata">
+	  <datalist id="payment">
+		{foreach $Zaplata as $zaplata}
+		<option value="{$zaplata['IdSposobZaplaty']}">{$zaplata['SposobZaplaty']}</option>
+		{/foreach}
+		</datalist>
+		<br>
+
 <br>
+
+	<input type='hidden' name='dostawaCena' value={$dostawa}>
 	<input type='hidden' name='suma' value={$suma}>
 	<input type='submit' name='submit' value=Zamów>
 </form>

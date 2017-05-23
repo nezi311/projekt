@@ -16,7 +16,21 @@
 	<h4>Data Zamówienia: {$towar['DataZamowienia']}</h4>
 	<h4>Klient: {$towar['Nazwisko']} {$towar['Imie']}</h4>
 	<h4>Wartość Zamówienia: {$towar['Wartosc']}</h4>
-	<a type="button" class="btn btn-primary" href="http://{$smarty.server.HTTP_HOST}{$subdir}Zamowienia/faktura/{$towar['IdZamowienieSprzedaz']}" >Generuj Fakturę</a>
+	<form action='Zamowienia/faktura/{$towar['IdZamowienieSprzedaz']}' method='post' style=width:10%;>
+		<div class="form-group">
+			<label for="dataOd">Data sprzedaży</label>
+			<input class="form-control" type="date" id="dataSprzedazy" name="dataSprzedazy"/>
+		</div>
+
+{*{if $towar['IdSposobZaplaty']==='1'}*}
+		<div class="form-group">
+			<label for="dataOd">Termin zapłaty</label>
+			<input class="form-control" type="date" id="dataZaplaty" name="dataZaplaty"/>
+		</div>
+{*{/if}*}
+		<input type="submit" class="btn btn-primary" value="Generuj fakturę">
+	</form>
+
 		<table class="table sorttable" style=width:50%;>
 		  <thead>
 		    <tr>
