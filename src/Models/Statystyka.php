@@ -12,6 +12,17 @@
                 try
                 {
                     $statystyki = array();
+<<<<<<< HEAD
+                    $stmt = $this->pdo->query("SELECT NazwaTowaru, COUNT(*)*ilosc AS wartosc
+										FROM towar
+										INNER JOIN towarysprzedaz
+										ON towarysprzedaz.idTowar=towar.IdTowar
+											INNER JOIN zamowieniesprzedaz
+										    ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
+										 WHERE DataZamowienia BETWEEN '2016-01-01' AND '2017-04-23'
+										 GROUP BY NazwaTowaru
+										ORDER BY `wartosc` ASC");
+=======
 //ilość towaru
 if($kryterium==="towarIlosc")
 {
@@ -102,6 +113,7 @@ $stmt->bindValue(':fraza', '%'.$fraza.'%', PDO::PARAM_STR);
 $stmt->bindValue(':dataOd', $dataOd, PDO::PARAM_STR);
 $stmt->bindValue(':dataDo', $dataDo, PDO::PARAM_STR);
 $result = $stmt->execute();
+>>>>>>> 46e61074cdf067578c0d5bdc5026aaab80bea70b
                     $statystyki = $stmt->fetchAll();
                     $stmt->closeCursor();
                     if($statystyki && !empty($statystyki))

@@ -124,6 +124,12 @@ $stmt->execute();
    $stmt -> bindValue(':NazwaSkrocona',$element_jednostka['NazwaSkrocona'],PDO::PARAM_STR);
    $wynik_zapytania = $stmt -> execute();
  }
+
+
+
+
+
+
  /*************************************************/
  /*******************TOWAR*************************/
  /*************************************************/
@@ -142,14 +148,12 @@ $stmt->execute();
    `IdKategoria` INT NOT NULL,
    `IdJednostkaMiary` INT NOT NULL,
    `Freeze` INT NOT NULL,
-   `Cena` float  NULL,
+   `Cena` INT NULL,
    PRIMARY KEY (IdTowar),
    FOREIGN KEY (IdKategoria)
-   REFERENCES Kategoria(IdKategoria)
-   ON DELETE CASCADE,
+   REFERENCES Kategoria(IdKategoria),
    FOREIGN KEY (IdJednostkaMiary)
    REFERENCES Jednostkamiary(IdJednostkaMiary)
-   ON DELETE CASCADE
  )ENGINE = InnoDB;");
  $stmt->execute();
 
@@ -173,6 +177,50 @@ $stmt->execute();
    $stmt -> bindValue(':Cena',$element_towar['Cena'],PDO::PARAM_INT);
    $wynik_zapytania = $stmt -> execute();
  }
+
+ /*************************************************/
+ /**********************CENNIK*********************/
+ /*************************************************/
+ $stmt = $pdo->query("DROP TABLE IF EXISTS `cennik`");
+ $stmt->execute();
+ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `cennik`
+ (
+   `idCennik` INT AUTO_INCREMENT,
+   `idTowar` INT NULL,
+   `cena` float NOT NULL,
+   `dataOd` DATE NOT NULL,
+   `dataDo` DATE NULL,
+   `aktualny` VARCHAR(1) DEFAULT 'T',
+   `poprzedniaCenaId` INT NULL,
+   PRIMARY KEY (idCennik)
+ )ENGINE = InnoDB;");
+
+ $datee=date("d-m-Y");
+ $stmt->execute();
+ $cennik = array();
+ $cennik[]=array('idTowar'=>1,'cena'=>100,'dataOd'=>$datee);
+ foreach($cennik as $element_towar)
+ {
+   $stmt = $pdo->prepare('INSERT INTO `cennik`(`idTowar`,`cena`,`dataOd`) VALUES (:idTowar,:cena,:dataOd)');
+   $stmt -> bindValue(':idTowar',$element_towar['idTowar'],PDO::PARAM_INT);
+   $stmt -> bindValue(':cena',$element_towar['cena'],PDO::PARAM_STR);
+   $stmt -> bindValue(':dataOd',$element_towar['dataOd'],PDO::PARAM_STR);
+   $wynik_zapytania = $stmt -> execute();
+ }
+
+
+ $stmt = $pdo->query("ALTER TABLE cennik ADD FOREIGN KEY (idTowar)
+ REFERENCES Towar(IdTowar)");
+ $stmt->execute();
+
+ $stmt = $pdo->query("ALTER TABLE cennik ADD FOREIGN KEY (poprzedniaCenaId)
+ REFERENCES cennik(idCennik)");
+ $stmt->execute();
+
+ $stmt = $pdo->query("ALTER TABLE Towar ADD  FOREIGN KEY (Cena)
+ REFERENCES cennik(idCennik)");
+ $stmt->execute();
+
  /*************************************************/
  /*******************ZAMÓWIENIA********************/
  /*************************************************/
@@ -728,10 +776,15 @@ foreach($kategorie as $element_kategoria)
   $stmt -> bindValue(':cena',$element_kategoria['cena'],PDO::PARAM_STR);
   $wynik_zapytania = $stmt -> execute();
 }
+
+
+
 */
+
  /*************************************************/
  /*******************CENA_HISTORIA*******************/
  /*************************************************/
+ /*
  $stmt = $pdo->query("DROP TABLE IF EXISTS `cenahistoria`");
  $stmt->execute();
  $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `cenahistoria`
@@ -779,6 +832,15 @@ $kategorie[]=array(
    $stmt -> bindValue(':IdTowar',$element_kategoria['IdTowar'],PDO::PARAM_INT);
    $wynik_zapytania = $stmt -> execute();
  }
+
+*/
+
+
+
+
+
+
+
  echo ("Baza została zainstalowana.");
  return true;
 }
