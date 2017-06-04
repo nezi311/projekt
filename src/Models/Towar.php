@@ -27,6 +27,29 @@
       return $data;
     }
 
+		public function getAllTwCn()
+		{
+			$data = array();
+			if(!$this->pdo)
+					$data['error'] = 'Połączenie z bazą nie powidoło się!';
+			else
+					try
+					{
+							$stmt = $this->pdo->query("SELECT * FROM Towar INNER JOIN Cennik ON Cennik.idCennik = Towar.Cena");
+							$towary = $stmt->fetchAll();
+							$stmt->closeCursor();
+							if($towary && !empty($towary))
+									$data['towary'] = $towary;
+							else
+									$data['towary'] = array();
+					}
+					catch(\PDOException $e)
+					{
+							$data['error'] = 'Błąd odczytu danych z bazy! ';
+					}
+			return $data;
+		}
+
 		public function getNotPriced()
 		{
 			$data = array();

@@ -15,6 +15,18 @@ class Cennik extends Controller
         $data['towar'] = $model->getNotPriced();
       }
 
+      $model = $this->getModel("Kategoria");
+      if($model)
+      {
+        $data['kategorie'] = $model->getAll();
+      }
+
+      $model = $this->getModel("Towar");
+      if($model)
+      {
+        $data['towarAll'] = $model->getAllTwCn();
+      }
+
       $view = $this->getView('Cennik');
       $view->index($data);
     }
@@ -29,7 +41,22 @@ class Cennik extends Controller
       $model = $this->getModel("Cennik");
       if($model)
       {
-        $model->insert($_POST['Towar'],$_POST['Cena'],$_POST['Opis']);
+        $model->insert($_POST['Towar'],$_POST['Cena'],$_POST['Opis'],$_POST['dataOd'],$_POST['dataDo']);
+      }
+      $this->redirect('Cennik');
+    }
+    else
+      $this->redirect('index/');
+  }
+
+  public function insertNew()
+  {
+    if($_SESSION['role']<=1)
+    {
+      $model = $this->getModel("Cennik");
+      if($model)
+      {
+        $model->insert($_POST['Towar'],$_POST['bylyCennik'],$_POST['Cena'],$_POST['Opis'],$_POST['dataOd'],$_POST['dataDo']);
       }
       $this->redirect('Cennik');
     }

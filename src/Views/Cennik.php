@@ -6,9 +6,15 @@
 
       public function index($data = null)
       {
-
+					d($data);
 					if(isset($data['liczbaTowarow']))
 						 $this->set('liczbaTowarow', $data['liczbaTowarow']);
+
+					if(isset($data['towarAll']))
+	 					$this->set('towarAll', $data['towarAll']['towary']);
+
+					if(isset($data['kategorie']))
+							$this->set('kategorie', $data['kategorie']['kategorie']);
 
 					if(isset($data['towar']['towary']))
 						 $this->set('tablicaTowary', $data['towar']['towary']);
