@@ -37,18 +37,13 @@
 									</div>
 
 									<div class="form-group">
-										<label for="Opis">Cena</label>
+										<label for="Opis">Opis</label>
 										<input name="Opis" class="form-control" type="text" placeholder="Krótki opis cennika">
 									</div>
 
 									<div class="form-group">
 										<label for="dataOd">Cennik od</label>
 										<input name="dataOd" class="form-control" type="date" placeholder="data Od">
-									</div>
-
-									<div class="form-group">
-										<label for="dataDo">Cennik do</label>
-										<input name="dataDo" class="form-control" type="date" placeholder="data Do">
 									</div>
 
 									<div class="form-group">
@@ -107,6 +102,7 @@
 															<td>Cennik od</td>
 															<td>Cennik do</td>
 															<td>Opis</td>
+															<td>Aktualny</td>
 															<td>Nowy cennik</td>
 															<td>Historia ceny</td>
 														</tr>
@@ -120,6 +116,7 @@
 															<td>{$all['dataOd']}</td>
 															<td>{$all['dataDo']}</td>
 															<td>{$all['opis']}</td>
+															<td>{$all['aktualny']}</td>
 															<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalCennikNowy{$all['idTowar']}">Nowy</button></td>
 															<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalCennikHistoria{$all['idTowar']}">Historia</button></td>
 														</tr>
@@ -150,18 +147,13 @@
 																			</div>
 
 																			<div class="form-group">
-																				<label for="Opis">Cena</label>
+																				<label for="Opis">Opis</label>
 																				<input name="Opis" class="form-control" type="text" placeholder="Krótki opis cennika">
 																			</div>
 
 																			<div class="form-group">
 																				<label for="dataOd">Cennik od</label>
 																				<input name="dataOd" class="form-control" type="date" placeholder="data Od">
-																			</div>
-
-																			<div class="form-group">
-																				<label for="dataDo">Cennik do</label>
-																				<input name="dataDo" class="form-control" type="date" placeholder="data Do">
 																			</div>
 
 																			<div class="form-group">

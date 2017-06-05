@@ -28,7 +28,7 @@
       return $data;
     }
 
-	public function insert($towar,$cena,$opis,$dataOd,$dataDo)
+	public function insert($towar,$cena,$opis,$dataOd)
 	{
 		$blad=false;
 		$data = array();
@@ -52,22 +52,16 @@
 		{
 			try
 			{
-
 				$this->pdo->beginTransaction();
-				if($dataDo===null)
-					$stmt = $this->pdo->prepare('INSERT INTO cennik (idTowar,opis,Cena,dataOd,dataDo) VALUES (:idTowar,:opis,:Cena,:dataOd,:dataDo) ');
-				else
-					$stmt = $this->pdo->prepare('INSERT INTO cennik (idTowar,opis,Cena,dataOd) VALUES (:idTowar,:opis,:Cena,:dataOd) ');
+				$stmt = $this->pdo->prepare('INSERT INTO cennik (idTowar,opis,cena,dataOd) VALUES (:idTowar,:opis,:Cena,:dataOd)');
 				$stmt -> bindValue(':idTowar',$towar,PDO::PARAM_INT);
 				$stmt -> bindValue(':Cena',$cena,PDO::PARAM_STR);
 				$stmt -> bindValue(':opis',$opis,PDO::PARAM_STR);
 				//$datee=date("Y-m-d");
 				$stmt -> bindValue(':dataOd',$dataOd,PDO::PARAM_STR);
-				if($dataDo===null)
-					$stmt -> bindValue(':dataDo',$dataDo,PDO::PARAM_STR);
 				$wynik_zapytania = $stmt -> execute();
 
-				$idCennika = $this->pdo->lastInsertId();;
+				$idCennika = $this->pdo->lastInsertId();
 
 				$stmt = $this->pdo->prepare('UPDATE Towar SET Cena = :CennikId WHERE IdTowar=:idTowar');
 				$stmt -> bindValue(':idTowar',$towar,PDO::PARAM_INT);
@@ -90,7 +84,7 @@
 		return $data;
 	}
 
-	public function insertNew($towar,$idCennikByly,$cena,$opis,$dataOd,$dataDo)
+	public function insertNew($towar,$idCennikByly,$cena,$opis,$dataOd)
 	{
 		$blad=false;
 		$data = array();
@@ -122,31 +116,57 @@
 
 				$this->pdo->beginTransaction();
 
-				$stmt = $this->pdo->prepare('UPDATE Cennik SET dataDo = :dataDo WHERE idCennik=:idCennik');
-				$stmt -> bindValue(':dataDo',$dataOd,PDO::PARAM_STR);
+				$stmt = $this->pdo->prepare('SELECT dataOd FROM Cennik WHERE idCennik=:idCennik');
 				$stmt -> bindValue(':idCennik',$idCennikByly,PDO::PARAM_INT);
-				$stmt -> execute();
+				$stmt->execute();
+				$data['cennik'] = $stmt->fetchAll();
+
+				if($data['cennik'][0]['dataOd']<=$dataOd)
+				{
+						$stmt = $this->pdo->prepare('UPDATE Cennik SET dataDo =:dataDo, aktualny=:aktualny WHERE idCennik=:idCennik');
+						$stmt -> bindValue(':dataDo',$dataOd,PDO::PARAM_STR);
+						$stmt -> bindValue(':idCennik',$idCennikByly,PDO::PARAM_INT);
+						if($dataOd!="")
+							if(date("Y-m-d")>=$dataOd)
+								$stmt->bindValue(':aktualny','N',PDO::PARAM_STR);
+							else
+								$stmt->bindValue(':aktualny','T',PDO::PARAM_STR);
+
+						$stmt->execute();
 
 
-				if($dataDo===null)
-					$stmt = $this->pdo->prepare('INSERT INTO cennik (idTowar,opis,Cena,dataOd,dataDo) VALUES (:idTowar,:opis,:Cena,:dataOd,:dataDo) ');
+						$stmt = $this->pdo->prepare('INSERT INTO Cennik (idTowar,opis,cena,dataOd,aktualny) VALUES (:idTowar,:opis,:Cena,:dataOd,:aktualny)');
+						$stmt -> bindValue(':idTowar',$towar,PDO::PARAM_INT);
+						$stmt -> bindValue(':Cena',$cena,PDO::PARAM_STR);
+						$stmt -> bindValue(':opis',$opis,PDO::PARAM_STR);
+						$stmt -> bindValue(':dataOd',$dataOd,PDO::PARAM_STR);
+						if($dataOd!="")
+							if(date("Y-m-d")<=$dataOd)
+								$stmt -> bindValue(':aktualny','N',PDO::PARAM_INT);
+							else
+								$stmt -> bindValue(':aktualny','T',PDO::PARAM_INT);
+
+						$wynik_zapytania=$stmt->execute();
+
+						$idCennika = $this->pdo->lastInsertId();
+						if($dataOd!="")
+							if(date("Y-m-d")>=$dataOd)
+						{
+							$stmt = $this->pdo->prepare('UPDATE Towar SET Cena =:CennikId WHERE IdTowar=:idTowar');
+							$stmt -> bindValue(':idTowar',$towar,PDO::PARAM_INT);
+							$stmt -> bindValue(':CennikId',$idCennika,PDO::PARAM_INT;
+							$wynik_zapytania = $stmt -> execute();
+						}
+				}
 				else
-					$stmt = $this->pdo->prepare('INSERT INTO cennik (idTowar,opis,Cena,dataOd) VALUES (:idTowar,:opis,:Cena,:dataOd) ');
-				$stmt -> bindValue(':idTowar',$towar,PDO::PARAM_INT);
-				$stmt -> bindValue(':Cena',$cena,PDO::PARAM_STR);
-				$stmt -> bindValue(':opis',$opis,PDO::PARAM_STR);
-				//$datee=date("Y-m-d");
-				$stmt -> bindValue(':dataOd',$dataOd,PDO::PARAM_STR);
-				if($dataDo===null)
-					$stmt -> bindValue(':dataDo',$dataDo,PDO::PARAM_STR);
-				$wynik_zapytania = $stmt -> execute();
+				{
+						$data['error'] .='Data od nie może być mniejsza od daty poprzedniego cennika! <br>';
+						$this->pdo->rollback();
+						return $data;
+				}
 
-				$idCennika = $this->pdo->lastInsertId();;
 
-				$stmt = $this->pdo->prepare('UPDATE Towar SET Cena = :CennikId WHERE IdTowar=:idTowar');
-				$stmt -> bindValue(':idTowar',$towar,PDO::PARAM_INT);
-				$stmt -> bindValue(':CennikId',$idCennika,PDO::PARAM_STR);
-				$wynik_zapytania = $stmt -> execute();
+
 
 				$this->pdo->commit();
 

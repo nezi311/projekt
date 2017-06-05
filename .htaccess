@@ -22,6 +22,7 @@ RewriteRule ^Categories/add/?$ index.php?controller=Categories&action=add [L]
 
 RewriteRule ^Cennik/?$ index.php?controller=Cennik [L]
 RewriteRule ^Cennik/insert?$ index.php?controller=Cennik&action=insert [L]
+RewriteRule ^Cennik/insertNew?$ index.php?controller=Cennik&action=insertNew [L]
 
 
 RewriteRule ^Towar/?$ index.php?controller=Towar [L]

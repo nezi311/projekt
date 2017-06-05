@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-06-04 20:48:42
+/* Smarty version 3.1.31, created on 2017-06-05 20:25:34
   from "E:\xampp\htdocs\PZ\templates\header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_5934560ab94e56_67332524',
+  'unifunc' => 'content_5935a21ea8bdd7_41435955',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4c3a4417f16c58c52ae81145e7bd8c6aeb43eabf' => 
     array (
       0 => 'E:\\xampp\\htdocs\\PZ\\templates\\header.html.php',
-      1 => 1496602116,
+      1 => 1496687132,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5934560ab94e56_67332524 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5935a21ea8bdd7_41435955 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -152,13 +152,13 @@ echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Zamowienia"><span class="glyphicon glyphicon-barcode"></span> Zamówienia klientów</a></li>
                   <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Koszyk"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk</a></li>
+Koszyk"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                   <!--<li><a href="#"><span class="glyphicon glyphicon-time"></span> Historia</a></li>-->
 
 
                                       <?php if ($_SESSION['role'] <= 1) {?>
                                         <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Użytkownicy<span class="caret"></span></a>
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                               <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
@@ -173,7 +173,7 @@ Klient" class="glyphicon glyphicon-user"> Klienci</a></li>
                                           </li>
                                       <?php }?>
                   <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-cog"></span> Konto<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-cog"></span><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                         <?php if (!isset($_SESSION['login'])) {?>
                             <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];

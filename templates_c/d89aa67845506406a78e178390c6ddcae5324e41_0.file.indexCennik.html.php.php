@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-06-04 22:23:39
+/* Smarty version 3.1.31, created on 2017-06-05 22:00:57
   from "E:\xampp\htdocs\PZ\templates\indexCennik.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_59346c4b2601b0_27355304',
+  'unifunc' => 'content_5935b8793930c2_84886436',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd89aa67845506406a78e178390c6ddcae5324e41' => 
     array (
       0 => 'E:\\xampp\\htdocs\\PZ\\templates\\indexCennik.html.php',
-      1 => 1496607817,
+      1 => 1496692854,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_59346c4b2601b0_27355304 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5935b8793930c2_84886436 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -79,18 +79,13 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 									</div>
 
 									<div class="form-group">
-										<label for="Opis">Cena</label>
+										<label for="Opis">Opis</label>
 										<input name="Opis" class="form-control" type="text" placeholder="Krótki opis cennika">
 									</div>
 
 									<div class="form-group">
 										<label for="dataOd">Cennik od</label>
 										<input name="dataOd" class="form-control" type="date" placeholder="data Od">
-									</div>
-
-									<div class="form-group">
-										<label for="dataDo">Cennik do</label>
-										<input name="dataDo" class="form-control" type="date" placeholder="data Do">
 									</div>
 
 									<div class="form-group">
@@ -172,6 +167,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['kat']->value) {
 															<td>Cennik od</td>
 															<td>Cennik do</td>
 															<td>Opis</td>
+															<td>Aktualny</td>
 															<td>Nowy cennik</td>
 															<td>Historia ceny</td>
 														</tr>
@@ -194,6 +190,8 @@ foreach ($_from as $_smarty_tpl->tpl_vars['all']->value) {
 </td>
 															<td><?php echo $_smarty_tpl->tpl_vars['all']->value['opis'];?>
 </td>
+															<td><?php echo $_smarty_tpl->tpl_vars['all']->value['aktualny'];?>
+</td>
 															<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalCennikNowy<?php echo $_smarty_tpl->tpl_vars['all']->value['idTowar'];?>
 ">Nowy</button></td>
 															<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalCennikHistoria<?php echo $_smarty_tpl->tpl_vars['all']->value['idTowar'];?>
@@ -212,7 +210,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['all']->value) {
 																	<div class="modal-body">
 																		<form action="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Cennik/insert" method="POST" class="form">
+Cennik/insertNew" method="POST" class="form">
 
 																			<div class="form-group" style="display:none;">
 																				<label for="Towar">IdTowaru</label>
@@ -232,18 +230,13 @@ Cennik/insert" method="POST" class="form">
 																			</div>
 
 																			<div class="form-group">
-																				<label for="Opis">Cena</label>
+																				<label for="Opis">Opis</label>
 																				<input name="Opis" class="form-control" type="text" placeholder="Krótki opis cennika">
 																			</div>
 
 																			<div class="form-group">
 																				<label for="dataOd">Cennik od</label>
 																				<input name="dataOd" class="form-control" type="date" placeholder="data Od">
-																			</div>
-
-																			<div class="form-group">
-																				<label for="dataDo">Cennik do</label>
-																				<input name="dataDo" class="form-control" type="date" placeholder="data Do">
 																			</div>
 
 																			<div class="form-group">

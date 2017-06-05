@@ -41,7 +41,7 @@ class Cennik extends Controller
       $model = $this->getModel("Cennik");
       if($model)
       {
-        $model->insert($_POST['Towar'],$_POST['Cena'],$_POST['Opis'],$_POST['dataOd'],$_POST['dataDo']);
+        $model->insert($_POST['Towar'],$_POST['Cena'],$_POST['Opis'],$_POST['dataOd']);
       }
       $this->redirect('Cennik');
     }
@@ -56,7 +56,7 @@ class Cennik extends Controller
       $model = $this->getModel("Cennik");
       if($model)
       {
-        $model->insert($_POST['Towar'],$_POST['bylyCennik'],$_POST['Cena'],$_POST['Opis'],$_POST['dataOd'],$_POST['dataDo']);
+        $model->insert($_POST['Towar'],$_POST['bylyCennik'],$_POST['Cena'],$_POST['Opis'],$_POST['dataOd']);
       }
       $this->redirect('Cennik');
     }
