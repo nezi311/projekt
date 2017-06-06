@@ -2,7 +2,7 @@
 	namespace Models;
 	use \PDO;
 	class SzukajTowar extends Model {
-		public function search($towar='' ,$cenaMin='' ,$cenaMax='' ,$sprzedawane='' ,$niesprzedawane='')
+		public function search($towar='' ,$cenaMin='' ,$cenaMax='',$kodTowaru='' ,$sprzedawane='' ,$niesprzedawane='')
 		{
 			$data = array();
 			if(!$this->pdo)
@@ -10,15 +10,19 @@
 			else
 					try
 					{
-						$zapytanie="SELECT * FROM `Towar` WHERE (NazwaTowaru LIKE :nazwa)";
+						$zapytanie="SELECT *,(SELECT cena FROM cennik WHERE cennik.idTowar=Towar.idTowar AND (Current_Date() BETWEEN IFNULL(cennik.dataOd,'1900-01-01') AND IFNULL(cennik.dataDo, Current_Date() )) ) AS CENA2 FROM Towar WHERE (NazwaTowaru LIKE :nazwa)";
 						d($cenaMin);
 						if ($cenaMin!='')
 						{
-							$zapytanie=$zapytanie." AND (Cena>=:cenaMin)";
+							$zapytanie=$zapytanie." AND ((SELECT cena FROM cennik WHERE cennik.idTowar=Towar.idTowar AND (Current_Date() BETWEEN IFNULL(cennik.dataOd,'1900-01-01') AND IFNULL(cennik.dataDo, Current_Date() )) )>=:cenaMin)";
 						}
 						if ($cenaMax!='')
 						{
-							$zapytanie=$zapytanie." AND (Cena<=:cenaMax)";
+							$zapytanie=$zapytanie." AND ((SELECT cena FROM cennik WHERE cennik.idTowar=Towar.idTowar AND (Current_Date() BETWEEN IFNULL(cennik.dataOd,'1900-01-01') AND IFNULL(cennik.dataDo, Current_Date() )) )<=:cenaMax)";
+						}
+						if ($kodTowaru!='')
+						{
+							$zapytanie=$zapytanie." AND (kodTowaru LIKE :kodTowaru)";
 						}
 						if($sprzedawane!='tru' || $niesprzedawane!='tru')
 						{
@@ -43,9 +47,9 @@
 							{
 								$stmt->bindValue(':cenaMax',$cenaMax, PDO::PARAM_INT);
 							}
-							if ($cenaMin!='')
+							if ($kodTowaru!='')
 							{
-								$stmt->bindValue(':cenaMin',$cenaMin, PDO::PARAM_INT);
+								$stmt->bindValue(':kodTowaru', '%'.$kodTowaru.'%', PDO::PARAM_INT);
 							}
 							$stmt->execute();
 							$towary = $stmt->fetchAll();
