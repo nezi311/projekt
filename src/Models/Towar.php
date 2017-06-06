@@ -35,7 +35,11 @@
 			else
 					try
 					{
-							$stmt = $this->pdo->query("SELECT * FROM Towar INNER JOIN Cennik ON Cennik.idCennik = Towar.Cena");
+							$datee = date("Y-m-d");
+							$stmt = $this->pdo->prepare("SELECT * FROM cennik INNER JOIN Towar ON cennik.idTowar = Towar.IdTowar WHERE :obecnaData BETWEEN IFNULL(cennik.dataOd,:pomocniczaDataOd) AND IFNULL(cennik.dataDo,:obecnaData)");
+							$stmt -> bindValue(':pomocniczaDataOd','1900-01-01',PDO::PARAM_STR);
+							$stmt -> bindValue(':obecnaData',$datee,PDO::PARAM_STR);
+							$stmt->execute();
 							$towary = $stmt->fetchAll();
 							$stmt->closeCursor();
 							if($towary && !empty($towary))
@@ -58,7 +62,7 @@
 			else
 					try
 					{
-							$stmt = $this->pdo->query("SELECT * FROM Towar WHERE Cena IS NULL");
+							$stmt = $this->pdo->query("SELECT * FROM Towar WHERE Towar.idTowar NOT IN (SELECT cennik.idTowar FROM cennik)");
 							$towary = $stmt->fetchAll();
 							$stmt->closeCursor();
 							if($towary && !empty($towary))
@@ -73,7 +77,7 @@
 					catch(\PDOException $e)
 					{
 							$data['error'] = 'Błąd odczytu danych z bazy! ';
-					}
+					}	2017-06-06		dsada	T
 			return $data;
 		}
 
@@ -85,7 +89,7 @@
 			else
 					try
 					{
-							$stmt = $this->pdo->query("SELECT * FROM Towar WHERE Cena IS NULL");
+							$stmt = $this->pdo->query("SELECT * FROM Towar WHERE Towar.idTowar NOT IN (SELECT cennik.idTowar FROM cennik)");
 							$towary = $stmt->fetchAll();
 							$iloscWierszy = $stmt->rowCount();
 							$stmt->closeCursor();

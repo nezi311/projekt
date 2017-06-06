@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-05-23 18:31:45
+/* Smarty version 3.1.31, created on 2017-06-06 14:50:44
   from "/opt/lampp/htdocs/PZ/templates/header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_592463f17e8178_06950776',
+  'unifunc' => 'content_5936a5245b3597_41401059',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '66e378da416daab7ad10377897dbd6f79fbd3e8a' => 
     array (
       0 => '/opt/lampp/htdocs/PZ/templates/header.html.php',
-      1 => 1495556533,
+      1 => 1496753423,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_592463f17e8178_06950776 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5936a5245b3597_41401059 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -114,18 +114,13 @@ Towar/freeze" class="glyphicon glyphicon-list-alt"> Zamrożone Towary</a></li>
                     <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Towar/add" class="glyphicon glyphicon-plus"> Dodaj Towar</a></li>
-<<<<<<< HEAD
                     <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
                     <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Cennik" class="glyphicon glyphicon-list-alt"> Cennik towarów</a></li>
-=======
-                    <!--<li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
-echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>-->
->>>>>>> 22ad7dd4ee4ccaecd66d92535f3bad8187496cbc
+
                   </ul>
 
                 </li>
@@ -157,13 +152,13 @@ echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Zamowienia"><span class="glyphicon glyphicon-barcode"></span> Zamówienia klientów</a></li>
                   <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Koszyk"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk</a></li>
+Koszyk"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                   <!--<li><a href="#"><span class="glyphicon glyphicon-time"></span> Historia</a></li>-->
 
 
                                       <?php if ($_SESSION['role'] <= 1) {?>
                                         <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Użytkownicy<span class="caret"></span></a>
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                               <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
@@ -178,7 +173,7 @@ Klient" class="glyphicon glyphicon-user"> Klienci</a></li>
                                           </li>
                                       <?php }?>
                   <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-cog"></span> Konto<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-cog"></span><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                         <?php if (!isset($_SESSION['login'])) {?>
                             <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
