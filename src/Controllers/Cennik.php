@@ -26,9 +26,44 @@ class Cennik extends Controller
       {
         $data['towarAll'] = $model->getAllTwCn();
       }
-
+      d($data);
       $view = $this->getView('Cennik');
       $view->index($data);
+    }
+    else
+      $this->redirect('index/');
+  }
+
+
+
+  public function zmienStanAktywnosc($id)
+  {
+    if($_SESSION['role']<=1)
+    {
+      if($model)
+      {
+        $model->zmienStanAktywnosc($id);
+      }
+      $this->redirect('Cennik/historiaCeny/'.$this->getOstatniCennikId());
+    }
+    else
+      $this->redirect('index/');
+  }
+
+
+
+  public function historiaCeny($id)
+  {
+    if($_SESSION['role']<=1)
+    {
+      $this->setOstatniCennikId($id);
+      $model = $this->getModel("Cennik");
+      if($model)
+      {
+        $data = $model->historiaCeny($id);
+      }
+      $view = $this->getView('Cennik');
+      $view->historiaCeny($data);
     }
     else
       $this->redirect('index/');
@@ -56,7 +91,7 @@ class Cennik extends Controller
       $model = $this->getModel("Cennik");
       if($model)
       {
-        $model->insert($_POST['Towar'],$_POST['bylyCennik'],$_POST['Cena'],$_POST['Opis'],$_POST['dataOd']);
+        $model->insertNew($_POST['Towar'],$_POST['bylyCennik'],$_POST['Cena'],$_POST['Opis'],$_POST['dataOd']);
       }
       $this->redirect('Cennik');
     }

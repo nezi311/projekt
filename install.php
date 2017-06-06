@@ -198,9 +198,9 @@ $stmt->execute();
    `opis` VARCHAR(150) DEFAULT NULL,
    PRIMARY KEY (idCennik)
  )ENGINE = InnoDB;");
- $datee=date("d-m-Y");
  $stmt->execute();
  $cennik = array();
+<<<<<<< HEAD
  $cennik[]=array('idTowar'=>2,'cena'=>100,'dataOd'=>$datee);
   $cennik[]=array('idTowar'=>3,'cena'=>120,'dataOd'=>$datee);
  foreach($cennik as $element_towar)
@@ -211,6 +211,9 @@ $stmt->execute();
    $stmt -> bindValue(':dataOd',$element_towar['dataOd'],PDO::PARAM_STR);
    $wynik_zapytania = $stmt -> execute();
  }
+=======
+
+>>>>>>> b5cd8b50b790232d172c25d118a1a33bb38691c1
  $stmt = $pdo->query("ALTER TABLE cennik ADD FOREIGN KEY (idTowar)
  REFERENCES Towar(IdTowar)");
  $stmt->execute();

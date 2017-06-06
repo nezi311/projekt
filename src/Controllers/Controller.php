@@ -28,5 +28,19 @@
                 return new $name();
             return null;
 		}
+
+		public function setOstatniCennikId($id)
+		{
+			if(isset($id))
+			{
+					$_SESSION['cennikId']=$id;
+			}
+		}
+
+		public function getOstatniCennikId()
+		{
+				return	$_SESSION['cennikId'];
+		}
+
 	}
 ?>
