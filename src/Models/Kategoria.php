@@ -42,10 +42,22 @@ $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $result = $stmt->execute();
                     $kategorie = $stmt->fetchAll();
                     $stmt->closeCursor();
-                    if($kategorie && !empty($kategorie))
+										if($kategorie && !empty($kategorie))
                         $data['kategorie'] = $kategorie;
                     else
                         $data['kategorie'] = array();
+
+										$katnazwa = array();
+                    $stmt = $this->pdo->prepare('SELECT NazwaKategorii FROM Kategoria WHERE IdKategoria=:id');
+$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+$result = $stmt->execute();
+                    $katnazwa = $stmt->fetchAll();
+                    $stmt->closeCursor();
+                    if($katnazwa && !empty($katnazwa))
+                        $data['katnazwa'] = $katnazwa;
+                    else
+                        $data['katnazwa'] = array();
+
                 }
                 catch(\PDOException $e)
                 {

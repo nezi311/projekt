@@ -1,8 +1,11 @@
 {include file="header.html.php"}
-
+{if isset($katnazwa)}
 <div class="page-header">
-	<h2>Lista Towarów z kategori </h2>
+	{foreach $katnazwa as $nazwa2}
+	<h2>Lista Towarów z kategori {$nazwa2['NazwaKategorii']}</h2>
+	{/foreach}
 </div>
+{/if}
 <table class="table sorttable">
   <thead>
     <tr>

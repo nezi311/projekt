@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-06-06 16:49:48
+/* Smarty version 3.1.31, created on 2017-06-06 18:25:03
   from "C:\xampp\htdocs\PZ\templates\header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_5936c10c937754_18263903',
+  'unifunc' => 'content_5936d75f0cd143_27802720',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd8104eaa282f8e757b1eb1f22b3fed373c78d3de' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\header.html.php',
-      1 => 1496744437,
+      1 => 1496765812,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5936c10c937754_18263903 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5936d75f0cd143_27802720 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -114,9 +114,9 @@ Towar/freeze" class="glyphicon glyphicon-list-alt"> Zamrożone Towary</a></li>
                     <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Towar/add" class="glyphicon glyphicon-plus"> Dodaj Towar</a></li>
-                    <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
+                    <!-- <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
+Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li> -->
                     <li><a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Cennik" class="glyphicon glyphicon-list-alt"> Cennik towarów</a></li>
