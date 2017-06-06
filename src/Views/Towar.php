@@ -54,6 +54,8 @@
 							$this->set('Klienci', $data['Klienci']);
 							if(isset($data['Dostawa']))
 								$this->set('Dostawa', $data['Dostawa']);
+								if(isset($data['Zaplata']))
+									$this->set('Zaplata', $data['Zaplata']);
 					}
           if(isset($data['error']))
               $this->set('error', $data['error']);

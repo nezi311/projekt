@@ -48,7 +48,9 @@
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar" class="glyphicon glyphicon-list-alt"> Lista Towarów</a></li>
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/freeze" class="glyphicon glyphicon-list-alt"> Zamrożone Towary</a></li>
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/add" class="glyphicon glyphicon-plus"> Dodaj Towar</a></li>
-                    <!--<li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>-->
+                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li>
+                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Cennik" class="glyphicon glyphicon-list-alt"> Cennik towarów</a></li>
+
                   </ul>
 
                 </li>
@@ -70,13 +72,13 @@
 
                 <ul class="nav navbar-nav navbar-right">
                   <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Zamowienia"><span class="glyphicon glyphicon-barcode"></span> Zamówienia klientów</a></li>
-                  <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk</a></li>
+                  <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                   <!--<li><a href="#"><span class="glyphicon glyphicon-time"></span> Historia</a></li>-->
 
 
                                       {if $smarty.session.role<=1}
                                         <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Użytkownicy<span class="caret"></span></a>
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                               <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy" class="glyphicon glyphicon-user"> Pracownicy</a></li>
                                               <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Pracownicy/add" class="glyphicon glyphicon-plus"> Dodaj pracownika</a></li>
@@ -85,7 +87,7 @@
                                           </li>
                                       {/if}
                   <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-cog"></span> Konto<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-cog"></span><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                         {if !isset($smarty.session.login)}
                             <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}AccessRoles/logform">Zaloguj</a></li>

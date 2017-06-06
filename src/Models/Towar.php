@@ -27,6 +27,77 @@
       return $data;
     }
 
+		public function getAllTwCn()
+		{
+			$data = array();
+			if(!$this->pdo)
+					$data['error'] = 'Połączenie z bazą nie powidoło się!';
+			else
+					try
+					{
+							$stmt = $this->pdo->query("SELECT * FROM Towar INNER JOIN Cennik ON Cennik.idCennik = Towar.Cena");
+							$towary = $stmt->fetchAll();
+							$stmt->closeCursor();
+							if($towary && !empty($towary))
+									$data['towary'] = $towary;
+							else
+									$data['towary'] = array();
+					}
+					catch(\PDOException $e)
+					{
+							$data['error'] = 'Błąd odczytu danych z bazy! ';
+					}
+			return $data;
+		}
+
+		public function getNotPriced()
+		{
+			$data = array();
+			if(!$this->pdo)
+					$data['error'] = 'Połączenie z bazą nie powidoło się!';
+			else
+					try
+					{
+							$stmt = $this->pdo->query("SELECT * FROM Towar WHERE Cena IS NULL");
+							$towary = $stmt->fetchAll();
+							$stmt->closeCursor();
+							if($towary && !empty($towary))
+							{
+								$data['towary'] = $towary;
+							}
+							else
+							{
+								$data['towary'] = array();
+							}
+					}
+					catch(\PDOException $e)
+					{
+							$data['error'] = 'Błąd odczytu danych z bazy! ';
+					}
+			return $data;
+		}
+
+		public function getNotPricedCount()
+		{
+			$data = array();
+			if(!$this->pdo)
+					$data['error'] = 'Połączenie z bazą nie powidoło się!';
+			else
+					try
+					{
+							$stmt = $this->pdo->query("SELECT * FROM Towar WHERE Cena IS NULL");
+							$towary = $stmt->fetchAll();
+							$iloscWierszy = $stmt->rowCount();
+							$stmt->closeCursor();
+
+					}
+					catch(\PDOException $e)
+					{
+							$data['error'] = 'Błąd odczytu danych z bazy! ';
+					}
+			return $iloscWierszy;
+		}
+
 
 		public function search($towar)
 		{
@@ -53,7 +124,7 @@
 			return $data;
 		}
 
-			public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary,$Cena)
+		public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary,$Cena)
 		{
 			$blad=false;
 			$data = array();
@@ -124,6 +195,7 @@
 		}
 			return $data;
 		}
+
 
 		public function edit($id, $NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary) {
 
@@ -219,6 +291,7 @@
 	          }
 	      return $data;
 		}
+
 
     public function getFreeze()
     {
@@ -373,18 +446,24 @@
 				return $data;
 			}
 
-			public function zrealizuj($suma, $klient, $dostawa)
+			public function zrealizuj($suma, $klient, $dostawa, $zaplata)
 			{
+				echo "suma ".$suma."<br>";
+				echo "kl ".$klient."<br>";
+				echo "dos ".$dostawa."<br>";
+				echo "zap ".$zaplata."<br>";
 				$data = array();
-					if($suma === NULL || $suma === "")
-						$data['error'] = 'Nieokreślona suma!';
+				$data['error']="";
+					if($zaplata === NULL || $zaplata === "")
+						$data['error'] = 'Nieokreślona zaplata!';
 					else
 						try
 						{
-							$stmt = $this->pdo->prepare('INSERT INTO `zamowieniesprzedaz`(`DataZamowienia`,`Wartosc`,`IdStanZamowienia`,`IdKlient`, `IdSposobDostawy`) VALUES (CURDATE(),:suma,3,:klient, :dostawa)');
-					    $stmt -> bindValue(':suma',$suma,PDO::PARAM_INT);
+							$stmt = $this->pdo->prepare('INSERT INTO `zamowieniesprzedaz`(`DataZamowienia`,`Wartosc`,`IdStanZamowienia`,`IdKlient`, `IdSposobDostawy`,`IdSposobZaplaty`) VALUES (CURDATE(),:suma,3,:klient, :dostawa,:zaplata)');
+							$stmt -> bindValue(':suma',$suma,PDO::PARAM_INT);
 							$stmt -> bindValue(':klient',$klient,PDO::PARAM_INT);
 							$stmt -> bindValue(':dostawa',$dostawa,PDO::PARAM_INT);
+							$stmt -> bindValue(':zaplata',$zaplata,PDO::PARAM_INT);
 							$stmt -> execute();
 
 							$stmt = $this->pdo->prepare('INSERT INTO towarysprzedaz (IdTowar, ilosc, klient, cena, vat, IdZamowienieSprzedaz) select koszyk.IdTowar, ilosc, :klient, Cena, StawkaVat, (SELECT MAX(IdZamowienieSprzedaz) FROM zamowieniesprzedaz) FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar');
