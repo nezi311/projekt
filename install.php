@@ -202,8 +202,12 @@ $stmt->execute();
  $cennik = array();
 
  $cennik[]=array('idTowar'=>2,'cena'=>100,'dataOd'=>'2017-06-01','dataDo'=>'2017-06-20');
+
   $cennik[]=array('idTowar'=>3,'cena'=>120,'dataOd'=>'2017-06-01','dataDo'=>'2017-06-03');
   $cennik[]=array('idTowar'=>3,'cena'=>124,'dataOd'=>'2017-06-04','dataDo'=>'2017-06-23');
+
+  $cennik[]=array('idTowar'=>3,'cena'=>120,'dataOd'=>'2017-06-01','dataDo'=>'2017-06-20');
+
  foreach($cennik as $element_towar)
  {
    $stmt = $pdo->prepare('INSERT INTO `cennik`(`idTowar`,`cena`,`dataOd`,`dataDo`) VALUES (:idTowar,:cena,:dataOd,:dataDo)');
