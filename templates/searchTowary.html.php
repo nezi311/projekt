@@ -52,15 +52,16 @@
   </thead>
   {foreach $tablicaTowarow as $towar}
   <tr>
-    <td>{$towar['NazwaTowaru']}</td>
+    <td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/showone/{$towar['IdTowar']}" role="button"><strong>{$towar['NazwaTowaru']}</strong></a></td>
     <td>{$towar['StanMagazynowyDysponowany']}</td>
     <td>{$towar['KodTowaru']}</td>
-		<td>{if $towar['Freeze']==1} Nie {else} Tak {/if}</td>
+		<td>{if $towar['Freeze']==1} Nie {else} Tak {/if}  </td>
     <td>
-          <div class="btn-group" role="group">
-						<a type="button" class="btn btn-primary" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/edit/{$towar['IdTowar']}" role="button">Edytuj</a>
-						<a type="button" class="btn btn-warning" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/zamroz/{$towar['IdTowar']}" role="button">Zamroź</a>
-	</td>
+
+			<div class="btn-group" role="group">
+						{if $towar['Freeze']==1}<a type="button" class="btn btn-info" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/unfreeze/{$towar['IdTowar']}" role="button">Wprowadź do sprzedaży</a>{else}<a type="button" class="btn btn-info" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/freeze/{$towar['IdTowar']}" role="button">Wycofaj ze sprzedaży</a>{/if}
+
+					</div></td>
   </tr>
   {/foreach}
 </table>

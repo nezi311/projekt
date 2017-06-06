@@ -24,7 +24,7 @@ RewriteRule ^Cennik/?$ index.php?controller=Cennik [L]
 RewriteRule ^Cennik/insert/?$ index.php?controller=Cennik&action=insert [L]
 RewriteRule ^Cennik/insertNew/?$ index.php?controller=Cennik&action=insertNew [L]
 RewriteRule ^Cennik/historiaCeny/(\d+)/?$ index.php?controller=Cennik&action=historiaCeny&id=$1 [L]
-RewriteRule ^Cennik/zmienStanAktywnosci/(\d+)/?$ index.php?controller=Cennik&action=zmienStanAktywnosci&id=$1 [L]
+RewriteRule ^Cennik/zmienStanAktywnosc/(\d+)/?$ index.php?controller=Cennik&action=zmienStanAktywnosc&id=$1 [L]
 
 
 RewriteRule ^Towar/?$ index.php?controller=Towar [L]

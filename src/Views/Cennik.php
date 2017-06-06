@@ -27,7 +27,6 @@
 
 			public function historiaCeny($data = null)
 			{
-				d($data);
 				if(isset($data['historiaCeny']))
 					 $this->set('cennik', $data['historiaCeny']);
 

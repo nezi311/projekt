@@ -20,7 +20,7 @@
 							$stmt = $this->pdo->query("SELECT `IdSposobZaplaty`,`SposobZaplaty` FROM sposobzaplaty");
 							$Zaplata= $stmt->fetchAll();
               $stmt->closeCursor();
-							
+
               if($Klients && !empty($Klients))
                   $data['Klienci'] = $Klients;
               else
@@ -113,6 +113,8 @@
 					}
 			return $data;
 		}
+
+
 
 
 		// ** Dawid Dominiak **//

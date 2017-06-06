@@ -17,7 +17,7 @@
 								<th>Cennik od</th>
 								<th>Cennik do</th>
 								<th>Opis</th>
-								<th>Aktualny</th>
+								<th>Aktywny</th>
 								<th>Zmień aktywność</th>
 						</thead>
 						<tbody>
@@ -30,7 +30,7 @@
 												<td>{$cen[6]}</td>
 												<td>{$cen[5]}</td>
 												<td>
-													<a href="http://{$smarty.server.HTTP_HOST}{$subdir}Cennik/zmienStanAktywnosci/{$cen[0]}">Zmień</a>
+													<a href="http://{$smarty.server.HTTP_HOST}{$subdir}Cennik/zmienStanAktywnosc/{$cen[0]}">Zmień</a>
 												</td>
 											</tr>
 								{/foreach}

@@ -90,6 +90,7 @@
 					try
 					{
 							$stmt = $this->pdo->query("SELECT * FROM Towar WHERE Towar.idTowar NOT IN (SELECT cennik.idTowar FROM cennik)");
+
 							$towary = $stmt->fetchAll();
 							$iloscWierszy = $stmt->rowCount();
 							$stmt->closeCursor();
@@ -104,7 +105,7 @@
 
 
 
-		public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary,$Cena)
+		public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary)
 		{
 			$blad=false;
 			$data = array();
@@ -144,11 +145,7 @@
 				$data['error'] .= 'Nieokreślone Jednostka Miary! <br>';
 				$blad=true;
 			}
-			if($Cena === null || $Cena === "")
-			{
-				$data['error'] .= 'Nieokreślone Cena! <br>';
-				$blad=true;
-			}
+
 			if(!$blad)
 			{
 				try
@@ -163,8 +160,8 @@
 			    $stmt -> bindValue(':KodTowaru',$KodTowaru,PDO::PARAM_STR);
 					$stmt -> bindValue(':IdKategoria',$IdKategoria,PDO::PARAM_INT);
 			    $stmt -> bindValue(':IdJednostkaMiary',$IdJednostkaMiary,PDO::PARAM_INT);
-			    $stmt -> bindValue(':Freeze',0,PDO::PARAM_INT);
-					$stmt -> bindValue(':Cena',$Cena,PDO::PARAM_INT);
+			    $stmt -> bindValue(':Freeze',1,PDO::PARAM_INT);
+					$stmt -> bindValue(':Cena',NULL,PDO::PARAM_INT);
 			    $wynik_zapytania = $stmt -> execute();
 				}
 				catch(\PDOException $e)
@@ -281,18 +278,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT IdTowar,
-																					CONCAT(Cena,' ','zł') AS Cena,
-																					KodTowaru,
-																					StanMagazynowyDysponowany,
-																					StawkaVat,
-																					NazwaTowaru,
-																					Kategoria.NazwaKategorii AS Kategoria,
-																					Jednostkamiary.Nazwa AS JednostkaMiary
-																					FROM `Towar`
-																					INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria
-																					INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary
-																					WHERE freeze=1");
+              $stmt = $this->pdo->query("SELECT towar.IdTowar, KodTowaru, StanMagazynowyDysponowany, StawkaVat, NazwaTowaru, Kategoria.NazwaKategorii AS Kategoria, Jednostkamiary.Nazwa AS JednostkaMiary, (SELECT CONCAT(cena,' ','zl') FROM cennik WHERE cennik.idTowar=Towar.idTowar AND (CURRENT_DATE() BETWEEN IFNULL(cennik.dataOd,'1900-01-01') AND IFNULL(cennik.dataDo, CURRENT_DATE() )) ) AS Cena FROM `Towar` INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary INNER JOIN Cennik ON Cennik.idCennik = Towar.Cena WHERE freeze=1");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -315,19 +301,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT towar.IdTowar,
-																					CONCAT(cennik.cena,' ','zł') AS Cena,
-																					KodTowaru,
-																					StanMagazynowyDysponowany,
-																					StawkaVat,
-																					NazwaTowaru,
-																					Kategoria.NazwaKategorii AS Kategoria,
-																					Jednostkamiary.Nazwa AS JednostkaMiary
-																					FROM `Towar`
-																					INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria
-																					INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary
-																					INNER JOIN Cennik ON Cennik.idCennik = Towar.Cena
-																					WHERE freeze=0");
+              $stmt = $this->pdo->query("SELECT towar.IdTowar, KodTowaru, StanMagazynowyDysponowany, StawkaVat, NazwaTowaru, Kategoria.NazwaKategorii AS Kategoria, Jednostkamiary.Nazwa AS JednostkaMiary, (SELECT CONCAT(cena,' ','zl') FROM cennik WHERE cennik.idTowar=Towar.idTowar AND (CURRENT_DATE() BETWEEN IFNULL(cennik.dataOd,'1900-01-01') AND IFNULL(cennik.dataDo, CURRENT_DATE() )) ) AS Cena FROM `Towar` INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary INNER JOIN Cennik ON Cennik.idCennik = Towar.Cena WHERE freeze=0");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))

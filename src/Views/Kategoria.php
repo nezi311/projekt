@@ -29,7 +29,10 @@
 
 				if(isset($data['kategorie']))
 						 $this->set('allKategorie', $data['kategorie']);
+				if(isset($data['katnazwa']))
+		 				 $this->set('katnazwa', $data['katnazwa']);
 			}
+			
 			if(isset($data['error']))
 					$this->set('error', $data['error']);// jesli tak to przypisujemy je do zmiennej
 
