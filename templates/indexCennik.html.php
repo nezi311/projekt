@@ -97,14 +97,14 @@
 												<table class="table">
 													<thead>
 														<tr>
-															<td>Towar</td>
-															<td>Obecna Cena</td>
-															<td>Cennik od</td>
-															<td>Cennik do</td>
-															<td>Opis</td>
-															<td>Aktualny</td>
-															<td>Nowy cennik</td>
-															<td>Historia ceny</td>
+															<th>Towar</th>
+															<th>Obecna Cena</th>
+															<th>Cennik od</th>
+															<th>Cennik do</th>
+															<th>Opis</th>
+															<th>Aktualny</th>
+															<th>Nowy cennik</th>
+															<th>Historia ceny</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -118,8 +118,10 @@
 															<td>{$all['opis']}</td>
 															<td>{$all['aktualny']}</td>
 															<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalCennikNowy{$all['idTowar']}">Nowy</button></td>
-															<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalCennikHistoria{$all['idTowar']}">Historia</button></td>
+															<td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Cennik/historiaCeny/{$all['idTowar']}" class="btn btn-info">Historia</a></td>
 														</tr>
+
+
 														<div id="myModalCennikNowy{$all['idTowar']}" class="modal fade" role="dialog">
 															<div class="modal-dialog">
 
@@ -170,13 +172,10 @@
 												{/foreach}
 												</tbody>
 											</table>
-												</div>
+											</div>
 											{/foreach}
 										{/if}
 									</div>
-
-
-
 
 								</div>
 							</div>

@@ -34,6 +34,22 @@ class Cennik extends Controller
       $this->redirect('index/');
   }
 
+  public function historiaCeny($id)
+  {
+    if($_SESSION['role']<=1)
+    {
+      $model = $this->getModel("Cennik");
+      if($model)
+      {
+        $data = $model->historiaCeny($id);
+      }
+      $view = $this->getView('Cennik');
+      $view->historiaCeny($data);
+    }
+    else
+      $this->redirect('index/');
+  }
+
   public function insert()
   {
     if($_SESSION['role']<=1)
@@ -56,7 +72,7 @@ class Cennik extends Controller
       $model = $this->getModel("Cennik");
       if($model)
       {
-        $model->insert($_POST['Towar'],$_POST['bylyCennik'],$_POST['Cena'],$_POST['Opis'],$_POST['dataOd']);
+        $model->insertNew($_POST['Towar'],$_POST['bylyCennik'],$_POST['Cena'],$_POST['Opis'],$_POST['dataOd']);
       }
       $this->redirect('Cennik');
     }

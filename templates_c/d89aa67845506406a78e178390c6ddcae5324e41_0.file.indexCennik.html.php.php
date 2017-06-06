@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-06-05 22:00:57
+/* Smarty version 3.1.31, created on 2017-06-06 13:22:38
   from "E:\xampp\htdocs\PZ\templates\indexCennik.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_5935b8793930c2_84886436',
+  'unifunc' => 'content_5936907ea3b090_68186715',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd89aa67845506406a78e178390c6ddcae5324e41' => 
     array (
       0 => 'E:\\xampp\\htdocs\\PZ\\templates\\indexCennik.html.php',
-      1 => 1496692854,
+      1 => 1496748156,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_5935b8793930c2_84886436 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5936907ea3b090_68186715 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -162,14 +162,14 @@ foreach ($_from as $_smarty_tpl->tpl_vars['kat']->value) {
 												<table class="table">
 													<thead>
 														<tr>
-															<td>Towar</td>
-															<td>Obecna Cena</td>
-															<td>Cennik od</td>
-															<td>Cennik do</td>
-															<td>Opis</td>
-															<td>Aktualny</td>
-															<td>Nowy cennik</td>
-															<td>Historia ceny</td>
+															<th>Towar</th>
+															<th>Obecna Cena</th>
+															<th>Cennik od</th>
+															<th>Cennik do</th>
+															<th>Opis</th>
+															<th>Aktualny</th>
+															<th>Nowy cennik</th>
+															<th>Historia ceny</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -194,9 +194,13 @@ foreach ($_from as $_smarty_tpl->tpl_vars['all']->value) {
 </td>
 															<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalCennikNowy<?php echo $_smarty_tpl->tpl_vars['all']->value['idTowar'];?>
 ">Nowy</button></td>
-															<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalCennikHistoria<?php echo $_smarty_tpl->tpl_vars['all']->value['idTowar'];?>
-">Historia</button></td>
+															<td><a href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Cennik/historiaCeny/<?php echo $_smarty_tpl->tpl_vars['all']->value['idTowar'];?>
+" class="btn btn-info">Historia</a></td>
 														</tr>
+
+
 														<div id="myModalCennikNowy<?php echo $_smarty_tpl->tpl_vars['all']->value['idTowar'];?>
 " class="modal fade" role="dialog">
 															<div class="modal-dialog">
@@ -258,7 +262,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 
 												</tbody>
 											</table>
-												</div>
+											</div>
 											<?php
 }
 }
@@ -267,9 +271,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 
 										<?php }?>
 									</div>
-
-
-
 
 								</div>
 							</div>
