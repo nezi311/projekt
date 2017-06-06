@@ -102,7 +102,7 @@
 															<th>Cennik od</th>
 															<th>Cennik do</th>
 															<th>Opis</th>
-															<th>Aktualny</th>
+															<th>Aktywny</th>
 															<th>Nowy cennik</th>
 															<th>Historia ceny</th>
 														</tr>

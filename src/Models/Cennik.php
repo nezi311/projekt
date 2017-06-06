@@ -62,7 +62,7 @@
 
 				$idCennika = $this->pdo->lastInsertId();
 
-				$stmt = $this->pdo->prepare('UPDATE Towar SET Cena = :CennikId WHERE IdTowar=:idTowar');
+				$stmt = $this->pdo->prepare('UPDATE Towar SET Cena = :CennikI2017-06-06		dsada	Td WHERE IdTowar=:idTowar');
 				$stmt -> bindValue(':idTowar',$towar,PDO::PARAM_INT);
 				$stmt -> bindValue(':CennikId',$idCennika,PDO::PARAM_STR);
 				$wynik_zapytania=$stmt->execute();
@@ -145,7 +145,11 @@
 
 					$wynik_zapytania = $stmt -> execute();
 					$temp=$stmt->fetchAll();
-					$data['cena']=$temp['cena'];
+					$iloscWierszy = $stmt->rowCount();
+					if($iloscWierszy>0)
+						$data['cena']=$temp['cena'];
+					else
+						$data['cena'].='Błąd odczytu danych do bazy! <br>';
 				}
 				catch(\PDOException $e)
 				{
@@ -174,12 +178,12 @@
 				{
 					try
 					{
-						$stmt = $this->pdo->prepare('SELECT * FROM cennik WHERE idcennik=:idCennik');
+						$stmt = $this->pdo->prepare('SELECT aktualny FROM cennik WHERE idCennik=:idCennik');
 						$stmt -> bindValue(':idCennik',$idCennik,PDO::PARAM_INT);
 						$wynik_zapytania = $stmt -> execute();
-						$data=$stmt->fetchAll();
+						$data['cennik']=$stmt->fetchAll();
 
-						if($data['aktualny']=="T")
+						if(strcmp($data['cennik'][0][0],"T")==0)
 							$aktualny='N';
 						else
 							$aktualny='T';

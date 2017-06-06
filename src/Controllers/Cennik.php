@@ -26,7 +26,7 @@ class Cennik extends Controller
       {
         $data['towarAll'] = $model->getAllTwCn();
       }
-      d($data);
+
       $view = $this->getView('Cennik');
       $view->index($data);
     }
@@ -40,6 +40,7 @@ class Cennik extends Controller
   {
     if($_SESSION['role']<=1)
     {
+      $model = $this->getModel("Cennik");
       if($model)
       {
         $model->zmienStanAktywnosc($id);

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-06-06 15:00:25
+/* Smarty version 3.1.31, created on 2017-06-06 17:47:26
   from "/opt/lampp/htdocs/PZ/templates/historiaCeny.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_5936a7693025c0_39783448',
+  'unifunc' => 'content_5936ce8ee27ce6_21568730',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1792dbcc309a4217dd355461c857b5fd47b46366' => 
     array (
       0 => '/opt/lampp/htdocs/PZ/templates/historiaCeny.html.php',
-      1 => 1496754022,
+      1 => 1496764042,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_5936a7693025c0_39783448 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5936ce8ee27ce6_21568730 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -46,7 +46,7 @@ $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id,
 								<th>Cennik od</th>
 								<th>Cennik do</th>
 								<th>Opis</th>
-								<th>Aktualny</th>
+								<th>Aktywny</th>
 								<th>Zmień aktywność</th>
 						</thead>
 						<tbody>
@@ -70,7 +70,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['cen']->value) {
 												<td>
 													<a href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
-Cennik/zmienStanAktywnosci/<?php echo $_smarty_tpl->tpl_vars['cen']->value[0];?>
+Cennik/zmienStanAktywnosc/<?php echo $_smarty_tpl->tpl_vars['cen']->value[0];?>
 ">Zmień</a>
 												</td>
 											</tr>
