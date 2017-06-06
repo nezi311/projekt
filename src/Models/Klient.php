@@ -15,11 +15,12 @@
           {
               $stmt = $this->pdo->query("SELECT `IdKlient`,`Imie`,`Nazwisko`,`NIP`,`Miasto`,`Ulica`,`Dom`,`Lokal`,`KodPocztowy`,`Poczta`,`EMail`,`NazwaFirmy` FROM Klient");
               $Klients = $stmt->fetchAll();
-							$stmt = $this->pdo->query("SELECT `IdSposobDostawy`,`SposobDostawy`,`Cena` FROM sposobdostawy");
+							$stmt = $this->pdo->query("SELECT `IdSposobDostawy`,`SposobDostawy` FROM sposobdostawy");
 							$Dostawa = $stmt->fetchAll();
 							$stmt = $this->pdo->query("SELECT `IdSposobZaplaty`,`SposobZaplaty` FROM sposobzaplaty");
 							$Zaplata= $stmt->fetchAll();
               $stmt->closeCursor();
+							
               if($Klients && !empty($Klients))
                   $data['Klienci'] = $Klients;
               else
