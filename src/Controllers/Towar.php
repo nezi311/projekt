@@ -93,12 +93,7 @@ class Towar extends Controller
 
   }
 
-  public function search()
-  {
 
-			$view=$this->getView('Towar');
-			$view->search($_POST['towar']);
-  }
 
   public function delete($id)
   {

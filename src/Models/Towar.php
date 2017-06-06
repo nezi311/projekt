@@ -28,30 +28,6 @@
     }
 
 
-		public function search($towar)
-		{
-			$data = array();
-			if(!$this->pdo)
-					$data['error'] = 'Połączenie z bazą nie powidoło się!';
-			else
-					try
-					{
-							$stmt = $this->pdo->prepare("SELECT * FROM `Towar` WHERE NazwaTowaru LIKE :nazwa");
-							$stmt->bindValue(':nazwa', '%'.$towar.'%', PDO::PARAM_STR);
-							$stmt->execute();
-							$towary = $stmt->fetchAll();
-							$stmt->closeCursor();
-							if($towary && !empty($towary))
-									$data['towary'] = $towary;
-							else
-									$data['error'] = 'Nie znaleziono towarów z daną frazą';
-					}
-					catch(\PDOException $e)
-					{
-							$data['error'] = 'Błąd odczytu danych z bazy! ';
-					}
-			return $data;
-		}
 
 			public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary,$Cena)
 		{

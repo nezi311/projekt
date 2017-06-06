@@ -27,8 +27,9 @@ RewriteRule ^Towar/delete/(\d+)/?$ index.php?controller=Towar&action=delete&id=$
 RewriteRule ^Towar/showone/(\d+)/?$ index.php?controller=Towar&action=showone&id=$1 [L]
 RewriteRule ^Towar/freeze/(\d+)/?$ index.php?controller=Towar&action=freeze&id=$1 [L]
 RewriteRule ^Towar/unfreeze/(\d+)/?$ index.php?controller=Towar&action=unfreeze&id=$1 [L]
-RewriteRule ^Szukaj/?$ index.php?controller=Towar&action=search [L]
 RewriteRule ^Towar/koszyk/(\d+)/?$ index.php?controller=Towar&action=koszyk&id=$1 [L]
+
+RewriteRule ^Szukaj/?$ index.php?controller=SzukajTowar&action=search [L]
 
 RewriteRule ^Zamowienia/?$ index.php?controller=Zamowienie&action=listaZamowien [L]
 RewriteRule ^Zamowienia/faktura/(\d+)/?$ index.php?controller=Zamowienie&action=faktura&id=$1 [L]
