@@ -27,9 +27,80 @@
       return $data;
     }
 
+		public function getAllTwCn()
+		{
+			$data = array();
+			if(!$this->pdo)
+					$data['error'] = 'Połączenie z bazą nie powidoło się!';
+			else
+					try
+					{
+							$stmt = $this->pdo->query("SELECT * FROM Towar INNER JOIN Cennik ON Cennik.idCennik = Towar.Cena");
+							$towary = $stmt->fetchAll();
+							$stmt->closeCursor();
+							if($towary && !empty($towary))
+									$data['towary'] = $towary;
+							else
+									$data['towary'] = array();
+					}
+					catch(\PDOException $e)
+					{
+							$data['error'] = 'Błąd odczytu danych z bazy! ';
+					}
+			return $data;
+		}
+
+		public function getNotPriced()
+		{
+			$data = array();
+			if(!$this->pdo)
+					$data['error'] = 'Połączenie z bazą nie powidoło się!';
+			else
+					try
+					{
+							$stmt = $this->pdo->query("SELECT * FROM Towar WHERE Cena IS NULL");
+							$towary = $stmt->fetchAll();
+							$stmt->closeCursor();
+							if($towary && !empty($towary))
+							{
+								$data['towary'] = $towary;
+							}
+							else
+							{
+								$data['towary'] = array();
+							}
+					}
+					catch(\PDOException $e)
+					{
+							$data['error'] = 'Błąd odczytu danych z bazy! ';
+					}
+			return $data;
+		}
+
+		public function getNotPricedCount()
+		{
+			$data = array();
+			if(!$this->pdo)
+					$data['error'] = 'Połączenie z bazą nie powidoło się!';
+			else
+					try
+					{
+							$stmt = $this->pdo->query("SELECT * FROM Towar WHERE Cena IS NULL");
+							$towary = $stmt->fetchAll();
+							$iloscWierszy = $stmt->rowCount();
+							$stmt->closeCursor();
+
+					}
+					catch(\PDOException $e)
+					{
+							$data['error'] = 'Błąd odczytu danych z bazy! ';
+					}
+			return $iloscWierszy;
+		}
 
 
-			public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary,$Cena)
+
+		public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary,$Cena)
 		{
 			$blad=false;
 			$data = array();
@@ -101,10 +172,102 @@
 			return $data;
 		}
 
-		public function add()
+
+		public function edit($id, $NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary) {
+
+			$blad=false;
+			$data = array();
+			$data['error']="";
+			if($NazwaTowaru === null || $NazwaTowaru === "")
+			{
+				$data['error'] .= 'Nieokreślone Nazwa Towaru! <br>';
+				$blad=true;
+			}
+			if($MinStanMagazynowy === null || $MinStanMagazynowy === "")
+			{
+				$data['error'] .='Nieokreślone Min Stan Magazynowy! <br>';
+				$blad=true;
+			}
+			if($MaxStanMagazynowy === null || $MaxStanMagazynowy === "")
+			{
+				$data['error'] .= 'Nieokreślony Max Stan Magazynowy! <br>';
+				$blad=true;
+			}
+			if($StawkaVat === null || $StawkaVat === "")
+			{
+				$data['error'] .= 'Nieokreślone Stawka Vat! <br>';
+				$blad=true;
+			}
+			if($KodTowaru === null || $KodTowaru === "")
+			{
+				$data['error'] .= 'Nieokreślony Kod Towaru! <br>';
+				$blad=true;
+			}
+			if($IdKategoria === null || $IdKategoria === "")
+			{
+				$data['error'] .= 'Nieokreślona Kategoria! <br>';
+				$blad=true;
+			}
+			if($IdJednostkaMiary === null || $IdJednostkaMiary === "")
+			{
+				$data['error'] .= 'Nieokreślone Jednostka Miary! <br>';
+				$blad=true;
+			}
+			if(!$blad)
+			{
+                try
+                {
+                    $stmt = $this->pdo->prepare('UPDATE `Towar`
+												SET `NazwaTowaru`=:NazwaTowaru,
+														`MinStanMagazynowy`=:MinStanMagazynowy,
+														`MaxStanMagazynowy`=:MaxStanMagazynowy,
+														`StawkaVat`=:StawkaVat,
+														`KodTowaru`=:KodTowaru,
+														`IdKategoria`=:IdKategoria,
+														`IdJednostkaMiary`=:IdJednostkaMiary
+												WHERE `IdTowar`=:id');
+								$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
+								$stmt -> bindValue(':NazwaTowaru',$NazwaTowaru,PDO::PARAM_STR);
+								$stmt -> bindValue(':MinStanMagazynowy',$MinStanMagazynowy,PDO::PARAM_INT);
+								$stmt -> bindValue(':MaxStanMagazynowy',$MaxStanMagazynowy,PDO::PARAM_INT);
+								$stmt -> bindValue(':StawkaVat',$StawkaVat,PDO::PARAM_INT);
+								$stmt -> bindValue(':KodTowaru',$KodTowaru,PDO::PARAM_STR);
+								$stmt -> bindValue(':IdKategoria',$IdKategoria,PDO::PARAM_INT);
+								$stmt -> bindValue(':IdJednostkaMiary',$IdJednostkaMiary,PDO::PARAM_INT);
+								$wynik_zapytania = $stmt -> execute();
+                }
+                catch(\PDOException $e)
+                {
+                     $data['error'] = 'Błąd zapisu danych do bazy!';
+                }
+            return $data;
+		}
+}
+		public function getJed()
 		{
 
+
+				$data = array();
+	      if(!$this->pdo)
+	          $data['error'] = 'Połączenie z bazą nie powidoło się!';
+	      else
+	          try
+	          {
+	              $stmt = $this->pdo->query("SELECT IdJednostkaMiary,CONCAT(Nazwa,', ',NazwaSkrocona) AS Nazwa2 From Jednostkamiary");
+	              $jednostki = $stmt->fetchAll();
+	              $stmt->closeCursor();
+	              if($jednostki && !empty($jednostki))
+	                  $data['jednostki'] = $jednostki;
+	              else
+	                  $data['jednostki'] = array();
+	          }
+	          catch(\PDOException $e)
+	          {
+	              $data['error'] = 'Błąd odczytu danych z bazy! ';
+	          }
+	      return $data;
 		}
+
 
     public function getFreeze()
     {
@@ -206,6 +369,8 @@
 			return $data;
 		}
 
+
+
 		public function wKoszyku()
     {
       $data = array();
@@ -257,18 +422,24 @@
 				return $data;
 			}
 
-			public function zrealizuj($suma, $klient, $dostawa)
+			public function zrealizuj($suma, $klient, $dostawa, $zaplata)
 			{
+				echo "suma ".$suma."<br>";
+				echo "kl ".$klient."<br>";
+				echo "dos ".$dostawa."<br>";
+				echo "zap ".$zaplata."<br>";
 				$data = array();
-					if($suma === NULL || $suma === "")
-						$data['error'] = 'Nieokreślona suma!';
+				$data['error']="";
+					if($zaplata === NULL || $zaplata === "")
+						$data['error'] = 'Nieokreślona zaplata!';
 					else
 						try
 						{
-							$stmt = $this->pdo->prepare('INSERT INTO `zamowieniesprzedaz`(`DataZamowienia`,`Wartosc`,`IdStanZamowienia`,`IdKlient`, `IdSposobDostawy`) VALUES (CURDATE(),:suma,3,:klient, :dostawa)');
-					    $stmt -> bindValue(':suma',$suma,PDO::PARAM_INT);
+							$stmt = $this->pdo->prepare('INSERT INTO `zamowieniesprzedaz`(`DataZamowienia`,`Wartosc`,`IdStanZamowienia`,`IdKlient`, `IdSposobDostawy`,`IdSposobZaplaty`) VALUES (CURDATE(),:suma,3,:klient, :dostawa,:zaplata)');
+							$stmt -> bindValue(':suma',$suma,PDO::PARAM_INT);
 							$stmt -> bindValue(':klient',$klient,PDO::PARAM_INT);
 							$stmt -> bindValue(':dostawa',$dostawa,PDO::PARAM_INT);
+							$stmt -> bindValue(':zaplata',$zaplata,PDO::PARAM_INT);
 							$stmt -> execute();
 
 							$stmt = $this->pdo->prepare('INSERT INTO towarysprzedaz (IdTowar, ilosc, klient, cena, vat, IdZamowienieSprzedaz) select koszyk.IdTowar, ilosc, :klient, Cena, StawkaVat, (SELECT MAX(IdZamowienieSprzedaz) FROM zamowieniesprzedaz) FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar');

@@ -12,6 +12,17 @@
                 try
                 {
                     $statystyki = array();
+
+                    $stmt = $this->pdo->query("SELECT NazwaTowaru, COUNT(*)*ilosc AS wartosc
+										FROM towar
+										INNER JOIN towarysprzedaz
+										ON towarysprzedaz.idTowar=towar.IdTowar
+											INNER JOIN zamowieniesprzedaz
+										    ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
+										 WHERE DataZamowienia BETWEEN '2016-01-01' AND '2017-04-23'
+										 GROUP BY NazwaTowaru
+										ORDER BY `wartosc` ASC");
+
 //ilość towaru
 if($kryterium==="kategoriaKasa")
 {
@@ -72,9 +83,9 @@ ON towarySprzedaz.idTowar=Towar.IdTowar
 	INNER JOIN zamowieniesprzedaz
     ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
     INNER JOIN Kategoria
-    ON towar.IdKategoria=Kategoria.IdKategoria
- WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza)
- GROUP BY Towarysprzedaz.cena
+    ON Towar.IdKategoria=Kategoria.IdKategoria
+ WHERE DataZamowienia BETWEEN :dataOd AND :dataDo
+ GROUP BY TowarySprzedaz.cena
 ORDER BY `wartosc` asc');
 }
 
