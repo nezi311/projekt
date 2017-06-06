@@ -77,7 +77,7 @@
 					catch(\PDOException $e)
 					{
 							$data['error'] = 'Błąd odczytu danych z bazy! ';
-					}	2017-06-06		dsada	T
+					}
 			return $data;
 		}
 
@@ -339,19 +339,20 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT towar.IdTowar,
-																					CONCAT(cennik.cena,' ','zł') AS Cena,
-																					KodTowaru,
-																					StanMagazynowyDysponowany,
-																					StawkaVat,
-																					NazwaTowaru,
-																					Kategoria.NazwaKategorii AS Kategoria,
-																					Jednostkamiary.Nazwa AS JednostkaMiary
-																					FROM `Towar`
-																					INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria
-																					INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary
-																					INNER JOIN Cennik ON Cennik.idCennik = Towar.Cena
-																					WHERE freeze=0");
+						$dataObecna = date("Y-m-d");
+              $stmt = $this->pdo->prepare("
+							SELECT *,
+							kategoria.NazwaKategorii as Kategoria,
+							jednostkamiary.Nazwa as JednostkaMiary,
+							(SELECT cena FROM cennik WHERE cennik.idTowar=Towar.idTowar AND (:data BETWEEN IFNULL(cennik.dataOd,:datatmp) AND IFNULL(cennik.dataDo, :data) )) AS Cena
+							FROM Towar
+							INNER JOIN kategoria on Towar.IdKategoria=kategoria.IdKategoria
+							INNER JOIN jednostkamiary on Towar.IdJednostkaMiary=jednostkamiary.IdJednostkaMiary
+							where Towar.Freeze=0
+							");
+							$stmt -> bindValue(':data',$dataObecna,PDO::PARAM_STR);
+							$stmt -> bindValue(':datatmp','1900-01-01',PDO::PARAM_STR);
+							$stmt -> execute();
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -408,7 +409,20 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT Id ,NazwaTowaru, KodTowaru, cennik.Cena, StawkaVat, ilosc, NazwaSkrocona FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar inner join `jednostkamiary` on jednostkamiary.idjednostkamiary=towar.idjednostkamiary INNER JOIN Cennik ON Cennik.idCennik = Towar.Cena");
+						$dataObecna = date("Y-m-d");
+              $stmt = $this->pdo->prepare("
+							SELECT *,
+							kategoria.NazwaKategorii as Kategoria,
+							jednostkamiary.Nazwa as JednostkaMiary,
+							(SELECT cena FROM cennik WHERE cennik.idTowar=Towar.idTowar AND (:data BETWEEN IFNULL(cennik.dataOd,:datatmp) AND IFNULL(cennik.dataDo, :data) )) AS Cena
+							FROM Towar
+							INNER JOIN kategoria on Towar.IdKategoria=kategoria.IdKategoria
+							INNER JOIN jednostkamiary on Towar.IdJednostkaMiary=jednostkamiary.IdJednostkaMiary
+							INNER join koszyk on koszyk.IdTowar=towar.IdTowar
+							");
+							$stmt -> bindValue(':data',$dataObecna,PDO::PARAM_STR);
+							$stmt -> bindValue(':datatmp','1900-01-01',PDO::PARAM_STR);
+							$stmt->execute();
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
