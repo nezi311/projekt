@@ -36,7 +36,10 @@
 					{$ilosc++}
 				{/while}
 			</select>
+
 		</form>
+	</td>
+</tr>
 
   {/foreach}
 {/if}

@@ -8,13 +8,14 @@
 	{$wartoscbrutto=0}
 	{assign var="licznik" value="0"}
 	{foreach $tablicaZamowien as $klient}
-	{if $licznik neq '1'}
+
+{if $licznik neq '1'}
 	{assign var="licznik" value="1"}
-	<h2>Faktura VAT nr. {$klient['DataZamowienia']}-{$klient['IdZamowienieSprzedaz']} z dnia {$klient['DataZamowienia']}</h2>
-	<h2>Data wystawienia: {$smarty.now|date_format:"%Y"}-{$smarty.now|date_format:"%m"}-{$smarty.now|date_format:"%d"}</h2>
-	<h2>Data sprzedaży: {$smarty.post.dataSprzedazy}</h2>
-	<h2>Sposob zapłaty: {$klient['SposobZaplaty']}</h2>
-	<h2>Termin zapłaty: {$smarty.post.dataZaplaty}</h2>
+	<h3>Faktura VAT nr. {$klient['DataZamowienia']}-{$klient['IdZamowienieSprzedaz']} z dnia {$klient['DataZamowienia']}</h3>
+	<h3>Data wystawienia: {$smarty.now|date_format:"%Y"}-{$smarty.now|date_format:"%m"}-{$smarty.now|date_format:"%d"}</h3>
+	<h3>Data sprzedaży: {$smarty.post.dataSprzedazy}</h3>
+	<h3>Sposob zapłaty: {$klient['SposobZaplaty']}</h3>
+	<h3>Termin zapłaty: {$smarty.post.dataZaplaty}</h3>
 	{/if}
 	{/foreach}
 	{/if}
@@ -97,8 +98,8 @@ Tel {$klient['Telefon']} <br>
 	</tr>
 {/if}
 </table>
-Sposób dostawy: {$towar['SposobDostawy']}<br>
-Suma: {$towar['Wartosc']}
+<h3>Sposób dostawy: {$towar['SposobDostawy']}</h3>
+<h3>Do zapłaty: {$towar['Wartosc']}</h3>
 {if isset($error)}
 <strong>{$error}</strong>
 {/if}

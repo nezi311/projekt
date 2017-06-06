@@ -6,7 +6,7 @@
 
 	if(isset($_GET['term']))
 	{
-    $Model = new Models\Towar;
+    $Model = new Models\SzukajTowar;
     $data = $Model->search($_GET['term']);
     $data=$data['towary'];
 

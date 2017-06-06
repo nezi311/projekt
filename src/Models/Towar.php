@@ -103,30 +103,6 @@
 		}
 
 
-		public function search($towar)
-		{
-			$data = array();
-			if(!$this->pdo)
-					$data['error'] = 'Połączenie z bazą nie powidoło się!';
-			else
-					try
-					{
-							$stmt = $this->pdo->prepare("SELECT * FROM `Towar` WHERE NazwaTowaru LIKE :nazwa");
-							$stmt->bindValue(':nazwa', '%'.$towar.'%', PDO::PARAM_STR);
-							$stmt->execute();
-							$towary = $stmt->fetchAll();
-							$stmt->closeCursor();
-							if($towary && !empty($towary))
-									$data['towary'] = $towary;
-							else
-									$data['error'] = 'Nie znaleziono towarów z daną frazą';
-					}
-					catch(\PDOException $e)
-					{
-							$data['error'] = 'Błąd odczytu danych z bazy! ';
-					}
-			return $data;
-		}
 
 		public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary,$Cena)
 		{
@@ -339,8 +315,8 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT IdTowar,
-																					CONCAT(Cena,' ','zł') AS Cena,
+              $stmt = $this->pdo->query("SELECT towar.IdTowar,
+																					CONCAT(cennik.cena,' ','zł') AS Cena,
 																					KodTowaru,
 																					StanMagazynowyDysponowany,
 																					StawkaVat,
@@ -350,6 +326,7 @@
 																					FROM `Towar`
 																					INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria
 																					INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary
+																					INNER JOIN Cennik ON Cennik.idCennik = Towar.Cena
 																					WHERE freeze=0");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
@@ -407,7 +384,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT Id ,NazwaTowaru, KodTowaru, Cena, StawkaVat, ilosc, NazwaSkrocona FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar inner join `jednostkamiary` on jednostkamiary.idjednostkamiary=towar.idjednostkamiary");
+              $stmt = $this->pdo->query("SELECT Id ,NazwaTowaru, KodTowaru, cennik.Cena, StawkaVat, ilosc, NazwaSkrocona FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar inner join `jednostkamiary` on jednostkamiary.idjednostkamiary=towar.idjednostkamiary INNER JOIN Cennik ON Cennik.idCennik = Towar.Cena");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -464,16 +441,16 @@
 						try
 						{
 							$stmt = $this->pdo->prepare('INSERT INTO `zamowieniesprzedaz`(`DataZamowienia`,`Wartosc`,`IdStanZamowienia`,`IdKlient`, `IdSposobDostawy`,`IdSposobZaplaty`) VALUES (CURDATE(),:suma,3,:klient, :dostawa,:zaplata)');
-							$stmt -> bindValue(':suma',$suma,PDO::PARAM_INT);
+							$stmt -> bindValue(':suma',$suma,PDO::PARAM_STR);
 							$stmt -> bindValue(':klient',$klient,PDO::PARAM_INT);
 							$stmt -> bindValue(':dostawa',$dostawa,PDO::PARAM_INT);
 							$stmt -> bindValue(':zaplata',$zaplata,PDO::PARAM_INT);
 							$stmt -> execute();
-
-							$stmt = $this->pdo->prepare('INSERT INTO towarysprzedaz (IdTowar, ilosc, klient, cena, vat, IdZamowienieSprzedaz) select koszyk.IdTowar, ilosc, :klient, Cena, StawkaVat, (SELECT MAX(IdZamowienieSprzedaz) FROM zamowieniesprzedaz) FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar');
+							echo 'zamowieniesprzedaz';
+							$stmt = $this->pdo->prepare('INSERT INTO towarysprzedaz (IdTowar, ilosc, klient, cena, vat, IdZamowienieSprzedaz) select koszyk.IdTowar, ilosc, :klient, cennik.Cena, StawkaVat, (SELECT MAX(IdZamowienieSprzedaz) FROM zamowieniesprzedaz) FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar INNER JOIN Cennik ON Cennik.idCennik = Towar.Cena');
 							$stmt -> bindValue(':klient',$klient,PDO::PARAM_INT);
 							$stmt -> execute();
-							echo 'cos';
+							echo 'towarysprzedaz';
 							$stmt2 = $this->pdo->prepare("truncate table koszyk");
 							$stmt2 -> execute();
 

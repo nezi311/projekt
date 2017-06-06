@@ -93,12 +93,7 @@ class Towar extends Controller
 
   }
 
-  public function search()
-  {
 
-			$view=$this->getView('Towar');
-			$view->search($_POST['towar']);
-  }
 
   public function delete($id)
   {
@@ -237,7 +232,7 @@ class Towar extends Controller
  {
 
    if($_SESSION['role']<=1)
-   {<<
+   {
      if($id !== null)
      {
 

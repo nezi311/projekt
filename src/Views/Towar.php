@@ -10,7 +10,7 @@
           if($model)
           {
               $data = $model->getNotFreeze();
-
+							//d($data['towary']);
               if(isset($data['towary']))
                    $this->set('tablicaTowarow', $data['towary']);
           }
@@ -50,6 +50,7 @@
 					if($model)
 					{
 						$data = $model->getAll();
+						//d($data['Dostawa']);
 						if(isset($data['Klienci']))
 							$this->set('Klienci', $data['Klienci']);
 							if(isset($data['Dostawa']))
@@ -87,21 +88,7 @@
 						$this->set('error', $data['error']);// jesli tak to przypisujemy je do zmiennej
 				$this->render('addTowar');
 }
-			public function search($towar)
-			{
-					$model = $this->getModel('Towar');
-					if($model)
-					{
-							$data = $model->search($towar);
 
-							if(isset($data['towary']))
-									 $this->set('tablicaTowarow', $data['towary']);
-					}
-					if(isset($data['error']))
-							$this->set('error', $data['error']);
-					//przetworzenie szablonu do wyświetlania listy pracowników
-					$this->render('searchTowary');
-			}
 
 			// public function edit($id, $data=null)
 			// {

@@ -30,11 +30,11 @@
   </tr>
   {/foreach}
 </table>
-
 <form action="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/zrealizuj" method="post" style='width:20%;'>
 <b>Klient</b>
 	<input list="customers" name="klient">
   <datalist id="customers">
+
 	{foreach $Klienci as $klient}
 	<option value="{$klient['IdKlient']}">{$klient['Imie']} {$klient['Nazwisko']}</option>
 	{/foreach}
@@ -45,8 +45,7 @@
 	<input list="delivery" name="dostawa">
   <datalist id="delivery">
 	{foreach $Dostawa as $sposob}
-	{$dostawa = $suma*$sposob['Cena']/100}
-	<option value="{$sposob['IdSposobDostawy']}">{$sposob['SposobDostawy']}/{$dostawa} zł</option>
+	<option value="{$sposob['IdSposobDostawy']}">{$sposob['SposobDostawy']}</option>
 	{/foreach}
 	</datalist>
 	<br>
