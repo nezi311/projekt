@@ -10,7 +10,7 @@
           if($model)
           {
               $data = $model->getNotFreeze();
-
+							//d($data['towary']);
               if(isset($data['towary']))
                    $this->set('tablicaTowarow', $data['towary']);
           }
@@ -50,6 +50,7 @@
 					if($model)
 					{
 						$data = $model->getAll();
+						//d($data['Dostawa']);
 						if(isset($data['Klienci']))
 							$this->set('Klienci', $data['Klienci']);
 							if(isset($data['Dostawa']))

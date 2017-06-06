@@ -237,7 +237,7 @@ class Towar extends Controller
  {
 
    if($_SESSION['role']<=1)
-   {<<
+   {
      if($id !== null)
      {
 
