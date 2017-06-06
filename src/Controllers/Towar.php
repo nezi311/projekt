@@ -248,7 +248,7 @@ class Towar extends Controller
                    //nie przekazano komunikatów o błędzie
                }
        //powiadamiamy odpowiedni widok, że nastąpiła aktualizacja bazy
-       $this->redirect('Towar/');
+       $this->redirect('Towar/freeze/');
      }
      else
        $this->redirect('Towar/');

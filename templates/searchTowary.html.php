@@ -13,7 +13,7 @@
   </thead>
   {foreach $tablicaTowarow as $towar}
   <tr>
-    <td>{$towar['NazwaTowaru']}</td>
+    <td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/showone/{$towar['IdTowar']}" role="button">{$towar['NazwaTowaru']}</a></td>
     <td>{$towar['StanMagazynowyDysponowany']}</td>
     <td>{$towar['StawkaVat']}</td>
     <td>{$towar['KodTowaru']}</td>
