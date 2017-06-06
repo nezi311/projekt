@@ -26,12 +26,5 @@
 			}
 		}
 
-		public function getModel($name)
-		{
-			$name = 'Models\\'.$name;
-						if(class_exists($name))
-								return new $name();
-						return null;
-		}
 	}
 ?>

@@ -6,10 +6,6 @@
 		//wyświetlenie widoku z kategoriami
 		public function index($kryterium="towarIlosc", $fraza="", $dataOd="", $dataDo="", $kategoria=0){
 			//pobranie z modelu listy kategorii
-<<<<<<< HEAD
-
-=======
->>>>>>> 4de0217c8f1da4d726ccd18871f5e64d7451fdcc
 			if ($dataDo==="")
 			{
 				$dataDo=date("Y-m-d");
@@ -19,10 +15,6 @@
 			{
 				$dataOd=date("Y-m-d", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-1 month" ) );
 			}
-<<<<<<< HEAD
-
-=======
->>>>>>> 4de0217c8f1da4d726ccd18871f5e64d7451fdcc
 			$model = $this->getModel('Statystyka');
             if($model)
 						{

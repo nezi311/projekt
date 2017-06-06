@@ -200,9 +200,9 @@ $stmt->execute();
  )ENGINE = InnoDB;");
  $stmt->execute();
  $cennik = array();
-<<<<<<< HEAD
- $cennik[]=array('idTowar'=>2,'cena'=>100,'dataOd'=>$datee);
-  $cennik[]=array('idTowar'=>3,'cena'=>120,'dataOd'=>$datee);
+
+ $cennik[]=array('idTowar'=>2,'cena'=>100,'dataOd'=>'2017-06-01','dataDo'=>'2017-06-20');
+  $cennik[]=array('idTowar'=>3,'cena'=>120,'dataOd'=>'2017-06-01','dataDo'=>'2017-06-20');
  foreach($cennik as $element_towar)
  {
    $stmt = $pdo->prepare('INSERT INTO `cennik`(`idTowar`,`cena`,`dataOd`) VALUES (:idTowar,:cena,:dataOd)');
@@ -211,9 +211,7 @@ $stmt->execute();
    $stmt -> bindValue(':dataOd',$element_towar['dataOd'],PDO::PARAM_STR);
    $wynik_zapytania = $stmt -> execute();
  }
-=======
 
->>>>>>> b5cd8b50b790232d172c25d118a1a33bb38691c1
  $stmt = $pdo->query("ALTER TABLE cennik ADD FOREIGN KEY (idTowar)
  REFERENCES Towar(IdTowar)");
  $stmt->execute();
