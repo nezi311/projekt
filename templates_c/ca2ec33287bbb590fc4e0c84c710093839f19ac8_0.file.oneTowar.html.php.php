@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-05-23 18:13:03
+/* Smarty version 3.1.31, created on 2017-06-06 16:00:42
   from "C:\xampp\htdocs\PZ\templates\oneTowar.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_59245f8f6eb586_59832303',
+  'unifunc' => 'content_5936b58a11f712_72008890',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ca2ec33287bbb590fc4e0c84c710093839f19ac8' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\oneTowar.html.php',
-      1 => 1495549234,
+      1 => 1496757638,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_59245f8f6eb586_59832303 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5936b58a11f712_72008890 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -35,8 +35,30 @@ if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['towar']->value) {
 ?>
 <div class="panel panel-primary">
-  <div class="panel-heading"><h2><?php echo $_smarty_tpl->tpl_vars['towar']->value['NazwaTowaru'];?>
+  <div class="panel-heading"><div class="row">
+  <div class="col-sm-10"><h2><?php echo $_smarty_tpl->tpl_vars['towar']->value['NazwaTowaru'];?>
 <h2></div>
+  <div class="col-sm-2"><div class="btn-group-vertical" role="group">
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
+">Edytuj</button>
+        <?php $_prefixVariable1 = 1;
+$_tmp_array = isset($_smarty_tpl->tpl_vars['towar']) ? $_smarty_tpl->tpl_vars['towar']->value : array();
+if (!is_array($_tmp_array) || $_tmp_array instanceof ArrayAccess) {
+settype($_tmp_array, 'array');
+}
+$_tmp_array['Freeze'] = $_prefixVariable1;
+$_smarty_tpl->_assignInScope('towar', $_tmp_array);
+if ($_prefixVariable1) {?><a type="button" class="btn btn-default" href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Towar/odmroz/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
+" role="button">Wprowadź do sprzedaży</a><?php } else { ?><a type="button" class="btn btn-default" href="http://<?php echo $_SERVER['HTTP_HOST'];
+echo $_smarty_tpl->tpl_vars['subdir']->value;?>
+Towar/zamroz/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
+" role="button">Wycofaj ze sprzedaży</a><?php }?>
+
+    	</div></div>
+</div>  </div>
+
   <div class="panel-body">
     <div class="col-md-12">
 		<table class="table">
@@ -65,28 +87,28 @@ foreach ($_from as $_smarty_tpl->tpl_vars['towar']->value) {
 </td>
     </tr>
     <tr>
-      <th>W sprzedaży:</th><td><?php $_prefixVariable1 = 1;
+      <th>W sprzedaży:</th><td><?php $_prefixVariable2 = 1;
 $_tmp_array = isset($_smarty_tpl->tpl_vars['towar']) ? $_smarty_tpl->tpl_vars['towar']->value : array();
 if (!is_array($_tmp_array) || $_tmp_array instanceof ArrayAccess) {
 settype($_tmp_array, 'array');
 }
-$_tmp_array['Freeze'] = $_prefixVariable1;
+$_tmp_array['Freeze'] = $_prefixVariable2;
 $_smarty_tpl->_assignInScope('towar', $_tmp_array);
-if ($_prefixVariable1) {?>tak<?php } else { ?>nie<?php }?></td>
+if ($_prefixVariable2) {?>tak<?php } else { ?>nie<?php }?></td>
     </tr>
     <tr>
       <th>Cena:</dt><th><?php echo $_smarty_tpl->tpl_vars['towar']->value['Cena'];?>
 zł</th>
       </tr>
     </table>
-	<div class="btn-group" role="group">
-    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
+    <!-- <div class="btn-group-vertical" role="group">
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
 ">Edytuj</button>
-		<a type="button" class="btn btn-warning" href="http://<?php echo $_SERVER['HTTP_HOST'];
+  		<a type="button" class="btn btn-warning" href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Towar/zamroz/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
 " role="button">Wycofaj ze sprzedaży</a>
-	</div>
+  	</div> -->
   <!-- Modal -->
   <div id="myModal2<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
 " class="modal fade" role="dialog">
@@ -181,7 +203,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
                 </select>
 
             </div>
-            
+
             <input type="submit" value="Edytuj" class="btn btn-primary" />
             <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
           </form>

@@ -4,7 +4,15 @@
 {if isset($tablicaTowarow) and !empty($tablicaTowarow)}
   {foreach $tablicaTowarow as $towar}
 <div class="panel panel-primary">
-  <div class="panel-heading"><h2>{$towar['NazwaTowaru']}<h2></div>
+  <div class="panel-heading"><div class="row">
+  <div class="col-sm-10"><h2>{$towar['NazwaTowaru']}<h2></div>
+  <div class="col-sm-2"><div class="btn-group-vertical" role="group">
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2{$towar['IdTowar']}">Edytuj</button>
+        {if $towar['Freeze']==1}<a type="button" class="btn btn-default" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/odmroz/{$towar['IdTowar']}" role="button">Wprowadź do sprzedaży</a>{else}<a type="button" class="btn btn-default" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/zamroz/{$towar['IdTowar']}" role="button">Wycofaj ze sprzedaży</a>{/if}
+
+    	</div></div>
+</div>  </div>
+
   <div class="panel-body">
     <div class="col-md-12">
 		<table class="table">
@@ -27,16 +35,16 @@
       <th>Jednostkamiary:</th><td>{$towar['IdJednostkaMiary']}</td>
     </tr>
     <tr>
-      <th>W sprzedaży:</th><td>{if $towar['Freeze']=1}tak{else}nie{/if}</td>
+      <th>W sprzedaży:</th><td>{if $towar['Freeze']==1}tak{else}nie{/if}</td>
     </tr>
     <tr>
       <th>Cena:</dt><th>{$towar['Cena']}zł</th>
       </tr>
     </table>
-	<div class="btn-group" role="group">
-    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2{$towar['IdTowar']}">Edytuj</button>
-		<a type="button" class="btn btn-warning" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/zamroz/{$towar['IdTowar']}" role="button">Wycofaj ze sprzedaży</a>
-	</div>
+    <!-- <div class="btn-group-vertical" role="group">
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2{$towar['IdTowar']}">Edytuj</button>
+  		<a type="button" class="btn btn-warning" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/zamroz/{$towar['IdTowar']}" role="button">Wycofaj ze sprzedaży</a>
+  	</div> -->
   <!-- Modal -->
   <div id="myModal2{$towar['IdTowar']}" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -100,7 +108,7 @@
                 </select>
 
             </div>
-            
+
             <input type="submit" value="Edytuj" class="btn btn-primary" />
             <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
           </form>

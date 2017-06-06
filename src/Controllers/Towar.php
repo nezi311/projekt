@@ -75,7 +75,7 @@ class Towar extends Controller
       $model=$this->getModel('Towar');
           if($model)
           {
-            $data = $model->insert($_POST['NazwaTowaru'],$_POST['MinStanMagazynowy'],$_POST['MaxStanMagazynowy'],$_POST['StawkaVat'],$_POST['KodTowaru'],$_POST['IdKategoria'],$_POST['IdJednostkaMiary'],$_POST['Cena']);
+            $data = $model->insert($_POST['NazwaTowaru'],$_POST['MinStanMagazynowy'],$_POST['MaxStanMagazynowy'],$_POST['StawkaVat'],$_POST['KodTowaru'],$_POST['IdKategoria'],$_POST['IdJednostkaMiary']);
             //pobranie komunikatów o bledach
           }
           if($data['error'] === "") // jeśli bledy nie istnieją, przechodzimy do zakladnki "pracownicy"
@@ -237,7 +237,7 @@ class Towar extends Controller
  {
 
    if($_SESSION['role']<=1)
-   {<<
+   {
      if($id !== null)
      {
 

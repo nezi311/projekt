@@ -17,7 +17,7 @@
     <td>{$towar['StanMagazynowyDysponowany']}</td>
     <td>{$towar['StawkaVat']}</td>
     <td>{$towar['KodTowaru']}</td>
-		<td>{if $towar['Freeze']=1} Nie {else} Tak {/if}</td>
+		<td>{if $towar['Freeze']==1} Nie {else} Tak {/if}  </td>
     <td>
 
           <div class="btn-group" role="group">

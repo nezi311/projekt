@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-05-23 18:13:00
+/* Smarty version 3.1.31, created on 2017-06-06 16:33:19
   from "C:\xampp\htdocs\PZ\templates\searchTowary.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_59245f8c9dca06_33937019',
+  'unifunc' => 'content_5936bd2f0ffee4_49836484',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '874a349d27059c6f67c4fc2b3d74ce07d4d2114d' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\searchTowary.html.php',
-      1 => 1495555947,
+      1 => 1496759594,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_59245f8c9dca06_33937019 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5936bd2f0ffee4_49836484 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -55,14 +55,8 @@ Towar/showone/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
 </td>
     <td><?php echo $_smarty_tpl->tpl_vars['towar']->value['KodTowaru'];?>
 </td>
-		<td><?php $_prefixVariable1 = 1;
-$_tmp_array = isset($_smarty_tpl->tpl_vars['towar']) ? $_smarty_tpl->tpl_vars['towar']->value : array();
-if (!is_array($_tmp_array) || $_tmp_array instanceof ArrayAccess) {
-settype($_tmp_array, 'array');
-}
-$_tmp_array['Freeze'] = $_prefixVariable1;
-$_smarty_tpl->_assignInScope('towar', $_tmp_array);
-if ($_prefixVariable1) {?> Nie <?php } else { ?> Tak <?php }?></td>
+		<td><?php if ($_smarty_tpl->tpl_vars['towar']->value['Freeze'] == 1) {?> Nie <?php } else { ?> Tak <?php }?>  <?php echo $_smarty_tpl->tpl_vars['towar']->value['Freeze'];?>
+</td>
     <td>
 
           <div class="btn-group" role="group">

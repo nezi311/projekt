@@ -85,7 +85,7 @@
 			else
 					try
 					{
-							$stmt = $this->pdo->query("SELECT * FROM Towar WHERE Cena IS NULL");
+							$stmt = $this->pdo->query("SELECT * FROM Towar WHERE Cena IS NULL and StanMagazynowyDysponowany >0");
 							$towary = $stmt->fetchAll();
 							$iloscWierszy = $stmt->rowCount();
 							$stmt->closeCursor();
@@ -124,7 +124,7 @@
 			return $data;
 		}
 
-		public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary,$Cena)
+		public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$StawkaVat,$KodTowaru,$IdKategoria,$IdJednostkaMiary)
 		{
 			$blad=false;
 			$data = array();
@@ -164,11 +164,7 @@
 				$data['error'] .= 'Nieokreślone Jednostka Miary! <br>';
 				$blad=true;
 			}
-			if($Cena === null || $Cena === "")
-			{
-				$data['error'] .= 'Nieokreślone Cena! <br>';
-				$blad=true;
-			}
+
 			if(!$blad)
 			{
 				try
@@ -184,7 +180,7 @@
 					$stmt -> bindValue(':IdKategoria',$IdKategoria,PDO::PARAM_INT);
 			    $stmt -> bindValue(':IdJednostkaMiary',$IdJednostkaMiary,PDO::PARAM_INT);
 			    $stmt -> bindValue(':Freeze',0,PDO::PARAM_INT);
-					$stmt -> bindValue(':Cena',$Cena,PDO::PARAM_INT);
+					$stmt -> bindValue(':Cena',NULL,PDO::PARAM_INT);
 			    $wynik_zapytania = $stmt -> execute();
 				}
 				catch(\PDOException $e)
@@ -301,18 +297,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT IdTowar,
-																					CONCAT(Cena,' ','zł') AS Cena,
-																					KodTowaru,
-																					StanMagazynowyDysponowany,
-																					StawkaVat,
-																					NazwaTowaru,
-																					Kategoria.NazwaKategorii AS Kategoria,
-																					Jednostkamiary.Nazwa AS JednostkaMiary
-																					FROM `Towar`
-																					INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria
-																					INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary
-																					WHERE freeze=1");
+              $stmt = $this->pdo->query("SELECT towar.IdTowar, CONCAT(cennik.cena,' ','zł') AS Cena, KodTowaru, StanMagazynowyDysponowany, StawkaVat, NazwaTowaru, Kategoria.NazwaKategorii AS Kategoria, Jednostkamiary.Nazwa AS JednostkaMiary FROM `Towar` INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria INNER JOIN Cennik on Towar.cena=Cennik.idCennik INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary WHERE freeze=1");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -335,18 +320,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT IdTowar,
-																					CONCAT(Cena,' ','zł') AS Cena,
-																					KodTowaru,
-																					StanMagazynowyDysponowany,
-																					StawkaVat,
-																					NazwaTowaru,
-																					Kategoria.NazwaKategorii AS Kategoria,
-																					Jednostkamiary.Nazwa AS JednostkaMiary
-																					FROM `Towar`
-																					INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria
-																					INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary
-																					WHERE freeze=0");
+              $stmt = $this->pdo->query("SELECT towar.IdTowar, CONCAT(cennik.cena,' ','zł') AS Cena, KodTowaru, StanMagazynowyDysponowany, StawkaVat, NazwaTowaru, Kategoria.NazwaKategorii AS Kategoria, Jednostkamiary.Nazwa AS JednostkaMiary FROM `Towar` INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria INNER JOIN Cennik on Towar.cena=Cennik.idCennik INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary WHERE freeze=0");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
