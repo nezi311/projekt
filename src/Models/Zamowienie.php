@@ -186,7 +186,7 @@
 			{
 					try
 					{
-							$stmt = $this->pdo->query("SELECT zamowieniesprzedaz.DataZamowienia, towar.KodTowaru, towar.NazwaTowaru, towar.IdJednostkaMiary, jednostkamiary.*, towarysprzedaz.ilosc, towarysprzedaz.vat, towarysprzedaz.cena, zamowieniesprzedaz.Wartosc, towarysprzedaz.IdZamowienieSprzedaz, klient.*, sposobdostawy.*, sposobzaplaty.* from zamowieniesprzedaz
+							$stmt = $this->pdo->query("SELECT zamowieniesprzedaz.DataZamowienia, towar.KodTowaru, towar.NazwaTowaru, towar.IdJednostkaMiary, jednostkamiary.*, towarysprzedaz.ilosc, towarysprzedaz.vat, towarysprzedaz.cena, zamowieniesprzedaz.Wartosc, towarysprzedaz.IdZamowienieSprzedaz, klient.*, sposobdostawy.*, sposobzaplaty.sposobzaplaty as SposobZaplaty from zamowieniesprzedaz
 								inner join klient on zamowieniesprzedaz.IdKlient = klient.IdKlient
 								inner join towarysprzedaz on towarysprzedaz.IdZamowienieSprzedaz = zamowieniesprzedaz.IdZamowienieSprzedaz
 								inner JOIN towar on towar.IdTowar = towarysprzedaz.IdTowar

@@ -8,7 +8,7 @@
   <div class="col-sm-10"><h2>{$towar['NazwaTowaru']}<h2></div>
   <div class="col-sm-2"><div class="btn-group-vertical" role="group">
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2{$towar['IdTowar']}">Edytuj</button>
-        {if $towar['Freeze']==1}<a type="button" class="btn btn-default" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/odmroz/{$towar['IdTowar']}" role="button">Wprowadź do sprzedaży</a>{else}<a type="button" class="btn btn-default" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/zamroz/{$towar['IdTowar']}" role="button">Wycofaj ze sprzedaży</a>{/if}
+        {if $towar['Freeze']==1}<a type="button" class="btn btn-default" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/unfreeze/{$towar['IdTowar']}" role="button">Wprowadź do sprzedaży</a>{else}<a type="button" class="btn btn-default" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/freeze/{$towar['IdTowar']}" role="button">Wycofaj ze sprzedaży</a>{/if}
 
     	</div></div>
 </div>  </div>
