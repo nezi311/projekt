@@ -77,7 +77,7 @@
 					catch(\PDOException $e)
 					{
 							$data['error'] = 'Błąd odczytu danych z bazy! ';
-					}
+					}	
 			return $data;
 		}
 
