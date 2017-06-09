@@ -24,7 +24,7 @@
 		<td>
 		<form action="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/koszyk/{$towar['IdTowar']}" method="post">
 			<input type='hidden' name='IdTowar' value={$towar['IdTowar']}>
-
+			<input type='hidden' name='cena' value={$towar['Cena']}>
 			<input type='submit' class="btn btn-primary" value='Dodaj'>
 
 			{$ilosc=1}

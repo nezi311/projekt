@@ -20,13 +20,13 @@
 		<td>{$towar['Cena']}</td>
     <td>{$towar['StawkaVat']}%</td>
     <td>
-			<a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/plus/{$towar['Id']}" role="button"><span class="glyphicon glyphicon-plus"></span></a>
+			<a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/plus/{$towar['IdTowar']}" role="button"><span class="glyphicon glyphicon-plus"></span></a>
 			{$towar['ilosc']} {$towar['NazwaSkrocona']}
-			<a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/minus/{$towar['Id']}" role="button"><span class="glyphicon glyphicon-minus"></span></a>
+			<a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/minus/{$towar['IdTowar']}" role="button"><span class="glyphicon glyphicon-minus"></span></a>
 		</td>
 		<td>{(((($towar['Cena']*$towar['StawkaVat'])/100)+$towar['Cena'])*$towar['ilosc'])}</td>
 		{$suma=$suma+((($towar['Cena']*$towar['StawkaVat'])/100*$towar['ilosc'])+$towar['Cena']*$towar['ilosc'])}
-		<td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/usun/{$towar['Id']}" role="button"><span class="glyphicon glyphicon-remove"></span></a></td>
+		<td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/usun/{$towar['IdTowar']}" role="button"><span class="glyphicon glyphicon-remove"></span></a></td>
   </tr>
   {/foreach}
 </table>

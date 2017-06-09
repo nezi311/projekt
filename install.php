@@ -163,9 +163,10 @@ $stmt->execute();
  )ENGINE = InnoDB;");
  $stmt->execute();
  $towary = array();
- $towary[]=array('NazwaTowaru'=>'klawiatura','MinStanMagazynowy'=>1,'MaxStanMagazynowy'=>1,'StanMagazynowyRzeczywisty'=>1,'StanMagazynowyDysponowany'=>1,'StawkaVat'=>8,'KodTowaru'=>'a43dv42','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>1,'Cena'=>1);
- $towary[]=array('NazwaTowaru'=>'mysz','MinStanMagazynowy'=>1,'MaxStanMagazynowy'=>1,'StanMagazynowyRzeczywisty'=>1,'StanMagazynowyDysponowany'=>1,'StawkaVat'=>8,'KodTowaru'=>'b43dv43','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>0,'Cena'=>1);
-  $towary[]=array('NazwaTowaru'=>'monitor','MinStanMagazynowy'=>2,'MaxStanMagazynowy'=>2,'StanMagazynowyRzeczywisty'=>2,'StanMagazynowyDysponowany'=>2,'StawkaVat'=>8,'KodTowaru'=>'h3h4j1','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>0,'Cena'=>2);
+ $towary[]=array('NazwaTowaru'=>'klawiatura','MinStanMagazynowy'=>1,'MaxStanMagazynowy'=>1,'StanMagazynowyRzeczywisty'=>1,'StanMagazynowyDysponowany'=>10,'StawkaVat'=>23,'KodTowaru'=>'a43dv42','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>1,'Cena'=>1);
+  $towary[]=array('NazwaTowaru'=>'głośniki','MinStanMagazynowy'=>1,'MaxStanMagazynowy'=>1,'StanMagazynowyRzeczywisty'=>1,'StanMagazynowyDysponowany'=>10,'StawkaVat'=>23,'KodTowaru'=>'a43dv42','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>0,'Cena'=>3);
+ $towary[]=array('NazwaTowaru'=>'mysz','MinStanMagazynowy'=>1,'MaxStanMagazynowy'=>1,'StanMagazynowyRzeczywisty'=>1,'StanMagazynowyDysponowany'=>10,'StawkaVat'=>8,'KodTowaru'=>'b43dv43','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>0,'Cena'=>1);
+  $towary[]=array('NazwaTowaru'=>'monitor','MinStanMagazynowy'=>2,'MaxStanMagazynowy'=>2,'StanMagazynowyRzeczywisty'=>2,'StanMagazynowyDysponowany'=>20,'StawkaVat'=>8,'KodTowaru'=>'h3h4j1','IdKategoria'=>1,'IdJednostkaMiary'=>1,'Freeze'=>0,'Cena'=>2);
  foreach($towary as $element_towar)
  {
    $stmt = $pdo->prepare('INSERT INTO `Towar`(`NazwaTowaru`,`MinStanMagazynowy`,`MaxStanMagazynowy`,`StanMagazynowyRzeczywisty`,`StanMagazynowyDysponowany`,`StawkaVat`,`KodTowaru`,`IdKategoria`,`IdJednostkaMiary`,`Freeze`,`Cena`) VALUES (:NazwaTowaru,:MinStanMagazynowy,:MaxStanMagazynowy,:StanMagazynowyRzeczywisty,:StanMagazynowyDysponowany,:StawkaVat,:KodTowaru,:IdKategoria,:IdJednostkaMiary,:Freeze,:Cena)');
@@ -201,12 +202,13 @@ $stmt->execute();
  $stmt->execute();
  $cennik = array();
 
+ $cennik[]=array('idTowar'=>1,'cena'=>80,'dataOd'=>'2017-06-01','dataDo'=>'2017-06-20');
  $cennik[]=array('idTowar'=>2,'cena'=>100,'dataOd'=>'2017-06-01','dataDo'=>'2017-06-20');
+ $cennik[]=array('idTowar'=>3,'cena'=>50,'dataOd'=>'2017-06-01','dataDo'=>'2017-06-20');
+ $cennik[]=array('idTowar'=>4,'cena'=>120,'dataOd'=>'2017-06-01','dataDo'=>'2017-06-03');
+ $cennik[]=array('idTowar'=>4,'cena'=>124,'dataOd'=>'2017-06-04','dataDo'=>'2017-06-23');
 
-  $cennik[]=array('idTowar'=>3,'cena'=>120,'dataOd'=>'2017-06-01','dataDo'=>'2017-06-03');
-  $cennik[]=array('idTowar'=>3,'cena'=>124,'dataOd'=>'2017-06-04','dataDo'=>'2017-06-23');
 
-  $cennik[]=array('idTowar'=>3,'cena'=>120,'dataOd'=>'2017-06-01','dataDo'=>'2017-06-20');
 
  foreach($cennik as $element_towar)
  {
@@ -637,6 +639,7 @@ $stmt->execute();
    `id` INT AUTO_INCREMENT,
    `IdTowar` int NOT NULL unique,
    `ilosc` int NOT NULL,
+   `cena` float NOT NULL,
    PRIMARY KEY (id),
    FOREIGN KEY (IdTowar)
    REFERENCES Towar(IdTowar)
