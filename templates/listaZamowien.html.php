@@ -7,7 +7,7 @@
 {assign var="klient" value="null"}
 <table>
 {if isset($tablicaZamowien)}
-{d($tablicaZamowien)}
+<!--{d($tablicaZamowien)}-->
   {foreach $tablicaZamowien as $towar}
 		{if $data neq $towar['DataZamowienia'] or $klient neq $towar['IdKlient']}
 		{assign var="data" value=$towar['DataZamowienia']}
@@ -27,7 +27,6 @@
 			<label for="dataOd">Data sprzedaży</label>
 			<input class="form-control" type="date" id="dataSprzedazy" name="dataSprzedazy"/>
 		</div>
-
 {*{if $towar['IdSposobZaplaty']==='1'}*}
 		<div class="form-group">
 			<label for="dataOd">Termin zapłaty</label>

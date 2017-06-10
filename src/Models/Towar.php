@@ -77,7 +77,7 @@
 					catch(\PDOException $e)
 					{
 							$data['error'] = 'Błąd odczytu danych z bazy! ';
-					}	
+					}
 			return $data;
 		}
 
@@ -295,9 +295,9 @@
 
     public function getNotFreeze()
     {
-			d($_COOKIE['idtowary']);
-			d($_COOKIE['ilosci']);
-			d($_COOKIE['ceny']);
+			//d($_COOKIE['idtowary']);
+			//d($_COOKIE['ilosci']);
+			//d($_COOKIE['ceny']);
       $data = array();
       if(!$this->pdo)
           $data['error'] = 'Połączenie z bazą nie powidoło się!';
@@ -460,7 +460,7 @@
 							$stmt -> bindValue(':zaplata',$zaplata,PDO::PARAM_INT);
 							$stmt -> execute();
 							echo 'zamowieniesprzedaz';
-							$stmt = $this->pdo->prepare('INSERT INTO towarysprzedaz (IdTowar, ilosc, klient, cena, vat, IdZamowienieSprzedaz) select koszyk.IdTowar, ilosc, :klient, cennik.Cena, StawkaVat, (SELECT MAX(IdZamowienieSprzedaz) FROM zamowieniesprzedaz) FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar INNER JOIN Cennik ON Cennik.idCennik = Towar.Cena');
+							$stmt = $this->pdo->prepare('INSERT INTO towarysprzedaz (IdTowar, ilosc, klient, cena, vat, IdZamowienieSprzedaz) select koszyk.IdTowar, koszyk.ilosc, :klient, koszyk.cena, StawkaVat, (SELECT MAX(IdZamowienieSprzedaz) FROM zamowieniesprzedaz) FROM `towar` inner join `koszyk` on towar.IdTowar=koszyk.IdTowar');
 							$stmt -> bindValue(':klient',$klient,PDO::PARAM_INT);
 							$stmt -> execute();
 							echo 'towarysprzedaz';

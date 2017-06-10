@@ -3,6 +3,9 @@
 <div class="page-header">
 	{if isset($tablicaZamowien)}
 	{$lp=1}
+	{$vaty=array()}
+	{$vatywartosci=array()}
+	{$wartosci=array()}
 	{$wartoscnetto=0}
 	{$wartoscvat=0}
 	{$wartoscbrutto=0}
@@ -79,11 +82,22 @@ Tel {$klient['Telefon']} <br>
 		<td>{$towar['cena']*$towar['ilosc']*$towar['vat']/100}</td>
 		<td>{(($towar['cena']*$towar['ilosc']*$towar['vat'])/100)+$towar['cena']*$towar['ilosc']}</td>
 		</tr>
-		{$lp++}
+		{$lp=$lp+1}
+		{$vaty[]=$towar['vat']}
+		{$wartosci[]=$towar['cena']*$towar['ilosc']*$towar['vat']/100}
 		{$wartoscnetto = $wartoscnetto+$towar['cena']*$towar['ilosc']}
 		{$wartoscvat = $wartoscvat+$towar['cena']*$towar['ilosc']*$towar['vat']/100}
 		{$wartoscbrutto = $wartoscbrutto+(($towar['cena']*$towar['ilosc']*$towar['vat'])/100)+$towar['cena']*$towar['ilosc']}
   {/foreach}
+	{for $i=0 to sizeof($vaty)-1}
+		{if array_key_exists($vaty[$i], $vatywartosci)}
+		{$suma=$vatywartosci[$vaty[$i]]}
+		{$suma=$suma+$wartosci[$i]}
+		{$vatywartosci[$vaty[$i]]=$suma}
+		{else}
+		{$vatywartosci[$vaty[$i]]=$wartosci[$i]}
+		{/if}
+	{/for}
 	<tr>
 	<td></td>
 	<td></td>
@@ -93,9 +107,23 @@ Tel {$klient['Telefon']} <br>
 	<td>Razem:</td>
 	<td>{$wartoscnetto}</td>
 	<td></td>
-	<td>{$wartoscvat}</td>
+	<td></td>
 	<td>{$wartoscbrutto}</td>
 	</tr>
+	{foreach $vatywartosci as $key=>$value}
+	<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>{$key}%</td>
+	<td>{$value}</td>
+	<td></td>
+	</tr>
+	{/foreach}
 {/if}
 </table>
 <h3>Sposób dostawy: {$towar['SposobDostawy']}</h3>

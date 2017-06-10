@@ -691,6 +691,22 @@ $stmt->execute();
    REFERENCES sposobzaplaty(IdSposobZaplaty)
     )ENGINE = InnoDB;");
  $stmt->execute();
+ /*************************************************/
+ /*******************FAKTURA********************/
+ /*************************************************/
+ $stmt = $pdo->query("DROP TABLE IF EXISTS `faktura`");
+ $stmt->execute();
+ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `faktura`
+ (
+   `IdFaktura` int AUTO_INCREMENT,
+   `IdZamowienieSprzedaz` int(11) NOT NULL,
+   `DataWystawienia` date NOT NULL,
+   `TerminZaplaty` date NOT NULL,
+   PRIMARY KEY (IdFaktura),
+   FOREIGN KEY (IdZamowienieSprzedaz)
+   REFERENCES zamowieniesprzedaz(IdZamowienieSprzedaz)
+   ON DELETE CASCADE
+  )ENGINE = InnoDB;");
 /*
  $kategorie = array();
  $kategorie[]=array(
