@@ -80,15 +80,20 @@
 					$model = $this->getModel('Zamowienie');
 					if($model)
 					{
-							$data = $model->faktura($id);
+						$today = date("Y-m-d");
+							$data = $model->faktura($id,$today,$_POST['dataZaplaty'],$_POST['dataSprzedazy']);
 
 							if(isset($data['zamowienia']))
 									 $this->set('tablicaZamowien', $data['zamowienia']);
 					}
 					if(isset($data['error']))
 							$this->set('error', $data['error']);
-					//przetworzenie szablonu do wyświetlania listy pracowników
-					$this->render('faktura');
+					if($_POST['dataSprzedazy']=="")
+					{
+						$this->set('pusta', "Podaj datę.");
+						$this->render('listaZamowien');
+					}
+					else $this->render('faktura');
 			}
 
 

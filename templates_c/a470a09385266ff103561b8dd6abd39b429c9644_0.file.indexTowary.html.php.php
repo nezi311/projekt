@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-06-10 14:27:49
+/* Smarty version 3.1.31, created on 2017-06-11 15:44:32
   from "C:\xampp\htdocs\PZ\templates\indexTowary.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_593be5c5e5a324_94010305',
+  'unifunc' => 'content_593d4940f110e3_52416368',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a470a09385266ff103561b8dd6abd39b429c9644' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\indexTowary.html.php',
-      1 => 1496827981,
+      1 => 1497188671,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_593be5c5e5a324_94010305 (Smarty_Internal_Template $_smarty_tpl) {
+function content_593d4940f110e3_52416368 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -33,7 +33,7 @@ $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id,
 <table class="table sortable">
   <thead>
     <tr>
-      <th>Nazwa Towaru</th><th>Stan Magazynowy Dysponowany</th><th>Kategoria</th><th>Jednostka Miary</th><th>Cena</th><th class="sorttable_nosort">Wycofaj z sprzedaży</th><th class="sorttable_nosort">Kup</th>
+      <th>Nazwa Towaru</th><th style=text-align:center;>Stan Magazynowy Dysponowany</th><th style=text-align:center;>Kategoria</th><th style=text-align:center;>Jednostka Miary</th><th style=text-align:right;>Cena</th><th class="sorttable_nosort">Wycofaj z sprzedaży</th><th class="sorttable_nosort">Kup</th>
     </tr>
   </thead>
 <?php if (isset($_smarty_tpl->tpl_vars['tablicaTowarow']->value)) {?>
@@ -48,14 +48,14 @@ echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Towar/showone/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
 " role="button"><strong><?php echo $_smarty_tpl->tpl_vars['towar']->value['NazwaTowaru'];?>
 </strong></a></td>
-    <td><?php echo $_smarty_tpl->tpl_vars['towar']->value['StanMagazynowyDysponowany'];?>
+    <td style=text-align:center;><?php echo $_smarty_tpl->tpl_vars['towar']->value['StanMagazynowyDysponowany'];?>
 </td>
-    <td><?php echo $_smarty_tpl->tpl_vars['towar']->value['Kategoria'];?>
+    <td style=text-align:center;><?php echo $_smarty_tpl->tpl_vars['towar']->value['Kategoria'];?>
 </td>
-    <td><?php echo $_smarty_tpl->tpl_vars['towar']->value['JednostkaMiary'];?>
+    <td style=text-align:center;><?php echo $_smarty_tpl->tpl_vars['towar']->value['JednostkaMiary'];?>
 </td>
-		<td><?php echo $_smarty_tpl->tpl_vars['towar']->value['Cena'];?>
-</td>
+		<td style=text-align:right;><?php echo number_format((float)$_smarty_tpl->tpl_vars['towar']->value['Cena'],2,',',' ');?>
+ PLN</td>
 		<td>
     <a type="button" class="btn btn-primary" href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
@@ -64,6 +64,7 @@ Towar/freeze/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
 
 	</td>
 		<td>
+		<?php if ($_smarty_tpl->tpl_vars['towar']->value['StanMagazynowyDysponowany'] != 0) {?>
 		<form action="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Towar/koszyk/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
@@ -89,6 +90,11 @@ Towar/koszyk/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdTowar'];?>
 			</select>
 
 		</form>
+		<?php } else { ?>
+		<div class="alert alert-danger" style=text-align:center;>
+  	<strong>Brak towaru</strong>
+		</div>
+		<?php }?>
 	</td>
 </tr>
 

@@ -453,7 +453,7 @@
 					else
 						try
 						{
-							$stmt = $this->pdo->prepare('INSERT INTO `zamowieniesprzedaz`(`DataZamowienia`,`Wartosc`,`IdStanZamowienia`,`IdKlient`, `IdSposobDostawy`,`IdSposobZaplaty`) VALUES (CURDATE(),:suma,3,:klient, :dostawa,:zaplata)');
+							$stmt = $this->pdo->prepare('INSERT INTO `zamowieniesprzedaz`(`DataZamowienia`,`Wartosc`,`IdStanZamowienia`,`IdKlient`, `IdSposobDostawy`,`IdSposobZaplaty`) VALUES (NOW(),:suma,3,:klient, :dostawa,:zaplata)');
 							$stmt -> bindValue(':suma',$suma,PDO::PARAM_STR);
 							$stmt -> bindValue(':klient',$klient,PDO::PARAM_INT);
 							$stmt -> bindValue(':dostawa',$dostawa,PDO::PARAM_INT);

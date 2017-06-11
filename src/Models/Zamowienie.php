@@ -156,7 +156,7 @@
 			else
 					try
 					{
-							$stmt = $this->pdo->query("SELECT zamowieniesprzedaz.DataZamowienia, towar.NazwaTowaru, towarysprzedaz.ilosc, towarysprzedaz.vat, towarysprzedaz.cena, zamowieniesprzedaz.Wartosc, zamowieniesprzedaz.IdSposobZaplaty,klient.Nazwisko, klient.Imie, klient.IdKlient, towarysprzedaz.IdZamowienieSprzedaz, sposobdostawy.* from zamowieniesprzedaz inner join klient on zamowieniesprzedaz.IdKlient = klient.IdKlient inner join towarysprzedaz on towarysprzedaz.IdZamowienieSprzedaz = zamowieniesprzedaz.IdZamowienieSprzedaz inner JOIN towar on towar.IdTowar = towarysprzedaz.IdTowar inner join sposobdostawy on sposobdostawy.IdSposobDostawy = zamowieniesprzedaz.IdSposobDostawy");
+							$stmt = $this->pdo->query("SELECT zamowieniesprzedaz.DataWystawienia, zamowieniesprzedaz.TerminZaplaty, zamowieniesprzedaz.DataSprzedazy,zamowieniesprzedaz.DataZamowienia, towar.NazwaTowaru, towarysprzedaz.ilosc, towarysprzedaz.vat, towarysprzedaz.cena, zamowieniesprzedaz.Wartosc, zamowieniesprzedaz.IdSposobZaplaty,klient.Nazwisko, klient.Imie, klient.IdKlient, towarysprzedaz.IdZamowienieSprzedaz, sposobdostawy.* from zamowieniesprzedaz inner join klient on zamowieniesprzedaz.IdKlient = klient.IdKlient inner join towarysprzedaz on towarysprzedaz.IdZamowienieSprzedaz = zamowieniesprzedaz.IdZamowienieSprzedaz inner JOIN towar on towar.IdTowar = towarysprzedaz.IdTowar inner join sposobdostawy on sposobdostawy.IdSposobDostawy = zamowieniesprzedaz.IdSposobDostawy order by zamowieniesprzedaz.IdZamowienieSprzedaz asc");
 							$zamowienia = $stmt->fetchAll();
 							$stmt->closeCursor();
 							if($zamowienia && !empty($zamowienia))
@@ -170,7 +170,7 @@
 					}
 			return $data;
 		}
-		public function faktura($id)
+		public function faktura($id,$DataWystawienia,$TerminZaplaty,$DataSprzedazy)
 		{
 			$blad=false;
 			$data = array();
@@ -186,7 +186,23 @@
 			{
 					try
 					{
-							$stmt = $this->pdo->query("SELECT zamowieniesprzedaz.DataZamowienia, towar.KodTowaru, towar.NazwaTowaru, towar.IdJednostkaMiary, jednostkamiary.*, towarysprzedaz.ilosc, towarysprzedaz.vat, towarysprzedaz.cena, zamowieniesprzedaz.Wartosc, towarysprzedaz.IdZamowienieSprzedaz, klient.*, sposobdostawy.*, sposobzaplaty.sposobzaplaty as SposobZaplaty from zamowieniesprzedaz
+						//d($id);
+						//d($DataWystawienia);
+						//d($TerminZaplaty);
+						//d($DataSprzedazy);
+						if($TerminZaplaty!=null && $DataSprzedazy!=null && $TerminZaplaty!='NULL' && $DataSprzedazy!='null')
+						{
+							$numer = date('Y').'/'.date('m').'/'.date('d').'/'.date('H').''.date('i');
+							$stmt = $this->pdo->prepare('update `zamowieniesprzedaz` set `DataWystawienia`=:DataWystawienia,`TerminZaplaty`=:TerminZaplaty,`DataSprzedazy`=:DataSprzedazy,`NrFaktury`=:numer where IdZamowienieSprzedaz=:id');
+							$stmt -> bindValue(':DataWystawienia',$DataWystawienia,PDO::PARAM_STR);
+							$stmt -> bindValue(':TerminZaplaty',$TerminZaplaty,PDO::PARAM_STR);
+							$stmt -> bindValue(':DataSprzedazy',$DataSprzedazy,PDO::PARAM_STR);
+							$stmt -> bindValue(':numer',$numer,PDO::PARAM_STR);
+							$stmt -> bindValue(':id',$id,PDO::PARAM_STR);
+							$stmt -> execute();
+						}
+
+							$stmt = $this->pdo->query("SELECT zamowieniesprzedaz.NrFaktury,zamowieniesprzedaz.DataWystawienia, zamowieniesprzedaz.TerminZaplaty, zamowieniesprzedaz.DataSprzedazy, zamowieniesprzedaz.DataZamowienia, towar.KodTowaru, towar.NazwaTowaru, towar.IdJednostkaMiary, jednostkamiary.*, towarysprzedaz.ilosc, towarysprzedaz.vat, towarysprzedaz.cena, zamowieniesprzedaz.Wartosc, towarysprzedaz.IdZamowienieSprzedaz, klient.*, sposobdostawy.*, sposobzaplaty.sposobzaplaty as SposobZaplaty from zamowieniesprzedaz
 								inner join klient on zamowieniesprzedaz.IdKlient = klient.IdKlient
 								inner join towarysprzedaz on towarysprzedaz.IdZamowienieSprzedaz = zamowieniesprzedaz.IdZamowienieSprzedaz
 								inner JOIN towar on towar.IdTowar = towarysprzedaz.IdTowar

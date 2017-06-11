@@ -494,7 +494,7 @@ $stmt->execute();
     `KodPocztowy` varchar(6) NOT NULL,
     `Poczta` varchar(30) NOT NULL,
     `Telefon` int NOT NULL,
-    `NrKonta` int NOT NULL,
+    `NrKonta` varchar(32) NOT NULL,
     `Bank` varchar(30) NOT NULL,
     `EMail` varchar(30) NOT NULL,
     `NazwaFirmy` varchar(100) DEFAULT NULL,
@@ -512,7 +512,7 @@ $stmt->execute();
   'KodPocztowy'=>'63-400',
   'Poczta'=>'Ostrów Wlkp',
   'Telefon'=>'132456789',
-  'NrKonta'=>'12321455646',
+  'NrKonta'=>'23 1500 1663 1234 9661 8188 7238',
   'Bank'=>'PKO',
   'EMail'=>'michal123@wp.pl',
   'NazwaFirmy'=>'Drutex');
@@ -526,7 +526,7 @@ $stmt->execute();
   'KodPocztowy'=>'63-400',
   'Poczta'=>'Ostrów Wlkp',
   'Telefon'=>'636547732',
-  'NrKonta'=>'5425346236',
+  'NrKonta'=>'23 1500 4567 1234 9661 8188 7238',
   'Bank'=>'Skok Stefczyka',
   'EMail'=>'DKowal123@wp.pl',
   'NazwaFirmy'=>'Marmoladex');
@@ -540,7 +540,7 @@ $stmt->execute();
   'KodPocztowy'=>'63-400',
   'Poczta'=>'Ostrów Wlkp',
   'Telefon'=>'763577335',
-  'NrKonta'=>'635636765546',
+  'NrKonta'=>'23 1500 1663 1234 9876 8188 7238',
   'Bank'=>'Milenium',
   'EMail'=>'maciux@wp.pl',
   'NazwaFirmy'=>'Maciux i spółka');
@@ -554,7 +554,7 @@ $stmt->execute();
   'KodPocztowy'=>'63-401',
   'Poczta'=>'Kalisz',
   'Telefon'=>'675463347',
-  'NrKonta'=>'773775756346',
+  'NrKonta'=>'23 1500 1663 1234 9661 8188 5632',
   'Bank'=>'Amber Gold',
   'EMail'=>'dojlido123@wp.pl',
   'NazwaFirmy'=>'Kamilonex');
@@ -573,7 +573,7 @@ $stmt->execute();
     $stmt -> bindValue(':EMail',$klient['EMail'],PDO::PARAM_STR);
     $stmt -> bindValue(':Firma',$klient['NazwaFirmy'],PDO::PARAM_STR);
     $stmt -> bindValue(':Telefon',$klient['Telefon'],PDO::PARAM_INT);
-    $stmt -> bindValue(':NrKonta',$klient['NrKonta'],PDO::PARAM_INT);
+    $stmt -> bindValue(':NrKonta',$klient['NrKonta'],PDO::PARAM_STR);
     $stmt -> bindValue(':Bank',$klient['Bank'],PDO::PARAM_STR);
     $wynik_zapytania = $stmt -> execute();
   }
@@ -674,12 +674,16 @@ $stmt->execute();
  $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `zamowieniesprzedaz`
  (
    `IdZamowienieSprzedaz` INT AUTO_INCREMENT,
-   `DataZamowienia` DATE NOT NULL,
+   `DataZamowienia` DATETIME NOT NULL,
    `Wartosc` float NOT NULL,
    `IdStanZamowienia` INT NOT NULL,
    `IdKlient` INT NOT NULL,
    `IdSposobDostawy` INT NOT NULL,
    `IdSposobZaplaty` INT NOT NULL,
+   `DataWystawienia` date  NULL,
+   `DataSprzedazy` date  NULL,
+   `TerminZaplaty` date  NULL,
+   `NrFaktury` varchar(20)  NULL,
    PRIMARY KEY (IdZamowienieSprzedaz),
    FOREIGN KEY (IdStanZamowienia)
    REFERENCES statuszamowienia(IdStanZamowienia),
@@ -691,22 +695,7 @@ $stmt->execute();
    REFERENCES sposobzaplaty(IdSposobZaplaty)
     )ENGINE = InnoDB;");
  $stmt->execute();
- /*************************************************/
- /*******************FAKTURA********************/
- /*************************************************/
- $stmt = $pdo->query("DROP TABLE IF EXISTS `faktura`");
- $stmt->execute();
- $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `faktura`
- (
-   `IdFaktura` int AUTO_INCREMENT,
-   `IdZamowienieSprzedaz` int(11) NOT NULL,
-   `DataWystawienia` date NOT NULL,
-   `TerminZaplaty` date NOT NULL,
-   PRIMARY KEY (IdFaktura),
-   FOREIGN KEY (IdZamowienieSprzedaz)
-   REFERENCES zamowieniesprzedaz(IdZamowienieSprzedaz)
-   ON DELETE CASCADE
-  )ENGINE = InnoDB;");
+
 /*
  $kategorie = array();
  $kategorie[]=array(

@@ -94,9 +94,20 @@ class Zamowienie extends Controller
 			$view = $this->getView('Zamowienie');
 			$view->listaZamowien();
 		}
-    public function faktura($id){
-      $view = $this->getView('Zamowienie');
-      $view->faktura($id);
+    public function faktura($id)
+    {
+      $today = date("Y-m-d");
+      if($_POST['dataSprzedazy']=="" || $_POST['dataZaplaty']=="" || $_POST['dataSprzedazy']<$today || $_POST['dataZaplaty']<$today)
+      {
+
+        $this->redirect('Zamowienia');
+      }
+      else
+      {
+        $view = $this->getView('Zamowienie');
+        $view->faktura($id);
+      }
+
     }
 
 }

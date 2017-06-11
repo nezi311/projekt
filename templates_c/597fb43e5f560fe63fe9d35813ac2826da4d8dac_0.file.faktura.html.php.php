@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-06-10 18:02:33
+/* Smarty version 3.1.31, created on 2017-06-11 15:54:52
   from "C:\xampp\htdocs\PZ\templates\faktura.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_593c1819020b81_28860667',
+  'unifunc' => 'content_593d4bac9ef118_46593657',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '597fb43e5f560fe63fe9d35813ac2826da4d8dac' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\faktura.html.php',
-      1 => 1497110551,
+      1 => 1497189284,
       2 => 'file',
     ),
   ),
@@ -22,8 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_593c1819020b81_28860667 (Smarty_Internal_Template $_smarty_tpl) {
-if (!is_callable('smarty_modifier_date_format')) require_once 'C:\\xampp\\htdocs\\PZ\\vendor\\smarty\\smarty\\libs\\plugins\\modifier.date_format.php';
+function content_593d4bac9ef118_46593657 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -55,19 +54,16 @@ foreach ($_from as $_smarty_tpl->tpl_vars['klient']->value) {
 <?php if ($_smarty_tpl->tpl_vars['licznik']->value != '1') {?>
 	<?php $_smarty_tpl->_assignInScope('licznik', "1");
 ?>
-	<h3>Faktura VAT nr. <?php echo $_smarty_tpl->tpl_vars['klient']->value['DataZamowienia'];?>
--<?php echo $_smarty_tpl->tpl_vars['klient']->value['IdZamowienieSprzedaz'];?>
- z dnia <?php echo $_smarty_tpl->tpl_vars['klient']->value['DataZamowienia'];?>
+	<h3>Faktura VAT nr. <?php echo $_smarty_tpl->tpl_vars['klient']->value['NrFaktury'];?>
+ z dnia <?php echo $_smarty_tpl->tpl_vars['klient']->value['DataWystawienia'];?>
 </h3>
-	<h3>Data wystawienia: <?php echo smarty_modifier_date_format(time(),"%Y");?>
--<?php echo smarty_modifier_date_format(time(),"%m");?>
--<?php echo smarty_modifier_date_format(time(),"%d");?>
+	<h3>Data wystawienia: <?php echo $_smarty_tpl->tpl_vars['klient']->value['DataWystawienia'];?>
 </h3>
-	<h3>Data sprzedaży: <?php echo $_POST['dataSprzedazy'];?>
+	<h3>Data sprzedaży: <?php echo $_smarty_tpl->tpl_vars['klient']->value['DataSprzedazy'];?>
 </h3>
 	<h3>Sposob zapłaty: <?php echo $_smarty_tpl->tpl_vars['klient']->value['SposobZaplaty'];?>
 </h3>
-	<h3>Termin zapłaty: <?php echo $_POST['dataZaplaty'];?>
+	<h3>Termin zapłaty: <?php echo $_smarty_tpl->tpl_vars['klient']->value['TerminZaplaty'];?>
 </h3>
 	<?php }?>
 	<?php
@@ -139,10 +135,19 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 <?php }?>
 </table>
 
-<table class="table sorttable" style=width:50%;>
+<table class="table sorttable" style=width:80%;>
 	<thead>
 		<tr>
-			<th>Lp.</th><th>Kod towaru</th><th>Nazwa towaru</th><th>Jednostka miary</th><th>Ilość</th><th>Cena netto</th><th>Wartość netto</th><th>Stawka VAT</th><th>Wartość VAT</th><th>Wartość brutto</th>
+			<th>Lp.</th>
+			<th>Kod towaru</th>
+			<th>Nazwa towaru</th>
+			<th>Jednostka miary</th>
+			<th>Ilość</th>
+			<th style=text-align:right;>Cena netto</th>
+			<th style=text-align:right;>Wartość netto</th>
+			<th style=text-align:right;>Stawka VAT</th>
+			<th style=text-align:right;>Wartość VAT</th>
+			<th style=text-align:right;>Wartość brutto</th>
 		</tr>
 	</thead>
 <?php if (isset($_smarty_tpl->tpl_vars['tablicaZamowien']->value)) {?>
@@ -160,18 +165,18 @@ foreach ($_from as $_smarty_tpl->tpl_vars['towar']->value) {
 </td>
 		<td><?php echo $_smarty_tpl->tpl_vars['towar']->value['Nazwa'];?>
 </td>
-    <td><?php echo $_smarty_tpl->tpl_vars['towar']->value['ilosc'];?>
+    <td align="center"><?php echo $_smarty_tpl->tpl_vars['towar']->value['ilosc'];?>
 </td>
-    <td><?php echo $_smarty_tpl->tpl_vars['towar']->value['cena'];?>
-</td>
-		<td><?php echo $_smarty_tpl->tpl_vars['towar']->value['cena']*$_smarty_tpl->tpl_vars['towar']->value['ilosc'];?>
-</td>
-		<td><?php echo $_smarty_tpl->tpl_vars['towar']->value['vat'];?>
+    <td align="right"><?php echo number_format($_smarty_tpl->tpl_vars['towar']->value['cena'],2,',',' ');?>
+ PLN</td>
+		<td align="right"><?php echo number_format($_smarty_tpl->tpl_vars['towar']->value['cena']*$_smarty_tpl->tpl_vars['towar']->value['ilosc'],2,',',' ');?>
+ PLN</td>
+		<td align="right"><?php echo $_smarty_tpl->tpl_vars['towar']->value['vat'];?>
 %</td>
-		<td><?php echo $_smarty_tpl->tpl_vars['towar']->value['cena']*$_smarty_tpl->tpl_vars['towar']->value['ilosc']*$_smarty_tpl->tpl_vars['towar']->value['vat']/100;?>
-</td>
-		<td><?php echo (($_smarty_tpl->tpl_vars['towar']->value['cena']*$_smarty_tpl->tpl_vars['towar']->value['ilosc']*$_smarty_tpl->tpl_vars['towar']->value['vat'])/100)+$_smarty_tpl->tpl_vars['towar']->value['cena']*$_smarty_tpl->tpl_vars['towar']->value['ilosc'];?>
-</td>
+		<td align="right"><?php echo number_format($_smarty_tpl->tpl_vars['towar']->value['cena']*$_smarty_tpl->tpl_vars['towar']->value['ilosc']*$_smarty_tpl->tpl_vars['towar']->value['vat']/100,2,',',' ');?>
+ PLN</td>
+		<td align="right"><?php echo number_format((($_smarty_tpl->tpl_vars['towar']->value['cena']*$_smarty_tpl->tpl_vars['towar']->value['ilosc']*$_smarty_tpl->tpl_vars['towar']->value['vat'])/100)+$_smarty_tpl->tpl_vars['towar']->value['cena']*$_smarty_tpl->tpl_vars['towar']->value['ilosc'],2,',',' ');?>
+ PLN</td>
 		</tr>
 		<?php $_smarty_tpl->_assignInScope('lp', $_smarty_tpl->tpl_vars['lp']->value+1);
 ?>
@@ -237,13 +242,14 @@ $_smarty_tpl->_assignInScope('vatywartosci', $_tmp_array);
 	<td></td>
 	<td></td>
 	<td></td>
-	<td>Razem:</td>
-	<td><?php echo $_smarty_tpl->tpl_vars['wartoscnetto']->value;?>
-</td>
+	<td align="right"><b>Razem:</b></td>
+	<td align="right"><b><?php echo number_format($_smarty_tpl->tpl_vars['wartoscnetto']->value,2,',',' ');?>
+ PLN</b></td>
 	<td></td>
-	<td></td>
-	<td><?php echo $_smarty_tpl->tpl_vars['wartoscbrutto']->value;?>
-</td>
+	<td align="right"><b><?php echo number_format($_smarty_tpl->tpl_vars['wartoscvat']->value,2,',',' ');?>
+ PLN</b></td>
+	<td align="right"><b><?php echo number_format($_smarty_tpl->tpl_vars['wartoscbrutto']->value,2,',',' ');?>
+ PLN</b></td>
 	</tr>
 	<?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['vatywartosci']->value, 'value', false, 'key');
@@ -258,10 +264,10 @@ foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_var
 	<td></td>
 	<td></td>
 	<td></td>
-	<td><?php echo $_smarty_tpl->tpl_vars['key']->value;?>
-%</td>
-	<td><?php echo $_smarty_tpl->tpl_vars['value']->value;?>
-</td>
+	<td align="right"><b><?php echo $_smarty_tpl->tpl_vars['key']->value;?>
+%</b></td>
+	<td align="right"><b><?php echo number_format($_smarty_tpl->tpl_vars['value']->value,2,',',' ');?>
+ PLN</b></td>
 	<td></td>
 	</tr>
 	<?php
@@ -274,8 +280,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 </table>
 <h3>Sposób dostawy: <?php echo $_smarty_tpl->tpl_vars['towar']->value['SposobDostawy'];?>
 </h3>
-<h3>Do zapłaty: <?php echo $_smarty_tpl->tpl_vars['towar']->value['Wartosc'];?>
-</h3>
+<h3>Do zapłaty: <?php echo number_format($_smarty_tpl->tpl_vars['towar']->value['Wartosc'],2,',',' ');?>
+ PLN</h3>
 <?php if (isset($_smarty_tpl->tpl_vars['error']->value)) {?>
 <strong><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
 </strong>

@@ -31,7 +31,10 @@
   {/foreach}
 </table>
 <form action="http://{$smarty.server.HTTP_HOST}{$subdir}Koszyk/zrealizuj" method="post" style='width:20%;'>
-<b>Klient</b>
+	<div class="col-2 col-form-label">
+	<b>Klient</b>
+	</div>
+<div class="col-10">
 	<input list="customers" name="klient">
   <datalist id="customers">
 
@@ -39,24 +42,33 @@
 	<option value="{$klient['IdKlient']}">{$klient['Imie']} {$klient['Nazwisko']}</option>
 	{/foreach}
 	</datalist>
+	</div>
 	<br>
 
-<b>Sposób dostawy</b>
+	<div class="col-2 col-form-label">
+	<b>Sposób dostawy</b>
+	</div>
+<div class="col-10">
 	<input list="delivery" name="dostawa">
   <datalist id="delivery">
 	{foreach $Dostawa as $sposob}
 	<option value="{$sposob['IdSposobDostawy']}">{$sposob['SposobDostawy']}</option>
 	{/foreach}
 	</datalist>
+	</div>
 	<br>
 
+<div class="col-2 col-form-label">
 <b>Sposób zapłaty</b>
+</div>
+<div class="col-10">
 		<input list="payment" name="zaplata">
 	  <datalist id="payment">
 		{foreach $Zaplata as $zaplata}
 		<option value="{$zaplata['IdSposobZaplaty']}">{$zaplata['SposobZaplaty']}</option>
 		{/foreach}
 		</datalist>
+		</div>
 		<br>
 
 <br>

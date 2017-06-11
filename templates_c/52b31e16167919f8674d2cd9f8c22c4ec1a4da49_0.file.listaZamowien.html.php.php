@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-06-10 16:23:48
+/* Smarty version 3.1.31, created on 2017-06-11 16:05:57
   from "C:\xampp\htdocs\PZ\templates\listaZamowien.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_593c00f4467b48_30655239',
+  'unifunc' => 'content_593d4e45954558_04478151',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '52b31e16167919f8674d2cd9f8c22c4ec1a4da49' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\listaZamowien.html.php',
-      1 => 1497104417,
+      1 => 1497189956,
       2 => 'file',
     ),
   ),
@@ -21,10 +21,9 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:header.html.php' => 1,
   ),
 ),false)) {
-function content_593c00f4467b48_30655239 (Smarty_Internal_Template $_smarty_tpl) {
+function content_593d4e45954558_04478151 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
-
 
 <div class="page-header">
 	<h2>Lista Zamówień</h2>
@@ -32,8 +31,10 @@ $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id,
 <?php $_smarty_tpl->_assignInScope('data', "null");
 $_smarty_tpl->_assignInScope('klient', "null");
 ?>
+
 <table>
 <?php if (isset($_smarty_tpl->tpl_vars['tablicaZamowien']->value)) {?>
+
 <!--<?php echo d($_smarty_tpl->tpl_vars['tablicaZamowien']->value);?>
 -->
   <?php
@@ -62,7 +63,8 @@ foreach ($_from as $_smarty_tpl->tpl_vars['towar']->value) {
 	</button><br><br>
 	<div class="collapse" id="<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdZamowienieSprzedaz'];?>
 ">
-	<form action='Zamowienia/faktura/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdZamowienieSprzedaz'];?>
+	<?php if ($_smarty_tpl->tpl_vars['towar']->value['TerminZaplaty'] == NULL) {?>
+	<form id='datyFaktura' action='Zamowienia/faktura/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdZamowienieSprzedaz'];?>
 ' method='post' style=width:10%;>
 		<div class="form-group">
 			<label for="dataOd">Data sprzedaży</label>
@@ -74,9 +76,17 @@ foreach ($_from as $_smarty_tpl->tpl_vars['towar']->value) {
 			<input class="form-control" type="date" id="dataZaplaty" name="dataZaplaty"/>
 		</div>
 
+	<div id="messages"></div>
 		<input type="submit" class="btn btn-primary" value="Generuj fakturę">
 	</form>
-
+	<?php } else { ?>
+	<form id='datyFaktura' action='Zamowienia/faktura/<?php echo $_smarty_tpl->tpl_vars['towar']->value['IdZamowienieSprzedaz'];?>
+' method='post' style=width:10%;>
+		<input class="form-control" type="hidden" id="dataSprzedazy" name="dataSprzedazy" value='NULL'/>
+		<input class="form-control" type="hidden" id="dataZaplaty" name="dataZaplaty" value='NULL'/>
+		<input type="submit" class="btn btn-primary" value="Pokaż fakturę">
+	</form>
+<?php }?>
 		<table class="table sorttable" style=width:50%;>
 		  <thead>
 		    <tr>

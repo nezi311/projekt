@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-06-10 14:27:53
+/* Smarty version 3.1.31, created on 2017-06-11 15:51:34
   from "C:\xampp\htdocs\PZ\templates\koszykTowary.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_593be5c9aa8bf1_39822992',
+  'unifunc' => 'content_593d4ae6721b47_13115582',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5e279aede6bdbad4b4a5004f4dc687417c133c30' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\koszykTowary.html.php',
-      1 => 1496826512,
+      1 => 1497189093,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_593be5c9aa8bf1_39822992 (Smarty_Internal_Template $_smarty_tpl) {
+function content_593d4ae6721b47_13115582 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -86,7 +86,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 <form action="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 Koszyk/zrealizuj" method="post" style='width:20%;'>
-<b>Klient</b>
+	<div class="col-2 col-form-label">
+	<b>Klient</b>
+	</div>
+<div class="col-10">
 	<input list="customers" name="klient">
   <datalist id="customers">
 
@@ -106,9 +109,13 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 ?>
 
 	</datalist>
+	</div>
 	<br>
 
-<b>Sposób dostawy</b>
+	<div class="col-2 col-form-label">
+	<b>Sposób dostawy</b>
+	</div>
+<div class="col-10">
 	<input list="delivery" name="dostawa">
   <datalist id="delivery">
 	<?php
@@ -126,9 +133,13 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 ?>
 
 	</datalist>
+	</div>
 	<br>
 
+<div class="col-2 col-form-label">
 <b>Sposób zapłaty</b>
+</div>
+<div class="col-10">
 		<input list="payment" name="zaplata">
 	  <datalist id="payment">
 		<?php
@@ -146,6 +157,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 ?>
 
 		</datalist>
+		</div>
 		<br>
 
 <br>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-06-10 14:19:32
+/* Smarty version 3.1.31, created on 2017-06-11 15:15:50
   from "C:\xampp\htdocs\PZ\templates\header.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_593be3d4d405a1_57290859',
+  'unifunc' => 'content_593d4286d94e02_86547402',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd8104eaa282f8e757b1eb1f22b3fed373c78d3de' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\header.html.php',
-      1 => 1496765812,
+      1 => 1497129319,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_593be3d4d405a1_57290859 (Smarty_Internal_Template $_smarty_tpl) {
+function content_593d4286d94e02_86547402 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
     <head>
@@ -78,6 +78,74 @@ css/bootstrap.css" rel="stylesheet">
           <link href="http://<?php echo $_SERVER['HTTP_HOST'];
 echo $_smarty_tpl->tpl_vars['subdir']->value;?>
 vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+          <?php echo '<script'; ?>
+>
+$(document).ready(function() {
+    $('#datyFaktura').formValidation({
+        framework: 'bootstrap',
+        err: {
+            container: '#messages'
+        },
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            dataSprzedazy: {
+                validators: {
+                    notEmpty: {
+                        message: 'Wybierz datę.'
+                    },
+                    greaterThan: {
+                      value: 2000-02-02,
+                      message: 'The value must be greater than or equal to 18'
+                    },
+                    date: {
+                      format: 'YYYY/MM/DD',
+                      message: 'The value is not a valid date'
+                    },
+                    callback: {
+                        message: 'The date is not in the range',
+                        callback: function(value, validator) {
+                            var m = new moment(value, 'YYYY/MM/DD', true);
+                            if (!m.isValid()) {
+                                return false;
+                            }
+                            return m.isAfter('2020/01/01') && m.isBefore('2020/12/30');
+                        }
+                }
+            },
+            dataZaplaty: {
+                validators: {
+                    notEmpty: {
+                        message: 'Wybierz datę.'
+                    },
+                    greaterThan: {
+                      value: 2000-02-02,
+                      message: 'The value must be greater than or equal to 18'
+                    },
+                    date: {
+                      format: 'YYYY/MM/DD',
+                      message: 'The value is not a valid date'
+                    },
+                    callback: {
+                        message: 'The date is not in the range',
+                        callback: function(value, validator) {
+                            var m = new moment(value, 'YYYY/MM/DD', true);
+                            if (!m.isValid()) {
+                                return false;
+                            }
+                            return m.isAfter('2020/01/01') && m.isBefore('2020/12/30');
+                        }
+                }
+            }
+        }
+    });
+});
+<?php echo '</script'; ?>
+>
         <!-- awaryjny bootstrap-->
         <!-- Latest compiled and minified CSS -->
         <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
