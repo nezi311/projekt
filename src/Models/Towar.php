@@ -278,7 +278,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT towar.IdTowar, KodTowaru, StanMagazynowyDysponowany, StawkaVat, NazwaTowaru, Kategoria.NazwaKategorii AS Kategoria, Jednostkamiary.Nazwa AS JednostkaMiary, (SELECT CONCAT(cena,' ','zl') FROM cennik WHERE cennik.idTowar=Towar.idTowar AND (CURRENT_DATE() BETWEEN IFNULL(cennik.dataOd,'1900-01-01') AND IFNULL(cennik.dataDo, CURRENT_DATE() )) ) AS Cena FROM `Towar` INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary INNER JOIN Cennik ON Cennik.idCennik = Towar.Cena WHERE freeze=1");
+              $stmt = $this->pdo->query("SELECT Towar.IdTowar, KodTowaru, StanMagazynowyDysponowany, StawkaVat, NazwaTowaru, Kategoria.NazwaKategorii AS Kategoria, Jednostkamiary.Nazwa AS JednostkaMiary, (SELECT CONCAT(cena,' ','zl') FROM cennik WHERE cennik.idTowar=Towar.idTowar AND (CURRENT_DATE() BETWEEN IFNULL(cennik.dataOd,'1900-01-01') AND IFNULL(cennik.dataDo, CURRENT_DATE() )) ) AS Cena FROM `Towar` INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary WHERE freeze=1");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -301,7 +301,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT towar.IdTowar, KodTowaru, StanMagazynowyDysponowany, StawkaVat, NazwaTowaru, Kategoria.NazwaKategorii AS Kategoria, Jednostkamiary.Nazwa AS JednostkaMiary, (SELECT CONCAT(cena,' ','zl') FROM cennik WHERE cennik.idTowar=Towar.idTowar AND (CURRENT_DATE() BETWEEN IFNULL(cennik.dataOd,'1900-01-01') AND IFNULL(cennik.dataDo, CURRENT_DATE() )) ) AS Cena FROM `Towar` INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary INNER JOIN Cennik ON Cennik.idCennik = Towar.Cena WHERE freeze=0");
+              $stmt = $this->pdo->query("SELECT Towar.IdTowar, KodTowaru, StanMagazynowyDysponowany, StawkaVat, NazwaTowaru, Kategoria.NazwaKategorii AS Kategoria, Jednostkamiary.Nazwa AS JednostkaMiary, (SELECT CONCAT(cena,' ','zl') FROM cennik WHERE cennik.idTowar=Towar.idTowar AND (CURRENT_DATE() BETWEEN IFNULL(cennik.dataOd,'1900-01-01') AND IFNULL(cennik.dataDo, CURRENT_DATE() )) ) AS Cena FROM `Towar` INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary  WHERE freeze=0");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
