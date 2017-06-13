@@ -39,7 +39,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="IdKategoria">Id Kategoria :</label>
+      <label class="control-label col-sm-2" for="IdKategoria">Kategoria :</label>
       <div class="col-sm-10">
         <select class="form-control" id="IdKategoria" name="IdKategoria">
           {foreach $tablicaKategorie as $kat}
@@ -49,7 +49,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="IdJednostkaMiary">jednostka miary :</label>
+      <label class="control-label col-sm-2" for="IdJednostkaMiary">Jednostka miary :</label>
       <div class="col-sm-10">
         <select class="form-control" id="IdJednostkaMiary" name="IdJednostkaMiary">
           {foreach $tablicaJednostki as $jed}
@@ -58,7 +58,7 @@
         </select>
       </div>
     </div>
-    
+
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-default">Dodaj</button>

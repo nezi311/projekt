@@ -35,7 +35,7 @@
       <th>Jednostkamiary:</th><td>{$towar['IdJednostkaMiary']}</td>
     </tr>
     <tr>
-      <th>W sprzedaży:</th><td>{if $towar['Freeze']==1}tak{else}nie{/if}</td>
+      <th>W sprzedaży:</th><td>{if $towar['Freeze']==1}nie{else}tak{/if}</td>
     </tr>
     <tr>
       <th>Cena:</dt><th>{$towar['Cena']}zł</th>
@@ -118,7 +118,7 @@
     </div>
   </div>
 
-  <img src="http://chart.apis.google.com/chart?cht=lc&amp;chs=600x400&chd=t:14,7,13,19,30,36,40,49&chxt=x,y&chxl=0:|I|II|III|IV|V|" alt="" />
+  <!-- <img src="http://chart.apis.google.com/chart?cht=lc&amp;chs=600x400&chd=t:14,7,13,19,30,36,40,49&chxt=x,y&chxl=0:|I|II|III|IV|V|" alt="" /> -->
 
 </div>
 
