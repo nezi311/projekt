@@ -218,7 +218,7 @@ class Towar extends Controller
             $model=$this->getModel('Towar');
                     if($model)
                     {
-                      $data = $model->koszyk($_POST['IdTowar'],$_POST['ilosc']);
+                      $data = $model->koszyk($_POST['IdTowar'],$_POST['ilosc'],$_POST['cena']);
                         //nie przekazano komunikatów o błędzie
                     }
             //powiadamiamy odpowiedni widok, że nastąpiła aktualizacja bazy

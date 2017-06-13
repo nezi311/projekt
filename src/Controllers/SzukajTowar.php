@@ -7,6 +7,7 @@ class SzukajTowar extends Controller
     $towar='';
     $cenaMin='';
     $cenaMax='';
+    $kodTowaru='';
     $sprzedawane='';
     $niesprzedawane='';
     if (isset ($_POST['towar']))
@@ -22,6 +23,10 @@ class SzukajTowar extends Controller
     {
       $cenaMax=$_POST['cenaMax'];
     }
+    if (isset ($_POST['kodTowaru']))
+    {
+      $kodTowaru=$_POST['kodTowaru'];
+    }
     if (isset ($_POST['sprzedawane']))
     {
       $sprzedawane=$_POST['sprzedawane'];
@@ -31,7 +36,7 @@ class SzukajTowar extends Controller
       $niesprzedawane=$_POST['niesprzedawane'];
     }
       $view=$this->getView('SzukajTowar');
-      $view->search($towar,$cenaMin,$cenaMax,$sprzedawane,$niesprzedawane);
+      $view->search($towar,$cenaMin,$cenaMax,$kodTowaru,$sprzedawane,$niesprzedawane);
   }
 }
 ?>

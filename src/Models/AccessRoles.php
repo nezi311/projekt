@@ -51,7 +51,7 @@
 								\Tools\AccessRoles::login($login,$user[0]['uprawnienia'],$user[0]['id']);
 								//d($_SESSION);
 								//return 0;
-								if(isset($_COOKIE['ilosci']) and isset($_COOKIE['idtowary']))
+								if(isset($_COOKIE['ilosci']) and isset($_COOKIE['idtowary']) and isset($_COOKIE['ceny']))
 								{
 									$cookie = $_COOKIE['idtowary'];
 									$cookie = stripslashes($cookie);
@@ -61,14 +61,23 @@
 									$cookie = stripslashes($cookie);
 									$quantity = json_decode($cookie, true);
 
+									$cookie = $_COOKIE['ceny'];
+									$cookie = stripslashes($cookie);
+									$prices = json_decode($cookie, true);
+
 									$stmt2 = $this->pdo->prepare('truncate table koszyk');
 									$stmt2 -> execute();
-
-										foreach (array_combine($ids, $quantity) as $towar => $ile)
+									//d($ids[3]);
+									//foreach $ids as $index => $value)
+									{
+									//	d($value);
+									}
+										for($i=0;$i<sizeof($ids);$i++)
 										{
-											$stmt = $this->pdo->prepare('insert into `koszyk`(`IdTowar`,`ilosc`,`klient`) values(:IdTowar,:ilosc,1);');
-											$stmt -> bindValue(':IdTowar',$towar,PDO::PARAM_INT);
-											$stmt -> bindValue(':ilosc',$ile,PDO::PARAM_INT);
+											$stmt = $this->pdo->prepare('insert into `koszyk`(`IdTowar`,`ilosc`,`cena`) values(:IdTowar,:ilosc,:cena);');
+											$stmt -> bindValue(':IdTowar',$ids[$i],PDO::PARAM_INT);
+											$stmt -> bindValue(':ilosc',$quantity[$i],PDO::PARAM_INT);
+											$stmt -> bindValue(':cena',$prices[$i],PDO::PARAM_INT);
 											$wynik_zapytania = $stmt -> execute();
 										}
 								}
