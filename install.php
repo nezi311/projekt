@@ -14,7 +14,7 @@ $stmt = $pdo->query("CREATE TABLE `bilans` (
   `IdBilans` int(11) NOT NULL
 );");
 /*************************************************/
-/*******************SPOSOBDOSTAWY********************/
+/*******************SPOSOBZAPLATY********************/
 /*************************************************/
 $stmt = $pdo->query("DROP TABLE IF EXISTS `sposobzaplaty`");
 $stmt->execute();
@@ -35,7 +35,7 @@ foreach($kategorie as $element_kategoria)
   $wynik_zapytania = $stmt -> execute();
 }
 /*************************************************/
-/*******************SPOSOBZAPLATY********************/
+/*******************SPOSOBDOSTAWY********************/
 /*************************************************/
 $stmt = $pdo->query("DROP TABLE IF EXISTS `sposobdostawy`");
 $stmt->execute();
@@ -48,7 +48,7 @@ $stmt = $pdo->query("CREATE TABLE IF NOT EXISTS `sposobdostawy`
 $stmt->execute();
 $kategorie = array();
 $kategorie[]=array('SposobDostawy'=>'Kurier');
-$kategorie[]=array('SposobDostawy'=>'Odbior Osobisty');
+$kategorie[]=array('SposobDostawy'=>'Odbiór Osobisty');
 foreach($kategorie as $element_kategoria)
 {
   $stmt = $pdo->prepare('INSERT INTO `sposobdostawy`(`SposobDostawy`) VALUES (:SposobDostawy)');
