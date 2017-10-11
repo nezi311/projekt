@@ -11,9 +11,9 @@
                 try
                 {
                     $kategorie = array();
-                    $stmt = $this->pdo->query('SELECT Kategoria.IdKategoria, NazwaKategorii, COUNT(NazwaTowaru) AS ilosc FROM Kategoria
-	LEFT JOIN Towar
-    ON Towar.IdKategoria= Kategoria.IdKategoria
+                    $stmt = $this->pdo->query('SELECT kategoria.IdKategoria, NazwaKategorii, COUNT(NazwaTowaru) AS ilosc FROM kategoria
+	LEFT JOIN towar
+    ON towar.IdKategoria= kategoria.IdKategoria
 GROUP BY NazwaKategorii');
                     $kategorie = $stmt->fetchAll();
                     $stmt->closeCursor();
@@ -37,7 +37,25 @@ GROUP BY NazwaKategorii');
                 try
                 {
                     $kategorie = array();
-                    $stmt = $this->pdo->prepare('SELECT Kategoria.IdKategoria, NazwaKategorii, IdTowar, NazwaTowaru, StanMagazynowyDysponowany, StawkaVat,KodTowaru,Nazwa, Freeze,Cena FROM Kategoria Inner JOIN Towar ON Towar.IdKategoria= Kategoria.IdKategoria inner join JednostkaMiary ON Towar.IdJednostkaMiary=JednostkaMiary.IdJednostkaMiary WHERE Kategoria.IdKategoria=:id');
+                    $stmt = $this->pdo->prepare("SELECT
+																									kategoria.IdKategoria,
+																									NazwaKategorii,
+																									IdTowar,
+																									NazwaTowaru,
+																									StanMagazynowyDysponowany,
+																									StawkaVat,
+																									KodTowaru,
+																									Nazwa,
+																									Freeze,
+																									IFNULL((SELECT CONCAT(cena,' ','zl')
+																									FROM cennik
+																									WHERE cennik.idTowar=towar.idTowar
+																									AND (CURRENT_DATE BETWEEN IFNULL(cennik.dataOd,'1900-01-01')
+																									 AND IFNULL(cennik.dataDo, CURRENT_DATE) )),'Nie ustalono jeszcze ceny dla towaru') AS Cena
+										FROM kategoria
+										Inner JOIN towar ON towar.IdKategoria= kategoria.IdKategoria
+										INNER JOIN jednostkamiary ON towar.IdJednostkaMiary=jednostkamiary.IdJednostkaMiary
+										WHERE kategoria.IdKategoria=:id");
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $result = $stmt->execute();
                     $kategorie = $stmt->fetchAll();
@@ -48,7 +66,7 @@ $result = $stmt->execute();
                         $data['kategorie'] = array();
 
 										$katnazwa = array();
-                    $stmt = $this->pdo->prepare('SELECT NazwaKategorii FROM Kategoria WHERE IdKategoria=:id');
+                    $stmt = $this->pdo->prepare('SELECT NazwaKategorii FROM kategoria WHERE IdKategoria=:id');
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $result = $stmt->execute();
                     $katnazwa = $stmt->fetchAll();
@@ -75,7 +93,7 @@ $result = $stmt->execute();
             else
                 try
                 {
-                    $stmt = $this->pdo->prepare('DELETE FROM `Kategoria` WHERE `IdKategoria`=:id');
+                    $stmt = $this->pdo->prepare('DELETE FROM `kategoria` WHERE `IdKategoria`=:id');
                     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
                     $result = $stmt->execute();
                     $rows = $stmt->rowCount();
@@ -99,7 +117,7 @@ $result = $stmt->execute();
             else
                 try
                 {
-                    $stmt = $this->pdo->prepare('INSERT INTO `Kategoria` (`NazwaKategorii`) VALUES (:name)');
+                    $stmt = $this->pdo->prepare('INSERT INTO `kategoria` (`NazwaKategorii`) VALUES (:name)');
                     $stmt->bindValue(':name', $name, PDO::PARAM_STR);
                     $stmt->execute();
                     $stmt->closeCursor();
@@ -120,7 +138,7 @@ $result = $stmt->execute();
             else
                 try
                 {
-                    $stmt = $this->pdo->prepare('UPDATE `Kategoria`
+                    $stmt = $this->pdo->prepare('UPDATE `kategoria`
 SET `NazwaKategorii`=:name
 WHERE `IdKategoria`=:id');
                     $stmt->bindValue(':id', $id, PDO::PARAM_INT);

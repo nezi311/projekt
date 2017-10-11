@@ -16,7 +16,7 @@
         try
         {
           $user=null;
-          $stmt = $this->pdo->prepare('SELECT * FROM `uzytkownik` WHERE (`login`=:login) AND (`haslo`=:haslo));
+          $stmt = $this->pdo->prepare('SELECT * FROM `uzytkownik` WHERE (`login`=:login) AND (`haslo`=:haslo)');
           $stmt->bindValue(':login', $login, PDO::PARAM_STR);
 					$stmt->bindValue(':login', $haslo, PDO::PARAM_STR);
           $result = $stmt->execute();

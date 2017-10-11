@@ -12,7 +12,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT * FROM Towar");
+              $stmt = $this->pdo->query("SELECT * FROM towar");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -36,7 +36,7 @@
 					try
 					{
 							$datee = date("Y-m-d");
-							$stmt = $this->pdo->prepare("SELECT * FROM cennik INNER JOIN Towar ON cennik.idTowar = Towar.IdTowar WHERE :obecnaData BETWEEN IFNULL(cennik.dataOd,:pomocniczaDataOd) AND IFNULL(cennik.dataDo,:obecnaData)");
+							$stmt = $this->pdo->prepare("SELECT * FROM cennik INNER JOIN towar ON cennik.idtowar = towar.Idtowar WHERE :obecnaData BETWEEN IFNULL(cennik.dataOd,:pomocniczaDataOd) AND IFNULL(cennik.dataDo,:obecnaData)");
 							$stmt -> bindValue(':pomocniczaDataOd','1900-01-01',PDO::PARAM_STR);
 							$stmt -> bindValue(':obecnaData',$datee,PDO::PARAM_STR);
 							$stmt->execute();
@@ -62,7 +62,7 @@
 			else
 					try
 					{
-							$stmt = $this->pdo->query("SELECT * FROM Towar WHERE Towar.idTowar NOT IN (SELECT cennik.idTowar FROM cennik)");
+							$stmt = $this->pdo->query("SELECT * FROM towar WHERE towar.idtowar NOT IN (SELECT cennik.idtowar FROM cennik)");
 							$towary = $stmt->fetchAll();
 							$stmt->closeCursor();
 							if($towary && !empty($towary))
@@ -89,7 +89,7 @@
 			else
 					try
 					{
-							$stmt = $this->pdo->query("SELECT * FROM Towar WHERE Towar.idTowar NOT IN (SELECT cennik.idTowar FROM cennik)");
+							$stmt = $this->pdo->query("SELECT * FROM towar WHERE towar.idtowar NOT IN (SELECT cennik.idtowar FROM cennik)");
 
 							$towary = $stmt->fetchAll();
 							$iloscWierszy = $stmt->rowCount();
@@ -150,7 +150,7 @@
 			{
 				try
 				{
-					$stmt = $this->pdo->prepare('INSERT INTO `Towar`(`NazwaTowaru`,`MinStanMagazynowy`,`MaxStanMagazynowy`,`StanMagazynowyRzeczywisty`,`StanMagazynowyDysponowany`,`StawkaVat`,`KodTowaru`,`IdKategoria`,`IdJednostkaMiary`,`Freeze`,`Cena`) VALUES (:NazwaTowaru,:MinStanMagazynowy,:MaxStanMagazynowy,:StanMagazynowyRzeczywisty,:StanMagazynowyDysponowany,:StawkaVat,:KodTowaru,:IdKategoria,:IdJednostkaMiary,:Freeze,:Cena)');
+					$stmt = $this->pdo->prepare('INSERT INTO `towar`(`Nazwatowaru`,`MinStanMagazynowy`,`MaxStanMagazynowy`,`StanMagazynowyRzeczywisty`,`StanMagazynowyDysponowany`,`StawkaVat`,`KodTowaru`,`IdKategoria`,`IdJednostkaMiary`,`Freeze`,`Cena`) VALUES (:NazwaTowaru,:MinStanMagazynowy,:MaxStanMagazynowy,:StanMagazynowyRzeczywisty,:StanMagazynowyDysponowany,:StawkaVat,:KodTowaru,:IdKategoria,:IdJednostkaMiary,:Freeze,:Cena)');
 			    $stmt -> bindValue(':NazwaTowaru',$NazwaTowaru,PDO::PARAM_STR);
 			    $stmt -> bindValue(':MinStanMagazynowy',$MinStanMagazynowy,PDO::PARAM_INT);
 			    $stmt -> bindValue(':MaxStanMagazynowy',$MaxStanMagazynowy,PDO::PARAM_INT);
@@ -218,7 +218,7 @@
 			{
                 try
                 {
-                    $stmt = $this->pdo->prepare('UPDATE `Towar`
+                    $stmt = $this->pdo->prepare('UPDATE `towar`
 												SET `NazwaTowaru`=:NazwaTowaru,
 														`MinStanMagazynowy`=:MinStanMagazynowy,
 														`MaxStanMagazynowy`=:MaxStanMagazynowy,
@@ -254,7 +254,7 @@
 	      else
 	          try
 	          {
-	              $stmt = $this->pdo->query("SELECT IdJednostkaMiary,CONCAT(Nazwa,', ',NazwaSkrocona) AS Nazwa2 From Jednostkamiary");
+	              $stmt = $this->pdo->query("SELECT IdJednostkaMiary,CONCAT(Nazwa,', ',NazwaSkrocona) AS Nazwa2 From jednostkamiary");
 	              $jednostki = $stmt->fetchAll();
 	              $stmt->closeCursor();
 	              if($jednostki && !empty($jednostki))
@@ -278,7 +278,7 @@
       else
           try
           {
-              $stmt = $this->pdo->query("SELECT Towar.IdTowar, KodTowaru, StanMagazynowyDysponowany, StawkaVat, NazwaTowaru, Kategoria.NazwaKategorii AS Kategoria, Jednostkamiary.Nazwa AS JednostkaMiary, (SELECT CONCAT(cena,' ','zl') FROM cennik WHERE cennik.idTowar=Towar.idTowar AND (CURRENT_DATE() BETWEEN IFNULL(cennik.dataOd,'1900-01-01') AND IFNULL(cennik.dataDo, CURRENT_DATE() )) ) AS Cena FROM `Towar` INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary WHERE freeze=1");
+              $stmt = $this->pdo->query("SELECT towar.IdTowar, KodTowaru, StanMagazynowyDysponowany, StawkaVat, NazwaTowaru, kategoria.NazwaKategorii AS Kategoria, jednostkamiary.Nazwa AS JednostkaMiary, (SELECT CONCAT(cena,' ','zl') FROM cennik WHERE cennik.idTowar=towar.idTowar AND (CURRENT_DATE() BETWEEN IFNULL(cennik.dataOd,'1900-01-01') AND IFNULL(cennik.dataDo, CURRENT_DATE() )) ) AS Cena FROM `towar` INNER JOIN kategoria on towar.IdKategoria=kategoria.IdKategoria INNER JOIN jednostkamiary on towar.IdJednostkaMiary=jednostkamiary.IdJednostkaMiary WHERE freeze=1");
               $towary = $stmt->fetchAll();
               $stmt->closeCursor();
               if($towary && !empty($towary))
@@ -309,21 +309,16 @@
 
 							$obecnaData = date("Y-m-d");
               $stmt = $this->pdo->prepare("
-							SELECT
-							Towar.IdTowar,
-							Towar.KodTowaru,
-							Towar.StanMagazynowyDysponowany,
-							Towar.StawkaVat,
-							Towar.NazwaTowaru,
-							Kategoria.NazwaKategorii AS Kategoria,
-							Jednostkamiary.Nazwa AS JednostkaMiary,
+							SELECT towar.IdTowar, towar.KodTowaru, towar.StanMagazynowyDysponowany, towar.StawkaVat, towar.NazwaTowaru, kategoria.NazwaKategorii AS Kategoria, jednostkamiary.Nazwa AS JednostkaMiary,
 							(SELECT CONCAT(cena,' ','zl')
-							  FROM cennik WHERE cennik.idTowar=Towar.idTowar
-							  AND (:obecnaData BETWEEN IFNULL(cennik.dataOd,:tempPoczatkowaData) AND IFNULL(cennik.dataDo, :obecnaData) )) AS Cena
-							  FROM `Towar`
-							  INNER JOIN Kategoria on Towar.IdKategoria=Kategoria.IdKategoria
-							  INNER JOIN Jednostkamiary on Towar.IdJednostkaMiary=Jednostkamiary.IdJednostkaMiary
-							  WHERE freeze=0
+								FROM cennik
+								WHERE cennik.idTowar=towar.idTowar
+								AND (:obecnaData BETWEEN IFNULL(cennik.dataOd,:tempPoczatkowaData)
+								 AND IFNULL(cennik.dataDo, :obecnaData) )) AS Cena
+							FROM towar,kategoria,jednostkamiary
+									 WHERE towar.freeze=0
+									 AND kategoria.IdKategoria=towar.IdKategoria
+										 AND towar.IdJednostkaMiary=jednostkamiary.IdJednostkaMiary
 							");
 							$stmt -> bindValue(':obecnaData',$obecnaData,PDO::PARAM_STR);
 							$stmt -> bindValue(':tempPoczatkowaData','1900-01-01',PDO::PARAM_STR);
@@ -353,7 +348,7 @@
 			else
 					try
 					{
-							$stmt = $this->pdo->prepare("SELECT * FROM Towar WHERE IdTowar=:id");
+							$stmt = $this->pdo->prepare("SELECT * FROM towar WHERE IdTowar=:id");
 							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
 							$stmt -> execute();
 							$towar = $stmt -> fetchAll();
@@ -389,11 +384,11 @@
 							SELECT *,
 							kategoria.NazwaKategorii as Kategoria,
 							jednostkamiary.Nazwa as JednostkaMiary,
-							(SELECT cena FROM cennik WHERE cennik.idTowar=Towar.idTowar AND (:data BETWEEN IFNULL(cennik.dataOd,:datatmp) AND IFNULL(cennik.dataDo, :data) )) AS Cena
-							FROM Towar
-							INNER JOIN kategoria on Towar.IdKategoria=kategoria.IdKategoria
-							INNER JOIN jednostkamiary on Towar.IdJednostkaMiary=jednostkamiary.IdJednostkaMiary
-							INNER join koszyk on koszyk.IdTowar=towar.IdTowar
+							(SELECT cena FROM cennik WHERE cennik.idTowar=towar.idTowar AND (:data BETWEEN IFNULL(cennik.dataOd,:datatmp) AND IFNULL(cennik.dataDo, :data) )) AS Cena
+							FROM towar
+							INNER JOIN kategoria on towar.IdKategoria=kategoria.IdKategoria
+							INNER JOIN jednostkamiary on towar.IdJednostkaMiary=jednostkamiary.IdJednostkaMiary
+							INNER JOIN koszyk on koszyk.IdTowar=towar.IdTowar
 							");
 							$stmt -> bindValue(':data',$dataObecna,PDO::PARAM_STR);
 							$stmt -> bindValue(':datatmp','1900-01-01',PDO::PARAM_STR);
@@ -428,7 +423,7 @@
 						{
 							$idt = $result['IdTowar'];
 						}
-						$stmt = $this->pdo->prepare('DELETE FROM `Towar` WHERE IdTowar=:id');
+						$stmt = $this->pdo->prepare('DELETE FROM `towar` WHERE IdTowar=:id');
 				    $stmt -> bindValue(':id',$id,PDO::PARAM_INT);
 				    $wynik_zapytania = $stmt -> execute();
 					}
@@ -937,7 +932,7 @@
 					$data = array();
 						try
 						{
-							$stmt = $this->pdo->prepare('UPDATE `Towar` SET `Freeze`=:Freeze WHERE `IdTowar`=:id');
+							$stmt = $this->pdo->prepare('UPDATE `towar` SET `Freeze`=:Freeze WHERE `IdTowar`=:id');
 							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
 							$stmt -> bindValue(':Freeze',1,PDO::PARAM_INT);
 							$wynik_zapytania = $stmt -> execute();
