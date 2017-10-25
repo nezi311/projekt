@@ -202,11 +202,11 @@ $stmt->execute();
  $stmt->execute();
  $cennik = array();
 
- $cennik[]=array('idTowar'=>1,'cena'=>80,'dataOd'=>'2017-06-01','dataDo'=>'2017-06-20');
- $cennik[]=array('idTowar'=>2,'cena'=>100,'dataOd'=>'2017-06-01','dataDo'=>'2017-06-20');
- $cennik[]=array('idTowar'=>3,'cena'=>50,'dataOd'=>'2017-06-01','dataDo'=>'2017-06-20');
- $cennik[]=array('idTowar'=>4,'cena'=>120,'dataOd'=>'2017-06-01','dataDo'=>'2017-06-03');
- $cennik[]=array('idTowar'=>4,'cena'=>124,'dataOd'=>'2017-06-04','dataDo'=>'2017-06-23');
+ $cennik[]=array('idTowar'=>1,'cena'=>80,'dataOd'=>'2017-06-01','dataDo'=>'2017-12-20');
+ $cennik[]=array('idTowar'=>2,'cena'=>100,'dataOd'=>'2017-06-01','dataDo'=>'2017-12-20');
+ $cennik[]=array('idTowar'=>3,'cena'=>50,'dataOd'=>'2017-06-01','dataDo'=>'2017-12-20');
+ $cennik[]=array('idTowar'=>4,'cena'=>120,'dataOd'=>'2017-06-01','dataDo'=>'2017-12-03');
+ $cennik[]=array('idTowar'=>4,'cena'=>124,'dataOd'=>'2017-06-04','dataDo'=>'2017-12-23');
 
 
 
