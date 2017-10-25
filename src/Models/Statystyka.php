@@ -25,7 +25,7 @@ INNER JOIN TowarySprzedaz
 ON TowarySprzedaz.idTowar=towar.IdTowar
 	INNER JOIN zamowieniesprzedaz
     ON Towarysprzedaz.IdZamowienieSprzedaz=Zamowieniesprzedaz.IdZamowienieSprzedaz
-    INNER JOIN kategoria.
+    INNER JOIN kategoria
     ON towar.IdKategoria=kategoria.IdKategoria
  GROUP BY Towarysprzedaz.cena
 ORDER BY `wartosc`  ASC) AS sprzedane');
@@ -35,7 +35,7 @@ if($kryterium==="towarNiesprzedany")
 {
                     $stmt = $this->pdo->prepare('SELECT NazwaTowaru as nazwa, StanMagazynowyDysponowany as wartosc, NazwaKategorii as kategoria
 FROM towar
-INNER JOIN kategoria.
+INNER JOIN kategoria
 ON kategoria.IdKategoria=towar.IdKategoria
 WHERE NazwaTowaru NOT IN(SELECT towar.NazwaTowaru AS NazwaTowaru
 FROM towar
@@ -56,7 +56,7 @@ ON towarysprzedaz.idTowar=towar.IdTowar
     ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
     INNER JOIN jednostkamiary
     ON jednostkamiary.IdJednostkaMiary=towar.IdJednostkaMiary
-    INNER JOIN kategoria.
+    INNER JOIN kategoria
     ON towar.IdKategoria=kategoria.IdKategoria
  WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza)
  GROUP BY NazwaTowaru
@@ -71,7 +71,7 @@ INNER JOIN towarysprzedaz
 ON towarysprzedaz.idTowar=towar.IdTowar
 	INNER JOIN zamowieniesprzedaz
     ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
-    INNER JOIN kategoria.
+    INNER JOIN kategoria
     ON towar.IdKategoria=kategoria.IdKategoria
  WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza)
  GROUP BY TowarySprzedaz.cena
@@ -82,7 +82,7 @@ if($kryterium==="towarNiesprzedany" && $kategoria!=0)
 {
                     $stmt = $this->pdo->prepare('SELECT NazwaTowaru as nazwa, StanMagazynowyDysponowany as wartosc, NazwaKategorii as kategoria
 FROM towar
-INNER JOIN kategoria.
+INNER JOIN kategoria
 ON kategoria.IdKategoria=towar.IdKategoria
 WHERE NazwaTowaru NOT IN(SELECT towar.NazwaTowaru AS NazwaTowaru
 FROM towar
@@ -105,7 +105,7 @@ ON towarysprzedaz.idTowar=towar.IdTowar
     ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
     INNER JOIN jednostkamiary
     ON jednostkamiary.IdJednostkaMiary=towar.IdJednostkaMiary
-    INNER JOIN kategoria.
+    INNER JOIN kategoria
     ON towar.IdKategoria=kategoria.IdKategoria
  WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza) AND (towar.IdKategoria=:kategoria)
  GROUP BY NazwaTowaru
@@ -121,7 +121,7 @@ INNER JOIN towarysprzedaz
 ON towarysprzedaz.idTowar=towar.IdTowar
 	INNER JOIN zamowieniesprzedaz
     ON towarysprzedaz.IdZamowienieSprzedaz=zamowieniesprzedaz.IdZamowienieSprzedaz
-    INNER JOIN kategoria.
+    INNER JOIN kategoria
     ON towar.IdKategoria=kategoria.IdKategoria
  WHERE (DataZamowienia BETWEEN :dataOd AND :dataDo) AND (NazwaTowaru like :fraza) AND (towar.IdKategoria=:kategoria)
  GROUP BY Towarysprzedaz.cena
