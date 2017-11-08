@@ -18,7 +18,7 @@
     <td style=text-align:center;>{$towar['JednostkaMiary']}</td>
 		<td style=text-align:right;>{number_format((float)$towar['Cena'], 2, ',', ' ')} PLN</td>
     <td style=text-align:center;>{$towar['StawkaVat']}</td>
-    <td style=text-align:center;>{number_format((float)($towar['Cena'])+($towar['StawkaVat']*$towar['Cena'])/100, 2, ',', ' ')} PLN</td>
+    <td style=text-align:center;>{number_format(((float)$towar['Cena']+(((float)$towar['StawkaVat']*(float)$towar['Cena'])/100)), 2,',',' ')} PLN</td>
 		<td>
     <a type="button" class="btn btn-primary" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/freeze/{$towar['IdTowar']}" role="button">Wycofaj z Sprzedaży</a>
 
