@@ -314,7 +314,7 @@
 								FROM cennik
 								WHERE cennik.idTowar=towar.idTowar
 								AND (:obecnaData BETWEEN IFNULL(cennik.dataOd,:tempPoczatkowaData)
-								 AND IFNULL(cennik.dataDo, :obecnaData) )) AS Cena
+								 AND IFNULL(cennik.dataDo, :obecnaData) AND cennik.aktualny='T' )) AS Cena
 							FROM towar,kategoria,jednostkamiary
 									 WHERE towar.freeze=0
 									 AND kategoria.IdKategoria=towar.IdKategoria
@@ -724,21 +724,31 @@
 			$blad=false;
 			$data = array();
 			$data['error']="";
-			if($IdTowar === null || $IdTowar === "")
+			$_SESSION['errorCennik']="";
+			if($cena === '')
 			{
-				$data['error'] .= 'Nieokreślone Id Towaru! <br>';
+				$_SESSION['errorCennik']='Towar nie posiada cennika!';
+				$data['error'] .= 'Towar nie posiada cennika! <br>';
 				$blad=true;
 			}
-			if($ilosc === null || $ilosc === "")
+			else
 			{
-				$data['error'] .='Nieokreślona ilosc! <br>';
-				$blad=true;
-			}
-			if($cena === null || $cena === "")
-			{
-				$data['error'] .='Nieokreślona cena! <br>';
-				$blad=true;
-			}
+				if($IdTowar === null || $IdTowar === "")
+				{
+					$data['error'] .= 'Nieokreślone Id Towaru! <br>';
+					$blad=true;
+				}
+				if($ilosc === null || $ilosc === "")
+				{
+					$data['error'] .='Nieokreślona ilosc! <br>';
+					$blad=true;
+				}
+				if($cena === null || $cena === "")
+				{
+					$data['error'] .='Nieokreślona cena! <br>';
+					$blad=true;
+				}
+			}	
 			if(!$blad)
 			{
 				if(!isset($_COOKIE['idtowary']))
@@ -919,12 +929,10 @@
           catch(\PDOException $e)
           {
               $data['error'] = 'Błąd odczytu danych z bazy! '.$e;
-							d($data['error']);
 							return $data;
           }
 				}
-
-      return $data;
+				else return $data;
     	}
 
 			public function freeze($id)
