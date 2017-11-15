@@ -348,8 +348,21 @@
 			else
 					try
 					{
-							$stmt = $this->pdo->prepare("SELECT * FROM towar WHERE IdTowar=:id");
+						$obecnaData = date("Y-m-d");
+							$stmt = $this->pdo->prepare("
+							SELECT towar.IdTowar, NazwaTowaru, StanMagazynowyDysponowany, MinStanMagazynowy, MaxStanMagazynowy, StawkaVat, KodTowaru, kategoria.IdKategoria, kategoria.NazwaKategorii AS Kategoria, jednostkamiary.Nazwa AS JednostkaMiary, Freeze,
+							(SELECT cena
+								FROM cennik
+								WHERE cennik.idTowar=towar.idTowar
+								AND (:obecnaData BETWEEN IFNULL(cennik.dataOd,:tempPoczatkowaData)
+								 AND IFNULL(cennik.dataDo, :obecnaData) )) AS Cena
+								 FROM towar,kategoria,jednostkamiary
+	 									 WHERE towar.IdTowar=:id
+	 									 AND kategoria.IdKategoria=towar.IdKategoria
+	 										 AND towar.IdJednostkaMiary=jednostkamiary.IdJednostkaMiary");
 							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
+							$stmt -> bindValue(':obecnaData',$obecnaData,PDO::PARAM_STR);
+							$stmt -> bindValue(':tempPoczatkowaData','1900-01-01',PDO::PARAM_STR);
 							$stmt -> execute();
 							$towar = $stmt -> fetchAll();
 							$liczba_wierszy = $stmt->rowCount();
