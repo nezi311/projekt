@@ -55,7 +55,7 @@ GROUP BY NazwaKategorii');
 										FROM kategoria
 										Inner JOIN towar ON towar.IdKategoria= kategoria.IdKategoria
 										INNER JOIN jednostkamiary ON towar.IdJednostkaMiary=jednostkamiary.IdJednostkaMiary
-										WHERE kategoria.IdKategoria=:id");
+										WHERE kategoria.IdKategoria=:id AND Freeze=0");
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $result = $stmt->execute();
                     $kategorie = $stmt->fetchAll();

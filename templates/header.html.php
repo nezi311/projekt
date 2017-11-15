@@ -111,8 +111,8 @@ $(document).ready(function() {
             <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-book"></span> Towary<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar" class="glyphicon glyphicon-list-alt"> Lista Towarów</a></li>
-                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/freeze" class="glyphicon glyphicon-list-alt"> Zamrożone Towary</a></li>
+                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar" class="glyphicon glyphicon-list-alt"> Lista towarów</a></li>
+                    <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/freeze" class="glyphicon glyphicon-list-alt"> Towary wycofane z sprzedaży</a></li>
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/add" class="glyphicon glyphicon-plus"> Dodaj Towar</a></li>
                     <!-- <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Zamowienie" class="glyphicon glyphicon-list-alt"> Zamowione Towary</a></li> -->
                     <li><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Cennik" class="glyphicon glyphicon-list-alt"> Cennik towarów</a></li>
