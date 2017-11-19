@@ -16,9 +16,17 @@
     <td style=text-align:center;>{$towar['StanMagazynowyDysponowany']}</td>
     <td style=text-align:center;>{$towar['Kategoria']}</td>
     <td style=text-align:center;>{$towar['JednostkaMiary']}</td>
-		<td style=text-align:right;>{number_format((float)$towar['Cena'], 2, ',', ' ')} PLN</td>
+		{if $towar['Cena']==0}
+			<td style=text-align:right;>Brak towaru</td>
+		{else}
+			<td style=text-align:right;>{number_format((float)$towar['Cena'], 2, ',', ' ')} PLN</td>
+		{/if}
     <td style=text-align:center;>{$towar['StawkaVat']}</td>
-    <td style=text-align:center;>{number_format((float)($towar['Cena'])+($towar['StawkaVat']*$towar['Cena'])/100, 2, ',', ' ')} PLN</td>
+		{if $towar['Cena']==0}
+			<td style=text-align:right;>Brak towaru</td>
+		{else}
+		<td style=text-align:center;>{number_format(((float)$towar['Cena']+(((float)$towar['StawkaVat']*(float)$towar['Cena'])/100)), 2,',',' ')} PLN</td>
+		{/if}
 		<td>
     <a type="button" class="btn btn-primary" href="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/freeze/{$towar['IdTowar']}" role="button">Wycofaj z Sprzedaży</a>
 
@@ -28,8 +36,11 @@
 		<form action="http://{$smarty.server.HTTP_HOST}{$subdir}Towar/koszyk/{$towar['IdTowar']}" method="post">
 			<input type='hidden' name='IdTowar' value={$towar['IdTowar']}>
 			<input type='hidden' name='cena' value={$towar['Cena']}>
+			{if $towar['Cena']==0}
+			<input type='submit' class="btn btn-primary" value='Dodaj' disabled>
+			{else}
 			<input type='submit' class="btn btn-primary" value='Dodaj'>
-
+			{/if}
 			{$ilosc=1}
 			<select name='ilosc' id='ilosc'>
 				{while $ilosc<=$towar['StanMagazynowyDysponowany']}
@@ -50,8 +61,11 @@
   {/foreach}
 {/if}
 </table>
-{if isset($error)}
+{if isset($error) and $error != ''}
 <strong>{$error}</strong>
+{/if}
+{if isset($errorCennik)}
+<strong>{$errorCennik}</strong>
 {/if}
 
 {include file="footer.html.php"}

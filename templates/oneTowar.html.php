@@ -32,13 +32,16 @@
       <th>Kod towaru:</th><td>{$towar['KodTowaru']}</td>
     </tr>
     <tr>
-      <th>Jednostkamiary:</th><td>{$towar['IdJednostkaMiary']}</td>
+      <th>Kategoria:</th><td><a href="http://{$smarty.server.HTTP_HOST}{$subdir}Kategoria/showone/{$towar['IdKategoria']}" role="button">{$towar['Kategoria']}</a></td>
+    </tr>
+    <tr>
+      <th>Jednostka miary:</th><td>{$towar['JednostkaMiary']}</td>
     </tr>
     <tr>
       <th>W sprzedaży:</th><td>{if $towar['Freeze']==1}nie{else}tak{/if}</td>
     </tr>
     <tr>
-      <th>Cena:</dt><th>{$towar['Cena']}zł</th>
+      <th>Cena:</dt><th>{$towar['Cena']} zł</th>
       </tr>
     </table>
     <!-- <div class="btn-group-vertical" role="group">
@@ -75,13 +78,13 @@
 
             </div>
             <div class="form-group">
-              <label  for="StawkaVat">stawka Vat :</label>
+              <label  for="StawkaVat">Stawka Vat :</label>
 
                 <input type="text" class="form-control" id="StawkaVat" name="StawkaVat" placeholder="Wprowadz stawke Vat" value="{$towar['StawkaVat']}">
 
             </div>
             <div class="form-group">
-              <label  for="KodTowaru">KodTowaru :</label>
+              <label  for="KodTowaru">Kod Towaru :</label>
 
                 <input type="text" class="form-control" id="KodTowaru" name="KodTowaru" placeholder="Wprowadz KodTowaru" value="{$towar['KodTowaru']}">
 

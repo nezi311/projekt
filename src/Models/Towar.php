@@ -314,7 +314,7 @@
 								FROM cennik
 								WHERE cennik.idTowar=towar.idTowar
 								AND (:obecnaData BETWEEN IFNULL(cennik.dataOd,:tempPoczatkowaData)
-								 AND IFNULL(cennik.dataDo, :obecnaData) )) AS Cena
+								 AND IFNULL(cennik.dataDo, :obecnaData) AND cennik.aktualny='T' )) AS Cena
 							FROM towar,kategoria,jednostkamiary
 									 WHERE towar.freeze=0
 									 AND kategoria.IdKategoria=towar.IdKategoria
@@ -348,8 +348,21 @@
 			else
 					try
 					{
-							$stmt = $this->pdo->prepare("SELECT * FROM towar WHERE IdTowar=:id");
+						$obecnaData = date("Y-m-d");
+							$stmt = $this->pdo->prepare("
+							SELECT towar.IdTowar, NazwaTowaru, StanMagazynowyDysponowany, MinStanMagazynowy, MaxStanMagazynowy, StawkaVat, KodTowaru, kategoria.IdKategoria, kategoria.NazwaKategorii AS Kategoria, jednostkamiary.Nazwa AS JednostkaMiary, Freeze,
+							(SELECT cena
+								FROM cennik
+								WHERE cennik.idTowar=towar.idTowar
+								AND (:obecnaData BETWEEN IFNULL(cennik.dataOd,:tempPoczatkowaData)
+								 AND IFNULL(cennik.dataDo, :obecnaData) )) AS Cena
+								 FROM towar,kategoria,jednostkamiary
+	 									 WHERE towar.IdTowar=:id
+	 									 AND kategoria.IdKategoria=towar.IdKategoria
+	 										 AND towar.IdJednostkaMiary=jednostkamiary.IdJednostkaMiary");
 							$stmt -> bindValue(':id',$id,PDO::PARAM_INT);
+							$stmt -> bindValue(':obecnaData',$obecnaData,PDO::PARAM_STR);
+							$stmt -> bindValue(':tempPoczatkowaData','1900-01-01',PDO::PARAM_STR);
 							$stmt -> execute();
 							$towar = $stmt -> fetchAll();
 							$liczba_wierszy = $stmt->rowCount();
@@ -724,21 +737,31 @@
 			$blad=false;
 			$data = array();
 			$data['error']="";
-			if($IdTowar === null || $IdTowar === "")
+			$_SESSION['errorCennik']="";
+			if($cena === '')
 			{
-				$data['error'] .= 'Nieokreślone Id Towaru! <br>';
+				$_SESSION['errorCennik']='Towar nie posiada cennika!';
+				$data['error'] .= 'Towar nie posiada cennika! <br>';
 				$blad=true;
 			}
-			if($ilosc === null || $ilosc === "")
+			else
 			{
-				$data['error'] .='Nieokreślona ilosc! <br>';
-				$blad=true;
-			}
-			if($cena === null || $cena === "")
-			{
-				$data['error'] .='Nieokreślona cena! <br>';
-				$blad=true;
-			}
+				if($IdTowar === null || $IdTowar === "")
+				{
+					$data['error'] .= 'Nieokreślone Id Towaru! <br>';
+					$blad=true;
+				}
+				if($ilosc === null || $ilosc === "")
+				{
+					$data['error'] .='Nieokreślona ilosc! <br>';
+					$blad=true;
+				}
+				if($cena === null || $cena === "")
+				{
+					$data['error'] .='Nieokreślona cena! <br>';
+					$blad=true;
+				}
+			}	
 			if(!$blad)
 			{
 				if(!isset($_COOKIE['idtowary']))
@@ -919,12 +942,10 @@
           catch(\PDOException $e)
           {
               $data['error'] = 'Błąd odczytu danych z bazy! '.$e;
-							d($data['error']);
 							return $data;
           }
 				}
-
-      return $data;
+				else return $data;
     	}
 
 			public function freeze($id)
