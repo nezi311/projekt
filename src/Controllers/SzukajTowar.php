@@ -17,7 +17,6 @@ class SzukajTowar extends Controller
     if (isset ($_POST['cenaMin']))
     {
       $cenaMin=$_POST['cenaMin'];
-      d("coś");
     }
     if (isset ($_POST['cenaMax']))
     {

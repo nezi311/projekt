@@ -11,7 +11,6 @@
 					try
 					{
 						$zapytanie="SELECT *,(SELECT cena FROM cennik WHERE cennik.idTowar=Towar.idTowar AND (Current_Date() BETWEEN IFNULL(cennik.dataOd,'1900-01-01') AND IFNULL(cennik.dataDo, Current_Date() )) ) AS CENA2 FROM Towar WHERE (NazwaTowaru LIKE :nazwa)";
-						d($cenaMin);
 						if ($cenaMin!='')
 						{
 							$zapytanie=$zapytanie." AND ((SELECT cena FROM cennik WHERE cennik.idTowar=Towar.idTowar AND (Current_Date() BETWEEN IFNULL(cennik.dataOd,'1900-01-01') AND IFNULL(cennik.dataDo, Current_Date() )) )>=:cenaMin)";
@@ -35,7 +34,6 @@
 								$zapytanie=$zapytanie." AND (Freeze=1)";
 							}
 						}
-						d($zapytanie);
 
 							$stmt = $this->pdo->prepare($zapytanie);
 							$stmt->bindValue(':nazwa', '%'.$towar.'%', PDO::PARAM_STR);

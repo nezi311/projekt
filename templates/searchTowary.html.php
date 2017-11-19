@@ -30,8 +30,8 @@
 				<label for="WSprzedazy">W sprzedaży:</label>
 				<div class="form-inline">
 			<div class="checkbox">
-					<input type="checkbox" name="sprzedawane" id="blankCheckbox" value="tru" {if $sprzedawane=="tru"}checked{/if}> tak
-			    <input type="checkbox" name="niesprzedawane" id="blankCheckbox" {if $niesprzedawane=="tru"}checked{/if} value="tru"> nie
+					<label><input type="checkbox" name="sprzedawane" id="blankCheckbox" value="tru" {if $sprzedawane=="tru"}checked{/if}> tak</label>
+			    <label><input type="checkbox" name="niesprzedawane" id="blankCheckbox" {if $niesprzedawane=="tru"}checked{/if} value="tru"> nie</label>
 			</div>
 		</div>
 		</div>

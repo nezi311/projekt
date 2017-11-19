@@ -22,8 +22,7 @@
 				$this->set('kodTowaru',$kodTowaru);
 				$this->set('sprzedawane',$sprzedawane);
 				$this->set('niesprzedawane',$niesprzedawane);
-				d($sprzedawane);
-				
+
         $this->render('searchTowary');
     }
 }

@@ -77,4 +77,4 @@ RewriteRule ^AccessRoles/logform/?$ index.php?controller=AccessRoles&action=logf
 RewriteRule ^AccessRoles/login/?$ index.php?controller=AccessRoles&action=login [L]
 RewriteRule ^AccessRoles/logout/?$ index.php?controller=AccessRoles&action=logout [L]
 
-ErrorDocument 404 http://localhost/PZ/errors/404.html
+ErrorDocument 404 /pz/errors/404.html
