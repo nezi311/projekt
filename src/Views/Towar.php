@@ -10,14 +10,15 @@
           if($model)
           {
               $data = $model->getNotFreeze();
-							//d($data['towary']);
               if(isset($data['towary']))
                    $this->set('tablicaTowarow', $data['towary']);
           }
           if(isset($data['error']))
-              $this->set('error', $data['error']);
-          //przetworzenie szablonu do wyświetlania listy pracowników
-          $this->render('indexTowary');
+			  $this->set('error', $data['error']);
+		  if(isset($_SESSION['errorCennik']))
+		  	$this->set('errorCennik',$_SESSION['errorCennik']);
+		  $this->render('indexTowary');
+		  $_SESSION['errorCennik']="";
       }
 
 			public function freezed()

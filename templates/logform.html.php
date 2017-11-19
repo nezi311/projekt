@@ -2,6 +2,7 @@
     <head>
         <title>SRPH</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <!-- Latest compiled and minified JavaScript -->
         <script src="http://code.jquery.com/jquery-latest.js"></script>
           <script src="http://{$smarty.server.HTTP_HOST}{$subdir}/js/jquery.min.js"></script>
