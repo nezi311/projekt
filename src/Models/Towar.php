@@ -332,7 +332,8 @@
           }
           catch(\PDOException $e)
           {
-              $data['error'] = 'Błąd odczytu danych z baz! ';
+			  $data['error'] = 'Błąd odczytu danych z baz! ';
+			  
           }
       return $data;
     }

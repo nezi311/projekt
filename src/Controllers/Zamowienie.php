@@ -90,6 +90,28 @@ class Zamowienie extends Controller
       else
         $this->redirect('index/');
     }
+
+    public function anuluj($id)
+    {
+        if($_SESSION['role']<=1)
+        {
+          if($id !== null)
+          {
+  
+            $model=$this->getModel('Zamowienie');
+                    if($model)
+                    {
+                      $data = $model->anuluj($id);
+                    }
+            $this->redirect('index/');
+          }
+          else
+            $this->redirect('index/');
+        }
+        else
+          $this->redirect('index/');
+      }
+    
     public function listaZamowien(){
 			$view = $this->getView('Zamowienie');
 			$view->listaZamowien();

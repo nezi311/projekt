@@ -19,9 +19,23 @@
 	<h4>Data Zamówienia: {$towar['DataZamowienia']}</h4>
 	<h4>Klient: {$towar['Nazwisko']} {$towar['Imie']}</h4>
 	<h4>Wartość Zamówienia: {number_format($towar['Wartosc'], 2, ',', ' ')} PLN</h4>
+	<table>
+	<tr>
+	<td style="padding:5px;">
 	<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#{$towar['IdZamowienieSprzedaz']}" aria-expanded="false" aria-controls="collapseExample">
 	  Szczegóły
-	</button><br><br>
+	</button>
+	</td>	
+
+	{if $towar['TerminZaplaty']==NULL}
+	<form action='Zamowienia/anuluj/{$towar['IdZamowienieSprzedaz']}'>
+	<td style="padding:5px;">
+		<input type="submit" class="btn btn-info" value="Anuluj zamówienie">
+		</td>
+	</form>
+	{/if}
+	</tr>
+	</table>
 	<div class="collapse" id="{$towar['IdZamowienieSprzedaz']}">
 	{if $towar['TerminZaplaty']==NULL}
 	<form id='datyFaktura' action='Zamowienia/faktura/{$towar['IdZamowienieSprzedaz']}' method='post' style=width:10%;>
