@@ -17,13 +17,13 @@
     <td style=text-align:center;>{$towar['Kategoria']}</td>
     <td style=text-align:center;>{$towar['JednostkaMiary']}</td>
 		{if $towar['Cena']==0}
-			<td style=text-align:right;>Brak towaru</td>
+			<td style=text-align:right;>Cena nie została ustalona</td>
 		{else}
 			<td style=text-align:right;>{number_format((float)$towar['Cena'], 2, ',', ' ')} PLN</td>
 		{/if}
     <td style=text-align:center;>{$towar['StawkaVat']}</td>
 		{if $towar['Cena']==0}
-			<td style=text-align:right;>Brak towaru</td>
+			<td style=text-align:right;>Cena nie została ustalona</td>
 		{else}
 		<td style=text-align:center;>{number_format(((float)$towar['Cena']+(((float)$towar['StawkaVat']*(float)$towar['Cena'])/100)), 2,',',' ')} PLN</td>
 		{/if}
@@ -50,6 +50,11 @@
 			</select>
 
 		</form>
+		{elseif $towar['Cena']==0}
+		<div class="alert alert-danger" style=text-align:center;>
+		<strong>Cena nie została ustalona</strong>
+		</div>
+
 		{else}
 		<div class="alert alert-danger" style=text-align:center;>
   	<strong>Brak towaru</strong>

@@ -11,7 +11,7 @@
 		private static $database;
 
 		public static function setDBConfig($database ='PZ',
-			$username ='user', $password = '123456', $host = '127.0.0.1',
+			$username ='user2', $password = '123456', $host = '192.168.137.1',
 			$type = 'mysql', $port = '3306'){
 
 			DBConfig::$database = $database;
@@ -31,6 +31,7 @@
 
 			}catch(\PDOException $e){
 				echo 'Database connection error!';
+				echo $e;
 				exit(1);
 			}
 			return null;
