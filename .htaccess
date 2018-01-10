@@ -42,6 +42,7 @@ RewriteRule ^Szukaj/?$ index.php?controller=SzukajTowar&action=search [L]
 
 RewriteRule ^Zamowienia/?$ index.php?controller=Zamowienie&action=listaZamowien [L]
 RewriteRule ^Zamowienia/faktura/(\d+)/?$ index.php?controller=Zamowienie&action=faktura&id=$1 [L]
+RewriteRule ^Zamowienia/anuluj/(\d+)/?$ index.php?controller=Zamowienie&action=anuluj&id=$1 [L]
 
 RewriteRule ^Zamowienie/?$ index.php?controller=Zamowienie [L]
 RewriteRule ^Zamowienie/add/?$ index.php?controller=Zamowienie&action=add [L]

@@ -90,6 +90,46 @@
 
 		}
 
+		public function anuluj($id)
+		{
+			$data = array();
+				if($id === NULL || $id === "")
+					$data['error'] = 'Nieokreślone ID!';
+				else
+					try
+					{
+					$stmt = $this->pdo->prepare('select * FROM `towarysprzedaz` WHERE IdZamowienieSprzedaz=:id');
+				    $stmt -> bindValue(':id',$id,PDO::PARAM_INT);
+					$stmt -> execute();
+					$towarysprzedaz = $stmt -> fetchAll();
+					foreach($towarysprzedaz as $zamowionyTowar){
+						$stmt2 = $this->pdo->prepare('select StanMagazynowyDysponowany FROM `towar` WHERE IdTowar=:id');
+						$stmt2 -> bindValue(':id',$zamowionyTowar['IdTowar'],PDO::PARAM_INT);
+						$stmt2 -> execute();
+						$stan = $stmt2 -> fetchAll();
+						foreach($stan as $s){
+							$stmt2 = $this->pdo->prepare('update `towar` set StanMagazynowyDysponowany = :stan WHERE IdTowar=:id');
+							$stmt2 -> bindValue(':id',$zamowionyTowar['IdTowar'],PDO::PARAM_INT);
+							$stmt2 -> bindValue(':stan',$s['StanMagazynowyDysponowany']+$zamowionyTowar['ilosc'],PDO::PARAM_INT);
+							$stmt2 -> execute();
+						}
+					}
+					$stmt = $this->pdo->prepare('delete from `towarysprzedaz` WHERE IdZamowienieSprzedaz=:id');
+				    $stmt -> bindValue(':id',$id,PDO::PARAM_INT);
+					$stmt -> execute();
+					$stmt = $this->pdo->prepare('delete from `zamowieniesprzedaz` WHERE IdZamowienieSprzedaz=:id');
+				    $stmt -> bindValue(':id',$id,PDO::PARAM_INT);
+					$stmt -> execute();
+					}
+					catch(\PDOException $e)
+					{
+						$data['error'] =$data['error'].'<br> Błąd wykonywania operacji usunięcia';
+						$e;
+					}
+				return $data;
+
+		}
+
 		public function insert($NazwaTowaru,$MinStanMagazynowy,$MaxStanMagazynowy,$stawkaVat,$kategoria,$jednostkamiary)
 		{
 			$blad=false;
