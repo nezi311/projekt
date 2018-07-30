@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-12-20 17:55:11
+/* Smarty version 3.1.31, created on 2018-07-30 16:41:04
   from "C:\xampp\htdocs\PZ\templates\koszykTowary.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_5a3a95ef81bbe8_11241445',
+  'unifunc' => 'content_5b5f238026c4e6_47133143',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5e279aede6bdbad4b4a5004f4dc687417c133c30' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\koszykTowary.html.php',
-      1 => 1497342376,
+      1 => 1515602634,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.html.php' => 1,
   ),
 ),false)) {
-function content_5a3a95ef81bbe8_11241445 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b5f238026c4e6_47133143 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -129,7 +129,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
 	<b>Sposób dostawy</b>
 	</div>
 <div class="col-10">
-	<input list="delivery" name="dostawa">
+	<input list="delivery" name="dostawa" id="dostawa">
   <datalist id="delivery">
 	<?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['Dostawa']->value, 'sposob');

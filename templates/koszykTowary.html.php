@@ -58,7 +58,7 @@
 	<b>Sposób dostawy</b>
 	</div>
 <div class="col-10">
-	<input list="delivery" name="dostawa">
+	<input list="delivery" name="dostawa" id="dostawa">
   <datalist id="delivery">
 	{foreach $Dostawa as $sposob}
 	<option value="{$sposob['IdSposobDostawy']}">{$sposob['SposobDostawy']}</option>

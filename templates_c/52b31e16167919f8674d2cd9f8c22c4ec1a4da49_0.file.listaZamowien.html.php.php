@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2018-01-01 18:15:28
+/* Smarty version 3.1.31, created on 2018-07-30 16:41:05
   from "C:\xampp\htdocs\PZ\templates\listaZamowien.html.php" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_5a4a6cb088b964_43931447',
+  'unifunc' => 'content_5b5f2381456518_63162884',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '52b31e16167919f8674d2cd9f8c22c4ec1a4da49' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PZ\\templates\\listaZamowien.html.php',
-      1 => 1514826927,
+      1 => 1514826939,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:header.html.php' => 1,
   ),
 ),false)) {
-function content_5a4a6cb088b964_43931447 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b5f2381456518_63162884 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.html.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
